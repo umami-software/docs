@@ -1,0 +1,12 @@
+node_modules
+.DS_Store
+.idea
+.yarn
+*.iml
+*.log
+.vscode
+.tool-versions
+.env*
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

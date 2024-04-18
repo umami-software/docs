@@ -1,0 +1,19 @@
+{
+  "name": "umami-docs",
+  "version": "1.0.0",
+  "description": "Umami documentation website.",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/umami-software/docs.git"
+  },
+  "author": "Umami Software, Inc. <hello@umami.is>",
+  "license": "MIT",
+  "main": "index.js",
+  "dependencies": {
+    "mintlify": "^4.0.146",
+    "sharp": "^0.33.3"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
+}

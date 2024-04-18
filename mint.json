@@ -1,0 +1,13 @@
+{
+  "name": "umami",
+  "navigation": [{
+    "group": "Getting started",
+    "pages": ["/"]
+  }],
+  "favicon": "/favicon.svg",
+  "colors": {
+    "primary": "#2AB673",
+    "light": "#55D799",
+    "dark": "#117866"
+  }
+}
