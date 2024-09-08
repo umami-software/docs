@@ -1,13 +1,48 @@
 {
-  "name": "umami",
-  "navigation": [{
-    "group": "Getting started",
-    "pages": ["/"]
-  }],
+  "name": "umami / docs",
   "favicon": "/favicon.svg",
   "colors": {
-    "primary": "#2AB673",
-    "light": "#55D799",
-    "dark": "#117866"
+    "primary": "#147af3",
+    "light": "#147af3",
+    "dark": "#147af3"
+  },
+  "navigation": [
+    {
+      "group": "Getting started",
+      "pages": ["introduction"]
+    },
+    {
+      "group": "Using Umami",
+      "pages": [
+        "add-a-user",
+        "enable-share-url",
+        "track-events",
+        "sessions",
+        "compare",
+        "teams",
+        "updates",
+        "languages"
+      ]
+    }
+  ],
+  "tabs": [
+    {
+      "name": "Documentation",
+      "url": "/"
+    },
+    {
+      "name": "Cloud",
+      "url": "/cloud"
+    },
+    {
+      "name": "API Reference",
+      "url": "/api"
+    }
+  ],
+  "footerSocials": {
+    "github": "https://github.com/umami-software/umami",
+    "discord": "https://umami.is/discord",
+    "twitter": "https://twitter.com/umami_software",
+    "linkedin": "https://www.linkedin.com/company/umami-software/"
   }
 }

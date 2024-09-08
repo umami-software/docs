@@ -10,7 +10,7 @@
   "license": "MIT",
   "main": "index.js",
   "dependencies": {
-    "mintlify": "^4.0.217",
+    "mintlify": "^4.0.218",
     "sharp": "^0.33.5"
   },
   "devDependencies": {

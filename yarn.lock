@@ -338,17 +338,17 @@
     "@types/mdx" "^2.0.0"
     "@types/react" ">=16"
 
-"@mintlify/cli@4.0.217":
-  version "4.0.217"
-  resolved "https://registry.yarnpkg.com/@mintlify/cli/-/cli-4.0.217.tgz#8f697b6413a5182eadff158e0214922c035ea467"
-  integrity sha512-3Jhxsq7DtKlT4EFHpiGJ+bemSkleGF/PFv5ObkVSN1mugtEp+Sfcv0prQ31SU+UZ2jPHn5FSHaws2D5E9BiGMQ==
+"@mintlify/cli@4.0.218":
+  version "4.0.218"
+  resolved "https://registry.yarnpkg.com/@mintlify/cli/-/cli-4.0.218.tgz#bf76d8185fac9cba3809a185b3cf2c13dc484cd0"
+  integrity sha512-BvBefXbsj/0b3MYXo1pIu8qAS7yYSUqDUvE4w9EZkK+mBOmVUJ+kOLd8zbcjdxVLgVfNObEfwhNqrfHez1XN7w==
   dependencies:
     "@apidevtools/swagger-parser" "^10.1.0"
-    "@mintlify/link-rot" "3.0.219"
-    "@mintlify/models" "0.0.118"
-    "@mintlify/prebuild" "1.0.218"
-    "@mintlify/previewing" "4.0.211"
-    "@mintlify/validation" "0.1.184"
+    "@mintlify/link-rot" "3.0.220"
+    "@mintlify/models" "0.0.119"
+    "@mintlify/prebuild" "1.0.219"
+    "@mintlify/previewing" "4.0.212"
+    "@mintlify/validation" "0.1.185"
     chalk "^5.2.0"
     detect-port "^1.5.1"
     fs-extra "^11.1.1"
@@ -357,15 +357,15 @@
     unist-util-visit "^4.1.1"
     yargs "^17.6.0"
 
-"@mintlify/common@1.0.139":
-  version "1.0.139"
-  resolved "https://registry.yarnpkg.com/@mintlify/common/-/common-1.0.139.tgz#460a2ae3aa2c2369c881c4851bb117a63799786e"
-  integrity sha512-1WyLwiYwhwH4sIYlQziYN/zYo/ET2ZCLUUeuxIg/E0AuZ5KzMvTMqmp36M0HhZk/+cwaSwWCaT4ykNmZuCIxuw==
+"@mintlify/common@1.0.140":
+  version "1.0.140"
+  resolved "https://registry.yarnpkg.com/@mintlify/common/-/common-1.0.140.tgz#3080dedc731999ffe5955abc12523b5e120c4746"
+  integrity sha512-2RbEasl3yl5rprZ9DBWgQFBeE8YgAZMgdClI4uBLKTUX8UuECfo3s9kxw6PlYv235OUECNuym+LxLB3uu6zhoQ==
   dependencies:
     "@apidevtools/swagger-parser" "^10.1.0"
     "@mintlify/mdx" "0.0.46"
-    "@mintlify/models" "0.0.118"
-    "@mintlify/validation" "0.1.184"
+    "@mintlify/models" "0.0.119"
+    "@mintlify/validation" "0.1.185"
     "@sindresorhus/slugify" "^2.1.1"
     acorn "^8.11.2"
     acorn-jsx "^5.3.2"
@@ -402,14 +402,14 @@
     unist-util-visit-parents "^5.0.0"
     vfile "^5.3.6"
 
-"@mintlify/link-rot@3.0.219":
-  version "3.0.219"
-  resolved "https://registry.yarnpkg.com/@mintlify/link-rot/-/link-rot-3.0.219.tgz#44476c41834e652a99c040fcbe50f7efeea62457"
-  integrity sha512-h64lVQwjwJ72V0o5ctIbLSR7ubrxYEh3VgKrn6gSkgE/wd7/huAGxxtZ2sdi2rdKce0BPIwiUwDXhicHre2p2g==
+"@mintlify/link-rot@3.0.220":
+  version "3.0.220"
+  resolved "https://registry.yarnpkg.com/@mintlify/link-rot/-/link-rot-3.0.220.tgz#35e6e9afe25573eafa08f2c934e7dd1c4662611a"
+  integrity sha512-dMbR4G3GtzliVpSfP6TMINV2xP86IPl8UFVDOfYip12qkkT3BsxxFNz/qNTY2JYcXIc+OIgCBpNw06iZFV1PdA==
   dependencies:
     "@apidevtools/swagger-parser" "10.x"
-    "@mintlify/common" "1.0.139"
-    "@mintlify/prebuild" "1.0.218"
+    "@mintlify/common" "1.0.140"
+    "@mintlify/prebuild" "1.0.219"
     chalk "^5.1.0"
     fs-extra "^11.1.0"
     gray-matter "^4.0.3"
@@ -431,23 +431,23 @@
     remark-smartypants "^2.0.0"
     unist-util-visit "^4.1.1"
 
-"@mintlify/models@0.0.118":
-  version "0.0.118"
-  resolved "https://registry.yarnpkg.com/@mintlify/models/-/models-0.0.118.tgz#34bfbdc4e679de6c6ba2f6f10fd2d5b2a10fe466"
-  integrity sha512-h8aYU4I8wCkV2XnI6ktAMReJ5tbKTuYCSpdFrpdC6xPXH5dB4Mox11yyTtTxU9QQAjXTTjqIFz3MFjrxYntvwg==
+"@mintlify/models@0.0.119":
+  version "0.0.119"
+  resolved "https://registry.yarnpkg.com/@mintlify/models/-/models-0.0.119.tgz#1e604fd87ad9d1295bcde140249de2d4ea410002"
+  integrity sha512-q6nWj8HPSpwzRaM5NsCuplKwD3iovtSdfAy8kRV5G8Lrz/S3mpdM3LMVlm5AJ6atcp+k0p9CdGlnaDihnq8EgA==
   dependencies:
     axios "^1.4.0"
     openapi-types "12.x"
 
-"@mintlify/prebuild@1.0.218":
-  version "1.0.218"
-  resolved "https://registry.yarnpkg.com/@mintlify/prebuild/-/prebuild-1.0.218.tgz#2c46f8434d50df217396f0faa4604f0bdf1d7457"
-  integrity sha512-jEv8/SHK0J+uTkvkPeOf6WsY6Jpk80wClMAKm1JxEEzPMApsslU9xn+eoQSHIpdRCUcro2PT7X3ek95BZWkEXw==
+"@mintlify/prebuild@1.0.219":
+  version "1.0.219"
+  resolved "https://registry.yarnpkg.com/@mintlify/prebuild/-/prebuild-1.0.219.tgz#7d98c0d1a0c4e8fdac2b3b26b9f4d42ed7ef409f"
+  integrity sha512-/+ptGLolxet1QTTR7Sfd9Gh7pDI3SmSNstHUPAuATTCk3O4gKpp2O8zVXQeyQ4IQP2tkH5St6ot5SOScBeopRw==
   dependencies:
     "@apidevtools/swagger-parser" "10.x"
-    "@mintlify/common" "1.0.139"
-    "@mintlify/scraping" "3.0.162"
-    "@mintlify/validation" "0.1.184"
+    "@mintlify/common" "1.0.140"
+    "@mintlify/scraping" "3.0.163"
+    "@mintlify/validation" "0.1.185"
     axios "^1.6.2"
     chalk "^5.3.0"
     favicons "^7.0.2"
@@ -458,15 +458,15 @@
     openapi-types "12.x"
     unist-util-visit "^4.1.1"
 
-"@mintlify/previewing@4.0.211":
-  version "4.0.211"
-  resolved "https://registry.yarnpkg.com/@mintlify/previewing/-/previewing-4.0.211.tgz#af7728271eb5fc7a084d486172e1a0fd909ebf16"
-  integrity sha512-R6iXp1CJN29zSFXMUJkcCWS++PyHkW9I70+CL1dGtjWUHKa9tEZRPyEDdJozlZI9Rt8Kdxgu2qlUtyaOVD3a3g==
+"@mintlify/previewing@4.0.212":
+  version "4.0.212"
+  resolved "https://registry.yarnpkg.com/@mintlify/previewing/-/previewing-4.0.212.tgz#396d2b0f06fcb522901393f3a3656951db8a37c5"
+  integrity sha512-TM31IhnUKwLnsX02AupXoxoWLimp8eo3WsI+MsmUSBZOHRi9rnqOEs+jjc6xPjqmioMvUuJ+Kh/j4tlrmOCOTw==
   dependencies:
     "@apidevtools/swagger-parser" "^10.1.0"
-    "@mintlify/common" "1.0.139"
-    "@mintlify/prebuild" "1.0.218"
-    "@mintlify/validation" "0.1.184"
+    "@mintlify/common" "1.0.140"
+    "@mintlify/prebuild" "1.0.219"
+    "@mintlify/validation" "0.1.185"
     "@octokit/rest" "^19.0.5"
     chalk "^5.1.0"
     chokidar "^3.5.3"
@@ -484,13 +484,13 @@
     unist-util-visit "^4.1.1"
     yargs "^17.6.0"
 
-"@mintlify/scraping@3.0.162":
-  version "3.0.162"
-  resolved "https://registry.yarnpkg.com/@mintlify/scraping/-/scraping-3.0.162.tgz#0f3c6d8050465511b5a3d1bc72cd6e866dbd1edc"
-  integrity sha512-Pi3MNF8uEd0XT3EqeHg0PuK588MjDlRN7CISz4YVcSEdcHCcFxOniipUN8pL26aRAqpTKQ3p/NaCSXZXzmDl2A==
+"@mintlify/scraping@3.0.163":
+  version "3.0.163"
+  resolved "https://registry.yarnpkg.com/@mintlify/scraping/-/scraping-3.0.163.tgz#a4ace5facc4a3de3e653289f811e9b95e451bd76"
+  integrity sha512-wINMDgLRLx3FrOo+CcwSMEuWukgB2wuLjsSMTdmc8FtaX++ULs6Tz9Hu0j+Oo/xH+GLotuyAmAJk1m/9gHSqAg==
   dependencies:
     "@apidevtools/swagger-parser" "^10.1.0"
-    "@mintlify/common" "1.0.139"
+    "@mintlify/common" "1.0.140"
     axios "^1.2.2"
     cheerio "^1.0.0-rc.12"
     fs-extra "^11.1.1"
@@ -499,12 +499,12 @@
     puppeteer "^22.14.0"
     yargs "^17.6.0"
 
-"@mintlify/validation@0.1.184":
-  version "0.1.184"
-  resolved "https://registry.yarnpkg.com/@mintlify/validation/-/validation-0.1.184.tgz#b90e3bb870b013434702e6936d9ddf0a8462515e"
-  integrity sha512-iAc+Cw2APDrRgujvVZrJe7YliBaao3+8S//bKV2bIPeZ7XkVqzdwaaFdu5DD8jHk6CLxHGIGZbMm2VdtI3aLjw==
+"@mintlify/validation@0.1.185":
+  version "0.1.185"
+  resolved "https://registry.yarnpkg.com/@mintlify/validation/-/validation-0.1.185.tgz#834033b19c5b00396d61c2be1bb3519fcc6704a9"
+  integrity sha512-yh1MUYCj3l0y7+8v7WT2XRorjEclbdvFwouW8Y6Aog7XOly6kq1rMrU6actmBtrpwy6xbV0Gz70RXMu0lTerXQ==
   dependencies:
-    "@mintlify/models" "0.0.118"
+    "@mintlify/models" "0.0.119"
     lcm "^0.0.3"
     lodash "^4.17.21"
     openapi-types "12.x"
@@ -3368,12 +3368,12 @@ minizlib@^2.1.1:
     minipass "^3.0.0"
     yallist "^4.0.0"
 
-mintlify@^4.0.217:
-  version "4.0.217"
-  resolved "https://registry.yarnpkg.com/mintlify/-/mintlify-4.0.217.tgz#a431248e3b7b8afc5b720ea6161b919a585e36b5"
-  integrity sha512-75kuiAomaFxpkhYu55/ON2PvsT/H/l3o0LgIepvhj7Je17obAXZRDMR8VYMdgHHRmDcdbSSRzlpXlJzmhhimEg==
+mintlify@^4.0.218:
+  version "4.0.218"
+  resolved "https://registry.yarnpkg.com/mintlify/-/mintlify-4.0.218.tgz#cacab01241633124a4187555ed3422a49cf205f5"
+  integrity sha512-mWZu7ARWmxOykYFg5f7W2rcAf7++4JKp+X8syee4D2r3EmFn3ThD6IlhKw963gA70P5eR9vs0F0Z4pwcJ+YIrQ==
   dependencies:
-    "@mintlify/cli" "4.0.217"
+    "@mintlify/cli" "4.0.218"
 
 mitt@3.0.1:
   version "3.0.1"
