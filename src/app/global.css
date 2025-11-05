@@ -2,51 +2,70 @@
 @import "fumadocs-ui/css/black.css";
 @import "fumadocs-ui/css/preset.css";
 
-:root {
-  --color-fd-background: hsl(0, 0%, 100%);
-}
-
-.light {
-  --color-fd-background: hsl(0, 0%, 100%);
-
-  #nd-sidebar a[data-active="true"] {
-    background-color: #e5e5e5;
-  }
-}
-
-.dark {
-  --color-fd-background: hsl(0, 0%, 7%);
-}
-
 #nd-sidebar p {
   font-weight: bold;
-}
-
-#nd-page h1 {
-  font-size: 2.5rem;
-  font-weight: bold;
-  letter-spacing: -0.05rem;
-}
-
-#nd-page h2 {
-  font-size: 1.6rem;
-  font-weight: bold;
-  letter-spacing: -0.05rem;
-}
-
-#nd-page a {
-  text-decoration-color: color-mix(in srgb, var(--color-fd-foreground) 30%, transparent);
-  text-decoration-thickness: 1px;
 }
 
 #nd-subnav a[data-active="true"] {
   font-weight: bold;
 }
 
-.shiki pre {
-  border-radius: 0;
+#nd-page {
+  h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: -0.05rem;
+  }
+
+  h2 {
+    font-size: 1.6rem;
+    font-weight: bold;
+    letter-spacing: -0.05rem;
+  }
+
+  a {
+    text-decoration-color: color-mix(in srgb, var(--color-fd-foreground) 30%, transparent);
+    text-decoration-thickness: 1px;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    margin: 4rem auto;
+    box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.1);
+  }
+}
+
+.shiki {
+  border-radius: 6px;
+  border: 0;
+  box-shadow: none;
 
   code {
     font-size: 14px;
+    font-family: var(--font-jetbrains-mono), monospace;
   }
+}
+
+.light {
+  --color-fd-card: var(--color-neutral-50);
+  --color-fd-background: var(--color-white);
+
+  #nd-sidebar {
+    background: var(--color-fd-background);
+
+    a[data-active="true"] {
+      background-color: var(--color-neutral-100);
+    }
+  }
+
+  #nd-sidebar-mobile,
+  #nd-tocnav,
+  #nd-subnav {
+    background: var(--color-white);
+  }
+}
+
+.dark {
+  --color-fd-background: hsl(0, 0%, 7%);
 }
