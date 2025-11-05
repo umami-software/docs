@@ -19,10 +19,10 @@ export default function Layout({ children }: LayoutProps<'/'>) {
       <body className="flex flex-col min-h-screen">
         <RootProvider>{children}</RootProvider>
       </body>
-      {process.env.NODE_ENV === 'production' && (
+      {process.env.trackerId && (
         <Script
           defer
-          data-website-id="fba6be18-1e62-4f4c-9e6a-c0b75cccb7ce"
+          data-website-id={process.env.trackerId}
           data-domains="v2.umami.is"
           src="/a/script.js"
         />
