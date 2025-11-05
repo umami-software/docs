@@ -7,7 +7,7 @@ export function baseOptions(): BaseLayoutProps {
       title: (
         <>
           <Logo className="w-4 h-4" />
-          umami
+          <b>umami</b>
         </>
       ),
       url: 'https://umami.is/?ref=docs',
