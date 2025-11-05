@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "next dev --turbo",
-    "start": "next start",
+    "dev": "rimraf .source && next dev --turbo",
+    "start": "rimraf .source && next start",
     "postinstall": "fumadocs-mdx",
     "lint": "biome lint .",
     "format": "biome format --write .",
