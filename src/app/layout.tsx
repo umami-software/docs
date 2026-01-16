@@ -29,7 +29,7 @@ export default function Layout({ children }: LayoutProps<'/'>) {
           defer
           data-website-id={process.env.trackerId}
           data-domains="v2.umami.is"
-          src="/a/script.js"
+          src="/d.js"
         />
       )}
     </html>

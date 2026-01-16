@@ -12,7 +12,7 @@ const config = {
     unoptimized: true,
   },
   async rewrites() {
-    return [{ source: '/a/script.js', destination: 'https://cloud.umami.is/script.js' }];
+    return [{ source: '/d.js', destination: 'https://cloud.umami.is/script.js' }];
   },
   async redirects() {
     return [{ source: '/', destination: '/docs', permanent: true }];
