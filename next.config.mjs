@@ -1,12 +1,9 @@
 import nextra from 'nextra';
 
-const withNextra = nextra({
-  contentDirBasePath: '/docs',
-});
+const withNextra = nextra({});
 
 /** @type {import('next').NextConfig} */
 const config = {
-  assetPrefix: '/docs',
   reactStrictMode: true,
   env: {
     trackerId: process.env.TRACKER_ID || '',
