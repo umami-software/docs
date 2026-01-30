@@ -11,17 +11,6 @@ const config = {
   images: {
     unoptimized: true,
   },
-  async rewrites() {
-    return [
-      {
-        source: '/docs/:path((?!api|guides|cloud|changelog).*)',
-        destination: '/docs/:path*',
-      },
-    ];
-  },
-  async redirects() {
-    return [{ source: '/', destination: '/docs', permanent: true }];
-  },
 };
 
 export default withNextra(config);
