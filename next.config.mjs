@@ -11,6 +11,18 @@ const config = {
   images: {
     unoptimized: true,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/',
+        destination: '/docs',
+      },
+      {
+        source: '/:path((?!docs|api|guides|cloud|_next|favicon|og|llms).*)',
+        destination: '/docs/:path*',
+      },
+    ];
+  },
 };
 
 export default withNextra(config);
