@@ -1,10 +1,11 @@
-import defaultMdxComponents from 'fumadocs-ui/mdx';
+import { useMDXComponents as getDocsMDXComponents } from 'nextra-theme-docs';
 import type { MDXComponents } from 'mdx/types';
 
-// use this function to get MDX components, you will need it for rendering MDX
-export function getMDXComponents(components?: MDXComponents): MDXComponents {
+const docsComponents = getDocsMDXComponents();
+
+export function useMDXComponents(components?: MDXComponents): MDXComponents {
   return {
-    ...defaultMdxComponents,
+    ...docsComponents,
     ...components,
   };
 }

@@ -1,6 +1,8 @@
-import { createMDX } from 'fumadocs-mdx/next';
+import nextra from 'nextra';
 
-const withMDX = createMDX();
+const withNextra = nextra({
+  contentDirBasePath: '/docs',
+});
 
 /** @type {import('next').NextConfig} */
 const config = {
@@ -25,4 +27,4 @@ const config = {
   },
 };
 
-export default withMDX(config);
+export default withNextra(config);

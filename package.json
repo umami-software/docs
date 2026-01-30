@@ -4,9 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
-    "dev": "rimraf .source && next dev --turbo",
-    "start": "rimraf .source && next start",
-    "postinstall": "fumadocs-mdx",
+    "dev": "next dev --turbo",
+    "start": "next start",
     "lint": "biome lint .",
     "format": "biome format --write .",
     "check": "biome check ."
@@ -17,11 +16,11 @@
     ]
   },
   "dependencies": {
-    "fumadocs-core": "16.0.7",
-    "fumadocs-mdx": "13.0.5",
-    "fumadocs-ui": "16.0.7",
+    "gray-matter": "^4.0.3",
     "lucide-react": "^0.548.0",
     "next": "16.0.7",
+    "nextra": "^4.2.18",
+    "nextra-theme-docs": "^4.2.18",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"
   },

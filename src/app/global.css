@@ -1,16 +1,6 @@
 @import "tailwindcss";
-@import "fumadocs-ui/css/neutral.css";
-@import "fumadocs-ui/css/preset.css";
 
-#nd-sidebar p {
-  font-weight: bold;
-}
-
-#nd-subnav a[data-active="true"] {
-  font-weight: bold;
-}
-
-#nd-page {
+article {
   h1 {
     font-size: 2.5rem;
     font-weight: bold;
@@ -23,55 +13,15 @@
     letter-spacing: -0.05rem;
   }
 
-  a {
-    text-decoration-color: color-mix(in srgb, var(--color-fd-foreground) 30%, transparent);
-    text-decoration-thickness: 1px;
-  }
-
   img {
     display: block;
     max-width: 100%;
-    margin: 4rem auto;
+    margin: 2rem auto;
     box-shadow: 2px 2px 16px rgba(0, 0, 0, 0.1);
   }
 }
 
-.shiki {
-  border-radius: 6px;
-  border: 0;
-  box-shadow: none;
-
-  code {
-    font-size: 14px;
-    font-family: "JetBrains Mono", monospace;
-  }
-}
-
-.light {
-  --color-fd-card: var(--color-neutral-50);
-  --color-fd-background: var(--color-white);
-  --color-fd-primary: var(--color-blue-600);
-
-  #nd-sidebar {
-    a[data-active="true"] {
-      background-color: var(--color-blue-100);
-    }
-  }
-
-  #nd-sidebar-mobile,
-  #nd-tocnav,
-  #nd-subnav {
-    background: var(--color-white);
-  }
-}
-
-.dark {
-  --color-fd-background: var(--color-neutral-900);
-  --color-fd-primary: var(--color-blue-400);
-
-  #nd-sidebar {
-    a[data-active="true"] {
-      background-color: var(--color-blue-950);
-    }
-  }
+pre code {
+  font-size: 14px;
+  font-family: "JetBrains Mono", monospace;
 }
