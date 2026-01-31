@@ -1,6 +1,8 @@
 import nextra from 'nextra';
 
-const withNextra = nextra({});
+const withNextra = nextra({
+  defaultShowCopyCode: true,
+});
 
 /** @type {import('next').NextConfig} */
 const config = {
@@ -10,18 +12,6 @@ const config = {
   },
   images: {
     unoptimized: true,
-  },
-  async rewrites() {
-    return [
-      {
-        source: '/',
-        destination: '/docs',
-      },
-      {
-        source: '/:path((?!docs|api|guides|cloud|_next|favicon|og|llms).*)',
-        destination: '/docs/:path*',
-      },
-    ];
   },
 };
 

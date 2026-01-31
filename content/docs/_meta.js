@@ -1,6 +1,5 @@
 export default {
-  '-- Umami --': { type: 'separator', title: 'Umami' },
-  index: 'Umami',
+  index: 'Introduction',
   install: 'Installation',
   updates: 'Getting updates',
   '-- Quickstart --': { type: 'separator', title: 'Quickstart' },

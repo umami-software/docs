@@ -1,18 +1,18 @@
 export default {
   docs: {
-    title: 'Documentation',
     type: 'page',
+    title: 'Documentation',
   },
   api: {
-    title: 'API',
     type: 'page',
+    title: 'API',
   },
   guides: {
-    title: 'Guides',
     type: 'page',
+    title: 'Guides',
   },
   cloud: {
-    title: 'Cloud',
     type: 'page',
+    title: 'Cloud',
   },
 };
