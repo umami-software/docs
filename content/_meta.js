@@ -1,4 +1,13 @@
 export default {
+  index: {
+    type: 'page',
+    title: 'Home',
+    theme: {
+      sidebar: false,
+      toc: false,
+      timestamp: false,
+    },
+  },
   docs: {
     type: 'page',
     title: 'Documentation',
