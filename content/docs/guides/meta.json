@@ -4,8 +4,6 @@
   "pages": [
     "---Guides---",
     "index",
-    "migrate-v1-v2",
-    "migrate-mysql-postgresql",
     "---Tracking---",
     "track-single-page-apps",
     "track-file-downloads",
@@ -46,8 +44,9 @@
     "running-on-sevalla",
     "running-on-supabase",
     "running-on-vercel",
-    "---AI---",
-    "connecting-agents"
+    "---Migration---",
+    "migrate-v1-v2",
+    "migrate-mysql-postgresql"
   ],
   "defaultOpen": true
 }
