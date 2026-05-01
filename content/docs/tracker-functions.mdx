@@ -7,7 +7,9 @@ more control over your tracking. By default everything is automatically collecte
 disable this using `data-auto-track="false"` and sending the data yourself.
 See [Tracker configuration](/docs/tracker-configuration).
 
-## Functions `v2.0.0`
+## Functions
+
+`v2.0.0`
 
 ```js
 // Tracks the current page
@@ -32,7 +34,9 @@ umami.identify(unique_id: string, data: object);
 umami.identify(data: object);
 ```
 
-## Pageviews `v2.0.0`
+## Pageviews
+
+`v2.0.0`
 
 Track a page view.
 
@@ -64,7 +68,9 @@ The above will only send the properties `website`, `url` and `title`. If you wan
 umami.track(props => ({ ...props, url: '/home', title: 'Home page' }));
 ```
 
-## Events `v2.0.0`
+## Events
+
+`v2.0.0`
 
 Track an event with a given name.
 
@@ -72,7 +78,9 @@ Track an event with a given name.
 umami.track('signup-button');
 ```
 
-## Event Data `v2.0.0`
+## Event Data
+
+`v2.0.0`
 
 Track an event with dynamic data.
 
@@ -126,7 +134,9 @@ Pass in your own ID to identify a user.
 umami.identify('unique_id');
 ```
 
-## Session Data `v2.13.0`
+## Session Data
+
+`v2.13.0`
 
 Save data about the current session.
 
