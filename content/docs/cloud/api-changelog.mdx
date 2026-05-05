@@ -4,6 +4,19 @@ title: Umami API
 
 This page documents changes made to **api.umami.is**.
 
+## 2026-05-04
+
+**Events**
+
+- `GET /api/websites/:websiteId/event-data-pivot`: **Added** — returns event data in a pivoted format with properties as parallel arrays.
+
+**Sessions**
+
+- `GET /api/websites/:websiteId/session-data-pivot`: **Added** — returns session data in a pivoted format with properties as parallel arrays.
+- `GET /api/websites/:websiteId/session-data/stats`: **Added** — returns aggregated activity statistics for sessions grouped by a property value.
+- `GET /api/websites/:websiteId/session-data/properties`: Added `propertyName` parameter to filter results to a specific property.
+- `GET /api/websites/:websiteId/session-data/values`: Added `dataType` parameter to filter results by data type.
+
 ## 2026-03-11
 
 **Websites**

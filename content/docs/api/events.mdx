@@ -16,6 +16,7 @@ GET /api/websites/:websiteId/event-data/fields
 GET /api/websites/:websiteId/event-data/properties
 GET /api/websites/:websiteId/event-data/values
 GET /api/websites/:websiteId/event-data/stats
+GET /api/websites/:websiteId/event-data-pivot
 ```
 
 ---
@@ -438,4 +439,42 @@ Gets aggregated website events, properties, and records within a given time rang
     "records": 26
   }
 ]
+```
+
+---
+
+## GET /api/websites/:websiteId/event-data-pivot
+
+Gets event data for a website in a pivoted format, with each row representing an event and its properties as parallel arrays.
+
+**Parameters**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `startAt` | number | Timestamp (in ms) of starting date. |
+| `endAt` | number | Timestamp (in ms) of end date. |
+| `eventName` | string | Event name to pivot on. |
+| `page` | number | (optional, default 1) Determines page. |
+| `pageSize` | number | (optional, default 20) Determines how many results to return. |
+| `filters` | object | Can accept filter parameters. |
+
+**Sample response**
+
+```json
+{
+  "data": [
+    {
+      "eventId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "sessionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "eventName": "signup",
+      "urlPath": "/register",
+      "createdAt": "2025-10-15T16:26:28Z",
+      "propertyKeys": ["plan", "source"],
+      "propertyValues": ["pro", "organic"]
+    }
+  ],
+  "count": 100,
+  "page": 1,
+  "pageSize": 20
+}
 ```
