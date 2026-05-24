@@ -85,7 +85,7 @@ umami.track('signup-button');
 Track an event with dynamic data.
 
 ```js
-umami.track('signup-button', { name: 'newsletter', id: 123 });
+umami.track('signup-button', { plan: 'newsletter', id: 123 });
 ```
 
 When tracking events, the default properties are included in the payload.
@@ -96,7 +96,7 @@ umami.track(props => ({
   ...props,
   name: 'signup-button',
   data: {
-    name: 'newsletter',
+    plan: 'newsletter',
     id: 123,
   },
 }));

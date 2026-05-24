@@ -91,6 +91,12 @@ const topPages = metrics
 Compare this week vs. last week to detect trends:
 
 ```js
+const WEEK = 7 * 24 * 60 * 60 * 1000;
+const thisWeekEnd = Date.now();
+const thisWeekStart = thisWeekEnd - WEEK;
+const lastWeekEnd = thisWeekStart;
+const lastWeekStart = lastWeekEnd - WEEK;
+
 const thisWeek = await fetch(
   `https://your-umami.example.com/api/websites/${websiteId}/stats` +
     `?startAt=${thisWeekStart}&endAt=${thisWeekEnd}`,
@@ -104,7 +110,8 @@ const lastWeek = await fetch(
 ).then(r => r.json());
 
 const change = ((thisWeek.visitors - lastWeek.visitors) / lastWeek.visitors * 100).toFixed(1);
-console.log(`Visitors: ${thisWeek.visitors} (${change > 0 ? '+' : ''}${change}% vs last week)`);
+const sign = Number(change) > 0 ? '+' : '';
+console.log(`Visitors: ${thisWeek.visitors} (${sign}${change}% vs last week)`);
 ```
 
 ## Running on a schedule

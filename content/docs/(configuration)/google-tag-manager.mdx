@@ -16,7 +16,7 @@ Normally, you would install the Umami tracker by using the following code:
 
 However, Google Tag Manager strips custom `data-*` attributes from script tags. To work around this, create the script element dynamically using a **Custom HTML** tag in GTM:
 
-```javascript
+```html
 <script>
   (function () {
   var el = document.createElement('script');

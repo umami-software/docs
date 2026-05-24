@@ -29,8 +29,8 @@ PostgreSQL: postgresql://user:password@host:port/dbname
 
 ## Install Umami with a PostgreSQL database
 
-1. Install Umami (v2.19.0) on a PostgreSQL server. Documents are the installation process can be found [here](/docs/install).
-1. Truncate the tables below. These tables will be populated from the MySQL import.
+1. Install Umami (v2.19.0) on a PostgreSQL server. Documentation for the installation process can be found [here](/docs/install).
+2. Truncate the tables below. These tables will be populated from the MySQL import.
 
 ```sql
 truncate table "_prisma_migrations";
@@ -89,7 +89,7 @@ FROM website_event;
 
 **Notes**
 
-- The file path (/tmp/users.csv) is on the MySQL server's filesystem, not necessarily your host.
+- The file path (/tmp/website_event.csv) is on the MySQL server's filesystem, not necessarily your host.
 - Make sure MySQL has permission to write there (secure_file_priv may restrict this).
 
 2. Move the file from MySQL server to location accessible by psql using `scp` or `cp`.

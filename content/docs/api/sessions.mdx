@@ -153,11 +153,11 @@ Gets summarized website session statistics.
 }
 ```
 
-- `pageviews`: Pages hits
+- `pageviews`: Page hits
 - `visitors`: Number of unique visitors
 - `visits`: Number of unique visits
-- `bounces`: Number of visitors who only visit a single page
-- `totaltime`: Time spent on the website
+- `countries`: Number of unique countries
+- `events`: Number of events
 
 ---
 
@@ -192,7 +192,7 @@ Get collected count of sessions by hour of weekday.
 
 ## GET /api/websites/:websiteId/sessions/:sessionId
 
-Gets session details for a individual session
+Gets session details for an individual session
 
 **Sample response**
 
@@ -222,7 +222,7 @@ Gets session details for a individual session
 
 ## GET /api/websites/:websiteId/sessions/:sessionId/activity
 
-Gets session activity for a individual session
+Gets session activity for an individual session
 
 **Parameters**
 
@@ -275,7 +275,7 @@ Gets session activity for a individual session
 
 ## GET /api/websites/:websiteId/sessions/:sessionId/properties
 
-Gets session properties for a individual session
+Gets session properties for an individual session
 
 **Sample response**
 

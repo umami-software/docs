@@ -31,14 +31,14 @@ Just pass in your API key via a custom header `x-umami-api-key`
 For example, with `curl` it would look like this:
 
 ```shell
-curl https://api.umami.is/v1/websites
-   -H "Accept: application/json"
+curl https://api.umami.is/v1/websites \
+   -H "Accept: application/json" \
    -H "x-umami-api-key: <api-key>"
 ```
 
 ## Using your key with API Client
 
-Set the following requirement variables to have the API client use your API key.
+Set the following environment variables to have the API client use your API key.
 
 ```dotenv
 UMAMI_API_KEY={Your API key}
