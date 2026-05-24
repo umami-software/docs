@@ -24,7 +24,7 @@ For **Umami Cloud** send a POST to `https://cloud.umami.is/api/send`.
 | `payload.website` | string | Website ID. |
 | `payload.name` | string | Name of the event. |
 | `payload.data` | object | (optional) Additional data for the event. |
-| `type` | string | `event` is currently the only type available. |
+| `type` | string | One of `event`, `identify`, or `performance`. |
 
 **Sample payload**
 
@@ -82,3 +82,48 @@ const data = {
   type: 'event',
 };
 ```
+
+## POST /api/batch
+
+To send multiple events in a single request, POST a JSON **array** to `/api/batch`. Each element of the array has the same shape as an `/api/send` request body. Like `/api/send`, this endpoint does not require an authentication token but does require a valid `User-Agent` header.
+
+**Sample payload**
+
+```json
+[
+  {
+    "payload": {
+      "hostname": "your-hostname",
+      "url": "/page-1",
+      "website": "your-website-id",
+      "name": "event-name"
+    },
+    "type": "event"
+  },
+  {
+    "payload": {
+      "hostname": "your-hostname",
+      "url": "/page-2",
+      "website": "your-website-id",
+      "name": "event-name"
+    },
+    "type": "event"
+  }
+]
+```
+
+Each item is forwarded to `/api/send`, so all `type` values and payload fields supported there are also supported here.
+
+**Sample response**
+
+```json
+{
+  "size": 2,
+  "processed": 2,
+  "errors": 0,
+  "details": [],
+  "cache": "xxxxxxxxxxxxxxx"
+}
+```
+
+If any items fail, `errors` is the failure count and `details` lists each failure along with its `index` in the submitted array.

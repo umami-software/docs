@@ -21,12 +21,12 @@ To assist with the migration we created a script `@umami/migrate-v1-v2` that wil
 
 ### Requirements
 
-- Database schema must be in sync with the latest v1 version (v1.4.0). The script will query the prisma migrations table to ensure the latest migrations have been ran.
+- Database schema must be in sync with the latest v1 version (v1.4.0). The script will query the prisma migrations table to ensure the latest migrations have been run.
 
 ### Important
 
 - Backup your target database prior to use. Potential data loss may occur if the migration is interrupted.
-- For users with larger datasets (5M+), the migration may take while. Please plan accordingly.
+- For users with larger datasets (5M+), the migration may take a while. Please plan accordingly.
 - The script will NOT migrate any event data into v2.
 - The script will ask you if you want to drop your v1 tables after the migration is complete.
 - If an `event_data` table is found populated with data, it will be renamed to `v1_event_data` but not dropped.

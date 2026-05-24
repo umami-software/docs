@@ -20,21 +20,24 @@ npm install @umami/node
 ```
 
 ```js
-import Umami from '@umami/node';
+import umami from '@umami/node';
 
-const umami = new Umami({
-  hostUrl: 'https://your-umami.example.com',
+umami.init({
   websiteId: 'your-website-id',
+  hostUrl: 'https://your-umami.example.com',
 });
 
 // Track a page view
 await umami.track({ url: '/api/checkout', title: 'Checkout API' });
 
 // Track a custom event
-await umami.track('payment-received', {
-  revenue: 49.99,
-  currency: 'USD',
-  plan: 'pro',
+await umami.track({
+  name: 'payment-received',
+  data: {
+    revenue: 49.99,
+    currency: 'USD',
+    plan: 'pro',
+  },
 });
 ```
 
@@ -89,36 +92,50 @@ requests.post('https://your-umami.example.com/api/send', json={
 
 ## Batch sending
 
-For importing bulk data, use the `/api/batch` endpoint to send multiple events at once:
+To send multiple events in a single request, POST a JSON **array** to the `/api/batch` endpoint. Each element of the array has the same shape as an `/api/send` request body:
 
 ```bash
 curl -X POST https://your-umami.example.com/api/batch \
   -H "Content-Type: application/json" \
   -H "User-Agent: Mozilla/5.0 (Server)" \
-  -d '{
-    "events": [
-      {
-        "payload": {
-          "hostname": "example.com",
-          "url": "/page-1",
-          "website": "your-website-id"
-        },
-        "type": "event"
-      },
-      {
-        "payload": {
-          "hostname": "example.com",
-          "url": "/page-2",
-          "website": "your-website-id"
-        },
-        "type": "event"
+  -d '[
+    {
+      "type": "event",
+      "payload": {
+        "website": "your-website-id",
+        "hostname": "example.com",
+        "url": "/page-1",
+        "name": "page-view"
       }
-    ]
-  }'
+    },
+    {
+      "type": "event",
+      "payload": {
+        "website": "your-website-id",
+        "hostname": "example.com",
+        "url": "/page-2",
+        "name": "page-view"
+      }
+    }
+  ]'
 ```
+
+Each item is forwarded to `/api/send`, so the same `type` values (`event`, `identify`, `performance`) and payload fields are supported. The response summarizes the batch:
+
+```json
+{
+  "size": 2,
+  "processed": 2,
+  "errors": 0,
+  "details": [],
+  "cache": "..."
+}
+```
+
+If any items fail, `errors` is the failure count and `details` lists each failure by its `index` in the array.
 
 ## Tips
 
 - Server-side events appear in the same dashboard as client-side events. Use event names or properties to distinguish them if needed.
 - When tracking revenue from payment webhooks, use the `revenue` and `currency` properties so data appears in the [Revenue](/docs/revenue) insight.
-- For high-volume backends, batch events together to reduce the number of HTTP requests.
+- For high-volume backends, consider queuing events and sending them with concurrency limits to avoid overwhelming your instance.

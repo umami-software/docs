@@ -29,7 +29,7 @@ Session metrics help identify a unique session for a user. Each session is store
 
 | Metric | Description | Examples |
 | --- | --- | --- |
-| Browser | Browser name extracted from the [User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent). | Chrome, Firefox, iOS, Safari, Edge |
+| Browser | Browser name extracted from the [User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent). | Chrome, Firefox, Safari, Edge |
 | OS | Operating system name extracted from the [User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent). | Windows 10, macOS, Linux, Android, iOS |
 | Device | Device name identified from the combination of **OS** and **screen**. | Laptop, desktop, mobile, tablet |
 | Screen | [Screen](https://developer.mozilla.org/en-US/docs/Web/API/Screen) width and height property included in the payload. | 1920x1080, 1280x960 |
@@ -104,8 +104,8 @@ Calculated metrics are a combination of total and unique aggregates per website.
 
 | Metric | Definition |
 | --- | --- |
-| Views | The total number of events that were collected by your visitors. |
-| Visitors | Unique number of sessions. A session is calculated using a hash of data such as Website ID, hostname, User-Agent, etc and a rotating salt that is rotated at the start of every month. |
-| Visits | Unique number of visits. A visit is a more granular range within a user session. A visit is calculated using a hash of the session ID and rotating salt that is rotated at the start of every hour. Visits are able to span across hourly intervals. |
+| Views | The total number of events collected from your visitors. |
+| Visitors | Unique number of sessions. A session is calculated using a hash of data such as Website ID, hostname, User-Agent, etc and a rotating salt that changes at the start of every month. |
+| Visits | Unique number of visits. A visit is a more granular range within a user session. A visit is calculated using a hash of the session ID and a rotating salt that changes at the start of every hour. Visits are able to span across hourly intervals. |
 | Bounce rate | A bounce is defined when a visit has only 1 event. A user will enter the website, initially generating a view, then leaving. The bounce rate is calculated by dividing the total number of bounces by unique number of visits. |
-| Visit duration | Total time spent on the website divided by unique number of visits. Total time is only calculated for visitors that visit more than one page. The difference between the first and last event create time per visit are summed into a duration time. |
+| Visit duration | Total time spent on the website divided by unique number of visits. Total time is only calculated for visitors that visit more than one page. The difference between the first and last event timestamps per visit is summed into a duration time. |
