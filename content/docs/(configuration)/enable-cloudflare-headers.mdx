@@ -20,7 +20,7 @@ configure Cloudflare to send additional headers.
 Then, you'll have to proxy [the following headers](https://github.com/umami-software/umami/blob/aaa1f9dc58feafe6af54248c5f0611112786fddf/src/lib/detect.ts#L14C2-L18C5) to Umami:
 
 - `CF-IPCountry`
-- `CF-RegionCode`
+- `CF-Region-Code`
 - `CF-IPCity`
 
 For example, if you're using Nginx as a reverse proxy, you can add the following configuration:
@@ -33,7 +33,7 @@ location / {
     proxy_set_header X-Forwarded-Host $host;
     proxy_set_header CF-Connecting-IP $remote_addr;
     proxy_set_header CF-IPCountry $http_cf_ipcountry;
-    proxy_set_header CF-RegionCode $http_cf_regioncode;
+    proxy_set_header CF-Region-Code $http_cf_regioncode;
     proxy_set_header CF-IPCity $http_cf_ipcity;
     proxy_pass http://127.0.0.1:3000;
 }
