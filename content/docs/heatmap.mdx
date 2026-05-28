@@ -1,0 +1,63 @@
+---
+title: Heatmap
+---
+
+*Available since v3.1.0*
+
+**Heatmaps** visualize where visitors click and scroll on your pages — giving you an at-a-glance view of engagement patterns without watching individual replays.
+Use heatmaps to identify which elements attract the most attention, discover dead clicks, and understand how far down the page visitors actually scroll.
+
+## Enabling Heatmaps
+
+Log into Umami and click on **Websites** in the sidebar.
+
+![image](/images/docs/navbar.png)
+
+Click on the **Edit** button for the website you want to edit.
+
+![image](/images/docs/website-edit.png)
+
+Navigate to the **Replays & Heatmaps** section and enable the **Heatmaps** toggle.
+
+![image](/images/docs/heatmap-edit.png)
+
+| Option | Description | Default |
+| --- | --- | --- |
+| Heatmap Sample Rate | Fraction of sessions to include in heatmap data, from `0` to `1`. | `0.15` |
+
+You will also need to update your tracker script to opt in to heatmap collection.
+
+```html
+<script
+  defer src="http://localhost:3000/recorder.js"
+  data-website-id="my-website-id"
+></script>
+```
+
+> **Notes**
+>
+> - Heatmap data is only collected from sessions recorded after enabling the feature.
+> - Heatmaps are generated from aggregated session data — no individual session is identifiable.
+
+## Accessing Heatmaps
+
+Navigate to a website and click the **Heatmap** tab.
+
+![image](/images/docs/heatmap-pages.png)
+
+Use the **Pages** dropdown to select the page you want to inspect.
+
+![image](/images/docs/heatmap-clicks.png)
+
+The heatmap overlay is rendered on top of a live snapshot of the page.
+
+## Heatmap Types
+
+Use the type selector to switch between views.
+
+![image](/images/docs/heatmap-scroll.png)
+
+| Type | Description |
+| --- | --- |
+| Click | Shows where visitors click. Highlights high-engagement elements and dead clicks. |
+| Scroll | Shows how far down the page visitors scroll. Useful for identifying content below the fold that goes unseen. |

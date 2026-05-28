@@ -17,26 +17,23 @@ Click on the **Edit** button for the website you want to edit.
 
 ![image](/images/docs/website-edit.png)
 
-Navigate to the **Replays** section and click on the toggle.
+Navigate to the **Replays & Heatmaps** section and click on the **Replays**toggle.
 
 ![image](/images/docs/replay-edit.png)
 
-| Option | Attribute | Description | Default |
-| --- | --- | --- | --- |
-| Sample Rate | `data-sample-rate` | Fraction of sessions to record, from `0` to `1`. For example, `0.15` records 15% of sessions. | `0.15` |
-| Mask Level | `data-mask-level` | Privacy masking level. `moderate` masks all input fields; `strict` masks all inputs and all text on the page. | `moderate` |
-| Max Duration | `data-max-duration` | Maximum recording length in milliseconds. Recording stops automatically when reached. | `300000` (5 min) |
-| Block Selector | `data-block-selector` | CSS selector for elements to fully exclude from recording (e.g., `.sensitive-widget`). | none |
+| Option | Description | Default |
+| --- | --- | --- |
+| Sample Rate | Fraction of sessions to record, from `0` to `1`. For example, `0.15` records 15% of sessions. | `0.15` |
+| Mask Level | Privacy masking level. `moderate` masks all input fields; `strict` masks all inputs and all text on the page. | `moderate` |
+| Max Duration | Maximum recording length in milliseconds. Recording stops automatically when reached. | `300000` (5 min) |
+| Block Selector | CSS selector for elements to fully exclude from recording (e.g., `.sensitive-widget`). | none |
 
 You will also need to update your tracker script to opt in to replay collection.
 
 ```html
-<script 
-  defer src="http://localhost:3000/recorder.js" 
-  data-website-id="my-website-id" 
-  data-sample-rate="0.15" 
-  data-mask-level="moderate" 
-  data-max-duration="300000"
+<script
+  defer src="http://localhost:3000/recorder.js"
+  data-website-id="my-website-id"
 ></script>
 ```
 

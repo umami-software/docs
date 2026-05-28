@@ -4,6 +4,20 @@ title: Umami API
 
 This page documents changes made to **api.umami.is**.
 
+## 2026-05-28
+
+**Revenue**
+
+- `GET /api/websites/:websiteId/revenue/chart`: **Added** — returns revenue chart data for a given date range and currency.
+- `GET /api/websites/:websiteId/revenue/stats`: **Added** — returns revenue statistics with optional period-over-period comparison.
+- `GET /api/websites/:websiteId/revenue/metrics`: **Added** — returns revenue breakdown by `type` (`country` \| `region` \| `referrer` \| `channel`).
+- `GET /api/websites/:websiteId/revenue/sessions`: **Added** — returns paginated sessions with revenue data.
+
+**Websites**
+
+- `GET /api/websites/:websiteId/recorder`: **Added** — returns the recorder configuration for a website. Used by the tracker to initialize session replay and heatmap collection. Requires no authentication.
+- `POST /api/websites/:websiteId`: `replayConfig` is now a nested object. `replayEnabled` has moved inside `replayConfig`.
+
 ## 2026-05-04
 
 **Events**

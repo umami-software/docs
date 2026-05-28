@@ -20,6 +20,10 @@ POST /api/reports/journey
 POST /api/reports/performance
 POST /api/reports/retention
 POST /api/reports/revenue
+GET /api/websites/:websiteId/revenue/chart
+GET /api/websites/:websiteId/revenue/stats
+GET /api/websites/:websiteId/revenue/metrics
+GET /api/websites/:websiteId/revenue/sessions
 POST /api/reports/utm
 ```
 
@@ -1077,6 +1081,153 @@ Get currency for given range. Needed for Revenue and optional in Attribution rep
             "value": 60
         }
     ]
+}
+```
+
+---
+
+## GET /api/websites/:websiteId/revenue/chart
+
+Returns revenue chart data for a given date range and currency.
+
+**Parameters**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `startAt` | number | Start date in Unix milliseconds. |
+| `endAt` | number | End date in Unix milliseconds. |
+| `timezone` | string | Timezone (ex. America/Los_Angeles). |
+| `currency` | string | Currency code (ISO 4217). |
+| `compare` | string | (optional) Comparison period (`prev` \| `yoy`). |
+
+**Sample response**
+
+```json
+[
+  {
+    "x": "revenue-demo",
+    "t": "2026-05-01T08:00:00Z",
+    "y": 70,
+    "count": 2
+  },
+  {
+    "x": "revenue-demo",
+    "t": "2026-05-01T09:00:00Z",
+    "y": 40,
+    "count": 2
+  }
+]
+```
+
+---
+
+## GET /api/websites/:websiteId/revenue/stats
+
+Returns revenue statistics for a given date range with optional comparison period.
+
+**Parameters**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `startAt` | number | Start date in Unix milliseconds. |
+| `endAt` | number | End date in Unix milliseconds. |
+| `timezone` | string | Timezone (ex. America/Los_Angeles). |
+| `currency` | string | Currency code (ISO 4217). |
+| `compare` | string | (optional) Comparison period (`prev` \| `yoy`). |
+
+**Sample response**
+
+```json
+{
+  "sum": 320,
+  "count": 12,
+  "unique_count": 12,
+  "total_sessions": 1300,
+  "average": 26.67,
+  "arpu": 0.246,
+  "comparison": {
+    "sum": 2470,
+    "count": 66,
+    "unique_count": 66,
+    "total_sessions": 2994,
+    "average": 37.42,
+    "arpu": 0.825
+  }
+}
+```
+
+---
+
+## GET /api/websites/:websiteId/revenue/metrics
+
+Returns revenue broken down by a specified dimension.
+
+**Parameters**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `startAt` | number | Start date in Unix milliseconds. |
+| `endAt` | number | End date in Unix milliseconds. |
+| `timezone` | string | Timezone (ex. America/Los_Angeles). |
+| `type` | string | Breakdown type (`country` \| `region` \| `referrer` \| `channel`). |
+| `currency` | string | Currency code (ISO 4217). |
+
+**Sample response**
+
+```json
+[
+  { "name": "US", "value": 120 },
+  { "name": "GB", "value": 100 },
+  { "name": "DE", "value": 60 }
+]
+```
+
+---
+
+## GET /api/websites/:websiteId/revenue/sessions
+
+Returns a paginated list of sessions with revenue data.
+
+**Parameters**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `startAt` | number | Start date in Unix milliseconds. |
+| `endAt` | number | End date in Unix milliseconds. |
+| `timezone` | string | Timezone (ex. America/Los_Angeles). |
+| `currency` | string | Currency code (ISO 4217). |
+| `page` | number | (optional) Page number. |
+| `pageSize` | number | (optional) Number of results per page. |
+| `search` | string | (optional) Search term to filter sessions. |
+
+**Sample response**
+
+```json
+{
+  "data": [
+    {
+      "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "websiteId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "hostname": "example.com",
+      "browser": "Chrome",
+      "os": "Windows",
+      "device": "desktop",
+      "screen": "1920x1080",
+      "language": "en-US",
+      "country": "US",
+      "region": "US-CA",
+      "city": "San Francisco",
+      "firstAt": "2026-05-01T08:00:00Z",
+      "lastAt": "2026-05-01T08:15:00Z",
+      "visits": 1,
+      "views": 5,
+      "events": 2,
+      "createdAt": "2026-05-01T08:00:00Z"
+    }
+  ],
+  "count": 1,
+  "page": 1,
+  "pageSize": 20
 }
 ```
 
