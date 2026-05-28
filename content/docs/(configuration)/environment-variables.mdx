@@ -296,3 +296,23 @@ Skips the Prisma migration step in the build process. Setting `SKIP_DB_CHECK` al
 ```
 SKIP_DB_MIGRATION = 1
 ```
+
+### SKIP_BUILD_GEO
+
+`v3.1.0`
+
+Skips the local GeoIP database setup step in the build process.
+
+```
+SKIP_BUILD_GEO = 1
+```
+
+### BUILD_GEO
+
+`v3.0.0`
+
+Run the local GeoIP database setup step even in Vercel environment.
+
+```
+BUILD_GEO = 1
+```
