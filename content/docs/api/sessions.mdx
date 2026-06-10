@@ -15,6 +15,8 @@ GET /api/websites/:websiteId/sessions/:sessionId/activity
 GET /api/websites/:websiteId/sessions/:sessionId/properties
 GET /api/websites/:websiteId/session-data/properties
 GET /api/websites/:websiteId/session-data/values
+GET /api/websites/:websiteId/session-data-pivot
+GET /api/websites/:websiteId/session-data/stats
 ```
 
 ---
@@ -151,11 +153,11 @@ Gets summarized website session statistics.
 }
 ```
 
-- `pageviews`: Pages hits
+- `pageviews`: Page hits
 - `visitors`: Number of unique visitors
 - `visits`: Number of unique visits
-- `bounces`: Number of visitors who only visit a single page
-- `totaltime`: Time spent on the website
+- `countries`: Number of unique countries
+- `events`: Number of events
 
 ---
 
@@ -190,7 +192,7 @@ Get collected count of sessions by hour of weekday.
 
 ## GET /api/websites/:websiteId/sessions/:sessionId
 
-Gets session details for a individual session
+Gets session details for an individual session
 
 **Sample response**
 
@@ -220,7 +222,7 @@ Gets session details for a individual session
 
 ## GET /api/websites/:websiteId/sessions/:sessionId/activity
 
-Gets session activity for a individual session
+Gets session activity for an individual session
 
 **Parameters**
 
@@ -273,7 +275,7 @@ Gets session activity for a individual session
 
 ## GET /api/websites/:websiteId/sessions/:sessionId/properties
 
-Gets session properties for a individual session
+Gets session properties for an individual session
 
 **Sample response**
 
@@ -322,6 +324,7 @@ Gets session data counts by property name
 | --- | --- | --- |
 | `startAt` | number | Timestamp (in ms) of starting date. |
 | `endAt` | number | Timestamp (in ms) of end date. |
+| `propertyName` | string | (optional) Filter results to a specific property name. |
 | `filters` | - | Can accept filter parameters. |
 
 **Sample response**
@@ -360,6 +363,7 @@ Gets session data counts for a given property
 | `startAt` | number | Timestamp (in ms) of starting date. |
 | `endAt` | number | Timestamp (in ms) of end date. |
 | `propertyName` | string | Property name. |
+| `dataType` | number | (optional) Filter by data type (1=string, 2=number, 3=date, 4=boolean). |
 | `filters` | - | Can accept filter parameters. |
 
 **Sample response**
@@ -376,3 +380,79 @@ Gets session data counts for a given property
   }
 ]
 ```
+
+---
+
+## GET /api/websites/:websiteId/session-data-pivot
+
+Gets session data in a pivoted format, with each row representing a session and its properties as parallel arrays.
+
+**Parameters**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `startAt` | number | Timestamp (in ms) of starting date. |
+| `endAt` | number | Timestamp (in ms) of end date. |
+| `propertyName` | string | Session property name to pivot on. |
+| `page` | number | (optional, default 1) Determines page. |
+| `pageSize` | number | (optional, default 20) Determines how many results to return. |
+| `filters` | - | Can accept filter parameters. |
+
+**Sample response**
+
+```json
+{
+  "data": [
+    {
+      "sessionId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+      "distinctId": "user-123",
+      "createdAt": "2025-10-15T16:26:28Z",
+      "propertyKeys": ["plan", "role"],
+      "propertyValues": ["pro", "admin"]
+    }
+  ],
+  "count": 50,
+  "page": 1,
+  "pageSize": 20
+}
+```
+
+---
+
+## GET /api/websites/:websiteId/session-data/stats
+
+Gets aggregated activity statistics for sessions grouped by a given property value.
+
+**Parameters**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `startAt` | number | Timestamp (in ms) of starting date. |
+| `endAt` | number | Timestamp (in ms) of end date. |
+| `propertyName` | string | Property name to group by. |
+| `filters` | - | Can accept filter parameters. |
+
+**Sample response**
+
+```json
+[
+  {
+    "label": "pro",
+    "activity": 342,
+    "sessions": 89,
+    "visits": 201,
+    "views": 1450,
+    "events": 892
+  },
+  {
+    "label": "free",
+    "activity": 158,
+    "sessions": 44,
+    "visits": 91,
+    "views": 630,
+    "events": 310
+  }
+]
+```
+
+Results are ordered by `activity` descending. Maximum 100 rows returned.

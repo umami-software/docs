@@ -16,6 +16,20 @@ This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and
 
 - Added path filtering to heatmap pages.
 
+## May 28, 2026
+
+**API: Revenue**
+
+- `GET /api/websites/:websiteId/revenue/chart`: **Added** — returns revenue chart data for a given date range and currency.
+- `GET /api/websites/:websiteId/revenue/stats`: **Added** — returns revenue statistics with optional period-over-period comparison.
+- `GET /api/websites/:websiteId/revenue/metrics`: **Added** — returns revenue breakdown by `type` (`country` \| `region` \| `referrer` \| `channel`).
+- `GET /api/websites/:websiteId/revenue/sessions`: **Added** — returns paginated sessions with revenue data.
+
+**API: Websites**
+
+- `GET /api/websites/:websiteId/recorder`: **Added** — returns the recorder configuration for a website. Used by the tracker to initialize session replay and heatmap collection. Requires no authentication.
+- `POST /api/websites/:websiteId`: `replayConfig` is now a nested object. `replayEnabled` has moved inside `replayConfig`.
+
 ## May 12, 2026
 
 **Revenue**
@@ -46,6 +60,19 @@ This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and
 **Heatmaps**
 
 - Added scroll heatmaps.
+
+## May 4, 2026
+
+**API: Events**
+
+- `GET /api/websites/:websiteId/event-data-pivot`: **Added** — returns event data in a pivoted format with properties as parallel arrays.
+
+**API: Sessions**
+
+- `GET /api/websites/:websiteId/session-data-pivot`: **Added** — returns session data in a pivoted format with properties as parallel arrays.
+- `GET /api/websites/:websiteId/session-data/stats`: **Added** — returns aggregated activity statistics for sessions grouped by a property value.
+- `GET /api/websites/:websiteId/session-data/properties`: Added `propertyName` parameter to filter results to a specific property.
+- `GET /api/websites/:websiteId/session-data/values`: Added `dataType` parameter to filter results by data type.
 
 ## April 29, 2026
 

@@ -97,12 +97,18 @@ function PageviewsChart({ data }) {
 The [Umami API client](/docs/api/api-client) simplifies authentication and provides typed methods:
 
 ```js
-import Umami from '@umami/api-client';
+import { getClient } from '@umami/api-client';
 
-const client = new Umami();
-await client.authenticate({ username: 'admin', password: 'your-password' });
+// Configure via environment variables:
+//   UMAMI_API_CLIENT_USER_ID
+//   UMAMI_API_CLIENT_SECRET
+//   UMAMI_API_CLIENT_ENDPOINT
+// or, for Umami Cloud:
+//   UMAMI_API_KEY
+const client = getClient();
 
-const stats = await client.getWebsiteStats(websiteId, {
+// Methods return { ok, data, status, error }
+const { data } = await client.getWebsiteStats(websiteId, {
   startAt: Date.now() - 86400000,
   endAt: Date.now(),
 });

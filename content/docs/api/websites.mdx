@@ -13,6 +13,7 @@ GET /api/websites/:websiteId
 POST /api/websites/:websiteId
 DELETE /api/websites/:websiteId
 POST /api/websites/:websiteId/reset
+GET /api/websites/:websiteId/recorder
 ```
 
 ---
@@ -139,13 +140,30 @@ Updates a website.
 | `name` | string | The name of the website in Umami. |
 | `domain` | string | The full domain of the tracked website. |
 | `shareId` | string | (optional) A unique string to enable a share URL. Set `null` to unshare. |
+| `replayConfig` | object | (optional) Session recording and heatmap configuration. |
+
+**`replayConfig` fields**
+
+| Field | Type | Description |
+| --- | --- | --- |
+| `replayEnabled` | boolean | Enable or disable session replay recording. |
+| `heatmapEnabled` | boolean | Enable or disable heatmap data collection. |
+| `sampleRate` | number | Fraction of sessions to record for replay (0–1). |
+| `heatmapSampleRate` | number | Fraction of sessions to record for heatmaps (0–1). |
+| `maskLevel` | string | PII masking level: `strict` or `moderate`. |
+| `maxDuration` | number | Maximum recording duration in seconds. |
+| `blockSelector` | string | CSS selector for elements to exclude from recording. |
 
 **Request body**
 
 ```json
 {
   "name": "Test",
-  "domain": "domain.com"
+  "domain": "domain.com",
+  "replayConfig": {
+    "replayEnabled": true,
+    "sampleRate": 0.5
+  }
 }
 ```
 
@@ -160,6 +178,16 @@ Updates a website.
   "resetAt": null,
   "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "teamId": null,
+  "recorderEnabled": true,
+  "replayConfig": {
+    "replayEnabled": true,
+    "heatmapEnabled": false,
+    "sampleRate": 0.5,
+    "heatmapSampleRate": 0,
+    "maskLevel": "moderate",
+    "maxDuration": 3600,
+    "blockSelector": ""
+  },
   "createdBy": "133660ed-e51c-4ed9-84aa-c86654460cae",
   "createdAt": "2025-10-10T22:01:06.201Z",
   "updatedAt": "2025-10-10T22:02:02.220Z",
@@ -192,5 +220,28 @@ Resets a website by removing all data related to the website.
 ```json
 {
   "ok": true
+}
+```
+
+---
+
+## GET /api/websites/:websiteId/recorder
+
+Returns the recorder configuration for a website. Used by the tracker to initialize session replay and heatmap collection. This endpoint requires no authentication and is publicly accessible.
+
+If the website does not exist or recording is disabled, returns `{ "enabled": false }`.
+
+**Sample response**
+
+```json
+{
+  "enabled": true,
+  "replayEnabled": true,
+  "heatmapEnabled": false,
+  "sampleRate": 0.15,
+  "heatmapSampleRate": 0.15,
+  "maskLevel": "moderate",
+  "maxDuration": 300000,
+  "blockSelector": ""
 }
 ```

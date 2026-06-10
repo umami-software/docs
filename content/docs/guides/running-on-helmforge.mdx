@@ -1,0 +1,95 @@
+---
+title: Running on Kubernetes with HelmForge
+---
+
+[HelmForge](https://helmforge.dev/docs/charts/umami/) provides a third-party Helm chart for running Umami on Kubernetes.
+The chart uses the official Umami container image and can deploy PostgreSQL as a bundled subchart or connect to an external PostgreSQL database.
+
+## Requirements
+
+- A working Kubernetes cluster.
+- Helm 3 installed locally.
+- A default `StorageClass` if you use the bundled PostgreSQL subchart.
+- Optional: an Ingress controller if you want to expose Umami with a public hostname.
+
+## Add the HelmForge repository
+
+```shell
+helm repo add helmforge https://repo.helmforge.dev
+helm repo update
+```
+
+## Install with bundled PostgreSQL
+
+For a basic installation, the chart can deploy Umami together with PostgreSQL:
+
+```shell
+kubectl create namespace umami
+
+helm install umami helmforge/umami \
+  --namespace umami
+```
+
+Access the application locally with port forwarding:
+
+```shell
+kubectl port-forward \
+  --namespace umami \
+  svc/umami-umami 3000:80
+```
+
+Then open `http://localhost:3000`.
+The default login credentials are username **admin** and password **umami**.
+
+> **Important**: Change the default password immediately after your first login.
+
+## Use an external PostgreSQL database
+
+To connect Umami to an existing PostgreSQL database, disable the bundled PostgreSQL subchart and provide the external database settings:
+
+```yaml
+# values.yaml
+postgresql:
+  enabled: false
+
+database:
+  external:
+    host: postgres.example.com
+    port: "5432"
+    name: umami
+    username: umami
+    existingSecret: umami-db-credentials
+    existingSecretPasswordKey: password
+```
+
+Then install the chart with:
+
+```shell
+helm install umami helmforge/umami \
+  --namespace umami \
+  --values values.yaml
+```
+
+## Expose with Ingress
+
+For a public installation, enable Ingress:
+
+```yaml
+ingress:
+  enabled: true
+  ingressClassName: nginx
+  hosts:
+    - host: analytics.example.com
+      paths:
+        - path: /
+          pathType: Prefix
+  tls:
+    - hosts:
+        - analytics.example.com
+      secretName: umami-tls
+```
+
+## More information
+
+- [HelmForge Umami chart documentation](https://helmforge.dev/docs/charts/umami/)
+- [HelmForge Umami chart source](https://github.com/helmforgedev/charts/tree/main/charts/umami)

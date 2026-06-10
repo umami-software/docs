@@ -13,7 +13,7 @@ The insight works by aggregating **Revenue** and **Currency** data across a spec
 
 ## Configuring Revenue
 
-To start collecting revenue data, you will be leveraging tracking an event with dynamic data. This can be done through [tracker functions](https://umami.is/docs/tracker-functions#event-data)
+To start collecting revenue data, you will track an event with dynamic data. This can be done through [tracker functions](https://umami.is/docs/tracker-functions#event-data)
 or [data attributes](https://umami.is/docs/track-events#using-data-attributes). The tracked event must be passed along with the two dynamic data
 properties `revenue` and `currency`. If a currency code (ISO 4217) is not recognized, the insight will default to `USD`.
 
@@ -43,7 +43,7 @@ Please note that revenue must be passed as a string while using this method.
 
 ```html
 <button
-  id="signup-button"
+  id="checkout-button"
   data-umami-event="checkout-cart"
   data-umami-event-revenue="19.99"
   data-umami-event-currency="USD"
