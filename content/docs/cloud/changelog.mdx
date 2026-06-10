@@ -1,0 +1,265 @@
+---
+title: Changelog
+---
+
+This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and **API (api.umami.is)**.
+
+## June 6, 2026
+
+**Cloud**
+
+- Collect endpoint changed to gateway.umami.is.
+
+## June 1, 2026
+
+**Heatmaps**
+
+- Added path filtering to heatmap pages.
+
+## May 12, 2026
+
+**Revenue**
+
+- Added cumulative mode to revenue charts.
+- Improved revenue query performance.
+
+## May 8, 2026
+
+**Events**
+
+- Added a table/card view toggle to data grids.
+- Event chart labels now stay hidden when changing date ranges.
+
+## May 7, 2026
+
+**Heatmaps**
+
+- Added heatmaps reports, including snapshot-based rendering.
+- Added share-page options for filtering and theme enforcement.
+
+**Cloud**
+
+- Added sorting to website, board, link, pixel, team, and admin tables.
+
+## May 5, 2026
+
+**Heatmaps**
+
+- Added scroll heatmaps.
+
+## April 29, 2026
+
+**Session Data**
+
+- Added session-data screens and filtering.
+
+## April 27, 2026
+
+**Heatmaps**
+
+- Added click heatmaps.
+
+## April 24, 2026
+
+**Event Data**
+
+- Added event-data property filtering.
+- Added support for array, boolean, and date event-data properties.
+
+## March 25, 2026
+
+**Funnels**
+
+- Added per-step filters to funnels.
+- Added wildcard support for goals reports.
+
+## March 23, 2026
+
+**Sharing**
+
+- Added new share-screen options.
+
+## March 15, 2026
+
+**Performance**
+
+- Added rating badges to performance report metrics.
+
+## March 11, 2026
+
+**API: Websites**
+
+- `GET /api/websites/:websiteId/daterange`: **Added** — returns the earliest and latest date range of collected data for a website.
+
+**API: Events**
+
+- `GET /api/websites/:websiteId/events/stats`: **Added** — returns event statistics with optional period-over-period comparison.
+
+**API: Links**
+
+- `POST /api/links`: **Added** — creates a link.
+
+**API: Pixels**
+
+- `POST /api/pixels`: **Added** — creates a pixel.
+
+**API: Reports**
+
+- `POST /api/reports/goal`: Renamed from `POST /api/reports/goals` (singular path).
+- `POST /api/reports/performance`: **Added** — performance report type supporting LCP, INP, CLS, FCP, and TTFB metrics.
+- `POST /api/reports/revenue`: Added `compare` parameter. Response now includes `arpu` and `comparison` in the `total` object, and new `region`, `referrer`, and `channel` breakdown arrays.
+
+## March 10, 2026
+
+**Boards**
+
+- Added separate board details and design flows.
+- Improved the board editor layout and component picker.
+
+## March 9, 2026
+
+**Sharing**
+
+- Added sharing to pixel and link detail pages.
+
+## March 4, 2026
+
+**Boards**
+
+- Added text blocks for free-form content on boards.
+
+## March 3, 2026
+
+**Session Replay**
+
+- Added session replay tables, filters, and replay modal.
+
+**Revenue**
+
+- Added AOV and ARPU metrics to the revenue page.
+
+## March 2, 2026
+
+**API: Events**
+
+- `GET /api/websites/:websiteId/event-data`: **Added**
+
+## February 13, 2026
+
+**Boards**
+
+- Added personal dashboard flow and per-component website selection.
+
+## February 12, 2026
+
+**Boards**
+
+- Added board selector to the top navigation.
+- Added link and pixel selectors to the top navigation.
+
+## February 8, 2026
+
+**Performance**
+
+- Added Web Vitals performance tracking for LCP, INP, CLS, FCP, and TTFB.
+
+## February 4, 2026
+
+**API: Share**
+
+- Added `share` API docs [here](/docs/api/share).
+
+## November 13, 2025
+
+**API: Realtime**
+
+- `GET /api/realtime/:websiteId`: Removed `timezone` parameter. Response will always return in `UTC` across all datasets.
+
+## October 7, 2025
+
+**API: Filters**
+
+- Changed filter `url` to `path`.
+- Changed filter `host` to `hostname`.
+
+**API: Websites**
+
+- `GET /websites/[id]/metrics`: The `type` parameter `url` has been changed to `path`.
+- `GET /websites/[id]/stats`: The response data structure has changed.
+
+```json
+{
+  "pageviews": 34210,
+  "visitors": 9401,
+  "visits": 12726,
+  "bounces": 7918,
+  "totaltime": 5214477,
+  "comparison": {
+    "pageviews": 30818,
+    "visitors": 8776,
+    "visits": 11756,
+    "bounces": 7396,
+    "totaltime": 1704355
+  }
+}
+```
+
+**API: Events**
+
+- `GET /event-data/values`: The `eventName` query parameter has been changed to `event`.
+
+**API: Reports**
+
+- `POST /reports`: The `insights` report has been changed to `breakdown`.
+
+## September 9, 2024
+
+**API: Websites**
+
+- `GET /websites/[id]/pageviews`: Fixed `region` parameter to optional.
+- `GET /websites/[id]/events`: Changed result set to website event details within a given time range.
+- `GET /websites/[id]/events/series`: **Added** event metrics endpoint (previously `GET /websites/[id]/events`).
+
+**API: Event Data**
+
+- `GET /event-data/events` : **Moved** to `/websites/[id]/event-data/events`.
+- `GET /event-data/fields` : **Moved** to `/websites/[id]/event-data/fields`.
+- `GET /event-data/stats` : **Moved** to `/websites/[id]/event-data/stats`.
+- `GET /websites/[id]/event-data/values` : **Added**.
+
+**API: Sessions**
+
+- `GET /websites/:websiteId/sessions` : **Added**.
+- `GET /websites/:websiteId/sessions/stats` : **Added**.
+- `GET /websites/:websiteId/sessions/:sessionId` : **Added**.
+- `GET /websites/:websiteId/sessions/:sessionId/activity` : **Added**.
+- `GET /websites/:websiteId/sessions/:sessionId/properties` : **Added**.
+- `GET /websites/:websiteId/session-data/properties` : **Added**.
+- `GET /websites/:websiteId/session-data/values` : **Added**.
+
+## May 23, 2024
+
+**API: Websites**
+
+- `GET /websites/[id]/stats`: Renamed `change` to `prev`.
+
+## March 27, 2024
+
+**API: Websites**
+
+- `GET /websites/[id]/stats`: Renamed `uniques` to `visitors`. Added `visits`.
+
+## February 16, 2024
+
+**API: Websites**
+
+- `POST /websites`: Added teamId as an optional parameter.
+
+**API: Teams**
+
+- `/teams/[id]/websites/[websiteId]`: **Deprecated**.
+- `GET /teams/[id]/users/[userId]/index`: **Added**.
+
+**API: Reports**
+
+- `GET /reports/index`: Added `websiteId` and `teamId` as query parameters.

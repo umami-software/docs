@@ -21,7 +21,7 @@
     "export-data",
     "import-data",
     "---Changelog---",
-    "api-changelog"
+    "changelog"
   ],
   "defaultOpen": true
 }
