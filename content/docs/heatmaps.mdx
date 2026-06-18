@@ -1,8 +1,8 @@
 ---
-title: Heatmap
+title: Heatmaps
 ---
 
-*Available since v3.1.0*
+*Available since v3.2.0*
 
 **Heatmaps** visualize where visitors click and scroll on your pages — giving you an at-a-glance view of engagement patterns without watching individual replays.
 Use heatmaps to identify which elements attract the most attention, discover dead clicks, and understand how far down the page visitors actually scroll.
@@ -25,7 +25,7 @@ Navigate to the **Replays & Heatmaps** section and enable the **Heatmaps** toggl
 | --- | --- | --- |
 | Heatmap Sample Rate | Fraction of sessions to include in heatmap data, from `0` to `1`. | `0.15` |
 
-You will also need to update your tracker script to opt in to heatmap collection.
+Add the recorder script to your site. This enables heatmap event collection.
 
 ```html
 <script
@@ -39,6 +39,33 @@ You will also need to update your tracker script to opt in to heatmap collection
 > - Heatmap data is only collected from sessions recorded after enabling the feature.
 > - Heatmaps are generated from aggregated session data — no individual session is identifiable.
 
+## Page Overlay
+
+The heatmap overlays click dots or scroll bands on top of a background snapshot of your page.
+There are two ways to get a background snapshot, depending on your setup.
+
+### rrweb overlay
+
+If you have **Replays** enabled, Umami automatically extracts a representative frame from replay recordings and uses it as the heatmap background. No additional configuration is required — the overlay appears as replay data accumulates.
+
+### Playwright overlay
+
+If you have a separate Playwright container, set `PLAYWRIGHT_URL` to connect to it. Umami will use Playwright to take a live screenshot of each page as the background.
+
+```bash
+# Self-hosted Playwright container
+PLAYWRIGHT_URL=ws://playwright:3000
+
+# With token-based authentication (e.g. browserless)
+PLAYWRIGHT_URL=wss://chrome.browserless.io?token=YOUR_TOKEN
+```
+
+`PLAYWRIGHT_URL` must be a WebSocket endpoint accepted by `playwright-core`'s `chromium.connect()`. If your provider requires authentication, append `?token=<TOKEN>` to the URL.
+
+> `PLAYWRIGHT_URL` is not supported on serverless setups.
+
+> If neither session replays nor `PLAYWRIGHT_URL` are configured, heatmaps still show click and scroll data — just without a page background.
+
 ## Accessing Heatmaps
 
 Navigate to a website and click the **Heatmap** tab.
@@ -49,7 +76,7 @@ Use the **Pages** dropdown to select the page you want to inspect.
 
 ![image](/images/docs/heatmap-clicks.png)
 
-The heatmap overlay is rendered on top of a live snapshot of the page.
+The heatmap overlay is rendered on top of a snapshot of the page when one is available.
 
 ## Heatmap Types
 
