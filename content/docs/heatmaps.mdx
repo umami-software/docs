@@ -41,30 +41,23 @@ Add the recorder script to your site. This enables heatmap event collection.
 
 ## Page Overlay
 
-The heatmap overlays click dots or scroll bands on top of a background snapshot of your page.
-There are two ways to get a background snapshot, depending on your setup.
+The heatmap overlays click dots or scroll bands on top of a live preview of your page.
+Umami loads the actual page in an embedded frame using its captured URL — no screenshots, replays, or extra services are required.
 
-### rrweb overlay
+If the preview can't load, the heatmap still shows click and scroll data on a blank canvas.
 
-If you have **Replays** enabled, Umami automatically extracts a representative frame from replay recordings and uses it as the heatmap background. No additional configuration is required — the overlay appears as replay data accumulates.
+### Allowing the page preview
 
-### Playwright overlay
+The preview only loads if your page allows the Umami dashboard to embed it in an iframe. Most sites block framing by default, so you need to opt in by adding the dashboard's origin to a `Content-Security-Policy` `frame-ancestors` directive on the pages you want to inspect:
 
-If you have a separate Playwright container, set `PLAYWRIGHT_URL` to connect to it. Umami will use Playwright to take a live screenshot of each page as the background.
-
-```bash
-# Self-hosted Playwright container
-PLAYWRIGHT_URL=ws://playwright:3000
-
-# With token-based authentication (e.g. browserless)
-PLAYWRIGHT_URL=wss://chrome.browserless.io?token=YOUR_TOKEN
+```
+Content-Security-Policy: frame-ancestors 'self' https://your-umami-instance.com;
 ```
 
-`PLAYWRIGHT_URL` must be a WebSocket endpoint accepted by `playwright-core`'s `chromium.connect()`. If your provider requires authentication, append `?token=<TOKEN>` to the URL.
-
-> `PLAYWRIGHT_URL` is not supported on serverless setups.
-
-> If neither session replays nor `PLAYWRIGHT_URL` are configured, heatmaps still show click and scroll data — just without a page background.
+> **Notes**
+>
+> - Use the origin where you access Umami in place of `https://your-umami-instance.com` (for Umami Cloud, use `https://cloud.umami.is`).
+> - If your site also sends `X-Frame-Options: DENY` or `SAMEORIGIN`, remove it — it overrides `frame-ancestors` in some browsers.
 
 ## Accessing Heatmaps
 
@@ -76,7 +69,7 @@ Use the **Pages** dropdown to select the page you want to inspect.
 
 ![image](/images/docs/heatmap-clicks.png)
 
-The heatmap overlay is rendered on top of a snapshot of the page when one is available.
+The heatmap overlay is rendered on top of a live preview of the page when one is available.
 
 ## Heatmap Types
 
@@ -88,3 +81,11 @@ Use the type selector to switch between views.
 | --- | --- |
 | Click | Shows where visitors click. Highlights high-engagement elements and dead clicks. |
 | Scroll | Shows how far down the page visitors scroll. Useful for identifying content below the fold that goes unseen. |
+
+## Screen Width
+
+Because responsive pages render differently across devices, heatmap data is grouped by the visitor's screen width. Use the **Screen width** selector to switch between the available widths and view the overlay for each layout.
+
+![image](/images/docs/heatmap-screen-width.png)
+
+Each option shows a device icon and the number of recorded sessions at that width. Widths with no data are disabled, and the view defaults to the width with the most sessions.
