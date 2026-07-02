@@ -50,3 +50,13 @@ Then restart your container to use the new image. If using Docker Compose:
 docker compose down
 docker compose up -d
 ```
+
+## Refresh database statistics after upgrading
+
+Major upgrades (such as moving to v3) run schema migrations that can leave PostgreSQL's query planner with stale statistics, making dashboard queries slower than expected on large instances. Run `ANALYZE` to refresh them:
+
+```sql
+ANALYZE;
+```
+
+This is safe to run on a live database and completes quickly. Afterward, dashboard queries should return to their expected speed.
