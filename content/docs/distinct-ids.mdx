@@ -45,6 +45,19 @@ Or by adding the **id** property to the event payload when using the [Sending st
 
 The **id** property has a 50 character limit. If your identifiers are longer, consider using a hash or shortened version.
 
+## Session linking
+
+Setting a Distinct ID does not merge sessions together — each device/browser still gets its own session,
+identified independently by IP address, user agent, and website ID. Instead, Umami links each session to the
+Distinct ID.
+
+When you open the profile for any session that has a Distinct ID, Umami automatically looks up every other
+session linked to that same ID and combines their activity into one timeline, expanding the visible date range
+to cover all of them. If a visitor is linked to more than one session, the profile shows a **Linked IDs** count
+so you know you're looking at combined, cross-device activity rather than a single visit.
+
+![image](/images/docs/sessions-linked-ids.png)
+
 ## Search
 
 Navigate to **Sessions** to view visitor activity.
