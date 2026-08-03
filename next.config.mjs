@@ -21,7 +21,40 @@ const config = {
     ];
   },
   async redirects() {
-    return [{ source: '/', destination: '/docs', permanent: true }];
+    return [
+      { source: '/', destination: '/docs', permanent: true },
+      // Guide migration: educational guides moved to umami.is/guides (one-hop, permanent).
+      {
+        source: '/docs/guides/measure-campaigns',
+        destination: 'https://umami.is/guides/marketing-campaign-tracking',
+        permanent: true,
+      },
+      {
+        source: '/docs/guides/setup-conversion-goals',
+        destination: 'https://umami.is/guides/conversion-tracking',
+        permanent: true,
+      },
+      {
+        source: '/docs/guides/analyze-traffic-sources',
+        destination: 'https://umami.is/guides/marketing-attribution',
+        permanent: true,
+      },
+      {
+        source: '/docs/guides/compare-traffic-periods',
+        destination: 'https://umami.is/guides/website-traffic-analysis',
+        permanent: true,
+      },
+      {
+        source: '/docs/guides/build-a-funnel',
+        destination: 'https://umami.is/guides/conversion-funnels',
+        permanent: true,
+      },
+      {
+        source: '/docs/guides/monitor-web-vitals',
+        destination: 'https://umami.is/guides/core-web-vitals',
+        permanent: true,
+      },
+    ];
   },
 };
 

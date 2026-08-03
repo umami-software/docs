@@ -4,6 +4,8 @@ title: Set up A/B testing with tags
 
 Use Umami's `data-tag` attribute to run simple A/B tests by tagging different page variants and comparing their metrics.
 
+This page covers the Umami implementation. For experiment design — choosing a success metric, sample sizes, and interpreting results — see the [A/B testing analytics guide](https://umami.is/guides/ab-testing-analytics) on the main site.
+
 ## How it works
 
 Tags let you label the tracker script with a variant name. All page views and events collected under that tag are grouped together, making it easy to compare performance between variants using Umami's filtering and breakdown tools.
@@ -80,6 +82,5 @@ Once both variants have collected data, use Umami's filtering to compare them.
 
 ## Tips
 
-- Run the test long enough to get meaningful sample sizes. A few hundred visitors per variant is a reasonable minimum.
 - Keep variant names descriptive: `pricing-short-form` vs. `pricing-long-form` is more useful than `v1` vs. `v2`.
-- Only test one change at a time to isolate what's driving the difference.
+- For guidance on test duration, sample sizes, and reading results without false positives, see the [A/B testing analytics guide](https://umami.is/guides/ab-testing-analytics).
