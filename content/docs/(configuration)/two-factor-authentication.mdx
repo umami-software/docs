@@ -1,0 +1,80 @@
+---
+title: Two-factor authentication
+---
+
+*Available since v3.3.0*
+
+Umami supports two-factor authentication (2FA) using time-based one-time passwords (TOTP) with an authenticator
+app such as Google Authenticator, Authy, or 1Password. Each user can enable 2FA for their own account, and
+admins can require it globally, for individual users, or for specific teams.
+
+## Requirements
+
+2FA secrets are encrypted at rest using AES-256-GCM. Before anyone can enable 2FA, you must set the
+`TWO_FACTOR_ENCRYPTION_KEY` environment variable to a 64-character hex string (256-bit key):
+
+```shell
+openssl rand -hex 32
+```
+
+```dotenv
+TWO_FACTOR_ENCRYPTION_KEY = "your generated key"
+```
+
+This value should be unique per installation and kept secret. Losing or changing it will make any previously
+stored 2FA secrets unreadable, requiring affected users to re-enroll.
+
+## Enabling 2FA for your account
+
+Click on the side nav profile button, then click **Settings**, then navigate to **Security**.
+
+![image](/images/docs/two-factor-settings.png)
+
+Toggle on **Enable two-factor authentication**. You'll be shown a QR code to scan with your authenticator
+app, along with a manual entry key as a fallback. Enter the 6-digit code from your app to confirm setup.
+
+![image](/images/docs/two-factor-setup-qr.png)
+
+Once confirmed, Umami generates 10 single-use backup codes. Save these somewhere safe — they're shown only
+once and can be used to log in if you lose access to your authenticator app.
+
+![image](/images/docs/two-factor-backup-codes.png)
+
+## Logging in with 2FA
+
+After entering your password, you'll be prompted for a 6-digit code from your authenticator app. If you don't
+have access to your app, click **Use a backup code** instead. Each backup code can only be used once.
+
+![image](/images/docs/two-factor-login.png)
+
+Five failed attempts will lock further attempts for 15 minutes.
+
+## Disabling 2FA
+
+From **Settings > Security**, toggle off 2FA. You'll need to enter your password and a valid code from your
+authenticator app to confirm. This option is unavailable if 2FA is currently required for your account (see
+below).
+
+## Requiring 2FA
+
+Admins can require 2FA at three levels. If a user isn't yet enrolled, they'll be prompted to set up 2FA the
+next time they log in and blocked from using the app until they do.
+
+| Level | Location | Notes |
+| --- | --- | --- |
+| Global | **Admin > Security** | Requires 2FA for every user on the instance. |
+| Per user | **Admin > Users > (a user)** | Requires 2FA for a specific user. |
+| Per team | **Admin > Teams > (a team) > Settings** | Requires 2FA for every member of a team. |
+
+![image](/images/docs/two-factor-admin-security.png)
+
+If 2FA is required at any of these levels, the toggle to disable it is locked for the affected user(s) until
+an admin removes the requirement.
+
+## Admin reset
+
+If a user is locked out (for example, they lost both their authenticator app and backup codes), an admin can
+reset their 2FA from **Admin > Users > (a user)**. This clears their existing 2FA secret and backup codes so
+they can re-enroll from scratch.
+
+![image](/images/docs/two-factor-admin-reset.png)

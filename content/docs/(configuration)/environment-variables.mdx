@@ -24,7 +24,6 @@ openssl rand -hex 32
 APP_SECRET = "random string"
 ```
 
-
 ### CLIENT_IP_HEADER
 
 `v1.24.0`
@@ -197,6 +196,16 @@ Disables all external network calls. Note, this will also disable all website ic
 PRIVATE_MODE = 1
 ```
 
+### REDIS_URL
+
+`v3.0.1`
+
+Optional Redis connection string used for caching and coordination features. If omitted, Redis-backed features stay disabled.
+
+```
+REDIS_URL = "redis://localhost:6379"
+```
+
 ### REMOVE_TRAILING_SLASH
 
 `v1.26.0`
@@ -205,6 +214,16 @@ Removes the trailing slash from all incoming urls.
 
 ```
 REMOVE_TRAILING_SLASH = 1
+```
+
+### SALT_ROTATION
+
+`v3.1.0`
+
+Controls how often the anonymous session salt rotates for generated session identifiers. The default is `month`.
+
+```
+SALT_ROTATION = "month"
 ```
 
 ### SKIP_LOCATION_HEADERS
@@ -229,6 +248,31 @@ The `.js` extension is not required. The value can also be any path you choose, 
 
 ```
 TRACKER_SCRIPT_NAME = "custom-script-name.js"
+```
+
+### USE_UUIDV7
+
+`v3.0.2`
+
+Uses UUIDv7 instead of UUIDv4 for generated random identifiers. Deterministic IDs derived from analytics data are unchanged.
+
+```
+USE_UUIDV7 = 1
+```
+
+### TWO_FACTOR_ENCRYPTION_KEY
+
+`v3.3.0`
+
+A 64-character hex string (256-bit key) used to encrypt [two-factor authentication](/docs/two-factor-authentication)
+secrets. Required before any user can enable 2FA. You can generate one with:
+
+```shell
+openssl rand -hex 32
+```
+
+```
+TWO_FACTOR_ENCRYPTION_KEY = "random hex string"
 ```
 
 ---
@@ -266,6 +310,27 @@ DATABASE_TYPE = "postgresql"
 ```
 
 The type of DB to be used. This is only required for the Docker build.
+
+### DEFAULT_CURRENCY / DEFAULT_LOCALE
+
+`v3.1.0`
+
+Sets the default currency and locale used by the application UI before a user chooses their own preferences.
+
+```
+DEFAULT_CURRENCY = "USD"
+DEFAULT_LOCALE = "en-US"
+```
+
+### DIRECT_DATABASE_URL
+
+`v3.2.0`
+
+Direct PostgreSQL connection string used for Prisma migrations during `check-db`. This is useful when `DATABASE_URL` points to a pooled connection that should not be used for migration commands.
+
+```
+DIRECT_DATABASE_URL = "connection string"
+```
 
 ### FORCE_SSL
 

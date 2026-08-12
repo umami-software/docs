@@ -2,7 +2,7 @@
 title: Filters
 ---
 
-*Available since v2.6.0 · Enhanced in v3.0.0*
+*Available since v2.6.0 · Enhanced in v3.0.0, v3.3.0*
 
 Umami has built-in reporting to help you gain deeper insights into parts of your data. With universal filtering, you can apply conditions across all screens/reports for consistent analysis.
 Segments let you group users based on shared attributes or behaviors. Cohorts take this further by analyzing groups of
@@ -33,6 +33,18 @@ Filters are grouped by category in the filter panel.
 | Other | Distinct ID | A custom identifier you assign to a visitor. See [Distinct IDs](/docs/distinct-ids). |
 | Other | Tag | A label or keyword you assign to your data. See [Tags](/docs/tags). |
 | Other | Event | Custom events triggered by users (e.g., button clicks, form submissions, video plays). |
+
+## Property filters
+
+In addition to the standard fields above, the filter panel has dedicated tabs for filtering on custom data:
+
+- **Session data** — filter by any [session data](/docs/tracker-functions#session-data) property you've saved (e.g. `plan`, `company`). Available on every report page.
+- **Event properties** — filter by any custom event property. Only available on the **Events** page, since these filters are scoped to a specific event.
+
+![image](/images/docs/filter-property.png)
+
+Each property filter is type-aware: the available operators (equals, contains, before/after, etc.) depend on
+whether the property was saved as a string, number, boolean, date, or array.
 
 ## Match mode
 
