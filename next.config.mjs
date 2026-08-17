@@ -54,6 +54,11 @@ const config = {
         destination: 'https://umami.is/guides/core-web-vitals',
         permanent: true,
       },
+      {
+        source: '/docs/guides/core-web-vitals',
+        destination: 'https://umami.is/guides/core-web-vitals',
+        permanent: true,
+      },
     ];
   },
 };

@@ -1,0 +1,83 @@
+---
+title: Monitor Core Web Vitals
+---
+
+*Requires v3.1.0*
+
+Use Umami to see how your site feels for real visitors. Performance tracking helps you spot slow pages, catch regressions, and see which browsers or devices need attention.
+
+## Step 1: Enable performance tracking
+
+Add the `data-performance` attribute to your tracker script:
+
+```html
+<script
+  defer
+  src="https://your-umami.example.com/script.js"
+  data-website-id="your-website-id"
+  data-performance="true"
+></script>
+```
+
+If you send pageviews manually, keep auto-track enabled and add `data-auto-pageview="false"` instead of `data-auto-track="false"`.
+This setup requires `v3.2.0` or later.
+
+```html
+<script
+  defer
+  src="https://your-umami.example.com/script.js"
+  data-website-id="your-website-id"
+  data-auto-pageview="false"
+  data-performance="true"
+></script>
+```
+
+Umami will collect these metrics:
+
+| Metric | What it measures | Good threshold |
+| --- | --- | --- |
+| **LCP** (Largest Contentful Paint) | How long it takes for the main content to appear | <= 2.5s |
+| **INP** (Interaction to Next Paint) | How responsive the page feels when someone interacts with it | <= 200ms |
+| **CLS** (Cumulative Layout Shift) | How stable the layout is while the page loads | <= 0.1 |
+| **FCP** (First Contentful Paint) | How long until the first visible content appears | <= 1.8s |
+| **TTFB** (Time to First Byte) | How quickly the server starts responding | <= 0.8s |
+
+## Step 2: View performance data
+
+Open your website in Umami and go to **Performance**. You'll see:
+
+- **Metric cards** showing the 75th percentile (p75) for each metric. In plain terms, most of your visitors are at or below this number.
+- **Score indicators** based on Google's thresholds: green for good, yellow for needs improvement, and red for poor.
+- **Pages breakdown** showing performance by page URL.
+- **Environment breakdown** showing performance by browser, operating system, and device type.
+
+## Step 3: Identify slow pages
+
+Use the Pages breakdown to find the trouble spots:
+
+1. Sort by **LCP** to find pages that load slowly.
+2. Sort by **CLS** to find pages with layout shift issues.
+3. Sort by **INP** to find pages that feel sluggish to interact with.
+
+## Step 4: Diagnose and fix issues
+
+Here are the usual patterns:
+
+### LCP (Largest Contentful Paint)
+
+Large images, slow responses, or render-blocking assets can hurt LCP.
+Try compressing images, using WebP or AVIF, and preloading the main element.
+
+### INP (Interaction to Next Paint)
+
+Long-running JavaScript and heavy event handlers can hurt INP.
+Try breaking up long tasks and simplifying expensive UI work.
+
+### CLS (Cumulative Layout Shift)
+
+Images or ads without reserved space can hurt CLS.
+Set `width` and `height`, reserve space for dynamic content, and use `font-display: swap`.
+
+## Step 5: Track improvements
+
+After you make a change, compare the before and after date ranges. Focus on the p75 value. If it improves, most of your visitors are getting a better experience.
