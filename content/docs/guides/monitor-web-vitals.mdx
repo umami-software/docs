@@ -19,6 +19,20 @@ Add the `data-performance` attribute to your tracker script:
 ></script>
 ```
 
+If you are sending pageviews manually, keep auto-track enabled and add `data-auto-pageview="false"` instead of
+`data-auto-track="false"`:
+This manual pageview setup requires `v3.2.0` or later.
+
+```html
+<script
+  defer
+  src="https://your-umami.example.com/script.js"
+  data-website-id="your-website-id"
+  data-auto-pageview="false"
+  data-performance="true"
+></script>
+```
+
 Umami begins collecting the following metrics from real visitors:
 
 | Metric | What it measures | Good threshold |

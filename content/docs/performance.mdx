@@ -28,6 +28,20 @@ Add the **data-performance** attribute to your tracking script to enable automat
 
 Once enabled, Umami will automatically capture performance metrics from your visitors' browsers and report them under the **Performance** tab for that website.
 
+If you are tracking pageviews manually, keep auto-track enabled and add `data-auto-pageview="false"` instead of
+`data-auto-track="false"`.
+This manual pageview setup requires `v3.2.0` or later.
+
+```html
+<script
+  defer
+  src="http://mywebsite.com/umami.js"
+  data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
+  data-auto-pageview="false"
+  data-performance="true"
+></script>
+```
+
 ## Metrics
 
 | Metric | Description |

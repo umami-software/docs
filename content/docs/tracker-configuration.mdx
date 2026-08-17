@@ -24,8 +24,9 @@ to another location.
 
 `v2.0.0`
 
-By default, Umami tracks all pageviews and events for you automatically. You can disable this behavior and
-track events yourself using the [tracker functions](/docs/tracker-functions).
+By default, Umami initializes pageview tracking, click tracking, path change detection, and optional features
+like performance tracking. Set this to `false` only if you want to disable tracker initialization entirely and
+send data yourself using the [tracker functions](/docs/tracker-functions).
 
 ```html
 <script
@@ -33,6 +34,22 @@ track events yourself using the [tracker functions](/docs/tracker-functions).
   src="http://mywebsite.com/umami.js"
   data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
   data-auto-track="false"
+></script>
+```
+
+### data-auto-pageview
+
+`v3.2.0`
+
+Disable automatic pageview tracking while keeping the rest of the tracker initialized. Use this when you want
+to call `umami.track()` manually but still keep features like performance tracking enabled.
+
+```html
+<script
+  defer
+  src="http://mywebsite.com/umami.js"
+  data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
+  data-auto-pageview="false"
 ></script>
 ```
 
@@ -72,7 +89,9 @@ Group events under a named tag for filtering and A/B testing. See [Tags](/docs/t
 
 `v3.1.0`
 
-Enable automatic collection of [Core Web Vitals](https://web.dev/articles/vitals) from your visitors' browsers. See [Performance](/docs/performance) for more details.
+Enable automatic collection of [Core Web Vitals](https://web.dev/articles/vitals) from your visitors' browsers. If
+you are sending pageviews manually, use `data-auto-pageview="false"` instead of `data-auto-track="false"` so
+performance tracking still initializes. See [Performance](/docs/performance) for more details.
 
 ```html
 <script
