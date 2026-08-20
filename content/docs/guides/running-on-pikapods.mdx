@@ -1,0 +1,33 @@
+---
+title: Running on PikaPods
+---
+
+[PikaPods](https://www.pikapods.com/) is a managed hosting platform that lets you run Umami and 100+ other
+open source apps with a single click — no server setup, Docker, or database configuration required.
+Deployments are fully managed: PikaPods handles updates, backups, and TLS certificates, and you only pay
+for the resources your pod actually uses.
+
+Pricing for Umami starts at around $2.8/month for the smallest instance, and you can resize your pod at
+any time as your traffic grows.
+
+## 1-Click Deploy Button
+
+[![Run on PikaPods](https://www.pikapods.com/static/run-button.svg)](https://www.pikapods.com/pods?run=umami)
+
+### Setup Instructions
+
+[#setup-instructions](#setup-instructions)
+
+1. Create a free account on [PikaPods](https://www.pikapods.com/register). No credit card is required, and new accounts start with $5 in free credit to try things out.
+2. Click the **Run on PikaPods** button above, or search for **Umami** from the
+[available apps](https://www.pikapods.com/apps) page and click **Run Your Own**.
+3. Choose a region and the amount of CPU, RAM, and storage for your pod, then click **Add Pod**.
+4. PikaPods provisions Umami along with its PostgreSQL database automatically and gives you a
+`*.pikapods.com` subdomain — no manual database setup needed.
+5. Once the pod status changes to **Running**, open it and log in with the default `admin` / `umami`
+credentials, then change the password immediately.
+6. Optionally, attach your own domain from the pod's **Settings** tab; PikaPods issues and renews the
+TLS certificate for you.
+
+Need to check resource usage, add a custom domain later, or access your database directly? See PikaPods'
+[pod management docs](https://docs.pikapods.com/manage/) for more.
