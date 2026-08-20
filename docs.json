@@ -34,10 +34,6 @@
         "icon": "github",
         "ariaLabel": "Umami on GitHub",
         "href": "https://github.com/umami-software/umami"
-      },
-      {
-        "label": "v2",
-        "href": "https://v2.umami.is"
       }
     ]
   },
@@ -47,16 +43,30 @@
         "icon": "github",
         "ariaLabel": "Umami on GitHub",
         "href": "https://github.com/umami-software/umami"
+      },
+      {
+        "icon": "x",
+        "ariaLabel": "Umami on X",
+        "href": "https://x.com/umami_software"
+      },
+      {
+        "icon": "discord",
+        "ariaLabel": "Umami on Discord",
+        "href": "https://umami.is/discord"
       }
-    ],
-    "attribution": false
+    ]
   },
   "search": {
     "prompt": "Search the docs...",
     "shortcut": "k"
   },
   "contextual": {
-    "options": ["copy", "view", "chatgpt", "claude"]
+    "options": [
+      "copy",
+      "view",
+      "chatgpt",
+      "claude"
+    ]
   },
   "seo": {
     "indexing": "all",
@@ -83,46 +93,125 @@
             "group": "Umami",
             "collapsible": false,
             "pages": [
-              { "page": "index", "title": "Introduction" },
-              "install",
-              "updates",
               {
-                "group": "Quickstart",
-                "expanded": true,
-                "pages": ["login", "add-a-website", "collect-data", "enable-share-url"]
+                "page": "index",
+                "title": "Introduction"
               },
               {
-                "group": "Configuration",
-                "pages": [
-                  "environment-variables",
-                  "enable-cloudflare-headers",
-                  "google-tag-manager",
-                  "enable-redis"
-                ]
+                "page": "install",
+                "title": "Installation"
               },
               {
-                "group": "How to",
-                "pages": [
-                  "bypass-ad-blockers",
-                  "exclude-my-own-visits",
-                  "track-outbound-links"
-                ]
+                "page": "updates",
+                "title": "Getting updates"
               },
-              { "page": "about", "hidden": true },
-              { "page": "faq", "hidden": true }
+              {
+                "page": "about",
+                "hidden": true,
+                "title": "About"
+              },
+              {
+                "page": "faq",
+                "hidden": true,
+                "title": "FAQ"
+              }
+            ]
+          },
+          {
+            "group": "Quickstart",
+            "pages": [
+              {
+                "page": "login",
+                "title": "Login"
+              },
+              {
+                "page": "add-a-website",
+                "title": "Add a website"
+              },
+              {
+                "page": "collect-data",
+                "title": "Collect data"
+              },
+              {
+                "page": "enable-share-url",
+                "title": "Enable Share URL"
+              }
+            ]
+          },
+          {
+            "group": "Configuration",
+            "pages": [
+              {
+                "page": "environment-variables",
+                "title": "Environment variables"
+              },
+              {
+                "page": "enable-cloudflare-headers",
+                "title": "Enable Cloudflare headers"
+              },
+              {
+                "page": "google-tag-manager",
+                "title": "Use Google Tag Manager"
+              },
+              {
+                "page": "enable-redis",
+                "title": "Enable Redis"
+              }
+            ]
+          },
+          {
+            "group": "How to",
+            "pages": [
+              {
+                "page": "bypass-ad-blockers",
+                "title": "Bypass ad blockers"
+              },
+              {
+                "page": "exclude-my-own-visits",
+                "title": "Exclude my own visits"
+              },
+              {
+                "page": "track-outbound-links",
+                "title": "Track outbound links"
+              }
             ]
           },
           {
             "group": "Tracking",
             "pages": [
-              "tracker-functions",
-              "tracker-configuration",
-              "track-events",
-              "distinct-ids",
-              "tags",
-              "links",
-              "pixels",
-              { "page": "event-data", "hidden": true }
+              {
+                "page": "tracker-functions",
+                "title": "Tracker functions"
+              },
+              {
+                "page": "tracker-configuration",
+                "title": "Tracker configuration"
+              },
+              {
+                "page": "track-events",
+                "title": "Track events"
+              },
+              {
+                "page": "distinct-ids",
+                "title": "Distinct IDs"
+              },
+              {
+                "page": "tags",
+                "title": "Tags"
+              },
+              {
+                "page": "links",
+                "title": "Links"
+              },
+              {
+                "page": "pixels",
+                "title": "Pixels"
+              },
+              {
+                "page": "event-data",
+                "hidden": true,
+                "title": "Event data"
+              }
             ]
           },
           {
@@ -130,45 +219,148 @@
             "pages": [
               {
                 "group": "Filtering",
-                "pages": ["filters", "segments", "cohorts"]
+                "pages": [
+                  {
+                    "page": "filters",
+                    "title": "Filters"
+                  },
+                  {
+                    "page": "segments",
+                    "title": "Segments"
+                  },
+                  {
+                    "page": "cohorts",
+                    "title": "Cohorts"
+                  }
+                ]
               },
-              "sessions",
-              "replays",
-              "heatmaps",
-              "performance",
-              "compare",
-              "breakdown",
-              "goals",
-              "funnel",
-              "journey",
-              "retention",
-              "utm",
-              "revenue",
-              "attribution",
-              { "page": "insights", "hidden": true }
+              {
+                "page": "sessions",
+                "title": "Sessions"
+              },
+              {
+                "page": "replays",
+                "title": "Replays"
+              },
+              {
+                "page": "heatmaps",
+                "title": "Heatmaps"
+              },
+              {
+                "page": "performance",
+                "title": "Performance"
+              },
+              {
+                "page": "compare",
+                "title": "Compare"
+              },
+              {
+                "page": "breakdown",
+                "title": "Breakdown"
+              },
+              {
+                "page": "goals",
+                "title": "Goals"
+              },
+              {
+                "page": "funnel",
+                "title": "Funnel"
+              },
+              {
+                "page": "journey",
+                "title": "Journey"
+              },
+              {
+                "page": "retention",
+                "title": "Retention"
+              },
+              {
+                "page": "utm",
+                "title": "UTM"
+              },
+              {
+                "page": "revenue",
+                "title": "Revenue"
+              },
+              {
+                "page": "attribution",
+                "title": "Attribution"
+              },
+              {
+                "page": "insights",
+                "hidden": true,
+                "title": "Insights"
+              }
             ]
           },
           {
             "group": "Boards",
-            "pages": ["using-boards", "add-a-board", "design-a-board"]
+            "pages": [
+              {
+                "page": "using-boards",
+                "title": "Using boards"
+              },
+              {
+                "page": "add-a-board",
+                "title": "Add a board"
+              },
+              {
+                "page": "design-a-board",
+                "title": "Design a board"
+              }
+            ]
           },
           {
             "group": "Teams",
             "pages": [
-              "using-teams",
-              "add-a-team",
-              "join-a-team",
-              "manage-a-team",
-              { "page": "add-a-user", "hidden": true }
+              {
+                "page": "using-teams",
+                "title": "Using teams"
+              },
+              {
+                "page": "add-a-team",
+                "title": "Add a team"
+              },
+              {
+                "page": "join-a-team",
+                "title": "Join a team"
+              },
+              {
+                "page": "manage-a-team",
+                "title": "Manage a team"
+              },
+              {
+                "page": "add-a-user",
+                "hidden": true,
+                "title": "Add a user"
+              }
             ]
           },
           {
             "group": "Reference",
-            "pages": ["metric-definitions", "integrations"]
+            "pages": [
+              {
+                "page": "metric-definitions",
+                "title": "Metric definitions"
+              },
+              {
+                "page": "integrations",
+                "title": "Integrations"
+              }
+            ]
           },
           {
             "group": "Contributing",
-            "pages": ["contributing", "code-of-conduct"]
+            "pages": [
+              {
+                "page": "contributing",
+                "title": "Contributing"
+              },
+              {
+                "page": "code-of-conduct",
+                "title": "Code of Conduct"
+              }
+            ]
           }
         ]
       },
@@ -178,70 +370,195 @@
         "groups": [
           {
             "group": "Guides",
-            "pages": ["guides/index"]
+            "pages": [
+              {
+                "page": "guides/index",
+                "title": "Overview"
+              }
+            ]
           },
           {
             "group": "Tracking",
             "pages": [
-              "guides/track-single-page-apps",
-              "guides/track-file-downloads",
-              "guides/track-form-submissions",
-              "guides/identify-logged-in-users",
-              "guides/setup-ab-testing"
+              {
+                "page": "guides/track-single-page-apps",
+                "title": "Track a single-page application"
+              },
+              {
+                "page": "guides/track-file-downloads",
+                "title": "Track file downloads"
+              },
+              {
+                "page": "guides/track-form-submissions",
+                "title": "Track form submissions"
+              },
+              {
+                "page": "guides/identify-logged-in-users",
+                "title": "Identify logged-in users"
+              },
+              {
+                "page": "guides/setup-ab-testing",
+                "title": "Set up A/B testing with tags"
+              }
             ]
           },
           {
             "group": "Marketing",
             "pages": [
-              "guides/measure-campaigns",
-              "guides/setup-conversion-goals",
-              "guides/analyze-traffic-sources",
-              "guides/compare-traffic-periods"
+              {
+                "page": "guides/measure-campaigns",
+                "title": "Measure campaigns"
+              },
+              {
+                "page": "guides/setup-conversion-goals",
+                "title": "Set up conversion goals"
+              },
+              {
+                "page": "guides/analyze-traffic-sources",
+                "title": "Analyze traffic sources with attribution"
+              },
+              {
+                "page": "guides/compare-traffic-periods",
+                "title": "Compare traffic across time periods"
+              }
             ]
           },
           {
             "group": "Product",
-            "pages": ["guides/build-a-funnel", "guides/monitor-web-vitals"]
+            "pages": [
+              {
+                "page": "guides/build-a-funnel",
+                "title": "Build a conversion funnel"
+              },
+              {
+                "page": "guides/monitor-web-vitals",
+                "title": "Monitor Core Web Vitals"
+              }
+            ]
           },
           {
             "group": "Developer",
             "pages": [
-              "guides/embed-analytics-in-your-app",
-              "guides/send-server-side-events",
-              "guides/automate-reporting-with-api"
+              {
+                "page": "guides/embed-analytics-in-your-app",
+                "title": "Embed analytics in your app"
+              },
+              {
+                "page": "guides/send-server-side-events",
+                "title": "Send server-side events"
+              },
+              {
+                "page": "guides/automate-reporting-with-api",
+                "title": "Automate reporting with the API"
+              }
             ]
           },
           {
             "group": "Teams",
-            "pages": ["guides/setup-team-workspaces", "guides/create-a-public-dashboard"]
+            "pages": [
+              {
+                "page": "guides/setup-team-workspaces",
+                "title": "Set up team workspaces"
+              },
+              {
+                "page": "guides/create-a-public-dashboard",
+                "title": "Create a public dashboard"
+              }
+            ]
           },
           {
             "group": "Hosting",
             "pages": [
-              "guides/hosting",
-              "guides/running-on-bunny",
-              "guides/running-on-caprover",
-              "guides/running-on-digitalocean",
-              "guides/running-on-northflank",
-              "guides/running-on-fly-io",
-              "guides/running-on-forge",
-              "guides/running-on-helmforge",
-              "guides/running-on-heroku",
-              "guides/running-on-koyeb",
-              "guides/running-on-neon",
-              "guides/running-on-netlify",
-              "guides/running-on-nodion",
-              "guides/running-on-planetscale",
-              "guides/running-on-qovery",
-              "guides/running-on-railway",
-              "guides/running-on-sevalla",
-              "guides/running-on-supabase",
-              "guides/running-on-vercel"
+              {
+                "page": "guides/hosting",
+                "title": "Hosting"
+              },
+              {
+                "page": "guides/running-on-bunny",
+                "title": "Running on bunny.net"
+              },
+              {
+                "page": "guides/running-on-caprover",
+                "title": "Running on CapRover"
+              },
+              {
+                "page": "guides/running-on-digitalocean",
+                "title": "Running on DigitalOcean"
+              },
+              {
+                "page": "guides/running-on-northflank",
+                "title": "Running on Northflank"
+              },
+              {
+                "page": "guides/running-on-fly-io",
+                "title": "Running on Fly.io"
+              },
+              {
+                "page": "guides/running-on-forge",
+                "title": "Running on Forge"
+              },
+              {
+                "page": "guides/running-on-helmforge",
+                "title": "Running on Kubernetes with HelmForge"
+              },
+              {
+                "page": "guides/running-on-heroku",
+                "title": "Running on Heroku"
+              },
+              {
+                "page": "guides/running-on-koyeb",
+                "title": "Running on Koyeb"
+              },
+              {
+                "page": "guides/running-on-neon",
+                "title": "Running on Neon Postgres"
+              },
+              {
+                "page": "guides/running-on-netlify",
+                "title": "Running on Netlify"
+              },
+              {
+                "page": "guides/running-on-nodion",
+                "title": "Running on Nodion"
+              },
+              {
+                "page": "guides/running-on-planetscale",
+                "title": "Running on PlanetScale"
+              },
+              {
+                "page": "guides/running-on-qovery",
+                "title": "Running on Qovery"
+              },
+              {
+                "page": "guides/running-on-railway",
+                "title": "Running on Railway"
+              },
+              {
+                "page": "guides/running-on-sevalla",
+                "title": "Running on Sevalla"
+              },
+              {
+                "page": "guides/running-on-supabase",
+                "title": "Running on Supabase"
+              },
+              {
+                "page": "guides/running-on-vercel",
+                "title": "Running on Vercel"
+              }
             ]
           },
           {
             "group": "Migration",
-            "pages": ["guides/migrate-v1-v2", "guides/migrate-mysql-postgresql"]
+            "pages": [
+              {
+                "page": "guides/migrate-v1-v2",
+                "title": "Migrate v1 to v2"
+              },
+              {
+                "page": "guides/migrate-mysql-postgresql",
+                "title": "Migrate MySQL to PostgreSQL"
+              }
+            ]
           }
         ]
       },
@@ -251,29 +568,90 @@
         "groups": [
           {
             "group": "API",
-            "pages": ["api/index", "api/authentication", "api/sending-stats"]
+            "pages": [
+              {
+                "page": "api/index",
+                "title": "Overview"
+              },
+              {
+                "page": "api/authentication",
+                "title": "Authentication"
+              },
+              {
+                "page": "api/sending-stats",
+                "title": "Sending stats"
+              }
+            ]
           },
           {
             "group": "Endpoints",
             "pages": [
-              "api/admin",
-              "api/events",
-              "api/links",
-              "api/me",
-              "api/pixels",
-              "api/websites",
-              "api/website-stats",
-              "api/realtime",
-              "api/reports",
-              "api/sessions",
-              "api/share",
-              "api/teams",
-              "api/users"
+              {
+                "page": "api/admin",
+                "title": "Admin"
+              },
+              {
+                "page": "api/events",
+                "title": "Events"
+              },
+              {
+                "page": "api/links",
+                "title": "Links"
+              },
+              {
+                "page": "api/me",
+                "title": "Me"
+              },
+              {
+                "page": "api/pixels",
+                "title": "Pixels"
+              },
+              {
+                "page": "api/websites",
+                "title": "Websites"
+              },
+              {
+                "page": "api/website-stats",
+                "title": "Website statistics"
+              },
+              {
+                "page": "api/realtime",
+                "title": "Realtime"
+              },
+              {
+                "page": "api/reports",
+                "title": "Reports"
+              },
+              {
+                "page": "api/sessions",
+                "title": "Sessions"
+              },
+              {
+                "page": "api/share",
+                "title": "Share"
+              },
+              {
+                "page": "api/teams",
+                "title": "Teams"
+              },
+              {
+                "page": "api/users",
+                "title": "Users"
+              }
             ]
           },
           {
             "group": "Clients",
-            "pages": ["api/api-client", "api/node-client"]
+            "pages": [
+              {
+                "page": "api/api-client",
+                "title": "API client"
+              },
+              {
+                "page": "api/node-client",
+                "title": "Node Client"
+              }
+            ]
           }
         ]
       },
@@ -284,33 +662,92 @@
           {
             "group": "Cloud",
             "pages": [
-              "cloud/index",
-              "cloud/sign-up",
-              "cloud/login",
-              "cloud/teams",
-              "cloud/email-reports",
-              "cloud/ip-filters",
-              "cloud/white-label",
-              "cloud/notifications",
-              "cloud/delete-account",
-              { "page": "cloud/faq", "hidden": true }
+              {
+                "page": "cloud/index",
+                "title": "Overview"
+              },
+              {
+                "page": "cloud/sign-up",
+                "title": "Sign up"
+              },
+              {
+                "page": "cloud/login",
+                "title": "Login"
+              },
+              {
+                "page": "cloud/teams",
+                "title": "Teams"
+              },
+              {
+                "page": "cloud/email-reports",
+                "title": "Email reports"
+              },
+              {
+                "page": "cloud/ip-filters",
+                "title": "IP Filters"
+              },
+              {
+                "page": "cloud/white-label",
+                "title": "White-label"
+              },
+              {
+                "page": "cloud/notifications",
+                "title": "Notifications"
+              },
+              {
+                "page": "cloud/delete-account",
+                "title": "Delete account"
+              },
+              {
+                "page": "cloud/faq",
+                "hidden": true,
+                "title": "FAQ"
+              }
             ]
           },
           {
             "group": "Billing",
-            "pages": ["cloud/subscription", "cloud/usage"]
+            "pages": [
+              {
+                "page": "cloud/subscription",
+                "title": "Subscription"
+              },
+              {
+                "page": "cloud/usage",
+                "title": "Usage"
+              }
+            ]
           },
           {
             "group": "API",
-            "pages": ["cloud/api-key"]
+            "pages": [
+              {
+                "page": "cloud/api-key",
+                "title": "API Key"
+              }
+            ]
           },
           {
             "group": "Data",
-            "pages": ["cloud/export-data", "cloud/import-data"]
+            "pages": [
+              {
+                "page": "cloud/export-data",
+                "title": "Export data"
+              },
+              {
+                "page": "cloud/import-data",
+                "title": "Import Data"
+              }
+            ]
           },
           {
             "group": "Changelog",
-            "pages": ["cloud/changelog"]
+            "pages": [
+              {
+                "page": "cloud/changelog",
+                "title": "Changelog"
+              }
+            ]
           }
         ]
       }
