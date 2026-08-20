@@ -29,7 +29,8 @@ const headers = { Authorization: `Bearer ${token}` };
 Use your [API key](/docs/cloud/api-key) instead:
 
 ```js
-const headers = { 'x-umami-api-key': 'your-api-key' };
+const apiKey = 'your-api-key';
+const headers = { Authorization: `Bearer ${apiKey}` };
 ```
 
 ## Example: Daily traffic summary

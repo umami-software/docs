@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "shiso build && node scripts/generate-llms-full.mjs",
-    "dev": "shiso dev",
+    "dev": "vite --config vite.config.ts",
     "preview": "shiso preview --outDir dist/client",
     "check": "shiso check",
     "lint": "biome lint .",
@@ -17,7 +17,7 @@
     ]
   },
   "dependencies": {
-    "@umami/shiso": "^1.1.12",
+    "@umami/shiso": "^1.2.0",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"
   },
@@ -26,6 +26,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "lint-staged": "^16.2.7",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vite": "^8.2.1"
   }
 }

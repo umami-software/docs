@@ -4,12 +4,13 @@ title: Tracker functions
 
 The Umami tracker exposes a function that you can call on your website if you want
 more control over your tracking. By default everything is automatically collected, but you can
-disable this using `data-auto-track="false"` and sending the data yourself.
+disable automatic pageviews using `data-auto-pageview="false"` and send them yourself with `umami.track()`.
+Use `data-auto-track="false"` only if you want to disable tracker initialization entirely.
 See [Tracker configuration](/docs/tracker-configuration).
 
 ## Functions
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 ```js
 // Tracks the current page
@@ -36,7 +37,7 @@ umami.identify(data: object);
 
 ## Pageviews
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 Track a page view.
 
@@ -70,7 +71,7 @@ umami.track(props => ({ ...props, url: '/home', title: 'Home page' }));
 
 ## Events
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 Track an event with a given name.
 
@@ -80,7 +81,7 @@ umami.track('signup-button');
 
 ## Event Data
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 Track an event with dynamic data.
 
@@ -126,7 +127,7 @@ umami.track(props => ({
 ```
 
 ## Sessions
-`v2.13.0`
+<Badge color="blue" size="sm">v2.13.0</Badge>
 
 Pass in your own ID to identify a user.
 
@@ -136,7 +137,7 @@ umami.identify('unique_id');
 
 ## Session Data
 
-`v2.13.0`
+<Badge color="blue" size="sm">v2.13.0</Badge>
 
 Save data about the current session.
 

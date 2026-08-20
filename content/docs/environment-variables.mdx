@@ -12,7 +12,7 @@ Runtime variables are recognized when Umami is running. You can set your environ
 
 ### APP_SECRET
 
-`v1.0.0`
+<Badge color="blue" size="sm">v1.0.0</Badge>
 
 A random string used to secure authentication tokens. Each installation should have a unique value. You can generate one with:
 
@@ -24,10 +24,9 @@ openssl rand -hex 32
 APP_SECRET = "random string"
 ```
 
-
 ### CLIENT_IP_HEADER
 
-`v1.24.0`
+<Badge color="blue" size="sm">v1.24.0</Badge>
 
 HTTP header to check for the client's IP address. This is useful when you're
 behind a proxy that uses non-standard headers.
@@ -38,7 +37,7 @@ CLIENT_IP_HEADER = "header name"
 
 ### COLLECT_API_ENDPOINT
 
-`v1.34.0`
+<Badge color="blue" size="sm">v1.34.0</Badge>
 
 Allows you to send metrics to a location different than the default `/api/send`. This is to help you avoid some [ad blockers](/docs/bypass-ad-blockers).
 
@@ -48,7 +47,7 @@ COLLECT_API_ENDPOINT = "/my-custom-route"
 
 ### CORS_MAX_AGE
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 How many seconds a CORS preflight should last. Default is 24 hours.
 
@@ -58,7 +57,7 @@ CORS_MAX_AGE = 86400
 
 ### DATABASE_URL
 
-`v1.0.0`
+<Badge color="blue" size="sm">v1.0.0</Badge>
 
 ```
 DATABASE_URL = "connection string"
@@ -68,7 +67,7 @@ Connection string for your database. This is the only required variable.
 
 ### DEBUG
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 Console logging for specific areas of the application. Values include `umami:auth`, `umami:clickhouse`, `umami:kafka`, `umami:middleware`, and `umami:prisma`.
 
@@ -78,7 +77,7 @@ DEBUG = "umami:*"
 
 ### DISABLE_BOT_CHECK
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 By default bots are excluded from statistics. This disables checking for bots.
 
@@ -88,7 +87,7 @@ DISABLE_BOT_CHECK = 1
 
 ### DISABLE_LOGIN
 
-`v1.26.0`
+<Badge color="blue" size="sm">v1.26.0</Badge>
 
 Disables the login page for the application.
 
@@ -96,19 +95,9 @@ Disables the login page for the application.
 DISABLE_LOGIN = 1
 ```
 
-### DISABLE_UPDATES
-
-`v1.33.0`
-
-Disables the check for new versions of Umami.
-
-```
-DISABLE_UPDATES = 1
-```
-
 ### DISABLE_TELEMETRY
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 Umami collects completely anonymous telemetry data in order help improve the application. You can choose to disable this if you don't want to participate.
 
@@ -116,9 +105,19 @@ Umami collects completely anonymous telemetry data in order help improve the app
 DISABLE_TELEMETRY = 1
 ```
 
+### DISABLE_UPDATES
+
+<Badge color="blue" size="sm">v1.33.0</Badge>
+
+Disables the check for new versions of Umami.
+
+```
+DISABLE_UPDATES = 1
+```
+
 ### ENABLE_TEST_CONSOLE
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 Enables the internal test page, `{host}/console`. Admin access is required. Users can manually fire pageviews and events to their websites.
 
@@ -128,7 +127,7 @@ ENABLE_TEST_CONSOLE = 1
 
 ### FAVICON_URL
 
-`v2.18.0`
+<Badge color="blue" size="sm">v2.18.0</Badge>
 
 The URL of the service for displaying website icons.
 
@@ -147,7 +146,7 @@ Some alternatives you can use:
 
 ### GEO_DATABASE_URL
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 The URL for downloading a MaxMind-compatible GeoIP database in MMDB format. This is used for IP-based location detection when location headers from a CDN are not available.
 
@@ -157,7 +156,7 @@ GEO_DATABASE_URL = "https://example.com/GeoLite2-City.mmdb"
 
 ### HOSTNAME / PORT
 
-`v1.0.0`
+<Badge color="blue" size="sm">v1.0.0</Badge>
 
 If you are running on an environment which requires you to bind to a specific hostname or port, such as Heroku, you can add
 these variables and start your app with `npm run start-env` instead of `npm start`.
@@ -169,7 +168,7 @@ PORT = 3000
 
 ### IGNORE_IP
 
-`v1.0.0`
+<Badge color="blue" size="sm">v1.0.0</Badge>
 
 You can provide a comma-delimited list of IP addresses and CIDR ranges to exclude from data collection.
 
@@ -179,7 +178,7 @@ IGNORE_IP = "192.168.0.1, 10.0.0.0/24, 2001:db8::/32"
 
 ### LOG_QUERY
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 If you are running in development mode, this will log database queries to the console for debugging.
 
@@ -189,7 +188,7 @@ LOG_QUERY = 1
 
 ### PRIVATE_MODE
 
-`v2.11.0`
+<Badge color="blue" size="sm">v2.11.0</Badge>
 
 Disables all external network calls. Note, this will also disable all website icons since they come from duckduckgo.com.
 
@@ -197,9 +196,19 @@ Disables all external network calls. Note, this will also disable all website ic
 PRIVATE_MODE = 1
 ```
 
+### REDIS_URL
+
+<Badge color="blue" size="sm">v3.0.1</Badge>
+
+Optional Redis connection string used for caching and coordination features. If omitted, Redis-backed features stay disabled.
+
+```
+REDIS_URL = "redis://localhost:6379"
+```
+
 ### REMOVE_TRAILING_SLASH
 
-`v1.26.0`
+<Badge color="blue" size="sm">v1.26.0</Badge>
 
 Removes the trailing slash from all incoming urls.
 
@@ -207,9 +216,19 @@ Removes the trailing slash from all incoming urls.
 REMOVE_TRAILING_SLASH = 1
 ```
 
+### SALT_ROTATION
+
+<Badge color="blue" size="sm">v3.1.0</Badge>
+
+Controls how often the anonymous session salt rotates for generated session identifiers. The default is `month`.
+
+```
+SALT_ROTATION = "month"
+```
+
 ### SKIP_LOCATION_HEADERS
 
-`v2.15.0`
+<Badge color="blue" size="sm">v2.15.0</Badge>
 
 Skips using known location headers for country/region/city detection and forces using the local geo database.
 
@@ -221,7 +240,7 @@ SKIP_LOCATION_HEADERS = 1
 
 ### TRACKER_SCRIPT_NAME
 
-`v1.26.0`
+<Badge color="blue" size="sm">v1.26.0</Badge>
 
 Allows you to assign a custom name to the tracker script different from the default `script.js`. This is to help you avoid some [ad blockers](/docs/bypass-ad-blockers).
 
@@ -231,15 +250,39 @@ The `.js` extension is not required. The value can also be any path you choose, 
 TRACKER_SCRIPT_NAME = "custom-script-name.js"
 ```
 
----
+### TWO_FACTOR_ENCRYPTION_KEY
 
+<Badge color="blue" size="sm">v3.3.0</Badge>
+
+A 64-character hex string (256-bit key) used to encrypt [two-factor authentication](/docs/two-factor-authentication)
+secrets. Required before any user can enable 2FA. You can generate one with:
+
+```shell
+openssl rand -hex 32
+```
+
+```
+TWO_FACTOR_ENCRYPTION_KEY = "random hex string"
+```
+
+### USE_UUIDV7
+
+<Badge color="blue" size="sm">v3.0.2</Badge>
+
+Uses UUIDv7 instead of UUIDv4 for generated random identifiers. Deterministic IDs derived from analytics data are unchanged.
+
+```
+USE_UUIDV7 = 1
+```
+
+---
 ## Build time variables
 
 Build time variables are only recognized during the build process. This also includes building custom Docker images. You need to set your environment variables prior to building the application.
 
 ### ALLOWED_FRAME_URLS
 
-`v2.3.0`
+<Badge color="blue" size="sm">v2.3.0</Badge>
 
 A space-delimited list of urls allowed to host the application in an iframe.
 
@@ -249,7 +292,7 @@ ALLOWED_FRAME_URLS = "URLs"
 
 ### BASE_PATH
 
-`v1.9.0`
+<Badge color="blue" size="sm">v1.9.0</Badge>
 
 If you want to host Umami under a subdirectory. You may need to update your reverse proxy settings to correctly handle the BASE_PATH prefix.
 
@@ -257,9 +300,19 @@ If you want to host Umami under a subdirectory. You may need to update your reve
 BASE_PATH = "/custom"
 ```
 
+### BUILD_GEO
+
+<Badge color="blue" size="sm">v3.0.0</Badge>
+
+Run the local GeoIP database setup step even in Vercel environment.
+
+```
+BUILD_GEO = 1
+```
+
 ### DATABASE_TYPE
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 ```
 DATABASE_TYPE = "postgresql"
@@ -267,9 +320,30 @@ DATABASE_TYPE = "postgresql"
 
 The type of DB to be used. This is only required for the Docker build.
 
+### DEFAULT_CURRENCY / DEFAULT_LOCALE
+
+<Badge color="blue" size="sm">v3.1.0</Badge>
+
+Sets the default currency and locale used by the application UI before a user chooses their own preferences.
+
+```
+DEFAULT_CURRENCY = "USD"
+DEFAULT_LOCALE = "en-US"
+```
+
+### DIRECT_DATABASE_URL
+
+<Badge color="blue" size="sm">v3.2.0</Badge>
+
+Direct PostgreSQL connection string used for Prisma migrations during `check-db`. This is useful when `DATABASE_URL` points to a pooled connection that should not be used for migration commands.
+
+```
+DIRECT_DATABASE_URL = "connection string"
+```
+
 ### FORCE_SSL
 
-`v1.0.0`
+<Badge color="blue" size="sm">v1.0.0</Badge>
 
 This will send a HTTP `Strict-Transport-Security` response header with all requests. See [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security).
 
@@ -277,9 +351,19 @@ This will send a HTTP `Strict-Transport-Security` response header with all reque
 FORCE_SSL = 1
 ```
 
+### SKIP_BUILD_GEO
+
+<Badge color="blue" size="sm">v3.1.0</Badge>
+
+Skips the local GeoIP database setup step in the build process.
+
+```
+SKIP_BUILD_GEO = 1
+```
+
 ### SKIP_DB_CHECK
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 Skips the `check-db` step in the build process. Used for Docker builds.
 
@@ -289,30 +373,10 @@ SKIP_DB_CHECK = 1
 
 ### SKIP_DB_MIGRATION
 
-`v2.0.0`
+<Badge color="blue" size="sm">v2.0.0</Badge>
 
 Skips the Prisma migration step in the build process. Setting `SKIP_DB_CHECK` also skips this step.
 
 ```
 SKIP_DB_MIGRATION = 1
-```
-
-### SKIP_BUILD_GEO
-
-`v3.1.0`
-
-Skips the local GeoIP database setup step in the build process.
-
-```
-SKIP_BUILD_GEO = 1
-```
-
-### BUILD_GEO
-
-`v3.0.0`
-
-Run the local GeoIP database setup step even in Vercel environment.
-
-```
-BUILD_GEO = 1
 ```

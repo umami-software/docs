@@ -83,6 +83,36 @@
       "description": "The page you requested could not be found. Return to the [documentation home](/docs)."
     }
   },
+  "redirects": [
+    {
+      "source": "/docs/guides/measure-campaigns",
+      "destination": "https://umami.is/guides/marketing-campaign-tracking"
+    },
+    {
+      "source": "/docs/guides/setup-conversion-goals",
+      "destination": "https://umami.is/guides/conversion-tracking"
+    },
+    {
+      "source": "/docs/guides/analyze-traffic-sources",
+      "destination": "https://umami.is/guides/marketing-attribution"
+    },
+    {
+      "source": "/docs/guides/compare-traffic-periods",
+      "destination": "https://umami.is/guides/website-traffic-analysis"
+    },
+    {
+      "source": "/docs/guides/build-a-funnel",
+      "destination": "https://umami.is/guides/conversion-funnels"
+    },
+    {
+      "source": "/docs/guides/monitor-web-vitals",
+      "destination": "https://umami.is/guides/core-web-vitals"
+    },
+    {
+      "source": "/docs/guides/core-web-vitals",
+      "destination": "https://umami.is/guides/core-web-vitals"
+    }
+  ],
   "navigation": {
     "tabs": [
       {
@@ -156,6 +186,10 @@
               {
                 "page": "enable-redis",
                 "title": "Enable Redis"
+              },
+              {
+                "page": "two-factor-authentication",
+                "title": "Two-factor authentication"
               }
             ]
           },
@@ -369,7 +403,7 @@
         "icon": "map",
         "groups": [
           {
-            "group": "Guides",
+            "group": "How-to Guides",
             "pages": [
               {
                 "page": "guides/index",
@@ -399,40 +433,6 @@
               {
                 "page": "guides/setup-ab-testing",
                 "title": "Set up A/B testing with tags"
-              }
-            ]
-          },
-          {
-            "group": "Marketing",
-            "pages": [
-              {
-                "page": "guides/measure-campaigns",
-                "title": "Measure campaigns"
-              },
-              {
-                "page": "guides/setup-conversion-goals",
-                "title": "Set up conversion goals"
-              },
-              {
-                "page": "guides/analyze-traffic-sources",
-                "title": "Analyze traffic sources with attribution"
-              },
-              {
-                "page": "guides/compare-traffic-periods",
-                "title": "Compare traffic across time periods"
-              }
-            ]
-          },
-          {
-            "group": "Product",
-            "pages": [
-              {
-                "page": "guides/build-a-funnel",
-                "title": "Build a conversion funnel"
-              },
-              {
-                "page": "guides/monitor-web-vitals",
-                "title": "Monitor Core Web Vitals"
               }
             ]
           },

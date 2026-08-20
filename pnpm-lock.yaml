@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@umami/shiso':
-        specifier: ^1.1.12
-        version: 1.1.12(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(jiti@2.7.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)
+        specifier: ^1.2.0
+        version: 1.2.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(jiti@2.7.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)
       react:
         specifier: ^19.2.1
         version: 19.2.1
@@ -33,6 +33,9 @@ importers:
       typescript:
         specifier: ^5.9.3
         version: 5.9.3
+      vite:
+        specifier: ^8.2.1
+        version: 8.2.1(@types/node@24.9.1)(jiti@2.7.0)(yaml@2.9.0)
 
 packages:
 
@@ -719,8 +722,8 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
-  '@umami/shiso@1.1.12':
-    resolution: {integrity: sha512-kb2AXOSd5tY3rMvKaBl7MnWv2e5lpY6/JY+EkI7QwjOEpxRuNmbve+fPZs3BJ8mYfVmW2RPtQcYijxUMRfW/0A==}
+  '@umami/shiso@1.2.0':
+    resolution: {integrity: sha512-9CoyEKUrV/U1voVEb6+YryRFqrAVFbdgfu3ZsIQUfeZbxz/GrqEH0/tNq6CFvrLQEEatECFl4RQmPAu7MyR5tg==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -1193,8 +1196,8 @@ packages:
   lowlight@3.3.0:
     resolution: {integrity: sha512-0JNhgFoPvP6U6lE/UdVsSq99tn6DhjjpAj5MxG49ewd2mOBVtwWYIT8ClyABhq198aXXODMU6Ox8DrGy/CpTZQ==}
 
-  lucide-react@1.32.0:
-    resolution: {integrity: sha512-txX56hMFnRxPi1f9/nH69YN8uvAO6a7Y1KSWKjCDAtdD9+soEgmWuCt6iRm1pkxUZo2+YntSdsE1L6bIuKoY8Q==}
+  lucide-react@1.33.0:
+    resolution: {integrity: sha512-MTRwMy0ZlL8Ur/vOAiJ9XGHE+kFPC7brq6MxAm0GiGXEBj0qy0jA/pG4N675oSzciO/UCdX8T+5yUQdmDeTLxg==}
     peerDependencies:
       react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
@@ -2271,7 +2274,7 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@umami/shiso@1.1.12(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(jiti@2.7.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)':
+  '@umami/shiso@1.2.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(jiti@2.7.0)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)':
     dependencies:
       '@base-ui/react': 1.7.0(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       '@fontsource/inter': 5.3.0
@@ -2287,7 +2290,7 @@ snapshots:
       estree-util-value-to-estree: 3.5.0
       github-slugger: 2.0.0
       highlight.js: 11.12.0
-      lucide-react: 1.32.0(react@19.2.1)
+      lucide-react: 1.33.0(react@19.2.1)
       react: 19.2.1
       react-dom: 19.2.1(react@19.2.1)
       react-router: 8.3.0(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -2757,7 +2760,7 @@ snapshots:
       devlop: 1.1.0
       highlight.js: 11.11.2
 
-  lucide-react@1.32.0(react@19.2.1):
+  lucide-react@1.33.0(react@19.2.1):
     dependencies:
       react: 19.2.1
 
