@@ -111,6 +111,10 @@
     {
       "source": "/docs/guides/core-web-vitals",
       "destination": "https://umami.is/guides/core-web-vitals"
+    },
+    {
+      "source": "/docs/track-outbound-links",
+      "destination": "/docs/guides/track-outbound-links"
     }
   ],
   "navigation": {
@@ -190,6 +194,14 @@
               {
                 "page": "two-factor-authentication",
                 "title": "Two-factor authentication"
+              },
+              {
+                "page": "bypass-ad-blockers",
+                "title": "Bypass ad blockers"
+              },
+              {
+                "page": "exclude-my-own-visits",
+                "title": "Exclude my own visits"
               }
             ]
           },
@@ -354,23 +366,6 @@
             ]
           },
           {
-            "group": "How to",
-            "pages": [
-              {
-                "page": "bypass-ad-blockers",
-                "title": "Bypass ad blockers"
-              },
-              {
-                "page": "exclude-my-own-visits",
-                "title": "Exclude my own visits"
-              },
-              {
-                "page": "track-outbound-links",
-                "title": "Track outbound links"
-              }
-            ]
-          },
-          {
             "group": "Reference",
             "pages": [
               {
@@ -414,6 +409,10 @@
           {
             "group": "Tracking",
             "pages": [
+              {
+                "page": "guides/track-outbound-links",
+                "title": "Track outbound links"
+              },
               {
                 "page": "guides/track-single-page-apps",
                 "title": "Track a single-page application"
