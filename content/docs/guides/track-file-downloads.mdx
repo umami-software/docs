@@ -50,8 +50,10 @@ This finds all links to downloadable files and adds tracking attributes automati
 2. Click on **Events** to see the `file-download` event and its counts.
 3. Click on **Event data** to view a breakdown by the `file` property, showing which files are downloaded most.
 
-## Tips
+<Callout title="Tips" variant="tip">
 
 - Use consistent event names (e.g., always `file-download`) so all downloads are grouped together.
 - Use the `file` property to distinguish between different files rather than creating a separate event name for each file.
 - If downloads are served from a different domain (like a CDN), the tracking still works since the event fires on the click, not the destination.
+
+</Callout>

@@ -16,11 +16,11 @@ There are several different ways to install Umami.
 - A server with [Node.js](https://nodejs.org/) version 18.18 or newer.
 - A database. Umami supports [PostgreSQL](https://www.postgresql.org/) (minimum v12.14) databases.
 
-> **Notes**: We recommend configuring the PostgreSQL database to use the **UTC** timezone.
->
->    **Why UTC?**
->
->    Using UTC avoids issues caused by regional offsets, ensuring consistent, predictable timestamps across environments, services, and deployments.
+<Callout title="Use UTC">
+
+We recommend configuring the PostgreSQL database to use the **UTC** timezone. UTC avoids issues caused by regional offsets, ensuring consistent, predictable timestamps across environments, services, and deployments.
+
+</Callout>
 
 
 ### Install pnpm
@@ -97,7 +97,11 @@ docker compose up -d
 This will create a PostgreSQL database and start the Umami application on `http://localhost:3000`.
 The default login credentials are username **admin** and password **umami**.
 
-> **Important**: Change the default password immediately after your first login.
+<Callout title="Change the default password" variant="warning">
+
+Change the default password immediately after your first login.
+
+</Callout>
 
 Alternatively, if you want to use prebuilt images, you can pull the Umami Docker image with PostgreSQL support:
 

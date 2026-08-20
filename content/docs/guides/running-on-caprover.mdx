@@ -73,7 +73,11 @@ You're now able to login to your Umami deployment at `app-name.your-sub-domain.y
 First make a backup from your database before doing the update. After you make a backup, just go to the CapRover panel and select your Umami app.
 Go to the `Deployment` tab and scroll down to `Deploy via ImageName` and deploy the desired version from the [Umami Docker Registry](https://github.com/umami-software/umami/pkgs/container/umami).
 
-NOTE: do not forget to select the right Docker image according to your database. Usually the MySQL images are prefixed with `mysql_` and the PostgreSQL images are prefixed with `postgresql_`.
+<Callout title="Select the matching database image">
+
+Do not forget to select the right Docker image according to your database. Usually the MySQL images are prefixed with `mysql_` and the PostgreSQL images are prefixed with `postgresql_`.
+
+</Callout>
 
 ## Support
 

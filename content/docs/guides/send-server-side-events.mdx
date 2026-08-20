@@ -65,7 +65,11 @@ curl -X POST https://your-umami.example.com/api/send \
   }'
 ```
 
-> **Important**: A valid `User-Agent` header is required. Requests without one will be rejected.
+<Callout title="User-Agent required" variant="warning">
+
+A valid `User-Agent` header is required. Requests without one will be rejected.
+
+</Callout>
 
 ### Python example
 
@@ -134,8 +138,10 @@ Each item is forwarded to `/api/send`, so the same `type` values (`event`, `iden
 
 If any items fail, `errors` is the failure count and `details` lists each failure by its `index` in the array.
 
-## Tips
+<Callout title="Tips" variant="tip">
 
 - Server-side events appear in the same dashboard as client-side events. Use event names or properties to distinguish them if needed.
 - When tracking revenue from payment webhooks, use the `revenue` and `currency` properties so data appears in the [Revenue](/docs/revenue) insight.
 - For high-volume backends, consider queuing events and sending them with concurrency limits to avoid overwhelming your instance.
+
+</Callout>

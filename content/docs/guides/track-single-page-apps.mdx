@@ -118,8 +118,10 @@ function handleCheckout() {
 }
 ```
 
-## Troubleshooting
+<Callout title="Troubleshooting" variant="warning">
 
 - **Pages not tracked after navigation**: Make sure the tracker script is loaded once in the root layout, not re-added on every route change.
 - **Duplicate page views**: Avoid calling `umami.track()` without arguments in `useEffect` or `onMounted` hooks, since the tracker already records navigation automatically.
 - **Hash-based routing**: If your app uses hash routing (`/#/page`), Umami tracks these by default. You can disable hash collection with `data-exclude-hash="true"` if needed.
+
+</Callout>

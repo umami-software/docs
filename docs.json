@@ -486,10 +486,6 @@
                 "title": "Running on DigitalOcean"
               },
               {
-                "page": "guides/running-on-northflank",
-                "title": "Running on Northflank"
-              },
-              {
                 "page": "guides/running-on-fly-io",
                 "title": "Running on Fly.io"
               },
@@ -498,16 +494,16 @@
                 "title": "Running on Forge"
               },
               {
-                "page": "guides/running-on-helmforge",
-                "title": "Running on Kubernetes with HelmForge"
-              },
-              {
                 "page": "guides/running-on-heroku",
                 "title": "Running on Heroku"
               },
               {
                 "page": "guides/running-on-koyeb",
                 "title": "Running on Koyeb"
+              },
+              {
+                "page": "guides/running-on-helmforge",
+                "title": "Running on Kubernetes with HelmForge"
               },
               {
                 "page": "guides/running-on-neon",
@@ -520,6 +516,10 @@
               {
                 "page": "guides/running-on-nodion",
                 "title": "Running on Nodion"
+              },
+              {
+                "page": "guides/running-on-northflank",
+                "title": "Running on Northflank"
               },
               {
                 "page": "guides/running-on-planetscale",

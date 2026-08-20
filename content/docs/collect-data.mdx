@@ -16,9 +16,10 @@ Copy the code and insert it into the `<head>` section of your website.
 
 Then visit your website and data should immediately appear in your Umami dashboard.
 
-### Troubleshooting
+<Callout title="Troubleshooting" variant="warning">
 
 - **Data not appearing?** Open your browser developer tools (F12) and check the Network tab for requests to your Umami instance. Make sure the script is loading without errors.
 - **Ad blockers** may prevent the tracking script from loading. See [Bypass ad blockers](/docs/bypass-ad-blockers) for solutions.
 - **Next.js** - Insert the tracking code using the [next/script](https://nextjs.org/docs/app/api-reference/components/script) component instead of a plain `<script>` tag.
 - **Single page applications** - Umami automatically tracks page navigations in SPAs. No additional configuration is needed.
+</Callout>

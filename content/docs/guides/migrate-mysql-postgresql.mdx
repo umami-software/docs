@@ -87,10 +87,12 @@ LINES TERMINATED BY '\n'
 FROM website_event;
 ```
 
-**Notes**
+<Callout title="Notes">
 
 - The file path (/tmp/website_event.csv) is on the MySQL server's filesystem, not necessarily your host.
 - Make sure MySQL has permission to write there (secure_file_priv may restrict this).
+
+</Callout>
 
 2. Move the file from MySQL server to location accessible by psql using `scp` or `cp`.
 
@@ -100,6 +102,8 @@ FROM website_event;
 psql -U postgres -d mydb -c "\COPY website_event FROM 'website_event.csv' CSV NULL '\N'"
 ```
 
-**Notes**
+<Callout title="Notes">
 
 - Include schema if not using default schema.
+
+</Callout>

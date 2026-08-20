@@ -34,10 +34,12 @@ Add the recorder script to your site. This enables heatmap event collection.
 ></script>
 ```
 
-> **Notes**
->
-> - Heatmap data is only collected from sessions recorded after enabling the feature.
-> - Heatmaps are generated from aggregated session data — no individual session is identifiable.
+<Callout title="Notes">
+
+- Heatmap data is only collected from sessions recorded after enabling the feature.
+- Heatmaps are generated from aggregated session data — no individual session is identifiable.
+
+</Callout>
 
 ## Page Overlay
 
@@ -54,10 +56,12 @@ The preview only loads if your page allows the Umami dashboard to embed it in an
 Content-Security-Policy: frame-ancestors 'self' https://your-umami-instance.com;
 ```
 
-> **Notes**
->
-> - Use the origin where you access Umami in place of `https://your-umami-instance.com` (for Umami Cloud, use `https://cloud.umami.is`).
-> - If your site also sends `X-Frame-Options: DENY` or `SAMEORIGIN`, remove it — it overrides `frame-ancestors` in some browsers.
+<Callout title="Notes">
+
+- Use the origin where you access Umami in place of `https://your-umami-instance.com` (for Umami Cloud, use `https://cloud.umami.is`).
+- If your site also sends `X-Frame-Options: DENY` or `SAMEORIGIN`, remove it — it overrides `frame-ancestors` in some browsers.
+
+</Callout>
 
 ## Accessing Heatmaps
 

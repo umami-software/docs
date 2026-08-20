@@ -19,7 +19,7 @@ title: Running on PlanetScale
 6. You should now be able to build and start Umami (`yarn build` followed by `yarn start`).
 7. Follow the **Getting started** guide starting from the [Login](/docs/login) step and be sure to change the default password.
 
-### Troubleshooting
+<Callout title="Troubleshooting" variant="warning">
 
 If you are getting an error like the following example:
 
@@ -32,3 +32,5 @@ You can try add a connection timeout query parameter on your `DATABASE_URL`:
 ```dotenv
 DATABASE_URL=mysql://username:password@host/umami-db?sslaccept=strict&connect_timeout=300
 ```
+
+</Callout>
