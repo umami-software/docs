@@ -160,23 +160,6 @@
             ]
           },
           {
-            "group": "How to",
-            "pages": [
-              {
-                "page": "bypass-ad-blockers",
-                "title": "Bypass ad blockers"
-              },
-              {
-                "page": "exclude-my-own-visits",
-                "title": "Exclude my own visits"
-              },
-              {
-                "page": "track-outbound-links",
-                "title": "Track outbound links"
-              }
-            ]
-          },
-          {
             "group": "Tracking",
             "pages": [
               {
@@ -333,6 +316,23 @@
                 "page": "add-a-user",
                 "hidden": true,
                 "title": "Add a user"
+              }
+            ]
+          },
+          {
+            "group": "How to",
+            "pages": [
+              {
+                "page": "bypass-ad-blockers",
+                "title": "Bypass ad blockers"
+              },
+              {
+                "page": "exclude-my-own-visits",
+                "title": "Exclude my own visits"
+              },
+              {
+                "page": "track-outbound-links",
+                "title": "Track outbound links"
               }
             ]
           },
