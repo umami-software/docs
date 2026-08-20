@@ -1,70 +1,57 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+This file provides guidance to Claude Code when working with this repository.
 
-## Project Overview
+## Project overview
 
-This is the documentation site for Umami Analytics, built with Next.js 16 and Fumadocs. It uses MDX for content authoring and Tailwind CSS v4 for styling.
+This is the documentation site for Umami Analytics. It is a statically generated
+Shiso site with MDX content.
 
 ## Commands
 
 ```bash
-# Development (clears .source cache and uses Turbopack)
-npm run dev
-
-# Build for production
-npm run build
-
-# Start production server
-npm run start
-
-# Linting and formatting (uses Biome)
-npm run lint      # Check for lint errors
-npm run format    # Format code
-npm run check     # Run all Biome checks
+pnpm dev      # Start the Shiso development server
+pnpm check    # Validate docs.json
+pnpm build    # Build the static site in dist/client
+pnpm preview  # Preview the production build
+pnpm lint     # Run Biome
+pnpm format   # Format files with Biome
 ```
 
 ## Architecture
 
-### Content Flow
+Shiso reads pages from `content/docs` and the site structure from `docs.json`.
+The production build prerenders HTML and Markdown versions of every page, builds
+the client-side search index, emits a sitemap, and writes everything to
+`dist/client`.
 
-```
-content/docs/*.mdx → fumadocs-mdx (postinstall) → .source/ → src/lib/source.ts → Routes
-```
+The build also runs `scripts/generate-llms-full.mjs` to combine the generated
+Markdown pages into `dist/client/llms-full.txt`.
 
-MDX files in `/content/docs` are processed by `fumadocs-mdx` during `postinstall`, generating the `.source/` directory (git-ignored). The `src/lib/source.ts` file creates loader instances that routes use to access content.
+## Key files
 
-### Documentation Sections
+- `docs.json` — navigation, branding, search, SEO, and theme configuration
+- `entry-client.tsx` — Shiso hydration and optional Umami tracker injection
+- `index.html` — Shiso HTML shell and early theme initialization
+- `styles.css` — site-specific Shiso style overrides
+- `content/docs` — Markdown and MDX documentation pages
+- `public` — images, favicons, and the Umami logo
+- `vercel.json` — static Vercel deployment configuration
 
-Four separate loader instances exist in `src/lib/source.ts`:
-- `source` - Main docs at `/docs`
-- `api` - API reference at `/docs/api`
-- `guides` - Deployment/migration guides at `/docs/guides`
-- `cloud` - Cloud-specific docs at `/docs/cloud`
+## Documentation sections
 
-### Key Files
+The four top-level tabs configured in `docs.json` are:
 
-- `source.config.ts` - Fumadocs configuration (frontmatter schema, MDX settings)
-- `next.config.mjs` - Next.js config with `/docs` asset prefix, rewrites, and Umami tracker script injection
-- `src/lib/source.ts` - Content loaders and helper functions (`getPageImage`, `getLLMText`)
-- `src/lib/layout.shared.tsx` - Shared layout options (nav, links)
-- `src/mdx-components.tsx` - Custom MDX component overrides
+- Documentation at `/docs`
+- Guides at `/docs/guides`
+- API Reference at `/docs/api`
+- Cloud at `/docs/cloud`
 
-### Route Structure
+Every published page must be listed in `docs.json`. Use a page object with
+`"hidden": true` for a page that should remain routable without appearing in
+the sidebar.
 
-- `src/app/docs/[[...slug]]/page.tsx` - Dynamic docs pages (catch-all)
-- `src/app/api/search/route.ts` - Full-text search endpoint (Orama-powered)
-- `src/app/llms-full.txt/route.ts` - LLM-friendly text dump of all docs
-- `src/app/og/docs/[...slug]/route.tsx` - Open Graph image generation
+## Analytics
 
-### Content Organization
-
-Documentation in `/content/docs` uses:
-- MDX files with `title` and `description` frontmatter
-- `meta.json` files to define page ordering within folders
-- Folder names in parentheses (e.g., `(quickstart)`) create collapsible groups
-
-### Path Aliases
-
-- `@/.source` → `./.source/index.ts` (generated content)
-- `@/*` → `./src/*`
+Set `VITE_TRACKER_ID` at build time to load the Umami tracker. Environment
+variables exposed to the browser must use Vite's `VITE_` prefix.

@@ -1,0 +1,25 @@
+:root,
+html[data-theme='light'],
+html[data-theme='dark'] {
+  --primary: #3b82f6;
+  --ring: #3b82f6;
+  --sidebar-primary: #3b82f6;
+  --sidebar-ring: #3b82f6;
+}
+
+/* Umami-specific overrides on top of the Shiso theme. */
+
+.docs-markdown a {
+  text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  text-decoration-thickness: 1px;
+}
+
+.docs-markdown [data-slot='zoomable-image'] {
+  display: block;
+  margin: 4rem auto;
+}
+
+.docs-markdown [data-slot='zoomable-image'] img {
+  max-width: 100%;
+  box-shadow: 2px 2px 16px rgb(0 0 0 / 10%);
+}

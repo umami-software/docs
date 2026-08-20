@@ -2,14 +2,14 @@
   "name": "umami-docs",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "build": "next build",
-    "dev": "rimraf .source && next dev --turbo",
-    "start": "rimraf .source && next start",
-    "postinstall": "fumadocs-mdx",
+    "build": "shiso build && node scripts/generate-llms-full.mjs",
+    "dev": "shiso dev",
+    "preview": "shiso preview --outDir dist/client",
+    "check": "shiso check",
     "lint": "biome lint .",
-    "format": "biome format --write .",
-    "check": "biome check ."
+    "format": "biome format --write ."
   },
   "lint-staged": {
     "**/*.{js,jsx,ts,tsx,json,css}": [
@@ -17,25 +17,15 @@
     ]
   },
   "dependencies": {
-    "fumadocs-core": "16.0.7",
-    "fumadocs-mdx": "13.0.5",
-    "fumadocs-ui": "16.0.7",
-    "lucide-react": "^0.548.0",
-    "next": "16.0.7",
+    "@umami/shiso": "^1.1.11",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"
   },
   "devDependencies": {
     "@biomejs/biome": "^2.3.8",
-    "@tailwindcss/postcss": "^4.1.16",
-    "@types/mdx": "^2.0.13",
-    "@types/node": "24.9.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "lint-staged": "^16.2.7",
-    "postcss": "^8.5.6",
-    "rimraf": "^6.1.0",
-    "tailwindcss": "^4.1.16",
     "typescript": "^5.9.3"
   }
 }

@@ -1,16 +1,12 @@
 # deps
 /node_modules
 
-# generated content
-.contentlayer
-.content-collections
-.source
-
 # test & build
 /coverage
+/dist
+/.shiso
 /.next/
-/out/
-/build
+/.source/
 *.tsbuildinfo
 
 # misc

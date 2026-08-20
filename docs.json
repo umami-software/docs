@@ -1,0 +1,319 @@
+{
+  "$schema": "./node_modules/@umami/shiso/docs.schema.json",
+  "$shiso": {
+    "docsPrefix": "/docs",
+    "contentDir": "content/docs",
+    "siteUrl": "https://docs.umami.is",
+    "locale": "en-US"
+  },
+  "theme": "shiso",
+  "name": "umami",
+  "description": "Documentation for Umami, a modern privacy-focused analytics platform.",
+  "logo": {
+    "light": "/logo.svg",
+    "dark": "/logo.svg",
+    "href": "https://umami.is/?ref=docs",
+    "target": "_blank"
+  },
+  "favicon": "/favicon.ico",
+  "colors": {
+    "primary": "#2563eb",
+    "light": "#60a5fa",
+    "dark": "#2563eb"
+  },
+  "appearance": {
+    "default": "system",
+    "strict": false
+  },
+  "styling": {
+    "eyebrows": "section"
+  },
+  "navbar": {
+    "links": [
+      {
+        "icon": "github",
+        "ariaLabel": "Umami on GitHub",
+        "href": "https://github.com/umami-software/umami"
+      },
+      {
+        "label": "v2",
+        "href": "https://v2.umami.is"
+      }
+    ]
+  },
+  "footer": {
+    "socials": [
+      {
+        "icon": "github",
+        "ariaLabel": "Umami on GitHub",
+        "href": "https://github.com/umami-software/umami"
+      }
+    ],
+    "attribution": false
+  },
+  "search": {
+    "prompt": "Search the docs...",
+    "shortcut": "k"
+  },
+  "contextual": {
+    "options": ["copy", "view", "chatgpt", "claude"]
+  },
+  "seo": {
+    "indexing": "all",
+    "metatags": {
+      "og:image": "https://docs.umami.is/images/docs/screenshot.png",
+      "twitter:card": "summary_large_image",
+      "twitter:image": "https://docs.umami.is/images/docs/screenshot.png"
+    }
+  },
+  "errors": {
+    "404": {
+      "redirect": false,
+      "title": "Page not found",
+      "description": "The page you requested could not be found. Return to the [documentation home](/docs)."
+    }
+  },
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Documentation",
+        "icon": "book-open",
+        "groups": [
+          {
+            "group": "Umami",
+            "collapsible": false,
+            "pages": [
+              { "page": "index", "title": "Introduction" },
+              "install",
+              "updates",
+              {
+                "group": "Quickstart",
+                "expanded": true,
+                "pages": ["login", "add-a-website", "collect-data", "enable-share-url"]
+              },
+              {
+                "group": "Configuration",
+                "pages": [
+                  "environment-variables",
+                  "enable-cloudflare-headers",
+                  "google-tag-manager",
+                  "enable-redis"
+                ]
+              },
+              {
+                "group": "How to",
+                "pages": [
+                  "bypass-ad-blockers",
+                  "exclude-my-own-visits",
+                  "track-outbound-links"
+                ]
+              },
+              { "page": "about", "hidden": true },
+              { "page": "faq", "hidden": true }
+            ]
+          },
+          {
+            "group": "Tracking",
+            "pages": [
+              "tracker-functions",
+              "tracker-configuration",
+              "track-events",
+              "distinct-ids",
+              "tags",
+              "links",
+              "pixels",
+              { "page": "event-data", "hidden": true }
+            ]
+          },
+          {
+            "group": "Analysis",
+            "pages": [
+              {
+                "group": "Filtering",
+                "pages": ["filters", "segments", "cohorts"]
+              },
+              "sessions",
+              "replays",
+              "heatmaps",
+              "performance",
+              "compare",
+              "breakdown",
+              "goals",
+              "funnel",
+              "journey",
+              "retention",
+              "utm",
+              "revenue",
+              "attribution",
+              { "page": "insights", "hidden": true }
+            ]
+          },
+          {
+            "group": "Boards",
+            "pages": ["using-boards", "add-a-board", "design-a-board"]
+          },
+          {
+            "group": "Teams",
+            "pages": [
+              "using-teams",
+              "add-a-team",
+              "join-a-team",
+              "manage-a-team",
+              { "page": "add-a-user", "hidden": true }
+            ]
+          },
+          {
+            "group": "Reference",
+            "pages": ["metric-definitions", "integrations"]
+          },
+          {
+            "group": "Contributing",
+            "pages": ["contributing", "code-of-conduct"]
+          }
+        ]
+      },
+      {
+        "tab": "Guides",
+        "icon": "map",
+        "groups": [
+          {
+            "group": "Guides",
+            "pages": ["guides/index"]
+          },
+          {
+            "group": "Tracking",
+            "pages": [
+              "guides/track-single-page-apps",
+              "guides/track-file-downloads",
+              "guides/track-form-submissions",
+              "guides/identify-logged-in-users",
+              "guides/setup-ab-testing"
+            ]
+          },
+          {
+            "group": "Marketing",
+            "pages": [
+              "guides/measure-campaigns",
+              "guides/setup-conversion-goals",
+              "guides/analyze-traffic-sources",
+              "guides/compare-traffic-periods"
+            ]
+          },
+          {
+            "group": "Product",
+            "pages": ["guides/build-a-funnel", "guides/monitor-web-vitals"]
+          },
+          {
+            "group": "Developer",
+            "pages": [
+              "guides/embed-analytics-in-your-app",
+              "guides/send-server-side-events",
+              "guides/automate-reporting-with-api"
+            ]
+          },
+          {
+            "group": "Teams",
+            "pages": ["guides/setup-team-workspaces", "guides/create-a-public-dashboard"]
+          },
+          {
+            "group": "Hosting",
+            "pages": [
+              "guides/hosting",
+              "guides/running-on-bunny",
+              "guides/running-on-caprover",
+              "guides/running-on-digitalocean",
+              "guides/running-on-northflank",
+              "guides/running-on-fly-io",
+              "guides/running-on-forge",
+              "guides/running-on-helmforge",
+              "guides/running-on-heroku",
+              "guides/running-on-koyeb",
+              "guides/running-on-neon",
+              "guides/running-on-netlify",
+              "guides/running-on-nodion",
+              "guides/running-on-planetscale",
+              "guides/running-on-qovery",
+              "guides/running-on-railway",
+              "guides/running-on-sevalla",
+              "guides/running-on-supabase",
+              "guides/running-on-vercel"
+            ]
+          },
+          {
+            "group": "Migration",
+            "pages": ["guides/migrate-v1-v2", "guides/migrate-mysql-postgresql"]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "icon": "terminal",
+        "groups": [
+          {
+            "group": "API",
+            "pages": ["api/index", "api/authentication", "api/sending-stats"]
+          },
+          {
+            "group": "Endpoints",
+            "pages": [
+              "api/admin",
+              "api/events",
+              "api/links",
+              "api/me",
+              "api/pixels",
+              "api/websites",
+              "api/website-stats",
+              "api/realtime",
+              "api/reports",
+              "api/sessions",
+              "api/share",
+              "api/teams",
+              "api/users"
+            ]
+          },
+          {
+            "group": "Clients",
+            "pages": ["api/api-client", "api/node-client"]
+          }
+        ]
+      },
+      {
+        "tab": "Cloud",
+        "icon": "cloud",
+        "groups": [
+          {
+            "group": "Cloud",
+            "pages": [
+              "cloud/index",
+              "cloud/sign-up",
+              "cloud/login",
+              "cloud/teams",
+              "cloud/email-reports",
+              "cloud/ip-filters",
+              "cloud/white-label",
+              "cloud/notifications",
+              "cloud/delete-account",
+              { "page": "cloud/faq", "hidden": true }
+            ]
+          },
+          {
+            "group": "Billing",
+            "pages": ["cloud/subscription", "cloud/usage"]
+          },
+          {
+            "group": "API",
+            "pages": ["cloud/api-key"]
+          },
+          {
+            "group": "Data",
+            "pages": ["cloud/export-data", "cloud/import-data"]
+          },
+          {
+            "group": "Changelog",
+            "pages": ["cloud/changelog"]
+          }
+        ]
+      }
+    ]
+  }
+}
