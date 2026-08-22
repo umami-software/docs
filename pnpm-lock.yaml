@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@umami/shiso':
-        specifier: ^1.5.0
-        version: 1.5.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)
+        specifier: ^1.6.0
+        version: 1.6.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)
       react:
         specifier: ^19.2.1
         version: 19.2.1
@@ -142,8 +142,8 @@ packages:
   '@floating-ui/utils@0.2.12':
     resolution: {integrity: sha512-HpCo8tmWzLVad5s2d19EhAz5zqrrQ6s69qd6moPMQvkOuSwDT1YgRfWSVuc4ennqrgv3OHppiOGMQ7oC13yIww==}
 
-  '@fontsource/inter@5.3.0':
-    resolution: {integrity: sha512-RofMylZmjlJEfELXeNHFWBRcSs75rGU/6bV2S2jfnvv/3rPXPGe0LgUJTklcHZ9lM4OZmAVFhcJPnACfb91A3g==}
+  '@fontsource-variable/inter@5.3.0':
+    resolution: {integrity: sha512-OupL48va4JNofb97w6NYeF9S7W/kHNKM0Er8Dem5nqi4jeOLrVJDoE8tZEpnMJmtkvNbB1EIPPwHcdkF6b1oUA==}
 
   '@fontsource/jetbrains-mono@5.3.0':
     resolution: {integrity: sha512-fqDfB5I9f1p1TV486aUgB9t8zP84P0O1FtQR5Ol9vjwPy+S+EIGlVYm1cvj2W5shcZMTg2nZFdVMoH5wFu8a1A==}
@@ -856,8 +856,8 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
-  '@umami/shiso@1.5.0':
-    resolution: {integrity: sha512-QK/puCWyHsbukYkUwf1YLH+Jw1SyVEC28trHK897gFOck2fxP2oIjWky8fgDqmseJdMB/qEbG1yutKv2cGjAMQ==}
+  '@umami/shiso@1.6.0':
+    resolution: {integrity: sha512-xrdZnh87R3UprNfwFJdn8x+E3LgSPKE16uyi6UHVHyqrEmYNW+efIm/ZEp49MU+8I7DgepsnQ1RRbCCnQRuNOQ==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -2018,7 +2018,7 @@ snapshots:
 
   '@floating-ui/utils@0.2.12': {}
 
-  '@fontsource/inter@5.3.0': {}
+  '@fontsource-variable/inter@5.3.0': {}
 
   '@fontsource/jetbrains-mono@5.3.0': {}
 
@@ -2531,10 +2531,10 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@umami/shiso@1.5.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)':
+  '@umami/shiso@1.6.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)':
     dependencies:
       '@base-ui/react': 1.7.0(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
-      '@fontsource/inter': 5.3.0
+      '@fontsource-variable/inter': 5.3.0
       '@fontsource/jetbrains-mono': 5.3.0
       '@mdx-js/react': 3.1.1(@types/react@19.2.7)(react@19.2.1)
       '@mdx-js/rollup': 3.1.1(rollup@4.62.4)
