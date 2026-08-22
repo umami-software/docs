@@ -1,11 +1,5 @@
 {
   "$schema": "./node_modules/@umami/shiso/docs.schema.json",
-  "$shiso": {
-    "docsPrefix": "/docs",
-    "contentDir": "content/docs",
-    "siteUrl": "https://docs.umami.is",
-    "locale": "en-US"
-  },
   "search": {
     "provider": "pagefind"
   },
