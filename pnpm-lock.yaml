@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@umami/shiso':
-        specifier: ^1.6.0
-        version: 1.6.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)
+        specifier: ^1.8.0
+        version: 1.8.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)
       react:
         specifier: ^19.2.1
         version: 19.2.1
@@ -856,8 +856,8 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
-  '@umami/shiso@1.6.0':
-    resolution: {integrity: sha512-xrdZnh87R3UprNfwFJdn8x+E3LgSPKE16uyi6UHVHyqrEmYNW+efIm/ZEp49MU+8I7DgepsnQ1RRbCCnQRuNOQ==}
+  '@umami/shiso@1.8.0':
+    resolution: {integrity: sha512-r3f5CgrwPDL9nNWv5bxX2CL6xw8ivIGmaNF7fSfvCOebTsAlcDpAOldwm/2MRRcv9vaF8J4FKnK8y5eHB7di9g==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -1661,8 +1661,8 @@ packages:
     resolution: {integrity: sha512-Xf0nWe6RseziFMu+Ap9biiUbmplq6S9/p+7w7YXP/JBHhrUDDUhwa+vANyubuqfZWTveU//DYVGsDG7RKL/vEw==}
     engines: {node: '>=0.10.0'}
 
-  reselect@5.2.0:
-    resolution: {integrity: sha512-AgZ3UOZm3YndfrJ4OYjgrT7bmCm/1iqkjvEfH/oYjzh6PD2qw4QuT3jjnXIrpdt4MTpMXclMT3lXbmRY+XRakw==}
+  reselect@5.3.0:
+    resolution: {integrity: sha512-XGoLeRAVzUTcJ1qkxPQhDJyIZ5d6zzZD9nT7AEZOaaU9UbWclhycElmhO+VD5bFeLuzhPBaOV2oXC8uG35ZSpg==}
 
   restore-cursor@5.1.0:
     resolution: {integrity: sha512-oMA2dcrw6u0YfxJQXm342bFKX/E4sG9rbTzO9ptUcR/e8A33cHuvStiYOwH7fszkZlZ1z/ta9AAoPk2F4qIOHA==}
@@ -1961,7 +1961,7 @@ snapshots:
       '@floating-ui/utils': 0.2.12
       react: 19.2.1
       react-dom: 19.2.1(react@19.2.1)
-      reselect: 5.2.0
+      reselect: 5.3.0
       use-sync-external-store: 1.6.0(react@19.2.1)
     optionalDependencies:
       '@types/react': 19.2.7
@@ -2531,7 +2531,7 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@umami/shiso@1.6.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)':
+  '@umami/shiso@1.8.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)(yaml@2.9.0)':
     dependencies:
       '@base-ui/react': 1.7.0(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       '@fontsource-variable/inter': 5.3.0
@@ -3695,7 +3695,7 @@ snapshots:
 
   require-from-string@2.0.2: {}
 
-  reselect@5.2.0: {}
+  reselect@5.3.0: {}
 
   restore-cursor@5.1.0:
     dependencies:

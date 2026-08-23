@@ -2,49 +2,40 @@
 title: Introduction
 ---
 
-Umami is an open-source web analytics platform that respects user privacy. No cookies, no tracking across sites, no personal data collection. GDPR compliant out of the box.
+Umami is a web analytics platform that brings traffic, campaigns, visitor behavior, conversions, and revenue together in one place. It gives you a complete picture of how people find and use your website, from their first visit to the outcomes that matter to your business.
 
 These docs cover **Umami v3**. For the previous version, see the [v2 documentation](https://v2.umami.is).
 
-## Why Umami?
+![Umami analytics dashboard](/images/docs/screenshot.png)
 
-- **Privacy-first** — No cookies, no fingerprinting, no personal data. Your visitors stay anonymous.
-- **Own your data** — Self-host on your infrastructure. Your analytics data never leaves your servers.
-- **Lightweight** — The tracking script is under 2KB. It won't slow down your site.
-- **Simple** — Deploy with Docker in minutes. No complex configuration required.
+## Understand your website from end to end
+
+- **Measure acquisition** — See pageviews, visitors, referrers, locations, devices, and real-time activity. Track [UTM campaigns](/docs/utm), [links](/docs/links), and [pixels](/docs/pixels) to understand which channels bring people to your site.
+- **Analyze behavior** — Go beyond pageviews with [custom events](/docs/track-events), [journeys](/docs/journey), [session replays](/docs/replays), and [heatmaps](/docs/heatmaps). Use [segments](/docs/segments), [cohorts](/docs/cohorts), and [retention](/docs/retention) to examine the audiences and patterns behind your metrics.
+- **Improve conversion** — Define the outcomes you care about with [goals](/docs/goals), build [funnels](/docs/funnel) to find drop-off points, and use [attribution](/docs/attribution) to connect conversions to the marketing that influenced them.
+- **Connect traffic to revenue** — Attach values to events and use the [revenue report](/docs/revenue) to see which pages, campaigns, and visitor segments generate the most value.
+- **Share and extend your analytics** — Create focused dashboards with [boards](/docs/using-boards), collaborate through [teams](/docs/using-teams), share website statistics, or use the [API](/docs/api) to build your own reports and integrations.
+
+## Privacy without sacrificing insight
+
+Umami provides these capabilities without cookies, cross-site tracking, or the automatic collection of personal data. You can use the managed cloud service or self-host Umami on your own infrastructure, keeping control over where your analytics data lives.
 
 ## Get started
 
-```bash
-docker compose up -d
-```
+Choose the setup that fits your team:
 
-That's it. Open `http://localhost:3000` and log in with `admin` / `umami`.
+- **Umami Cloud** — [Create a free account](https://cloud.umami.is/signup?ref=umami-docs-introduction) and let us manage hosting, updates, backups, and scaling.
+- **Self-hosted** — Follow the [installation guide](/docs/install) to run the open-source platform on your own infrastructure, or choose one of the [deployment guides](/docs/guides/hosting).
 
-For detailed setup options, see [Installation](/docs/install). For managed hosting platforms, check out our [deployment guides](/docs/guides/hosting).
+Once Umami is running:
 
-## Features
+1. [Add your website](/docs/add-a-website).
+2. [Install the tracking script](/docs/collect-data).
+3. Open your website dashboard and start exploring your data.
 
-**Core analytics** — Pageviews, visitors, bounce rate, session duration, referrers, browsers, operating systems, devices, and countries.
+## More resources
 
-**Custom events** — Track button clicks, form submissions, or any user interaction with a simple data attribute or JavaScript call.
-
-**Advanced insights** — Funnels, user journeys, retention analysis, goals, UTM campaign tracking, and cohort breakdowns.
-
-**Sessions** — View individual visitor activity and session properties without identifying personal information.
-
-**Teams** — Collaborate with your team. Share websites, assign roles, and manage access.
-
-**API** — Full REST API for programmatic access to all your analytics data.
-
-## Explore the docs
-
-- [Guides](/docs/guides) — Step-by-step deployment tutorials for Vercel, Railway, DigitalOcean, and other platforms.
-- [API Reference](/docs/api) — Endpoints for authentication, websites, events, sessions, and more.
-- [Cloud](/docs/cloud) — Managed hosting if you'd rather not self-host.
-
-## Links
-
-- [GitHub](https://github.com/umami-software/umami)
-- [Discord](https://discord.gg/4dz4zcXYrQ)
-- [X](https://twitter.com/umami_software)
+- [How-to guides](/docs/guides) — Follow practical tutorials for tracking, integrations, team administration, hosting, and migrations.
+- [API reference](/docs/api) — Authenticate and work with websites, events, sessions, reports, and more.
+- [Umami Cloud](/docs/cloud) — Learn about the managed version of Umami.
+- [Umami on GitHub](https://github.com/umami-software/umami) — View the source, report issues, and contribute.
