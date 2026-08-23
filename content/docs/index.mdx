@@ -24,8 +24,27 @@ Umami provides these capabilities without cookies, cross-site tracking, or the a
 
 Choose the setup that fits your team:
 
-- **Umami Cloud** — [Create a free account](https://cloud.umami.is/signup?ref=umami-docs-introduction) and let us manage hosting, updates, backups, and scaling.
-- **Self-hosted** — Follow the [installation guide](/docs/install) to run the open-source platform on your own infrastructure, or choose one of the [deployment guides](/docs/guides/hosting).
+<CardGroup cols={2}>
+  <Card
+    title="Umami Cloud"
+    href="https://cloud.umami.is/signup?ref=umami-docs-introduction"
+    icon="cloud"
+    cta="Create a free account"
+  >
+    Managed hosting, updates, backups, and scaling.
+  </Card>
+  <Card
+    title="Self-hosted"
+    href="/docs/install"
+    icon="server"
+    cta="View installation guide"
+    arrow
+  >
+    Run the open-source platform on your own infrastructure.
+  </Card>
+</CardGroup>
+
+You can also use one of the [deployment guides](/docs/guides/hosting) to run Umami on a managed hosting platform.
 
 Once Umami is running:
 
@@ -35,7 +54,21 @@ Once Umami is running:
 
 ## More resources
 
-- [How-to guides](/docs/guides) — Follow practical tutorials for tracking, integrations, team administration, hosting, and migrations.
-- [API reference](/docs/api) — Authenticate and work with websites, events, sessions, reports, and more.
-- [Umami Cloud](/docs/cloud) — Learn about the managed version of Umami.
-- [Umami on GitHub](https://github.com/umami-software/umami) — View the source, report issues, and contribute.
+<CardGroup cols={2}>
+  <Card title="How-to guides" href="/docs/guides" icon="map" arrow>
+    Practical tutorials for tracking, integrations, team administration, hosting, and migrations.
+  </Card>
+  <Card title="API reference" href="/docs/api" icon="terminal" arrow>
+    Authenticate and work with websites, events, sessions, reports, and more.
+  </Card>
+  <Card title="Umami Cloud" href="/docs/cloud" icon="cloud" arrow>
+    Learn about the managed version of Umami.
+  </Card>
+  <Card
+    title="Umami on GitHub"
+    href="https://github.com/umami-software/umami"
+    icon="git-fork"
+  >
+    View the source, report issues, and contribute.
+  </Card>
+</CardGroup>
