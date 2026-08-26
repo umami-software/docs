@@ -395,7 +395,7 @@
         "icon": "map",
         "groups": [
           {
-            "group": "How-to Guides",
+            "group": "Guides",
             "pages": [
               {
                 "page": "guides/index",
