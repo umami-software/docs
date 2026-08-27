@@ -478,6 +478,10 @@
                 "title": "Running on CapRover"
               },
               {
+                "page": "guides/running-on-cloudzy",
+                "title": "Running on Cloudzy"
+              },
+              {
                 "page": "guides/running-on-digitalocean",
                 "title": "Running on DigitalOcean"
               },
