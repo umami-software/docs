@@ -17,9 +17,26 @@ Click on the **Add link** button in the top-right corner.
 
 ![image](/images/docs/link-add.png)
 
-Fill out the form details and click the **Save** button.
+Fill out the **Name** and **Destination URL**. Two optional sections expand on demand:
+
+- **Customize preview** — controls the social-media preview card shown when the short link is shared on platforms like Facebook, X, LinkedIn, Slack, WhatsApp, Telegram, and Discord. Leave fields empty to auto-detect the title, description and image from the destination URL's Open Graph tags; or fill them in to override.
+- **UTM** — appends UTM parameters (`utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`) to the destination URL when the link is clicked, so visits can be attributed in your analytics.
+
+Click the **Save** button.
 
 ![image](/images/docs/link-add-form.png)
+
+### Customize preview
+
+When you fill in the **Destination URL**, Umami fetches the destination and detects its Open Graph metadata. The detected values appear as placeholder hints in the **Title**, **Description** and **Image URL** fields, with a small thumbnail preview of the detected image. Type your own value into any field to override; clear it to revert to auto-detection.
+
+![image](/images/docs/link-customize-preview.png)
+
+### UTM parameters
+
+Track campaign attribution by appending UTM parameters that Umami merges into the destination URL on each click. Existing query parameters on the destination URL are preserved; conflicting UTM keys are overwritten by the link-level values.
+
+![image](/images/docs/link-utm.png)
 
 ## Collect data
 

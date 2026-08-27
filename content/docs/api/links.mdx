@@ -38,6 +38,17 @@ Returns all user links.
       "name": "umami",
       "url": "https://www.umami.is",
       "slug": "xxxxxxxx",
+      "utmSource": null,
+      "utmMedium": null,
+      "utmCampaign": null,
+      "utmTerm": null,
+      "utmContent": null,
+      "ogTitle": null,
+      "ogDescription": null,
+      "ogImage": null,
+      "ogTitleManual": false,
+      "ogDescriptionManual": false,
+      "ogImageManual": false,
       "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
       "teamId": null,
       "createdAt": "2025-10-27T18:49:39.383Z",
@@ -55,16 +66,24 @@ Returns all user links.
 
 ## POST /api/links
 
-Creates a link.
+Creates a link. Auto-detects Open Graph metadata from the destination URL on save (title, description, image) unless explicit values are provided.
 
 **Parameters**
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `name` | string | The link's name. |
-| `url` | string | The link's destination URL. |
+| `url` | string | The link's destination URL (must be `http(s)`). |
 | `slug` | string | The link's URL slug (minimum 8 characters). |
 | `teamId` | string | (optional) The ID of the team the link will be created under. |
+| `utmSource` | string | (optional) `utm_source` value appended to the destination URL on click. |
+| `utmMedium` | string | (optional) `utm_medium` value. |
+| `utmCampaign` | string | (optional) `utm_campaign` value. |
+| `utmTerm` | string | (optional) `utm_term` value. |
+| `utmContent` | string | (optional) `utm_content` value. |
+| `ogTitle` | string | (optional) Override the social-preview title. Empty/omitted → auto-detected from the destination URL. |
+| `ogDescription` | string | (optional) Override the social-preview description. |
+| `ogImage` | string | (optional) Override the social-preview image (must be a public `http(s)` URL). |
 
 **Request body**
 
@@ -72,7 +91,9 @@ Creates a link.
 {
   "name": "umami",
   "url": "https://www.umami.is",
-  "slug": "umami123"
+  "slug": "umami123",
+  "utmSource": "newsletter",
+  "utmCampaign": "spring2026"
 }
 ```
 
@@ -84,6 +105,17 @@ Creates a link.
   "name": "umami",
   "url": "https://www.umami.is",
   "slug": "umami123",
+  "utmSource": "newsletter",
+  "utmMedium": null,
+  "utmCampaign": "spring2026",
+  "utmTerm": null,
+  "utmContent": null,
+  "ogTitle": "Umami | Privacy-Focused, Open-Source Web Analytics",
+  "ogDescription": "Umami is a simple, privacy-focused alternative to Google Analytics.",
+  "ogImage": "https://www.umami.is/og-image.png",
+  "ogTitleManual": false,
+  "ogDescriptionManual": false,
+  "ogImageManual": false,
   "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "teamId": null,
   "createdAt": "2025-10-27T18:49:39.383Z",
@@ -91,6 +123,8 @@ Creates a link.
   "deletedAt": null
 }
 ```
+
+The `og*Manual` flags are `true` when the corresponding field was set explicitly in the request, and `false` when the value was auto-detected. Auto-managed fields are re-detected whenever the destination URL changes; manual fields are preserved across URL changes.
 
 ---
 
@@ -106,6 +140,17 @@ Gets a link by ID.
   "name": "umami",
   "url": "https://www.umami.is",
   "slug": "xxxxxxxx",
+  "utmSource": null,
+  "utmMedium": null,
+  "utmCampaign": null,
+  "utmTerm": null,
+  "utmContent": null,
+  "ogTitle": null,
+  "ogDescription": null,
+  "ogImage": null,
+  "ogTitleManual": false,
+  "ogDescriptionManual": false,
+  "ogImageManual": false,
   "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "teamId": null,
   "createdAt": "2025-10-27T18:49:39.383Z",
@@ -118,22 +163,31 @@ Gets a link by ID.
 
 ## POST /api/links/:linkId
 
-Updates a link.
+Updates a link. When the destination URL changes and an OG field is auto-managed (`og*Manual=false`), Umami re-detects that field from the new destination.
 
 **Parameters**
 
 | Parameter | Type | Description |
 | --- | --- | --- |
 | `name` | string | (optional) The link's name. |
-| `url` | string | (optional) The link's destination URL. |
+| `url` | string | (optional) The link's destination URL (must be `http(s)`). |
 | `slug` | string | (optional) The link's URL slug (minimum 8 characters). |
+| `utmSource` | string | (optional) `utm_source` value. Send `""` or `null` to clear. |
+| `utmMedium` | string | (optional) `utm_medium` value. |
+| `utmCampaign` | string | (optional) `utm_campaign` value. |
+| `utmTerm` | string | (optional) `utm_term` value. |
+| `utmContent` | string | (optional) `utm_content` value. |
+| `ogTitle` | string | (optional) Override the social-preview title. Send `""` or `null` to revert to auto-detection; omit to leave the current value untouched. |
+| `ogDescription` | string | (optional) Override the social-preview description. Same null/omit semantics. |
+| `ogImage` | string | (optional) Override the social-preview image (must be a public `http(s)` URL). Same null/omit semantics. |
 
 **Request body**
 
 ```json
 {
   "name": "umami",
-  "url": "https://www.umami.is"
+  "url": "https://www.umami.is",
+  "ogImage": "https://example.com/custom-banner.png"
 }
 ```
 
@@ -145,6 +199,17 @@ Updates a link.
   "name": "umami",
   "url": "https://www.umami.is",
   "slug": "xxxxxxxx",
+  "utmSource": null,
+  "utmMedium": null,
+  "utmCampaign": null,
+  "utmTerm": null,
+  "utmContent": null,
+  "ogTitle": "Umami | Privacy-Focused, Open-Source Web Analytics",
+  "ogDescription": "Umami is a simple, privacy-focused alternative to Google Analytics.",
+  "ogImage": "https://example.com/custom-banner.png",
+  "ogTitleManual": false,
+  "ogDescriptionManual": false,
+  "ogImageManual": true,
   "userId": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "teamId": null,
   "createdAt": "2025-10-27T18:49:39.383Z",
@@ -152,6 +217,30 @@ Updates a link.
   "deletedAt": null
 }
 ```
+
+---
+
+## GET /api/links/og-preview
+
+Fetches Open Graph metadata from a destination URL without creating a link. Used by the link form's live preview.
+
+**Parameters**
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `url` | string | The destination URL to inspect (must be `http(s)`). |
+
+**Sample response**
+
+```json
+{
+  "title": "Umami | Privacy-Focused, Open-Source Web Analytics",
+  "description": "Umami is a simple, privacy-focused alternative to Google Analytics.",
+  "image": "https://www.umami.is/og-image.png"
+}
+```
+
+Any field may be `null` if the destination doesn't expose the corresponding Open Graph tag. Returns 400 if the URL isn't `http(s)`.
 
 ---
 
