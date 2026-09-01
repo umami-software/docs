@@ -4,6 +4,10 @@
     "provider": "pagefind"
   },
   "theme": "shiso",
+  "api": {
+    "spec": "./openapi.json",
+    "directory": "api-reference"
+  },
   "name": "umami",
   "description": "Documentation for Umami, a modern privacy-focused analytics platform.",
   "logo": {
@@ -637,6 +641,14 @@
               {
                 "page": "api/users",
                 "title": "Users"
+              }
+            ]
+          },
+          {
+            "group": "API operations",
+            "pages": [
+              {
+                "openapi": true
               }
             ]
           },
