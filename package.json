@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "shiso build && node scripts/generate-llms-full.mjs",
+    "build": "shiso build && node scripts/fix-root-redirect.mjs && node scripts/generate-llms-full.mjs",
     "dev": "vite --config vite.config.ts",
     "preview": "shiso preview --outDir dist/client",
     "check": "shiso check",
