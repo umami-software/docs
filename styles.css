@@ -9,11 +9,6 @@ html[data-theme='dark'] {
 
 /* Umami-specific overrides on top of the Shiso theme. */
 
-.docs-markdown a {
-  text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
-  text-decoration-thickness: 1px;
-}
-
 .docs-markdown [data-slot='zoomable-image'] {
   display: block;
   margin: 4rem auto;

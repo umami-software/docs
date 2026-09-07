@@ -6,7 +6,7 @@ The Umami tracker provides several properties that allow you to configure its be
 
 ### data-host-url
 
-`v2.0.0`
+<Badge>v2.0.0</Badge>
 
 By default, Umami will send data to wherever the script is located. You can override this to send data
 to another location.
@@ -22,7 +22,7 @@ to another location.
 
 ### data-auto-track
 
-`v2.0.0`
+<Badge>v2.0.0</Badge>
 
 By default, Umami initializes pageview tracking, click tracking, path change detection, and optional features
 like performance tracking. Set this to `false` only if you want to disable tracker initialization entirely and
@@ -39,7 +39,7 @@ send data yourself using the [tracker functions](/docs/tracker-functions).
 
 ### data-auto-pageview
 
-`v3.2.0`
+<Badge>v3.2.0</Badge>
 
 Disable automatic pageview tracking while keeping the rest of the tracker initialized. Use this when you want
 to call `umami.track()` manually but still keep features like performance tracking enabled.
@@ -55,7 +55,7 @@ to call `umami.track()` manually but still keep features like performance tracki
 
 ### data-domains
 
-`v2.0.0`
+<Badge>v2.0.0</Badge>
 
 If you want the tracker to only run on specific domains, you can add them to your tracker script. This is a comma delimited list of domain names. Each value matches against `window.location.hostname`, so you should double check if your website uses `www` or not.
 Helps if you are working in a staging/development environment.
@@ -72,7 +72,7 @@ Helps if you are working in a staging/development environment.
 
 ### data-tag
 
-`v2.11.0`
+<Badge>v2.11.0</Badge>
 
 Group events under a named tag for filtering and A/B testing. See [Tags](/docs/tags) for more details.
 
@@ -87,7 +87,7 @@ Group events under a named tag for filtering and A/B testing. See [Tags](/docs/t
 
 ### data-performance
 
-`v3.1.0`
+<Badge>v3.1.0</Badge>
 
 Enable automatic collection of [Core Web Vitals](https://web.dev/articles/vitals) from your visitors' browsers. If
 you are sending pageviews manually, use `data-auto-pageview="false"` instead of `data-auto-track="false"` so
@@ -104,7 +104,7 @@ performance tracking still initializes. See [Performance](/docs/performance) for
 
 ### data-exclude-search
 
-`v2.11.0`
+<Badge>v2.11.0</Badge>
 
 If you don't want to collect search parameters from the URL.
 
@@ -119,7 +119,7 @@ If you don't want to collect search parameters from the URL.
 
 ### data-exclude-hash
 
-`v2.16.0`
+<Badge>v2.16.0</Badge>
 
 If you don't want to collect the hash value from the URL.
 
@@ -134,7 +134,7 @@ If you don't want to collect the hash value from the URL.
 
 ### data-do-not-track
 
-`v2.17.0`
+<Badge>v2.17.0</Badge>
 
 Respect user's [Do Not Track](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/doNotTrack) browser setting.
 
@@ -149,7 +149,7 @@ Respect user's [Do Not Track](https://developer.mozilla.org/en-US/docs/Web/API/N
 
 ### data-before-send
 
-`v2.18.0`
+<Badge>v2.18.0</Badge>
 
 Allows you to specify a function that will be called before data is sent.
 You can then inspect and modify the payload or cancel the send entirely.

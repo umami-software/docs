@@ -4,6 +4,10 @@
     "provider": "pagefind"
   },
   "theme": "shiso",
+  "api": {
+    "spec": "./openapi.json",
+    "directory": "api-reference"
+  },
   "name": "umami",
   "description": "Documentation for Umami, a modern privacy-focused analytics platform.",
   "logo": {
@@ -395,7 +399,7 @@
         "icon": "map",
         "groups": [
           {
-            "group": "How-to Guides",
+            "group": "Guides",
             "pages": [
               {
                 "page": "guides/index",
@@ -476,6 +480,10 @@
               {
                 "page": "guides/running-on-caprover",
                 "title": "Running on CapRover"
+              },
+              {
+                "page": "guides/running-on-cloudzy",
+                "title": "Running on Cloudzy"
               },
               {
                 "page": "guides/running-on-digitalocean",
@@ -633,6 +641,14 @@
               {
                 "page": "api/users",
                 "title": "Users"
+              }
+            ]
+          },
+          {
+            "group": "API operations",
+            "pages": [
+              {
+                "openapi": true
               }
             ]
           },
