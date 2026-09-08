@@ -9,8 +9,8 @@ importers:
   .:
     dependencies:
       '@umami/shiso':
-        specifier: ^1.15.0
-        version: 1.15.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)
+        specifier: ^1.16.0
+        version: 1.16.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)
       react:
         specifier: ^19.2.1
         version: 19.2.1
@@ -1008,8 +1008,8 @@ packages:
   '@types/unist@3.0.3':
     resolution: {integrity: sha512-ko/gIFJRv177XgZsZcBwnqJN5x/Gien8qNOn0D5bQU/zAzVf9Zt3BlcUiLqhV9y4ARk0GbT3tnUiPNgnTXzc/Q==}
 
-  '@umami/shiso@1.15.0':
-    resolution: {integrity: sha512-WYPemnqxQwZdgajfE7gMtUg1DKPo3DPvskJbmPFU/G2NjCzajcYLep1PS6MvCrHKPoYpV7StwNO6okfhSKLBAw==}
+  '@umami/shiso@1.16.0':
+    resolution: {integrity: sha512-ABzJU9Wa9Qi6mivbRDgfSeQPdOux1vBHtwv8LjCPSNUu/pI+uEA7PI8jYEN1nuqaeXx9ehryt4yf3e6RMoU+bA==}
     engines: {node: ^20.19.0 || >=22.12.0}
     hasBin: true
     peerDependencies:
@@ -3155,7 +3155,7 @@ snapshots:
 
   '@types/unist@3.0.3': {}
 
-  '@umami/shiso@1.15.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)':
+  '@umami/shiso@1.16.0(@types/node@24.9.1)(@types/react-dom@19.2.3(@types/react@19.2.7))(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)(rollup@4.62.4)':
     dependencies:
       '@base-ui/react': 1.8.0(@types/react@19.2.7)(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
       '@fontsource-variable/inter': 5.3.0

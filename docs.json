@@ -1,7 +1,9 @@
 {
   "$schema": "./node_modules/@umami/shiso/docs.schema.json",
   "search": {
-    "provider": "pagefind"
+    "provider": "pagefind",
+    "prompt": "Search the docs...",
+    "shortcut": "k"
   },
   "theme": "shiso",
   "api": {
@@ -56,10 +58,6 @@
         "href": "https://umami.is/discord"
       }
     ]
-  },
-  "search": {
-    "prompt": "Search the docs...",
-    "shortcut": "k"
   },
   "contextual": {
     "options": [
@@ -116,6 +114,58 @@
     {
       "source": "/docs/track-outbound-links",
       "destination": "/docs/guides/track-outbound-links"
+    },
+    {
+      "source": "/docs/api/admin",
+      "destination": "/docs/api-reference/get-admin-users"
+    },
+    {
+      "source": "/docs/api/events",
+      "destination": "/docs/api-reference/get-website-events"
+    },
+    {
+      "source": "/docs/api/links",
+      "destination": "/docs/api-reference/get-links"
+    },
+    {
+      "source": "/docs/api/me",
+      "destination": "/docs/api-reference/get-me"
+    },
+    {
+      "source": "/docs/api/pixels",
+      "destination": "/docs/api-reference/get-pixels"
+    },
+    {
+      "source": "/docs/api/websites",
+      "destination": "/docs/api-reference/list-websites"
+    },
+    {
+      "source": "/docs/api/website-stats",
+      "destination": "/docs/api-reference/get-website-stats"
+    },
+    {
+      "source": "/docs/api/realtime",
+      "destination": "/docs/api-reference/get-realtime"
+    },
+    {
+      "source": "/docs/api/reports",
+      "destination": "/docs/api-reference/get-reports"
+    },
+    {
+      "source": "/docs/api/sessions",
+      "destination": "/docs/api-reference/get-website-sessions"
+    },
+    {
+      "source": "/docs/api/share",
+      "destination": "/docs/api-reference/create-share"
+    },
+    {
+      "source": "/docs/api/teams",
+      "destination": "/docs/api-reference/get-teams"
+    },
+    {
+      "source": "/docs/api/users",
+      "destination": "/docs/api-reference/create-user"
     }
   ],
   "navigation": {
@@ -588,67 +638,987 @@
             ]
           },
           {
-            "group": "Endpoints",
+            "group": "API endpoints",
             "pages": [
               {
-                "page": "api/admin",
-                "title": "Admin"
+                "group": "Account",
+                "pages": [
+                  {
+                    "page": "api-reference/update-my-password",
+                    "title": "Change my password",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-my-api-key",
+                    "title": "Create an API key",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-my-api-key",
+                    "title": "Delete an API key",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-me",
+                    "title": "Get my authentication details",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-my-api-keys",
+                    "title": "List my API keys",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-my-teams",
+                    "title": "List my team memberships",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-my-websites",
+                    "title": "List my websites",
+                    "method": "GET"
+                  }
+                ]
               },
               {
-                "page": "api/events",
-                "title": "Events"
+                "group": "Administration",
+                "pages": [
+                  {
+                    "page": "api-reference/get-admin-users-user-id2fa",
+                    "title": "Get a user's two-factor status",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-admin-teams",
+                    "title": "List all teams",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-admin-users",
+                    "title": "List all users",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-admin-websites",
+                    "title": "List all websites",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/delete-admin-users-user-id2fa",
+                    "title": "Reset a user's two-factor authentication",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/post-admin-teams-team-id2fa",
+                    "title": "Set a team's two-factor requirement",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/post-admin-users-user-id2fa",
+                    "title": "Set a user's two-factor requirement",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/post-admin2fa-global",
+                    "title": "Set the two-factor requirement for everyone",
+                    "method": "POST"
+                  }
+                ]
               },
               {
-                "page": "api/links",
-                "title": "Links"
+                "group": "Authentication",
+                "pages": [
+                  {
+                    "page": "api-reference/sso",
+                    "title": "Create a single sign-on token",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/get-subscription",
+                    "title": "Get subscription details",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/login",
+                    "title": "Log in",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/logout",
+                    "title": "Log out",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/verify",
+                    "title": "Verify the current sign-in",
+                    "method": "POST"
+                  }
+                ]
               },
               {
-                "page": "api/me",
-                "title": "Me"
+                "group": "Boards",
+                "pages": [
+                  {
+                    "page": "api-reference/clone-board",
+                    "title": "Clone a board",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-board",
+                    "title": "Create a board",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-board-share",
+                    "title": "Create a share for a board",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-board",
+                    "title": "Delete a board",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-board",
+                    "title": "Get a board",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-boards",
+                    "title": "List my boards",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-board-shares",
+                    "title": "List shares for a board",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-board",
+                    "title": "Update a board",
+                    "method": "POST"
+                  }
+                ]
               },
               {
-                "page": "api/pixels",
-                "title": "Pixels"
+                "group": "Collection",
+                "pages": [
+                  {
+                    "page": "api-reference/batch",
+                    "title": "Send a batch of tracking requests",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/record",
+                    "title": "Send session recordings or heatmap data",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/send",
+                    "title": "Send tracking data",
+                    "method": "POST"
+                  }
+                ]
               },
               {
-                "page": "api/websites",
-                "title": "Websites"
+                "group": "Configuration",
+                "pages": [
+                  {
+                    "page": "api-reference/get-config",
+                    "title": "Get application configuration",
+                    "method": "GET"
+                  }
+                ]
               },
               {
-                "page": "api/website-stats",
-                "title": "Website statistics"
+                "group": "Dashboard",
+                "pages": [
+                  {
+                    "page": "api-reference/get-dashboard",
+                    "title": "Get my dashboard",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/post-dashboard",
+                    "title": "Save my dashboard",
+                    "method": "POST"
+                  }
+                ]
               },
               {
-                "page": "api/realtime",
-                "title": "Realtime"
+                "group": "Links",
+                "pages": [
+                  {
+                    "page": "api-reference/create-link-share",
+                    "title": "Create a share for a link",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-link",
+                    "title": "Create a tracked link",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-link",
+                    "title": "Delete a tracked link",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-link",
+                    "title": "Get a tracked link",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-links-charts",
+                    "title": "Get visitor charts for links",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-links",
+                    "title": "List my links",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-link-shares",
+                    "title": "List shares for a link",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-link",
+                    "title": "Update a tracked link",
+                    "method": "POST"
+                  }
+                ]
               },
               {
-                "page": "api/reports",
-                "title": "Reports"
+                "group": "OAuth",
+                "pages": [
+                  {
+                    "page": "api-reference/decide-o-auth-authorization",
+                    "title": "Approve or deny OAuth access",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/describe-o-auth-authorization",
+                    "title": "Get OAuth authorization request details",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/oauth-token",
+                    "title": "Get or refresh an OAuth access token",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/oauth-register-client",
+                    "title": "Register an OAuth client",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/oauth-revoke",
+                    "title": "Revoke an OAuth refresh token",
+                    "method": "POST"
+                  }
+                ]
               },
               {
-                "page": "api/sessions",
-                "title": "Sessions"
+                "group": "Pixels",
+                "pages": [
+                  {
+                    "page": "api-reference/create-pixel-share",
+                    "title": "Create a share for a tracking pixel",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-pixel",
+                    "title": "Create a tracking pixel",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-pixel",
+                    "title": "Delete a tracking pixel",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-pixel",
+                    "title": "Get a tracking pixel",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-pixels-charts",
+                    "title": "Get visitor charts for tracking pixels",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-pixels",
+                    "title": "List my tracking pixels",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-pixel-shares",
+                    "title": "List shares for a tracking pixel",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-pixel",
+                    "title": "Update a tracking pixel",
+                    "method": "POST"
+                  }
+                ]
               },
               {
-                "page": "api/share",
-                "title": "Share"
+                "group": "Realtime",
+                "pages": [
+                  {
+                    "page": "api-reference/get-realtime",
+                    "title": "Get real-time website activity",
+                    "method": "GET"
+                  }
+                ]
               },
               {
-                "page": "api/teams",
-                "title": "Teams"
+                "group": "Reports",
+                "pages": [
+                  {
+                    "page": "api-reference/delete-report",
+                    "title": "Delete a saved report",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-report",
+                    "title": "Get a saved report",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/run-heatmap-report",
+                    "title": "Get page heatmap data",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/get-reports",
+                    "title": "List saved reports",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/run-breakdown-report",
+                    "title": "Run a breakdown report",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/run-utm-report",
+                    "title": "Run a campaign report",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/run-funnel-report",
+                    "title": "Run a funnel report",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/run-goal-report",
+                    "title": "Run a goal report",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/run-performance-report",
+                    "title": "Run a performance report",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/run-retention-report",
+                    "title": "Run a retention report",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/run-revenue-report",
+                    "title": "Run a revenue report",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/run-journey-report",
+                    "title": "Run a visitor journey report",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/run-attribution-report",
+                    "title": "Run an attribution report",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-report",
+                    "title": "Save a report",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/update-report",
+                    "title": "Update a saved report",
+                    "method": "POST"
+                  }
+                ]
               },
               {
-                "page": "api/users",
-                "title": "Users"
-              }
-            ]
-          },
-          {
-            "group": "API operations",
-            "pages": [
+                "group": "Scripts",
+                "pages": [
+                  {
+                    "page": "api-reference/get-scripts-telemetry",
+                    "title": "Get the installation telemetry script",
+                    "method": "GET"
+                  }
+                ]
+              },
               {
-                "openapi": true
+                "group": "Shares",
+                "pages": [
+                  {
+                    "page": "api-reference/create-share",
+                    "title": "Create a share",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-share",
+                    "title": "Delete a share",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-share",
+                    "title": "Get a share",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-share-by-slug",
+                    "title": "Open a share by its slug",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-share",
+                    "title": "Update a share",
+                    "method": "POST"
+                  }
+                ]
+              },
+              {
+                "group": "System",
+                "pages": [
+                  {
+                    "page": "api-reference/get-heartbeat",
+                    "title": "Check application availability",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
+                "group": "Teams",
+                "pages": [
+                  {
+                    "page": "api-reference/create-team-user",
+                    "title": "Add a team member",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/update-team-user",
+                    "title": "Change a team member's role",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-team",
+                    "title": "Create a team",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-team",
+                    "title": "Delete a team",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-team",
+                    "title": "Get a team",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-team-user",
+                    "title": "Get a team member",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/join-team",
+                    "title": "Join a team",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/get-team-boards",
+                    "title": "List a team's boards",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-team-links",
+                    "title": "List a team's links",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-team-pixels",
+                    "title": "List a team's tracking pixels",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-team-websites",
+                    "title": "List a team's websites",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-teams",
+                    "title": "List my teams",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-team-users",
+                    "title": "List team members",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/delete-team-user",
+                    "title": "Remove a team member",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/update-team",
+                    "title": "Update a team",
+                    "method": "POST"
+                  }
+                ]
+              },
+              {
+                "group": "Two-factor authentication",
+                "pages": [
+                  {
+                    "page": "api-reference/cancel-two-factor-setup",
+                    "title": "Cancel two-factor authentication setup",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/verify-two-factor",
+                    "title": "Complete two-factor sign-in",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/confirm-two-factor-setup",
+                    "title": "Confirm two-factor authentication setup",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/disable-two-factor",
+                    "title": "Disable two-factor authentication",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/get-two-factor-status",
+                    "title": "Get two-factor authentication status",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/initiate-two-factor-setup",
+                    "title": "Set up two-factor authentication",
+                    "method": "POST"
+                  }
+                ]
+              },
+              {
+                "group": "Users",
+                "pages": [
+                  {
+                    "page": "api-reference/create-user",
+                    "title": "Create a user",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-user",
+                    "title": "Delete a user",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-user",
+                    "title": "Get a user",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-user-teams",
+                    "title": "List a user's teams",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-user-websites",
+                    "title": "List a user's websites",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-user",
+                    "title": "Update a user",
+                    "method": "POST"
+                  }
+                ]
+              },
+              {
+                "group": "Websites",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-replay-saved",
+                    "title": "Check whether a replay is saved",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/create-website-share",
+                    "title": "Create a share for a website",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-website",
+                    "title": "Create a website",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-website-annotation",
+                    "title": "Create a website annotation",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-website-segment",
+                    "title": "Create a website segment or cohort",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-website-session",
+                    "title": "Delete a visitor session",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/delete-website",
+                    "title": "Delete a website",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/delete-website-annotation",
+                    "title": "Delete a website annotation",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/delete-website-segment",
+                    "title": "Delete a website segment or cohort",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/export-website",
+                    "title": "Export website analytics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-replay",
+                    "title": "Get a session replay recording",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-session-properties",
+                    "title": "Get a session's custom properties",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-session",
+                    "title": "Get a visitor session",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-session-activity",
+                    "title": "Get a visitor's session activity",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website",
+                    "title": "Get a website",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-annotation",
+                    "title": "Get a website annotation",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-segment",
+                    "title": "Get a website segment or cohort",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-active",
+                    "title": "Get active website visitors",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-stats",
+                    "title": "Get activity by session property",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-by-id",
+                    "title": "Get an event's custom properties",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-event-series",
+                    "title": "Get custom event counts over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-expanded-metrics",
+                    "title": "Get detailed website metrics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-array-series",
+                    "title": "Get event array values over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-stats",
+                    "title": "Get event property totals",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-property-series",
+                    "title": "Get event property values over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-numeric-series",
+                    "title": "Get numeric event properties over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-numeric-stats",
+                    "title": "Get numeric event property statistics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-numeric-series",
+                    "title": "Get numeric session properties over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-numeric-stats",
+                    "title": "Get numeric session property statistics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-pageviews",
+                    "title": "Get pageviews and sessions over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-metrics",
+                    "title": "Get ranked website metrics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-array-series",
+                    "title": "Get session array values over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-property-series",
+                    "title": "Get session property values over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-date-series",
+                    "title": "Get the distribution of event date values",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-date-series",
+                    "title": "Get the distribution of session date values",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-date-range",
+                    "title": "Get the website's available date range",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-sessions-weekly",
+                    "title": "Get traffic by weekday and hour",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-websites-charts",
+                    "title": "Get visitor charts for websites",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-session-stats",
+                    "title": "Get visitor session statistics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-event-stats",
+                    "title": "Get website event statistics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-recorder-config",
+                    "title": "Get website recording settings",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-revenue-metrics",
+                    "title": "Get website revenue by dimension",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-revenue-chart",
+                    "title": "Get website revenue over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-revenue-stats",
+                    "title": "Get website revenue totals",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-stats",
+                    "title": "Get website summary statistics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-session-replays",
+                    "title": "List a visitor's session replays",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-reports",
+                    "title": "List a website's saved reports",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-pivot",
+                    "title": "List event properties in table form",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-fields",
+                    "title": "List event property fields",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-properties",
+                    "title": "List event property usage",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-values",
+                    "title": "List event property values",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data",
+                    "title": "List events with custom properties",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-replays",
+                    "title": "List saved session replays",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-pivot",
+                    "title": "List session properties in table form",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-properties",
+                    "title": "List session property usage",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-values",
+                    "title": "List session property values",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-revenue-sessions",
+                    "title": "List sessions with revenue",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-shares",
+                    "title": "List shares for a website",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-events",
+                    "title": "List tracked events",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-sessions",
+                    "title": "List visitor sessions",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-annotations",
+                    "title": "List website annotations",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-values",
+                    "title": "List website filter values",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-segments",
+                    "title": "List website segments and cohorts",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-replays",
+                    "title": "List website session replays",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/list-websites",
+                    "title": "List websites",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/reset-website",
+                    "title": "Reset website analytics",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/save-website-replay",
+                    "title": "Save or unsave a session replay",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-events",
+                    "title": "Summarize properties by event",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/transfer-website",
+                    "title": "Transfer website ownership",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/update-website",
+                    "title": "Update a website",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/update-website-annotation",
+                    "title": "Update a website annotation",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/update-website-segment",
+                    "title": "Update a website segment or cohort",
+                    "method": "POST"
+                  }
+                ]
               }
             ]
           },
