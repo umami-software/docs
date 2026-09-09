@@ -634,6 +634,10 @@
               {
                 "page": "api/sending-stats",
                 "title": "Sending stats"
+              },
+              {
+                "page": "api/common-endpoints",
+                "title": "Common endpoints"
               }
             ]
           },
