@@ -405,419 +405,6 @@
         },
         "type": "array"
       },
-      "OAuthAuthorizationDecision": {
-        "properties": {
-          "client_id": {
-            "description": "OAuth client identifier.",
-            "maxLength": 2048,
-            "type": "string"
-          },
-          "code_challenge": {
-            "description": "PKCE challenge derived from the code verifier.",
-            "maxLength": 128,
-            "type": "string"
-          },
-          "code_challenge_method": {
-            "description": "Method used to derive the PKCE challenge; use S256.",
-            "maxLength": 10,
-            "type": "string"
-          },
-          "decision": {
-            "enum": [
-              "approve",
-              "deny"
-            ],
-            "type": "string"
-          },
-          "redirect_uri": {
-            "description": "Registered redirect URI to receive the authorization response.",
-            "maxLength": 2048,
-            "type": "string"
-          },
-          "resource": {
-            "description": "Resource URI identifying the API targeted by the OAuth request.",
-            "maxLength": 2048,
-            "type": "string"
-          },
-          "response_type": {
-            "description": "OAuth authorization response type; use code.",
-            "type": "string"
-          },
-          "scope": {
-            "description": "Space-separated OAuth permissions.",
-            "maxLength": 500,
-            "type": "string"
-          },
-          "state": {
-            "description": "Client-provided value returned unchanged to correlate the authorization response.",
-            "maxLength": 1024,
-            "type": "string"
-          }
-        },
-        "required": [
-          "client_id",
-          "decision"
-        ],
-        "type": "object"
-      },
-      "OAuthAuthorizationDetails": {
-        "additionalProperties": false,
-        "properties": {
-          "client": {
-            "additionalProperties": false,
-            "properties": {
-              "id": {
-                "description": "Unique identifier of the resource.",
-                "type": "string"
-              },
-              "logoUri": {
-                "type": "string"
-              },
-              "name": {
-                "description": "Display name of the resource.",
-                "type": "string"
-              },
-              "source": {
-                "enum": [
-                  "metadata-document",
-                  "registered"
-                ],
-                "type": "string"
-              },
-              "uri": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "id",
-              "name",
-              "source"
-            ],
-            "type": "object"
-          },
-          "redirectUri": {
-            "type": "string"
-          },
-          "resource": {
-            "description": "Resource URI identifying the API targeted by the OAuth request.",
-            "type": "string"
-          },
-          "scopes": {
-            "items": {
-              "additionalProperties": false,
-              "properties": {
-                "description": {
-                  "description": "Description of the resource.",
-                  "type": "string"
-                },
-                "scope": {
-                  "description": "Space-separated OAuth permissions.",
-                  "type": "string"
-                }
-              },
-              "required": [
-                "scope",
-                "description"
-              ],
-              "type": "object"
-            },
-            "type": "array"
-          }
-        },
-        "required": [
-          "client",
-          "scopes",
-          "redirectUri",
-          "resource"
-        ],
-        "type": "object"
-      },
-      "OAuthAuthorizationRedirect": {
-        "additionalProperties": false,
-        "properties": {
-          "redirectUrl": {
-            "type": "string"
-          }
-        },
-        "required": [
-          "redirectUrl"
-        ],
-        "type": "object"
-      },
-      "OAuthClientRegistrationRequest": {
-        "properties": {
-          "application_type": {
-            "enum": [
-              "web",
-              "native"
-            ],
-            "type": "string"
-          },
-          "client_name": {
-            "description": "Human-readable name of the OAuth client.",
-            "maxLength": 255,
-            "minLength": 1,
-            "type": "string"
-          },
-          "client_uri": {
-            "description": "URL of the OAuth client homepage.",
-            "maxLength": 2048,
-            "type": "string"
-          },
-          "grant_types": {
-            "description": "OAuth grant types supported by the client.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "logo_uri": {
-            "description": "URL of the OAuth client logo.",
-            "maxLength": 2048,
-            "type": "string"
-          },
-          "redirect_uris": {
-            "description": "Redirect URIs registered for the OAuth client.",
-            "items": {
-              "maxLength": 2048,
-              "type": "string"
-            },
-            "maxItems": 20,
-            "minItems": 1,
-            "type": "array"
-          },
-          "response_types": {
-            "description": "Authorization response types supported by the client.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "scope": {
-            "description": "Space-separated OAuth permissions.",
-            "maxLength": 500,
-            "type": "string"
-          },
-          "software_id": {
-            "maxLength": 255,
-            "type": "string"
-          },
-          "software_version": {
-            "maxLength": 255,
-            "type": "string"
-          },
-          "token_endpoint_auth_method": {
-            "const": "none",
-            "description": "Client authentication method used at the token endpoint.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "redirect_uris",
-          "client_name"
-        ],
-        "type": "object"
-      },
-      "OAuthClientRegistrationResponse": {
-        "additionalProperties": false,
-        "properties": {
-          "application_type": {
-            "enum": [
-              "web",
-              "native"
-            ],
-            "type": "string"
-          },
-          "client_id": {
-            "description": "OAuth client identifier.",
-            "type": "string"
-          },
-          "client_id_issued_at": {
-            "maximum": 9007199254740991,
-            "minimum": -9007199254740991,
-            "type": "integer"
-          },
-          "client_name": {
-            "description": "Human-readable name of the OAuth client.",
-            "maxLength": 255,
-            "minLength": 1,
-            "type": "string"
-          },
-          "client_uri": {
-            "description": "URL of the OAuth client homepage.",
-            "maxLength": 2048,
-            "type": "string"
-          },
-          "grant_types": {
-            "description": "OAuth grant types supported by the client.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "logo_uri": {
-            "description": "URL of the OAuth client logo.",
-            "maxLength": 2048,
-            "type": "string"
-          },
-          "redirect_uris": {
-            "description": "Redirect URIs registered for the OAuth client.",
-            "items": {
-              "maxLength": 2048,
-              "type": "string"
-            },
-            "maxItems": 20,
-            "minItems": 1,
-            "type": "array"
-          },
-          "response_types": {
-            "description": "Authorization response types supported by the client.",
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          },
-          "scope": {
-            "description": "Space-separated OAuth permissions.",
-            "maxLength": 500,
-            "type": "string"
-          },
-          "software_id": {
-            "maxLength": 255,
-            "type": "string"
-          },
-          "software_version": {
-            "maxLength": 255,
-            "type": "string"
-          },
-          "token_endpoint_auth_method": {
-            "const": "none",
-            "description": "Client authentication method used at the token endpoint.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "redirect_uris",
-          "client_name",
-          "token_endpoint_auth_method",
-          "grant_types",
-          "response_types",
-          "client_id",
-          "client_id_issued_at"
-        ],
-        "type": "object"
-      },
-      "OAuthErrorResponse": {
-        "additionalProperties": false,
-        "properties": {
-          "error": {
-            "description": "Error details returned when the operation fails.",
-            "type": "string"
-          },
-          "error_description": {
-            "description": "Human-readable explanation of the OAuth error.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "error"
-        ],
-        "type": "object"
-      },
-      "OAuthRevocationRequest": {
-        "properties": {
-          "token": {
-            "type": "string"
-          },
-          "token_type_hint": {
-            "description": "Hint indicating whether the revoked token is an access or refresh token.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "token"
-        ],
-        "type": "object"
-      },
-      "OAuthTokenRequest": {
-        "properties": {
-          "client_id": {
-            "description": "OAuth client identifier.",
-            "type": "string"
-          },
-          "code": {
-            "type": "string"
-          },
-          "code_verifier": {
-            "description": "Original PKCE verifier used to obtain the authorization code.",
-            "type": "string"
-          },
-          "grant_type": {
-            "description": "OAuth grant used to obtain or refresh an access token.",
-            "enum": [
-              "authorization_code",
-              "refresh_token"
-            ],
-            "type": "string"
-          },
-          "redirect_uri": {
-            "description": "Registered redirect URI to receive the authorization response.",
-            "type": "string"
-          },
-          "refresh_token": {
-            "description": "OAuth refresh token used to obtain a new access token.",
-            "type": "string"
-          },
-          "resource": {
-            "description": "Resource URI identifying the API targeted by the OAuth request.",
-            "type": "string"
-          },
-          "scope": {
-            "description": "Space-separated OAuth permissions.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "grant_type"
-        ],
-        "type": "object"
-      },
-      "OAuthTokenResponse": {
-        "additionalProperties": false,
-        "properties": {
-          "access_token": {
-            "description": "OAuth access token used to authorize API requests.",
-            "type": "string"
-          },
-          "expires_in": {
-            "description": "Access token lifetime in seconds.",
-            "maximum": 9007199254740991,
-            "minimum": -9007199254740991,
-            "type": "integer"
-          },
-          "refresh_token": {
-            "description": "OAuth refresh token used to obtain a new access token.",
-            "type": "string"
-          },
-          "scope": {
-            "description": "Space-separated OAuth permissions.",
-            "type": "string"
-          },
-          "token_type": {
-            "const": "Bearer",
-            "description": "Authorization scheme for the access token.",
-            "type": "string"
-          }
-        },
-        "required": [
-          "access_token",
-          "token_type",
-          "expires_in",
-          "refresh_token",
-          "scope"
-        ],
-        "type": "object"
-      },
       "Ok": {
         "additionalProperties": false,
         "description": "Successful operation response.",
@@ -1732,21 +1319,6 @@
         "description": "Token returned by POST /api/auth/login, or an API key (`umami_…`) created under Settings → API keys (self-hosted only).",
         "scheme": "bearer",
         "type": "http"
-      },
-      "oauth2": {
-        "description": "OAuth 2.1 access token (authorization code + PKCE). Only operations that declare an OAuth scope accept these tokens.",
-        "flows": {
-          "authorizationCode": {
-            "authorizationUrl": "/oauth/authorize",
-            "refreshUrl": "/api/oauth/token",
-            "scopes": {
-              "analytics:read": "Read analytics data (traffic, metrics, events, sessions, reports).",
-              "websites:read": "List and view websites you have access to."
-            },
-            "tokenUrl": "/api/oauth/token"
-          }
-        },
-        "type": "oauth2"
       },
       "shareContext": {
         "description": "Required context header when authenticating with a share token.",
@@ -8649,32 +8221,8 @@
                         },
                         {
                           "const": "api-key"
-                        },
-                        {
-                          "const": "oauth"
                         }
                       ]
-                    },
-                    "oauth": {
-                      "properties": {
-                        "clientId": {
-                          "type": "string"
-                        },
-                        "scopes": {
-                          "items": {
-                            "type": "string"
-                          },
-                          "type": "array"
-                        },
-                        "tokenId": {
-                          "type": "string"
-                        }
-                      },
-                      "required": [
-                        "clientId",
-                        "scopes"
-                      ],
-                      "type": "object"
                     },
                     "shareToken": {
                       "properties": {
@@ -8810,11 +8358,6 @@
         "security": [
           {
             "bearerAuth": []
-          },
-          {
-            "oauth2": [
-              "websites:read"
-            ]
           }
         ],
         "summary": "Get my authentication details",
@@ -8823,7 +8366,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "websites:read",
         "x-umami-source": "src/app/api/me/contract.generated.ts"
       }
     },
@@ -9833,369 +9375,6 @@
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
         "x-umami-source": "src/app/api/me/websites/contract.generated.ts"
-      }
-    },
-    "/api/oauth/authorize": {
-      "get": {
-        "description": "Validates an OAuth authorization request and returns the client and requested permissions for the consent screen. Requires an interactive user session.",
-        "operationId": "describeOAuthAuthorization",
-        "parameters": [
-          {
-            "description": "OAuth authorization response type; use code.",
-            "in": "query",
-            "name": "response_type",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "description": "OAuth client identifier.",
-            "in": "query",
-            "name": "client_id",
-            "required": true,
-            "schema": {
-              "maxLength": 2048,
-              "type": "string"
-            }
-          },
-          {
-            "description": "Registered redirect URI to receive the authorization response.",
-            "in": "query",
-            "name": "redirect_uri",
-            "schema": {
-              "maxLength": 2048,
-              "type": "string"
-            }
-          },
-          {
-            "description": "Space-separated OAuth permissions.",
-            "in": "query",
-            "name": "scope",
-            "schema": {
-              "maxLength": 500,
-              "type": "string"
-            }
-          },
-          {
-            "description": "Client-provided value returned unchanged to correlate the authorization response.",
-            "in": "query",
-            "name": "state",
-            "schema": {
-              "maxLength": 1024,
-              "type": "string"
-            }
-          },
-          {
-            "description": "PKCE challenge derived from the code verifier.",
-            "in": "query",
-            "name": "code_challenge",
-            "schema": {
-              "maxLength": 128,
-              "type": "string"
-            }
-          },
-          {
-            "description": "Method used to derive the PKCE challenge; use S256.",
-            "in": "query",
-            "name": "code_challenge_method",
-            "schema": {
-              "maxLength": 10,
-              "type": "string"
-            }
-          },
-          {
-            "description": "Resource URI identifying the API targeted by the OAuth request.",
-            "in": "query",
-            "name": "resource",
-            "schema": {
-              "maxLength": 2048,
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OAuthAuthorizationDetails"
-                }
-              }
-            },
-            "description": "Authorization request details."
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OAuthErrorResponse"
-                }
-              }
-            },
-            "description": "Invalid authorization request."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "error": {
-                    "code": "unauthorized",
-                    "message": "Unauthorized.",
-                    "status": 401
-                  }
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            },
-            "description": "Unauthorized."
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "summary": "Get OAuth authorization request details",
-        "tags": [
-          "OAuth"
-        ],
-        "x-umami-audience": "internal",
-        "x-umami-contract": "explicit",
-        "x-umami-source": "src/app/api/oauth/authorize/contract.ts"
-      },
-      "post": {
-        "description": "Records the user's consent decision and returns a redirect URL. Approval includes an authorization code, the request state, and the issuer.",
-        "operationId": "decideOAuthAuthorization",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OAuthAuthorizationDecision"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OAuthAuthorizationRedirect"
-                }
-              }
-            },
-            "description": "Redirect URL for the browser."
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "error": {
-                    "code": "bad-request",
-                    "message": "Bad request.",
-                    "status": 400
-                  }
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            },
-            "description": "Bad request."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "example": {
-                  "error": {
-                    "code": "unauthorized",
-                    "message": "Unauthorized.",
-                    "status": 401
-                  }
-                },
-                "schema": {
-                  "$ref": "#/components/schemas/ApiError"
-                }
-              }
-            },
-            "description": "Unauthorized."
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": []
-          }
-        ],
-        "summary": "Approve or deny OAuth access",
-        "tags": [
-          "OAuth"
-        ],
-        "x-umami-audience": "internal",
-        "x-umami-contract": "explicit",
-        "x-umami-source": "src/app/api/oauth/authorize/contract.ts"
-      }
-    },
-    "/api/oauth/register": {
-      "post": {
-        "description": "Registers a public OAuth client for clients that do not support Client ID Metadata Documents. Clients that support them should use an HTTPS metadata URL as their client ID.",
-        "operationId": "oauthRegisterClient",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OAuthClientRegistrationRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "201": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OAuthClientRegistrationResponse"
-                }
-              }
-            },
-            "description": "Registered client."
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OAuthErrorResponse"
-                }
-              }
-            },
-            "description": "Invalid client metadata."
-          }
-        },
-        "security": [],
-        "summary": "Register an OAuth client",
-        "tags": [
-          "OAuth"
-        ],
-        "x-umami-audience": "internal",
-        "x-umami-contract": "explicit",
-        "x-umami-source": "src/app/api/oauth/register/contract.ts"
-      }
-    },
-    "/api/oauth/revoke": {
-      "post": {
-        "description": "Revokes the supplied refresh token. Unknown tokens are accepted without revealing whether they existed.",
-        "operationId": "oauthRevoke",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OAuthRevocationRequest"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/OAuthRevocationRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "additionalProperties": false,
-                  "properties": {},
-                  "type": "object"
-                }
-              }
-            },
-            "description": "Token revoked (or already invalid)."
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OAuthErrorResponse"
-                }
-              }
-            },
-            "description": "Malformed request."
-          }
-        },
-        "security": [],
-        "summary": "Revoke an OAuth refresh token",
-        "tags": [
-          "OAuth"
-        ],
-        "x-umami-audience": "internal",
-        "x-umami-contract": "explicit",
-        "x-umami-source": "src/app/api/oauth/revoke/contract.ts"
-      }
-    },
-    "/api/oauth/token": {
-      "post": {
-        "description": "Exchanges an authorization code and PKCE verifier, or a refresh token, for an access token. Accepts form-encoded or JSON requests and rotates refresh tokens on use.",
-        "operationId": "oauthToken",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/OAuthTokenRequest"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/OAuthTokenRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OAuthTokenResponse"
-                }
-              }
-            },
-            "description": "Access and refresh tokens."
-          },
-          "400": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OAuthErrorResponse"
-                }
-              }
-            },
-            "description": "Invalid grant or request."
-          },
-          "401": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OAuthErrorResponse"
-                }
-              }
-            },
-            "description": "Invalid client."
-          }
-        },
-        "security": [],
-        "summary": "Get or refresh an OAuth access token",
-        "tags": [
-          "OAuth"
-        ],
-        "x-umami-audience": "internal",
-        "x-umami-contract": "explicit",
-        "x-umami-source": "src/app/api/oauth/token/contract.ts"
       }
     },
     "/api/pixels": {
@@ -12241,11 +11420,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -12256,7 +11430,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/realtime/[websiteId]/contract.generated.ts"
       }
     },
@@ -13827,11 +13000,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -13842,7 +13010,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/reports/attribution/contract.generated.ts"
       }
     },
@@ -13979,11 +13146,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -13994,7 +13156,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/reports/breakdown/contract.generated.ts"
       }
     },
@@ -14148,11 +13309,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -14163,7 +13319,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/reports/funnel/contract.generated.ts"
       }
     },
@@ -14725,11 +13880,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -14740,7 +13890,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/reports/journey/contract.generated.ts"
       }
     },
@@ -14983,11 +14132,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -14998,7 +14142,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/reports/retention/contract.generated.ts"
       }
     },
@@ -15215,11 +14358,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -15230,7 +14368,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/reports/revenue/contract.generated.ts"
       }
     },
@@ -15354,11 +14491,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -15369,7 +14501,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/reports/utm/contract.generated.ts"
       }
     },
@@ -19293,12 +18424,6 @@
                           "description": "Tracked links associated with the user.",
                           "type": "number"
                         },
-                        "oauthAuthorizationCodes": {
-                          "type": "number"
-                        },
-                        "oauthRefreshTokens": {
-                          "type": "number"
-                        },
                         "pixels": {
                           "description": "Tracking pixels associated with the user.",
                           "type": "number"
@@ -19339,9 +18464,7 @@
                         "twoFactorBackupCodes",
                         "twoFactorOtpUseds",
                         "twoFactorRateLimit",
-                        "apiKeys",
-                        "oauthAuthorizationCodes",
-                        "oauthRefreshTokens"
+                        "apiKeys"
                       ],
                       "type": "object"
                     },
@@ -19699,136 +18822,6 @@
                           "teamId",
                           "url",
                           "slug"
-                        ],
-                        "type": "object"
-                      },
-                      "type": "array"
-                    },
-                    "oauthAuthorizationCodes": {
-                      "items": {
-                        "properties": {
-                          "clientId": {
-                            "type": "string"
-                          },
-                          "codeChallenge": {
-                            "type": "string"
-                          },
-                          "codeChallengeMethod": {
-                            "type": "string"
-                          },
-                          "codeHash": {
-                            "type": "string"
-                          },
-                          "createdAt": {
-                            "description": "Date and time the record was created.",
-                            "format": "date-time",
-                            "type": "string"
-                          },
-                          "expiresAt": {
-                            "description": "Date and time the credential expires.",
-                            "format": "date-time",
-                            "type": "string"
-                          },
-                          "id": {
-                            "description": "Unique identifier of the resource.",
-                            "type": "string"
-                          },
-                          "redirectUri": {
-                            "type": "string"
-                          },
-                          "resource": {
-                            "description": "Resource URI identifying the API targeted by the OAuth request.",
-                            "type": "string"
-                          },
-                          "scope": {
-                            "description": "Space-separated OAuth permissions.",
-                            "type": "string"
-                          },
-                          "usedAt": {
-                            "description": "Date and time the code was used.",
-                            "format": "date-time",
-                            "type": "string"
-                          },
-                          "userId": {
-                            "description": "ID of the associated user.",
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "userId",
-                          "createdAt",
-                          "codeHash",
-                          "expiresAt",
-                          "clientId",
-                          "redirectUri",
-                          "scope",
-                          "resource",
-                          "codeChallenge",
-                          "codeChallengeMethod",
-                          "usedAt"
-                        ],
-                        "type": "object"
-                      },
-                      "type": "array"
-                    },
-                    "oauthRefreshTokens": {
-                      "items": {
-                        "properties": {
-                          "clientId": {
-                            "type": "string"
-                          },
-                          "createdAt": {
-                            "description": "Date and time the record was created.",
-                            "format": "date-time",
-                            "type": "string"
-                          },
-                          "expiresAt": {
-                            "description": "Date and time the credential expires.",
-                            "format": "date-time",
-                            "type": "string"
-                          },
-                          "id": {
-                            "description": "Unique identifier of the resource.",
-                            "type": "string"
-                          },
-                          "lastUsedAt": {
-                            "description": "Date and time the credential was last used.",
-                            "format": "date-time",
-                            "type": "string"
-                          },
-                          "resource": {
-                            "description": "Resource URI identifying the API targeted by the OAuth request.",
-                            "type": "string"
-                          },
-                          "revokedAt": {
-                            "description": "Date and time the credential was revoked.",
-                            "format": "date-time",
-                            "type": "string"
-                          },
-                          "scope": {
-                            "description": "Space-separated OAuth permissions.",
-                            "type": "string"
-                          },
-                          "tokenHash": {
-                            "type": "string"
-                          },
-                          "userId": {
-                            "description": "ID of the associated user.",
-                            "type": "string"
-                          }
-                        },
-                        "required": [
-                          "id",
-                          "userId",
-                          "createdAt",
-                          "expiresAt",
-                          "lastUsedAt",
-                          "clientId",
-                          "scope",
-                          "resource",
-                          "tokenHash",
-                          "revokedAt"
                         ],
                         "type": "object"
                       },
@@ -20345,8 +19338,6 @@
                     "twoFactorBackupCodes",
                     "twoFactorOtpUseds",
                     "apiKeys",
-                    "oauthAuthorizationCodes",
-                    "oauthRefreshTokens",
                     "_count"
                   ],
                   "type": "object"
@@ -21271,11 +20262,6 @@
         "security": [
           {
             "bearerAuth": []
-          },
-          {
-            "oauth2": [
-              "websites:read"
-            ]
           }
         ],
         "summary": "List websites",
@@ -21284,7 +20270,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "websites:read",
         "x-umami-source": "src/app/api/websites/contract.ts"
       },
       "post": {
@@ -21478,11 +20463,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "websites:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -21493,7 +20473,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "websites:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/contract.ts"
       },
       "post": {
@@ -21652,11 +20631,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -21667,7 +20641,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/active/contract.ts"
       }
     },
@@ -22510,11 +21483,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -22525,7 +21493,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/daterange/contract.generated.ts"
       }
     },
@@ -22979,11 +21946,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -22994,7 +21956,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/event-data/contract.generated.ts"
       }
     },
@@ -26591,11 +25552,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -26606,7 +25562,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/event-data/properties/contract.generated.ts"
       }
     },
@@ -26942,11 +25897,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -26957,7 +25907,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/event-data/stats/contract.generated.ts"
       }
     },
@@ -27319,11 +26268,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -27334,7 +26278,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/event-data/values/contract.generated.ts"
       }
     },
@@ -27715,11 +26658,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -27730,7 +26668,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/events/contract.ts"
       }
     },
@@ -28096,11 +27033,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -28111,7 +27043,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/events/series/contract.generated.ts"
       }
     },
@@ -28530,11 +27461,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -28545,7 +27471,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/events/stats/contract.generated.ts"
       }
     },
@@ -29116,11 +28041,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -29131,7 +28051,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/metrics/contract.ts"
       }
     },
@@ -29575,11 +28494,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -29590,7 +28504,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/metrics/expanded/contract.generated.ts"
       }
     },
@@ -29933,11 +28846,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -29948,7 +28856,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/pageviews/contract.ts"
       }
     },
@@ -38144,11 +37051,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -38159,7 +37061,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/sessions/contract.ts"
       }
     },
@@ -38354,11 +37255,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -38369,7 +37265,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/sessions/[sessionId]/contract.generated.ts"
       }
     },
@@ -38539,11 +37434,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -38554,7 +37444,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/sessions/[sessionId]/activity/contract.generated.ts"
       }
     },
@@ -38679,11 +37568,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -38694,7 +37578,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/sessions/[sessionId]/properties/contract.generated.ts"
       }
     },
@@ -39352,11 +38235,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -39367,7 +38245,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/sessions/stats/contract.generated.ts"
       }
     },
@@ -40740,11 +39617,6 @@
             "bearerAuth": []
           },
           {
-            "oauth2": [
-              "analytics:read"
-            ]
-          },
-          {
             "shareContext": [],
             "shareToken": []
           }
@@ -40755,7 +39627,6 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-oauth-scope": "analytics:read",
         "x-umami-source": "src/app/api/websites/[websiteId]/stats/contract.ts"
       }
     },
@@ -41306,9 +40177,6 @@
     },
     {
       "name": "Links"
-    },
-    {
-      "name": "OAuth"
     },
     {
       "name": "Pixels"
