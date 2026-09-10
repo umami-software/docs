@@ -295,6 +295,15 @@
             ]
           },
           {
+            "group": "Dashboard",
+            "pages": [
+              {
+                "page": "annotations",
+                "title": "Annotations"
+              }
+            ]
+          },
+          {
             "group": "Analysis",
             "pages": [
               {
