@@ -148,10 +148,6 @@
       "destination": "/docs/api-reference/get-realtime"
     },
     {
-      "source": "/docs/api/reports",
-      "destination": "/docs/api-reference/get-reports"
-    },
-    {
       "source": "/docs/api/sessions",
       "destination": "/docs/api-reference/get-website-sessions"
     },
@@ -904,36 +900,6 @@
                 ]
               },
               {
-                "group": "OAuth",
-                "pages": [
-                  {
-                    "page": "api-reference/decide-o-auth-authorization",
-                    "title": "Approve or deny OAuth access",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/describe-o-auth-authorization",
-                    "title": "Get OAuth authorization request details",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/oauth-token",
-                    "title": "Get or refresh an OAuth access token",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/oauth-register-client",
-                    "title": "Register an OAuth client",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/oauth-revoke",
-                    "title": "Revoke an OAuth refresh token",
-                    "method": "POST"
-                  }
-                ]
-              },
-              {
                 "group": "Pixels",
                 "pages": [
                   {
@@ -985,86 +951,6 @@
                     "page": "api-reference/get-realtime",
                     "title": "Get real-time website activity",
                     "method": "GET"
-                  }
-                ]
-              },
-              {
-                "group": "Reports",
-                "pages": [
-                  {
-                    "page": "api-reference/delete-report",
-                    "title": "Delete a saved report",
-                    "method": "DELETE"
-                  },
-                  {
-                    "page": "api-reference/get-report",
-                    "title": "Get a saved report",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/run-heatmap-report",
-                    "title": "Get page heatmap data",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/get-reports",
-                    "title": "List saved reports",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/run-breakdown-report",
-                    "title": "Run a breakdown report",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/run-utm-report",
-                    "title": "Run a campaign report",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/run-funnel-report",
-                    "title": "Run a funnel report",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/run-goal-report",
-                    "title": "Run a goal report",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/run-performance-report",
-                    "title": "Run a performance report",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/run-retention-report",
-                    "title": "Run a retention report",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/run-revenue-report",
-                    "title": "Run a revenue report",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/run-journey-report",
-                    "title": "Run a visitor journey report",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/run-attribution-report",
-                    "title": "Run an attribution report",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/create-report",
-                    "title": "Save a report",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/update-report",
-                    "title": "Update a saved report",
-                    "method": "POST"
                   }
                 ]
               },
@@ -1297,6 +1183,16 @@
                     "method": "POST"
                   },
                   {
+                    "page": "api-reference/create-website-funnel",
+                    "title": "Create website funnel",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/create-website-goal",
+                    "title": "Create website goal",
+                    "method": "POST"
+                  },
+                  {
                     "page": "api-reference/delete-website-session",
                     "title": "Delete a visitor session",
                     "method": "DELETE"
@@ -1314,6 +1210,16 @@
                   {
                     "page": "api-reference/delete-website-segment",
                     "title": "Delete a website segment or cohort",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/delete-website-funnel",
+                    "title": "Delete website funnel",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/delete-website-goal",
+                    "title": "Delete website goal",
                     "method": "DELETE"
                   },
                   {
@@ -1467,13 +1373,83 @@
                     "method": "GET"
                   },
                   {
+                    "page": "api-reference/get-website-attribution",
+                    "title": "Get website attribution",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-breakdown",
+                    "title": "Get website breakdown",
+                    "method": "GET"
+                  },
+                  {
                     "page": "api-reference/get-website-event-stats",
                     "title": "Get website event statistics",
                     "method": "GET"
                   },
                   {
+                    "page": "api-reference/get-website-funnel",
+                    "title": "Get website funnel",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-funnel-stats",
+                    "title": "Get website funnel stats",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-funnels",
+                    "title": "Get website funnels",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-goal",
+                    "title": "Get website goal",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-goal-stats",
+                    "title": "Get website goal stats",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-goals",
+                    "title": "Get website goals",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-heatmaps",
+                    "title": "Get website heatmaps",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-journeys",
+                    "title": "Get website journeys",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-performance-chart",
+                    "title": "Get website performance chart",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-performance-metrics",
+                    "title": "Get website performance metrics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-performance-stats",
+                    "title": "Get website performance stats",
+                    "method": "GET"
+                  },
+                  {
                     "page": "api-reference/get-website-recorder-config",
                     "title": "Get website recording settings",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-retention",
+                    "title": "Get website retention",
                     "method": "GET"
                   },
                   {
@@ -1492,18 +1468,28 @@
                     "method": "GET"
                   },
                   {
+                    "page": "api-reference/get-website-saved-funnel-stats",
+                    "title": "Get website saved funnel stats",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-goal-stats",
+                    "title": "Get website saved goal stats",
+                    "method": "GET"
+                  },
+                  {
                     "page": "api-reference/get-website-stats",
                     "title": "Get website summary statistics",
                     "method": "GET"
                   },
                   {
-                    "page": "api-reference/get-website-session-replays",
-                    "title": "List a visitor's session replays",
+                    "page": "api-reference/get-website-utm-metrics",
+                    "title": "Get website utm metrics",
                     "method": "GET"
                   },
                   {
-                    "page": "api-reference/get-website-reports",
-                    "title": "List a website's saved reports",
+                    "page": "api-reference/get-website-session-replays",
+                    "title": "List a visitor's session replays",
                     "method": "GET"
                   },
                   {
@@ -1629,6 +1615,16 @@
                   {
                     "page": "api-reference/update-website-segment",
                     "title": "Update a website segment or cohort",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/update-website-funnel",
+                    "title": "Update website funnel",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/update-website-goal",
+                    "title": "Update website goal",
                     "method": "POST"
                   }
                 ]
