@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "build": "shiso build && node scripts/fix-root-redirect.mjs && node scripts/generate-llms-full.mjs",
-    "dev": "vite --config vite.config.ts",
+    "dev": "vite --config vite.config.ts --port 5001",
     "preview": "shiso preview --outDir dist/client",
     "check": "shiso check",
     "lint": "biome lint .",
