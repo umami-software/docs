@@ -1780,6 +1780,10 @@
               {
                 "page": "cloud/api-key",
                 "title": "API Key"
+              },
+              {
+                "page": "cloud/mcp",
+                "title": "MCP"
               }
             ]
           },

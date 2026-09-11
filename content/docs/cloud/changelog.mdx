@@ -4,6 +4,29 @@ title: Changelog
 
 This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and **API (api.umami.is)**.
 
+## September 10, 2026
+
+**MCP**
+
+- Added a remote [Model Context Protocol](https://modelcontextprotocol.io) server at `https://cloud.umami.is/mcp`. Connect Claude, ChatGPT, Cursor, and other MCP clients to ask questions about your website traffic in natural language. See [MCP](/docs/cloud/mcp) for setup instructions.
+- Authenticate with your existing Cloud API key using an `Authorization: Bearer api_<key>` header (or `x-umami-api-key`). The same subscription requirements and website/team permissions as the Cloud API apply.
+- All tools are read-only and cover stats, traffic, metrics, realtime, events, sessions, annotations, segments, funnels, goals, journeys, retention, attribution, revenue, and performance.
+
+## September 3, 2026
+
+**Annotations**
+
+- Added [annotations](/docs/annotations), which let you pin dated notes (deploys, campaign launches, outages) to a website's traffic chart. Available from the **Notes** button below the Overview chart.
+- Annotations appear as markers on the chart and are visible on shared and public dashboards.
+
+**API: Annotations**
+
+- `GET /api/websites/:websiteId/annotations`: **Added** — lists annotations for a website.
+- `POST /api/websites/:websiteId/annotations`: **Added** — creates an annotation.
+- `GET /api/websites/:websiteId/annotations/:annotationId`: **Added** — returns a single annotation.
+- `POST /api/websites/:websiteId/annotations/:annotationId`: **Added** — updates an annotation.
+- `DELETE /api/websites/:websiteId/annotations/:annotationId`: **Added** — deletes an annotation.
+
 ## June 6, 2026
 
 **Cloud**
