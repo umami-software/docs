@@ -735,6 +735,36 @@
                 ]
               },
               {
+                "group": "Annotations",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-annotations",
+                    "title": "List website annotations",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/create-website-annotation",
+                    "title": "Create a website annotation",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/get-website-annotation",
+                    "title": "Get a website annotation",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-website-annotation",
+                    "title": "Update a website annotation",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-website-annotation",
+                    "title": "Delete a website annotation",
+                    "method": "DELETE"
+                  }
+                ]
+              },
+              {
                 "group": "Authentication",
                 "pages": [
                   {
@@ -855,6 +885,176 @@
                 ]
               },
               {
+                "group": "Event data",
+                "pages": [
+                  {
+                    "page": "api-reference/get-event-data",
+                    "title": "List events with custom properties",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-pivot",
+                    "title": "List event properties in table form",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-array-series",
+                    "title": "Get event array values over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-date-series",
+                    "title": "Get the distribution of event date values",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-numeric-series",
+                    "title": "Get numeric event properties over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-numeric-stats",
+                    "title": "Get numeric event property statistics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-property-series",
+                    "title": "Get event property values over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-by-id",
+                    "title": "Get an event's custom properties",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-events",
+                    "title": "Summarize properties by event",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-fields",
+                    "title": "List event property fields",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-properties",
+                    "title": "List event property usage",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-stats",
+                    "title": "Get event property totals",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-event-data-values",
+                    "title": "List event property values",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
+                "group": "Events",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-events",
+                    "title": "List tracked events",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-event-series",
+                    "title": "Get custom event counts over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-event-stats",
+                    "title": "Get website event statistics",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
+                "group": "Funnels",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-funnels",
+                    "title": "Get website funnels",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/create-website-funnel",
+                    "title": "Create website funnel",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/get-website-funnel",
+                    "title": "Get website funnel",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-website-funnel",
+                    "title": "Update website funnel",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-website-funnel",
+                    "title": "Delete website funnel",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-website-funnel-stats",
+                    "title": "Get website funnel stats",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-funnel-stats",
+                    "title": "Get website saved funnel stats",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
+                "group": "Goals",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-goals",
+                    "title": "Get website goals",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/create-website-goal",
+                    "title": "Create website goal",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/get-website-goal",
+                    "title": "Get website goal",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-website-goal",
+                    "title": "Update website goal",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-website-goal",
+                    "title": "Delete website goal",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-website-goal-stats",
+                    "title": "Get website goal stats",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-goal-stats",
+                    "title": "Get website saved goal stats",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
                 "group": "Links",
                 "pages": [
                   {
@@ -896,6 +1096,26 @@
                     "page": "api-reference/update-link",
                     "title": "Update a tracked link",
                     "method": "POST"
+                  }
+                ]
+              },
+              {
+                "group": "Performance",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-performance-chart",
+                    "title": "Get website performance chart",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-performance-metrics",
+                    "title": "Get website performance metrics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-performance-stats",
+                    "title": "Get website performance stats",
+                    "method": "GET"
                   }
                 ]
               },
@@ -955,11 +1175,231 @@
                 ]
               },
               {
+                "group": "Reports",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-attribution",
+                    "title": "Get website attribution",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-breakdown",
+                    "title": "Get website breakdown",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-heatmaps",
+                    "title": "Get website heatmaps",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-journeys",
+                    "title": "Get website journeys",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-retention",
+                    "title": "Get website retention",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-utm-metrics",
+                    "title": "Get website utm metrics",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
+                "group": "Revenue",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-revenue-chart",
+                    "title": "Get website revenue over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-revenue-metrics",
+                    "title": "Get website revenue by dimension",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-revenue-stats",
+                    "title": "Get website revenue totals",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-revenue-sessions",
+                    "title": "List sessions with revenue",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
                 "group": "Scripts",
                 "pages": [
                   {
                     "page": "api-reference/get-scripts-telemetry",
                     "title": "Get the installation telemetry script",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
+                "group": "Segments",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-segments",
+                    "title": "List website segments and cohorts",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/create-website-segment",
+                    "title": "Create a website segment or cohort",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/get-website-segment",
+                    "title": "Get a website segment or cohort",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-website-segment",
+                    "title": "Update a website segment or cohort",
+                    "method": "POST"
+                  },
+                  {
+                    "page": "api-reference/delete-website-segment",
+                    "title": "Delete a website segment or cohort",
+                    "method": "DELETE"
+                  }
+                ]
+              },
+              {
+                "group": "Session data",
+                "pages": [
+                  {
+                    "page": "api-reference/get-session-data-pivot",
+                    "title": "List session properties in table form",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-array-series",
+                    "title": "Get session array values over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-date-series",
+                    "title": "Get the distribution of session date values",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-numeric-series",
+                    "title": "Get numeric session properties over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-numeric-stats",
+                    "title": "Get numeric session property statistics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-properties",
+                    "title": "List session property usage",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-property-series",
+                    "title": "Get session property values over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-stats",
+                    "title": "Get activity by session property",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-session-data-values",
+                    "title": "List session property values",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
+                "group": "Session replays",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-recorder-config",
+                    "title": "Get website recording settings",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-replays",
+                    "title": "List website session replays",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-replay",
+                    "title": "Get a session replay recording",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-replays",
+                    "title": "List saved session replays",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-replay-saved",
+                    "title": "Check whether a replay is saved",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/save-website-replay",
+                    "title": "Save or unsave a session replay",
+                    "method": "POST"
+                  }
+                ]
+              },
+              {
+                "group": "Sessions",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-sessions",
+                    "title": "List visitor sessions",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-session",
+                    "title": "Get a visitor session",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/delete-website-session",
+                    "title": "Delete a visitor session",
+                    "method": "DELETE"
+                  },
+                  {
+                    "page": "api-reference/get-website-session-stats",
+                    "title": "Get visitor session statistics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-sessions-weekly",
+                    "title": "Get traffic by weekday and hour",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-session-activity",
+                    "title": "Get a visitor's session activity",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-session-properties",
+                    "title": "Get a session's custom properties",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-session-replays",
+                    "title": "List a visitor's session replays",
                     "method": "GET"
                   }
                 ]
@@ -991,6 +1431,36 @@
                     "page": "api-reference/update-share",
                     "title": "Update a share",
                     "method": "POST"
+                  }
+                ]
+              },
+              {
+                "group": "Stats",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-active",
+                    "title": "Get active website visitors",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-metrics",
+                    "title": "Get ranked website metrics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-pageviews",
+                    "title": "Get pageviews and sessions over time",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-stats",
+                    "title": "Get website summary statistics",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-expanded-metrics",
+                    "title": "Get detailed website metrics",
+                    "method": "GET"
                   }
                 ]
               },
@@ -1158,14 +1628,9 @@
                 "group": "Websites",
                 "pages": [
                   {
-                    "page": "api-reference/get-website-replay-saved",
-                    "title": "Check whether a replay is saved",
+                    "page": "api-reference/list-websites",
+                    "title": "List websites",
                     "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/create-website-share",
-                    "title": "Create a share for a website",
-                    "method": "POST"
                   },
                   {
                     "page": "api-reference/create-website",
@@ -1173,29 +1638,14 @@
                     "method": "POST"
                   },
                   {
-                    "page": "api-reference/create-website-annotation",
-                    "title": "Create a website annotation",
-                    "method": "POST"
+                    "page": "api-reference/get-website",
+                    "title": "Get a website",
+                    "method": "GET"
                   },
                   {
-                    "page": "api-reference/create-website-segment",
-                    "title": "Create a website segment or cohort",
+                    "page": "api-reference/update-website",
+                    "title": "Update a website",
                     "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/create-website-funnel",
-                    "title": "Create website funnel",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/create-website-goal",
-                    "title": "Create website goal",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/delete-website-session",
-                    "title": "Delete a visitor session",
-                    "method": "DELETE"
                   },
                   {
                     "page": "api-reference/delete-website",
@@ -1203,153 +1653,8 @@
                     "method": "DELETE"
                   },
                   {
-                    "page": "api-reference/delete-website-annotation",
-                    "title": "Delete a website annotation",
-                    "method": "DELETE"
-                  },
-                  {
-                    "page": "api-reference/delete-website-segment",
-                    "title": "Delete a website segment or cohort",
-                    "method": "DELETE"
-                  },
-                  {
-                    "page": "api-reference/delete-website-funnel",
-                    "title": "Delete website funnel",
-                    "method": "DELETE"
-                  },
-                  {
-                    "page": "api-reference/delete-website-goal",
-                    "title": "Delete website goal",
-                    "method": "DELETE"
-                  },
-                  {
-                    "page": "api-reference/export-website",
-                    "title": "Export website analytics",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-replay",
-                    "title": "Get a session replay recording",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-session-properties",
-                    "title": "Get a session's custom properties",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-session",
-                    "title": "Get a visitor session",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-session-activity",
-                    "title": "Get a visitor's session activity",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website",
-                    "title": "Get a website",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-annotation",
-                    "title": "Get a website annotation",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-segment",
-                    "title": "Get a website segment or cohort",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-active",
-                    "title": "Get active website visitors",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-session-data-stats",
-                    "title": "Get activity by session property",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-by-id",
-                    "title": "Get an event's custom properties",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-event-series",
-                    "title": "Get custom event counts over time",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-expanded-metrics",
-                    "title": "Get detailed website metrics",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-array-series",
-                    "title": "Get event array values over time",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-stats",
-                    "title": "Get event property totals",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-property-series",
-                    "title": "Get event property values over time",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-numeric-series",
-                    "title": "Get numeric event properties over time",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-numeric-stats",
-                    "title": "Get numeric event property statistics",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-session-data-numeric-series",
-                    "title": "Get numeric session properties over time",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-session-data-numeric-stats",
-                    "title": "Get numeric session property statistics",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-pageviews",
-                    "title": "Get pageviews and sessions over time",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-metrics",
-                    "title": "Get ranked website metrics",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-session-data-array-series",
-                    "title": "Get session array values over time",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-session-data-property-series",
-                    "title": "Get session property values over time",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-date-series",
-                    "title": "Get the distribution of event date values",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-session-data-date-series",
-                    "title": "Get the distribution of session date values",
+                    "page": "api-reference/get-websites-charts",
+                    "title": "Get visitor charts for websites",
                     "method": "GET"
                   },
                   {
@@ -1358,228 +1663,8 @@
                     "method": "GET"
                   },
                   {
-                    "page": "api-reference/get-website-sessions-weekly",
-                    "title": "Get traffic by weekday and hour",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-websites-charts",
-                    "title": "Get visitor charts for websites",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-session-stats",
-                    "title": "Get visitor session statistics",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-attribution",
-                    "title": "Get website attribution",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-breakdown",
-                    "title": "Get website breakdown",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-event-stats",
-                    "title": "Get website event statistics",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-funnel",
-                    "title": "Get website funnel",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-funnel-stats",
-                    "title": "Get website funnel stats",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-funnels",
-                    "title": "Get website funnels",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-goal",
-                    "title": "Get website goal",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-goal-stats",
-                    "title": "Get website goal stats",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-goals",
-                    "title": "Get website goals",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-heatmaps",
-                    "title": "Get website heatmaps",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-journeys",
-                    "title": "Get website journeys",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-performance-chart",
-                    "title": "Get website performance chart",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-performance-metrics",
-                    "title": "Get website performance metrics",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-performance-stats",
-                    "title": "Get website performance stats",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-recorder-config",
-                    "title": "Get website recording settings",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-retention",
-                    "title": "Get website retention",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-revenue-metrics",
-                    "title": "Get website revenue by dimension",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-revenue-chart",
-                    "title": "Get website revenue over time",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-revenue-stats",
-                    "title": "Get website revenue totals",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-saved-funnel-stats",
-                    "title": "Get website saved funnel stats",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-saved-goal-stats",
-                    "title": "Get website saved goal stats",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-stats",
-                    "title": "Get website summary statistics",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-utm-metrics",
-                    "title": "Get website utm metrics",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-session-replays",
-                    "title": "List a visitor's session replays",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-pivot",
-                    "title": "List event properties in table form",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-fields",
-                    "title": "List event property fields",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-properties",
-                    "title": "List event property usage",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data-values",
-                    "title": "List event property values",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-event-data",
-                    "title": "List events with custom properties",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-saved-replays",
-                    "title": "List saved session replays",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-session-data-pivot",
-                    "title": "List session properties in table form",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-session-data-properties",
-                    "title": "List session property usage",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-session-data-values",
-                    "title": "List session property values",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-revenue-sessions",
-                    "title": "List sessions with revenue",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-shares",
-                    "title": "List shares for a website",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-events",
-                    "title": "List tracked events",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-sessions",
-                    "title": "List visitor sessions",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-annotations",
-                    "title": "List website annotations",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-values",
-                    "title": "List website filter values",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-segments",
-                    "title": "List website segments and cohorts",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-replays",
-                    "title": "List website session replays",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/list-websites",
-                    "title": "List websites",
+                    "page": "api-reference/export-website",
+                    "title": "Export website analytics",
                     "method": "GET"
                   },
                   {
@@ -1588,14 +1673,14 @@
                     "method": "POST"
                   },
                   {
-                    "page": "api-reference/save-website-replay",
-                    "title": "Save or unsave a session replay",
-                    "method": "POST"
+                    "page": "api-reference/get-website-shares",
+                    "title": "List shares for a website",
+                    "method": "GET"
                   },
                   {
-                    "page": "api-reference/get-event-data-events",
-                    "title": "Summarize properties by event",
-                    "method": "GET"
+                    "page": "api-reference/create-website-share",
+                    "title": "Create a share for a website",
+                    "method": "POST"
                   },
                   {
                     "page": "api-reference/transfer-website",
@@ -1603,29 +1688,9 @@
                     "method": "POST"
                   },
                   {
-                    "page": "api-reference/update-website",
-                    "title": "Update a website",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/update-website-annotation",
-                    "title": "Update a website annotation",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/update-website-segment",
-                    "title": "Update a website segment or cohort",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/update-website-funnel",
-                    "title": "Update website funnel",
-                    "method": "POST"
-                  },
-                  {
-                    "page": "api-reference/update-website-goal",
-                    "title": "Update website goal",
-                    "method": "POST"
+                    "page": "api-reference/get-website-values",
+                    "title": "List website filter values",
+                    "method": "GET"
                   }
                 ]
               }
