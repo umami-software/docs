@@ -565,6 +565,10 @@
                 "title": "Running on Kubernetes with HelmForge"
               },
               {
+                "page": "guides/running-on-lizard",
+                "title": "Running on Lizard"
+              },
+              {
                 "page": "guides/running-on-neon",
                 "title": "Running on Neon Postgres"
               },
@@ -1814,3 +1818,4 @@
     ]
   }
 }
+
