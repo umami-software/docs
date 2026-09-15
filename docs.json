@@ -11,7 +11,7 @@
     "directory": "api-reference"
   },
   "name": "umami",
-  "description": "Documentation for Umami, a modern privacy-focused analytics platform.",
+  "description": "Documentation for Umami, a modern privacy-first analytics platform.",
   "logo": {
     "light": "/logo.svg",
     "dark": "/logo.svg",
