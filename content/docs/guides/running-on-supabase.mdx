@@ -6,15 +6,21 @@ title: Running on Supabase
 
 ## Setup
 
-1. Edit db/postgresql/schema.prisma to add directUrl = env("DIRECT_DATABASE_URL")
-2. Create a project on Supabase with a given name in a region close to where you will be hosting your Umami project.
-3. Get the database connection string from the **Settings > Database** page, then scroll to the bottom for the **Connection Pooling** section and copy the **Connection string**.
-4. Add `DATABASE_URL` and `DIRECT_DATABASE_URL` to your `.env` file:
+1. Create a project on Supabase in a region close to where you will host Umami.
+2. Open the project and click **Connect** at the top of the dashboard.
+
+3. Select the **Direct** tab, choose **Transaction pooler** under **Connection Method**, and leave **Type** set to **URI**. Copy the connection string and use it for `DATABASE_URL`.
+
+4. In the same panel, choose **Session pooler** and copy its URI. Use this connection string for `DIRECT_DATABASE_URL` so Umami can run database migrations over a session connection.
+5. Replace `[YOUR-PASSWORD]` in both connection strings with your database password. If the password contains reserved characters, percent-encode them.
+6. Add `DATABASE_URL` and `DIRECT_DATABASE_URL` to your `.env` file:
 
    ```dotenv
-   DATABASE_URL=postgres://[db-user].[project-ref]:[db-password]@aws-0-[aws-region].pooler.supabase.com:6543/[db-name]?pgbouncer=true&connection_limit=1
-   DIRECT_DATABASE_URL=postgres://postgres.[my-supabase-project-id]:[db-password]@aws-0-[aws-region].pooler.supabase.com:5432/postgres
+   DATABASE_URL=postgresql://postgres.[project-ref]:[db-password]@[pooler-host]:6543/postgres?pgbouncer=true&connection_limit=1
+   DIRECT_DATABASE_URL=postgresql://postgres.[project-ref]:[db-password]@[pooler-host]:5432/postgres
    ```
 
-5. You should now be able to build and start Umami (`npm run build` followed by `npm start`).
-6. Follow the **Getting started** guide starting from the [Login](/docs/login) step and be sure to change the default password.
+   Copy the complete host and project reference from Supabase instead of constructing them yourself. Do not commit the completed connection strings to source control.
+
+7. Build and start Umami (`npm run build` followed by `npm start`).
+8. Follow the **Getting started** guide starting from the [Login](/docs/login) step and be sure to change the default password.
