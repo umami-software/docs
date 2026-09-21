@@ -1,0 +1,124 @@
+---
+title: Enable MCP
+description: Connect an AI assistant to your self-hosted Umami analytics using the Model Context Protocol.
+---
+
+[Model Context Protocol](https://modelcontextprotocol.io) (MCP) lets AI tools such as Claude, ChatGPT, and Cursor answer questions about your website traffic in natural language.
+
+Umami's MCP server is read-only. It calls the same API as the dashboard, so it respects the API key owner's existing website and team permissions. It never accesses your database directly.
+
+## Turn on the MCP endpoint
+
+MCP is disabled by default. Use a version of Umami that includes MCP support, then add the following runtime environment variable to your deployment configuration:
+
+```dotenv
+MCP_ENABLED=1
+```
+
+Restart Umami after changing the variable. For Docker Compose deployments, add it to the `umami` service environment and run `docker compose up -d` to recreate the container.
+
+## Connect
+
+Create an [API key](/docs/api/authentication#api-keys-recommended) from your profile menu: select **Settings**, open **API keys**, and click **Create key**. Save the value when it is shown; it is only displayed once.
+
+Your MCP endpoint is the public URL of your Umami instance followed by `/mcp`:
+
+```text
+https://analytics.example.com/mcp
+```
+
+If your instance uses a [base path](/docs/environment-variables#base_path), include it in the endpoint, for example `https://analytics.example.com/umami/mcp`.
+
+Authenticate with the API key using the Bearer scheme:
+
+```text
+Authorization: Bearer umami_<your-api-key>
+```
+
+The remote MCP endpoint accepts self-hosted API keys only; browser login tokens are not supported.
+
+## Client setup
+
+Use an MCP client that supports Streamable HTTP and bearer-token or custom-header authentication. For example, configure a remote server with your endpoint and API key:
+
+```json
+{
+  "mcpServers": {
+    "umami": {
+      "url": "https://analytics.example.com/mcp",
+      "headers": {
+        "Authorization": "Bearer umami_<your-api-key>"
+      }
+    }
+  }
+}
+```
+
+The exact configuration screen and format vary by client. Keep the API key private: the analytics returned by MCP are shared with the AI application to answer your questions.
+
+### Local stdio clients
+
+For a client that only supports local `stdio` servers, run the `@umami/mcp` package with `npx`:
+
+```json
+{
+  "mcpServers": {
+    "umami": {
+      "command": "npx",
+      "args": ["-y", "@umami/mcp"],
+      "env": {
+        "UMAMI_URL": "https://analytics.example.com",
+        "UMAMI_API_TOKEN": "umami_<your-api-key>"
+      }
+    }
+  }
+}
+```
+
+This configuration connects to Umami's API rather than the remote `/mcp` endpoint. Do not include `/api` in `UMAMI_URL`.
+
+## Tools
+
+| Tool | Purpose |
+| --- | --- |
+| `list_websites` | Find the websites you can access. Call this first to get a `websiteId`. |
+| `get_website_daterange` | Earliest and latest dates with recorded data. |
+| `get_website_stats` | Pageviews, visitors, visits, bounce rate, duration, and previous period. |
+| `get_website_traffic` | Pageview and visit time series by minute, hour, day, month, or year. |
+| `get_website_metrics` | Top pages, referrers, channels, countries, browsers, devices, UTM, and events. |
+| `get_realtime` | Visitors active right now. |
+| `get_events` | Individual tracked events. |
+| `get_event_stats` | Custom event totals and previous period. |
+| `get_event_series` | Custom event counts over time, grouped by event name. |
+| `get_event_properties` | Custom event property names, or the values of one property. |
+| `get_sessions` | Visitor sessions. |
+| `get_session` | One session with its activity timeline and properties. |
+| `get_session_stats` | Session-level totals: visitors, visits, pageviews, events, and countries. |
+| `get_annotations` | Dated timeline notes that explain changes. |
+| `list_segments` | Saved segments and cohorts. |
+| `list_funnels` | Saved funnels with their steps. |
+| `run_funnel` | Conversion funnel from a saved funnel or ad-hoc page and event steps. |
+| `get_goals` | Saved goals with conversions, visitors, and rate for a date range. |
+| `run_journey` | Most common paths visitors take. |
+| `run_retention` | Cohort retention table. |
+| `run_attribution` | First-click or last-click attribution for a conversion. |
+| `get_revenue` | Revenue totals, series, and breakdowns. |
+| `get_performance` | Core Web Vitals percentiles, trend, and breakdown. |
+
+Dates use ISO 8601. Results that return individual events or sessions are paginated and have a maximum page size.
+
+## Example prompts
+
+- Show my websites.
+- How many visitors did example.com get last week?
+- What were the top 10 pages this month?
+- Compare traffic this month with the previous month.
+- Where is traffic coming from?
+- What signup events occurred yesterday?
+- Run my checkout funnel for last month.
+- How are we doing against our goals this quarter?
+- Which pages have the worst LCP on mobile?
+
+## Revoke access
+
+Access is tied to the API key. Delete that key under **Settings → API keys** to disconnect the AI tool.
