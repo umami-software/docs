@@ -1232,7 +1232,7 @@
     "securitySchemes": {
       "bearerAuth": {
         "bearerFormat": "JWT",
-        "description": "Token returned by POST /api/auth/login, or an API key (`umami_…`) created under Settings → API keys (self-hosted only).",
+        "description": "Token returned by POST /api/auth/login, or an API key (`umami_\u2026`) created under Settings \u2192 API keys (self-hosted only).",
         "scheme": "bearer",
         "type": "http"
       },
@@ -6085,72 +6085,6 @@
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
         "x-umami-source": "src/app/api/boards/[boardId]/shares/contract.generated.ts"
-      }
-    },
-    "/api/config": {
-      "get": {
-        "description": "Returns public application settings, including deployment mode, feature availability, and tracker and resource URLs.",
-        "operationId": "getConfig",
-        "responses": {
-          "200": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "properties": {
-                    "cloudMode": {
-                      "type": "boolean"
-                    },
-                    "faviconUrl": {
-                      "type": "string"
-                    },
-                    "linksUrl": {
-                      "type": "string"
-                    },
-                    "pixelsUrl": {
-                      "type": "string"
-                    },
-                    "privateMode": {
-                      "type": "boolean"
-                    },
-                    "sessionDeletionEnabled": {
-                      "type": "boolean"
-                    },
-                    "telemetryDisabled": {
-                      "type": "boolean"
-                    },
-                    "trackerScriptName": {
-                      "type": "string"
-                    },
-                    "updatesDisabled": {
-                      "type": "boolean"
-                    }
-                  },
-                  "required": [
-                    "cloudMode",
-                    "faviconUrl",
-                    "linksUrl",
-                    "pixelsUrl",
-                    "privateMode",
-                    "sessionDeletionEnabled",
-                    "telemetryDisabled",
-                    "trackerScriptName",
-                    "updatesDisabled"
-                  ],
-                  "type": "object"
-                }
-              }
-            },
-            "description": "The operation completed successfully."
-          }
-        },
-        "security": [],
-        "summary": "Get application configuration",
-        "tags": [
-          "Configuration"
-        ],
-        "x-umami-audience": "internal",
-        "x-umami-contract": "explicit",
-        "x-umami-source": "src/app/api/config/contract.generated.ts"
       }
     },
     "/api/dashboard": {
@@ -44261,9 +44195,6 @@
     },
     {
       "name": "Collection"
-    },
-    {
-      "name": "Configuration"
     },
     {
       "name": "Dashboard"

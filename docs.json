@@ -880,16 +880,6 @@
                 ]
               },
               {
-                "group": "Configuration",
-                "pages": [
-                  {
-                    "page": "api-reference/get-config",
-                    "title": "Get application configuration",
-                    "method": "GET"
-                  }
-                ]
-              },
-              {
                 "group": "Dashboard",
                 "pages": [
                   {
