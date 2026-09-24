@@ -1232,7 +1232,7 @@
     "securitySchemes": {
       "bearerAuth": {
         "bearerFormat": "JWT",
-        "description": "Token returned by POST /api/auth/login, or an API key (`umami_\u2026`) created under Settings \u2192 API keys (self-hosted only).",
+        "description": "Token returned by POST /api/auth/login, or an API key (`umami_…`) created under Settings → API keys (self-hosted only).",
         "scheme": "bearer",
         "type": "http"
       },
@@ -1261,7 +1261,7 @@
       "name": "MIT"
     },
     "title": "Umami API",
-    "version": "3.3.1"
+    "version": "3.4.0"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -17284,11 +17284,11 @@
             }
           },
           {
-            "description": "When present, include websites accessible through owned or managed teams.",
+            "description": "When present, include websites accessible through team membership.",
             "in": "query",
             "name": "includeTeams",
             "schema": {
-              "description": "When present, include websites accessible through owned or managed teams.",
+              "description": "When present, include websites accessible through team membership.",
               "type": "string"
             }
           }
@@ -17744,7 +17744,7 @@
             "name": "startAt",
             "required": false,
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           },
           {
@@ -17753,7 +17753,7 @@
             "name": "endAt",
             "required": false,
             "schema": {
-              "type": "number"
+              "type": "integer"
             }
           },
           {
@@ -17793,6 +17793,31 @@
             "schema": {
               "minimum": 1,
               "type": "integer"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
             }
           }
         ],
@@ -19543,7 +19568,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -19552,7 +19577,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -19817,6 +19842,31 @@
             "schema": {
               "minimum": 1,
               "type": "integer"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
             }
           }
         ],
@@ -20006,7 +20056,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -20015,7 +20065,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -20308,6 +20358,31 @@
               "minimum": 1,
               "type": "integer"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -20488,7 +20563,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -20497,7 +20572,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -20769,6 +20844,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -20872,7 +20972,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -20881,7 +20981,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -21144,6 +21244,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -21243,7 +21368,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -21252,7 +21377,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -21538,6 +21663,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -21637,7 +21787,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -21646,7 +21796,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -21900,6 +22050,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -22012,7 +22187,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -22021,7 +22196,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -22293,6 +22468,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -22540,7 +22740,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -22549,7 +22749,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -22785,6 +22985,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -22898,7 +23123,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -22907,7 +23132,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -23152,6 +23377,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -23257,7 +23507,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -23266,7 +23516,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -23499,6 +23749,31 @@
               "enum": [
                 "all",
                 "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
               ],
               "type": "string"
             }
@@ -23612,7 +23887,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -23621,7 +23896,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -23857,6 +24132,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -23957,7 +24257,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -23966,7 +24266,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -24229,6 +24529,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -24383,6 +24708,30 @@
               "enum": [
                 "prev",
                 "yoy"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
               ],
               "type": "string"
             }
@@ -24718,7 +25067,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -24727,7 +25076,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -24987,6 +25336,31 @@
               "enum": [
                 "all",
                 "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
               ],
               "type": "string"
             }
@@ -30057,6 +30431,30 @@
             }
           },
           {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
+          },
+          {
             "description": "Dimension to rank: path, entry, exit, title, query, hostname, referrer, domain, channel, event, tag, browser, os, device, screen, language, country, region, city, distinctId, utmSource, utmMedium, utmCampaign, utmContent, utmTerm.",
             "in": "query",
             "name": "type",
@@ -30891,6 +31289,30 @@
               "enum": [
                 "prev",
                 "yoy"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
               ],
               "type": "string"
             }
@@ -36674,8 +37096,43 @@
                     "type": "string"
                   },
                   "parameters": {
-                    "additionalProperties": true,
                     "description": "Configuration parameters for the resource.",
+                    "properties": {
+                      "action": {
+                        "properties": {
+                          "type": {
+                            "type": "string"
+                          },
+                          "value": {
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "type",
+                          "value"
+                        ],
+                        "type": "object"
+                      },
+                      "dateRange": {
+                        "type": "string"
+                      },
+                      "filters": {
+                        "description": "Filters applied to the analytics data.",
+                        "items": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      "match": {
+                        "description": "Whether records must match all filters or any filter.",
+                        "enum": [
+                          "all",
+                          "any"
+                        ],
+                        "type": "string"
+                      }
+                    },
                     "type": "object"
                   },
                   "type": {
@@ -36888,7 +37345,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -36897,7 +37354,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -37190,6 +37647,31 @@
               "minimum": 1,
               "type": "integer"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -37360,7 +37842,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -37369,7 +37851,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -37632,6 +38114,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -37735,7 +38242,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -37744,7 +38251,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -37998,6 +38505,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -38097,7 +38629,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -38106,7 +38638,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -38383,6 +38915,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -38482,7 +39039,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -38491,7 +39048,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -38742,6 +39299,31 @@
               "enum": [
                 "all",
                 "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
               ],
               "type": "string"
             }
@@ -38857,7 +39439,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -38866,7 +39448,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -39108,6 +39690,31 @@
               "enum": [
                 "all",
                 "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
               ],
               "type": "string"
             }
@@ -39216,7 +39823,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -39225,7 +39832,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -39488,6 +40095,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -39591,7 +40223,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -39600,7 +40232,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -39860,6 +40492,31 @@
               "enum": [
                 "all",
                 "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
               ],
               "type": "string"
             }
@@ -39980,7 +40637,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -39989,7 +40646,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -40243,6 +40900,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -40397,6 +41079,30 @@
               "enum": [
                 "prev",
                 "yoy"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
               ],
               "type": "string"
             }
@@ -40725,6 +41431,8 @@
             "name": "websiteId",
             "required": true,
             "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
               "type": "string"
             }
           },
@@ -40734,6 +41442,8 @@
             "name": "sessionId",
             "required": true,
             "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
               "type": "string"
             }
           }
@@ -40743,16 +41453,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "properties": {
-                    "ok": {
-                      "const": true,
-                      "description": "Whether the operation succeeded."
-                    }
-                  },
-                  "required": [
-                    "ok"
-                  ],
-                  "type": "object"
+                  "$ref": "#/components/schemas/Ok"
                 }
               }
             },
@@ -40821,7 +41522,7 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-source": "src/app/api/websites/[websiteId]/sessions/[sessionId]/contract.generated.ts"
+        "x-umami-source": "src/app/api/websites/[websiteId]/sessions/[sessionId]/contract.ts"
       },
       "get": {
         "description": "Returns details for a website session, including linked visitor identities and whether session deletion is available to the caller.",
@@ -40833,6 +41534,8 @@
             "name": "websiteId",
             "required": true,
             "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
               "type": "string"
             }
           },
@@ -40842,6 +41545,8 @@
             "name": "sessionId",
             "required": true,
             "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
               "type": "string"
             }
           }
@@ -40851,12 +41556,144 @@
             "content": {
               "application/json": {
                 "schema": {
+                  "additionalProperties": {},
                   "properties": {
-                    "canDelete": {},
-                    "stitchedSessionCount": {}
+                    "browser": {
+                      "description": "Browser used by the visitor.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "canDelete": {
+                      "description": "Whether the caller can delete this session.",
+                      "type": "boolean"
+                    },
+                    "city": {
+                      "description": "City of the visitor.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "country": {
+                      "description": "Country code of the visitor.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "device": {
+                      "description": "Device category used by the visitor.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "distinctId": {
+                      "description": "Distinct ID of the session. Omitted unless exactly one distinct ID is linked.",
+                      "type": "string"
+                    },
+                    "distinctIds": {
+                      "description": "Distinct IDs linked to the session.",
+                      "items": {
+                        "type": "string"
+                      },
+                      "type": "array"
+                    },
+                    "events": {
+                      "type": "number"
+                    },
+                    "firstAt": {
+                      "description": "Date and time of the first recorded activity.",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                      "type": "string"
+                    },
+                    "id": {
+                      "description": "Unique identifier of the resource.",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                      "type": "string"
+                    },
+                    "language": {
+                      "description": "Preferred language reported by the visitor browser.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "lastAt": {
+                      "description": "Date and time of the most recent recorded activity.",
+                      "format": "date-time",
+                      "pattern": "^(?:(?:\\d\\d[2468][048]|\\d\\d[13579][26]|\\d\\d0[48]|[02468][048]00|[13579][26]00)-02-29|\\d{4}-(?:(?:0[13578]|1[02])-(?:0[1-9]|[12]\\d|3[01])|(?:0[469]|11)-(?:0[1-9]|[12]\\d|30)|(?:02)-(?:0[1-9]|1\\d|2[0-8])))T(?:(?:[01]\\d|2[0-3]):[0-5]\\d:[0-5]\\d(?:\\.\\d+)?(?:Z))$",
+                      "type": "string"
+                    },
+                    "os": {
+                      "description": "Operating system used by the visitor.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "region": {
+                      "description": "Region or subdivision of the visitor.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "screen": {
+                      "description": "Screen resolution of the visitor device.",
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "stitchedSessionCount": {
+                      "description": "Number of sessions merged through the distinct ID, including this one.",
+                      "maximum": 9007199254740991,
+                      "minimum": 0,
+                      "type": "integer"
+                    },
+                    "totaltime": {
+                      "description": "Total visit duration in seconds.",
+                      "type": "number"
+                    },
+                    "views": {
+                      "description": "Pageview counts for the selected period.",
+                      "type": "number"
+                    },
+                    "visits": {
+                      "description": "Visit counts for the selected period.",
+                      "type": "number"
+                    },
+                    "websiteId": {
+                      "description": "ID of the website.",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                      "type": "string"
+                    }
                   },
                   "required": [
+                    "id",
+                    "websiteId",
+                    "browser",
+                    "os",
+                    "device",
+                    "screen",
+                    "language",
+                    "country",
+                    "region",
+                    "city",
+                    "firstAt",
+                    "lastAt",
+                    "visits",
+                    "views",
+                    "events",
+                    "totaltime",
                     "canDelete",
+                    "distinctIds",
                     "stitchedSessionCount"
                   ],
                   "type": "object"
@@ -40915,7 +41752,7 @@
         ],
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
-        "x-umami-source": "src/app/api/websites/[websiteId]/sessions/[sessionId]/contract.generated.ts"
+        "x-umami-source": "src/app/api/websites/[websiteId]/sessions/[sessionId]/contract.ts"
       }
     },
     "/api/websites/{websiteId}/sessions/{sessionId}/activity": {
@@ -40945,7 +41782,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -40954,7 +41791,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -40965,6 +41802,31 @@
             "name": "distinctId",
             "required": false,
             "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
               "type": "string"
             }
           }
@@ -41586,7 +42448,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -41595,7 +42457,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -41831,6 +42693,31 @@
               ],
               "type": "string"
             }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -41916,7 +42803,7 @@
             "description": "Start of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "startAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -41925,7 +42812,7 @@
             "description": "End of the date range as a Unix timestamp in milliseconds.",
             "in": "query",
             "name": "endAt",
-            "required": true,
+            "required": false,
             "schema": {
               "type": "integer"
             }
@@ -42167,6 +43054,31 @@
               "enum": [
                 "all",
                 "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
               ],
               "type": "string"
             }
@@ -43001,6 +43913,30 @@
               "enum": [
                 "prev",
                 "yoy"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
               ],
               "type": "string"
             }
@@ -44083,6 +45019,31 @@
             "name": "timezone",
             "required": false,
             "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Relative date range, for example 7d or 30day, used instead of an explicit startAt/endAt range.",
+            "in": "query",
+            "name": "period",
+            "required": false,
+            "schema": {
+              "enum": [
+                "today",
+                "24h",
+                "7d",
+                "30d",
+                "0day",
+                "24hour",
+                "0week",
+                "7day",
+                "0month",
+                "30day",
+                "90day",
+                "0year",
+                "6month",
+                "12month"
+              ],
               "type": "string"
             }
           }
