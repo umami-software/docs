@@ -1,0 +1,112 @@
+---
+title: Payment Providers
+---
+
+Connect your Stripe account to a website to see your recurring revenue in Umami. Umami imports your
+Stripe invoices and shows your ARR (annual recurring revenue) over time, broken down into new,
+retained, resurrected, expansion, contraction, and churned revenue, along with year-over-year growth
+and an ARR roll-forward table.
+
+Setting up a payment provider takes three steps:
+
+1. [Create a read-only API key](#create-a-read-only-api-key) in Stripe.
+2. [Add the payment provider](#add-a-payment-provider) in Umami.
+3. Optionally, [set up a webhook](#set-up-live-updates-optional) for live updates.
+
+## Create a read-only API key
+
+Umami only needs to **read** your invoices, so always use a Stripe **restricted key** with read-only
+permissions. Never use your secret key (`sk_live_...`), which has full access to your Stripe
+account.
+
+<Callout title="Use a read-only key" variant="warning">
+
+A restricted key limits what Umami can do in your Stripe account. With read-only permissions, the
+key can't create charges, issue refunds, or change any data, even if it were exposed.
+
+</Callout>
+
+In the Stripe Dashboard, go to **Developers** → **API keys** and click **Create restricted key**.
+
+Give the key a name, such as `Umami`, then set the following permissions to **Read**:
+
+| Resource | Permission |
+| --- | --- |
+| Invoices | Read |
+| Events | Read |
+| Prices | Read |
+
+Leave every other permission set to **None**, then click **Create key**. Copy the key, which starts
+with `rk_live_`.
+
+## Add a payment provider
+
+Log into Umami and click on the side nav profile button then click **Settings**.
+
+![image](/images/cloud/navbar-settings.png)
+
+Navigate to **Payment providers** and click on the **Add payment provider** button.
+
+Fill out the form:
+
+- **Name**: a name to identify this provider, for example `Stripe`.
+- **Website**: the website this revenue belongs to.
+- **Provider**: `Stripe`.
+- **API key**: the restricted key you created above.
+
+Click **Save**. Umami immediately starts importing your full invoice history. Depending on how many
+invoices you have, this can take a few minutes. Click on the provider's name to view your revenue.
+
+## Keeping data up to date
+
+Umami refreshes your invoice data from Stripe **every 4 hours**. Each refresh picks up new invoices
+and changes to existing ones, such as an unpaid invoice that has since been paid or an invoice that
+was voided.
+
+To refresh right away, open the payment provider and click **Sync now**. The time of the last sync is
+shown next to the button.
+
+## Set up live updates (optional)
+
+If you want changes in Stripe to appear in Umami within seconds instead of on the next refresh, add a
+webhook in Stripe. This is optional. Without it, your data still refreshes every 4 hours.
+
+### 1. Copy your webhook URL
+
+In Umami, navigate to **Payment providers** and click the **Edit** button next to your provider.
+Copy the **Webhook URL**. Each payment provider has its own URL.
+
+### 2. Create the webhook in Stripe
+
+In the Stripe Dashboard, go to **Developers** → **Webhooks** and add an endpoint:
+
+- **Endpoint URL**: the webhook URL you copied from Umami.
+- **Events to send**: select these events:
+  - `invoice.created`
+  - `invoice.finalized`
+  - `invoice.paid`
+  - `invoice.payment_failed`
+  - `invoice.updated`
+  - `invoice.voided`
+  - `invoice.marked_uncollectible`
+
+Save the endpoint, then reveal and copy its **Signing secret**, which starts with `whsec_`.
+
+### 3. Add the signing secret to Umami
+
+Back in Umami, paste the signing secret into the **Webhook secret** field of your payment provider
+and click **Save**. Umami uses the secret to verify that webhook requests come from Stripe.
+
+## Edit or delete a payment provider
+
+Navigate to **Payment providers** and click on the **Edit** button or **Delete** button next to your
+payment provider. When editing, leave the **API key** or **Webhook secret** field blank to keep the
+current value.
+
+<Callout title="Note">
+
+Deleting a payment provider in Umami doesn't change anything in your Stripe account. If you set up a
+webhook, delete it in Stripe under **Developers** → **Webhooks**, and roll or delete the restricted
+key under **Developers** → **API keys**.
+
+</Callout>

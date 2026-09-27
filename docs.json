@@ -1762,6 +1762,10 @@
                 "title": "IP Filters"
               },
               {
+                "page": "cloud/payment-providers",
+                "title": "Payment Providers"
+              },
+              {
                 "page": "cloud/white-label",
                 "title": "White-label"
               },
