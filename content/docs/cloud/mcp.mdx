@@ -5,6 +5,8 @@ description: Connect Claude, ChatGPT, Cursor, and other AI tools to your Umami C
 
 Umami Cloud provides a remote [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server. It lets AI tools like Claude, ChatGPT, and Cursor answer questions about your website traffic in natural language.
 
+Self-hosting Umami? See [MCP](/docs/mcp) for self-hosted setup.
+
 All tools are read-only. The MCP server calls the same Cloud API as the dashboard, so it respects your existing website and team permissions. It never accesses your data directly.
 
 ## Connect
@@ -58,49 +60,13 @@ If your client only supports local `stdio` servers, you can run the `@umami/mcp`
 }
 ```
 
-## Tools
+## Tools and example prompts
 
-| Tool | Purpose |
-| --- | --- |
-| `list_websites` | Find the websites you can access (call first to get a `websiteId`). |
-| `get_website_daterange` | Earliest and latest dates with recorded data. |
-| `get_website_stats` | Pageviews, visitors, visits, bounce rate, duration, and previous period. |
-| `get_website_traffic` | Pageview and visit time series by minute, hour, day, month, or year. |
-| `get_website_metrics` | Top pages, referrers, channels, countries, browsers, devices, UTM, and events. |
-| `get_realtime` | Visitors active right now. |
-| `get_events` | Individual tracked events (paginated). |
-| `get_event_stats` | Custom event totals and previous period. |
-| `get_event_series` | Custom event counts over time, grouped by event name. |
-| `get_event_properties` | Custom event property names, or the values of one property. |
-| `get_sessions` | Visitor sessions (paginated). |
-| `get_session` | One session with its activity timeline and properties. |
-| `get_session_stats` | Session-level totals: visitors, visits, pageviews, events, countries. |
-| `get_annotations` | Dated notes on the timeline (launches, campaigns) that explain changes. |
-| `list_segments` | Saved segments and cohorts; pass IDs via `filters.segment` or `filters.cohort`. |
-| `list_funnels` | Saved funnels with their steps. |
-| `run_funnel` | Conversion funnel from a saved `funnelId` or ad-hoc page and event steps. |
-| `get_goals` | Saved goals with conversions, visitors, and rate for a date range. |
-| `run_journey` | Most common paths visitors take. |
-| `run_retention` | Cohort retention table. |
-| `run_attribution` | First-click or last-click attribution for a conversion. |
-| `get_revenue` | Revenue totals, series, and breakdowns. |
-| `get_performance` | Core Web Vitals (LCP, INP, CLS, FCP, TTFB) percentiles, trend, and breakdown. |
+Cloud and self-hosted instances expose the same tools. See [MCP](/docs/mcp) for the full tool list, example prompts mapped to each tool, and limitations.
 
-Dates are ISO 8601. Results are paginated with a hard cap on page size.
+## Plan requirements
 
-## Example prompts
-
-- Show my websites.
-- How many visitors did example.com get last week?
-- What were the top 10 pages this month?
-- Compare traffic this month with the previous month.
-- Where is traffic coming from?
-- What signup events occurred yesterday?
-- Which pricing plans did people select in the checkout event last month?
-- Run my checkout funnel for last month.
-- How are we doing against our goals this quarter?
-- Which pages have the worst LCP on mobile?
-- What happened on the day traffic spiked?
+MCP uses Cloud API keys, which are available on the Pro, Business, and Enterprise plans. See [pricing](https://umami.is/pricing).
 
 ## Revoking access
 

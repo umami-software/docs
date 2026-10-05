@@ -1,0 +1,165 @@
+---
+title: MCP
+description: Connect Claude, ChatGPT, Cursor, and other AI tools to your Umami analytics with the official Model Context Protocol server, on Umami Cloud or a self-hosted instance.
+related:
+  - href: https://umami.is/blog/introducing-umami-mcp
+    title: "Introducing Umami MCP: Your Analytics, in Conversation"
+---
+
+*Available since v3.4.0*
+
+Umami provides an official [Model Context Protocol](https://modelcontextprotocol.io) (MCP) server. It lets MCP clients such as Claude, ChatGPT, and Cursor query your analytics so you can ask questions about traffic, events, funnels, and retention in natural language.
+
+This page answers three questions: how to connect, which questions the server can answer, and what it cannot do.
+
+## How it works
+
+- **Read-only.** Every tool retrieves data. No tool can change settings, create websites, or delete data.
+- **Same permissions as the API.** Each tool calls the Umami API, so it respects the website and team permissions of the API key you connect with. The MCP server never accesses the database directly.
+- **Your assistant does the reasoning.** Umami supplies the tools and the data. The AI application you connect decides which tools to call and writes the answer, and query results are returned to that application.
+
+## Requirements
+
+| | Umami Cloud | Self-hosted |
+| --- | --- | --- |
+| Availability | Pro, Business, and Enterprise plans | v3.4.0 or later |
+| Endpoint | `https://cloud.umami.is/mcp` | `https://<your-umami-instance>/mcp` |
+| Enabled by default | Yes | No. Set `MCP_ENABLED=1` |
+| Authentication | Cloud [API key](/docs/cloud/api-key) (`api_` prefix) | API key from **Settings → API keys** (`umami_` prefix) |
+
+You also need an MCP client that supports a remote Streamable HTTP server with a bearer token or custom headers, or one that can run a local `stdio` server.
+
+## Connect to Umami Cloud
+
+See [Cloud MCP](/docs/cloud/mcp) for the Cloud endpoint, authentication headers, and client configuration.
+
+## Connect to a self-hosted instance
+
+### Step 1: Enable the endpoint
+
+MCP is disabled by default on self-hosted instances. Set the following [environment variable](/docs/environment-variables) and restart Umami:
+
+```text
+MCP_ENABLED=1
+```
+
+### Step 2: Create an API key
+
+Log in, open **Settings → API keys**, and create a key. Copy the complete key, including its `umami_` prefix. Browser login tokens are not accepted by the remote endpoint.
+
+### Step 3: Configure your MCP client
+
+Add a remote server that points to your instance's `/mcp` endpoint and sends the key as a bearer token:
+
+```json
+{
+  "mcpServers": {
+    "umami": {
+      "url": "https://your-umami.example.com/mcp",
+      "headers": {
+        "Authorization": "Bearer umami_<your-api-key>"
+      }
+    }
+  }
+}
+```
+
+### Step 4: Test the connection
+
+Ask your assistant: **"Show my websites."** It should call `list_websites` and return the websites the key owner can access.
+
+## Run the server locally
+
+If your client only supports local `stdio` servers, run the [`@umami/mcp`](https://github.com/umami-software/umami/tree/master/packages/mcp) package with `npx`:
+
+```json
+{
+  "mcpServers": {
+    "umami": {
+      "command": "npx",
+      "args": ["-y", "@umami/mcp"],
+      "env": {
+        "UMAMI_URL": "https://your-umami.example.com",
+        "UMAMI_API_TOKEN": "umami_<your-api-key>"
+      }
+    }
+  }
+}
+```
+
+| Variable | Description |
+| --- | --- |
+| `UMAMI_URL` | Self-hosted instance URL (`/api` is appended). |
+| `UMAMI_API_URL` | Full API base URL, used instead of `UMAMI_URL`. |
+| `UMAMI_API_TOKEN` | Self-hosted API key or login token. |
+| `UMAMI_API_KEY` | Umami Cloud API key. Omit `UMAMI_URL` and `UMAMI_API_TOKEN` when using this. |
+
+## Tools
+
+| Tool | Purpose |
+| --- | --- |
+| `list_websites` | Find the websites you can access (call first to get a `websiteId`). |
+| `get_website_daterange` | Earliest and latest dates with recorded data. |
+| `get_website_stats` | Pageviews, visitors, visits, bounce rate, duration, and previous period. |
+| `get_website_traffic` | Pageview and visit time series by minute, hour, day, month, or year. |
+| `get_website_metrics` | Top pages, referrers, channels, countries, browsers, devices, UTM, and events. |
+| `get_realtime` | Visitors active right now. |
+| `get_events` | Individual tracked events (paginated). |
+| `get_event_stats` | Custom event totals and previous period. |
+| `get_event_series` | Custom event counts over time, grouped by event name. |
+| `get_event_properties` | Custom event property names, or the values of one property. |
+| `get_sessions` | Visitor sessions (paginated). |
+| `get_session` | One session with its activity timeline and properties. |
+| `get_session_stats` | Session-level totals: visitors, visits, pageviews, events, countries. |
+| `get_annotations` | Dated notes on the timeline (launches, campaigns) that explain changes. |
+| `list_segments` | Saved segments and cohorts; pass IDs via `filters.segment` or `filters.cohort`. |
+| `list_funnels` | Saved funnels with their steps. |
+| `run_funnel` | Conversion funnel from a saved `funnelId` or ad-hoc page and event steps. |
+| `get_goals` | Saved goals with conversions, visitors, and rate for a date range. |
+| `run_journey` | Most common paths visitors take. |
+| `run_retention` | Cohort retention table. |
+| `run_attribution` | First-click or last-click attribution for a conversion. |
+| `get_revenue` | Revenue totals, series, and breakdowns. |
+| `get_performance` | Core Web Vitals (LCP, INP, CLS, FCP, TTFB) percentiles, trend, and breakdown. |
+
+Dates are ISO 8601. Results are paginated with a hard cap on page size.
+
+## Example prompts
+
+Each prompt maps to one or more of the tools above.
+
+| Prompt | Tools used |
+| --- | --- |
+| Show my websites. | `list_websites` |
+| How many visitors did example.com get last week, compared with the week before? | `get_website_stats` |
+| What were the top 10 pages this month? | `get_website_metrics` |
+| Where is traffic coming from? | `get_website_metrics` |
+| How many signup events fired each day this week? | `get_event_series` |
+| Which pricing plans did people select in the checkout event last month? | `get_event_properties` |
+| Run my checkout funnel for last month. Where is the largest drop-off? | `list_funnels`, `run_funnel` |
+| What are the most common paths after the pricing page? | `run_journey` |
+| How many visitors who first arrived this month came back? | `run_retention` |
+| How are we doing against our goals this quarter? | `get_goals` |
+| Which pages have the worst LCP on mobile? | `get_performance` |
+| What happened on the day traffic spiked? | `get_website_traffic`, `get_annotations` |
+
+## Interpreting results
+
+- Answers are only as complete as your tracking. Event, revenue, and performance questions depend on what your website records, and funnel, goal, and annotation questions depend on what you have saved.
+- Ask the assistant to state the website, date range, and filters it used. This makes it easier to check an answer against the matching report in Umami.
+- For large date ranges, results are paginated. Ask for a narrower range or a specific breakdown instead of every row.
+
+## Limitations
+
+- The tools are read-only. The server cannot create or edit websites, funnels, goals, segments, boards, or any other setting.
+- Tool coverage is the list above. Session replay recordings, heatmaps, and boards are not available through MCP.
+- On Umami Cloud, requests are subject to the same subscription requirements and rate limits as the Cloud API.
+- The server does not include an AI model. The quality of an answer depends on the assistant you connect.
+
+## Official and community projects
+
+The server described here is maintained by Umami in the [main repository](https://github.com/umami-software/umami/tree/master/packages/mcp) and published as `@umami/mcp`. Any other MCP server for Umami is a community project. Community servers are not maintained by Umami and may expose different tools or require different credentials.
+
+## Revoking access
+
+Access is tied to the API key. To disconnect an AI tool, delete the key under **Settings → API keys**.

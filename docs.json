@@ -11,7 +11,7 @@
     "directory": "api-reference"
   },
   "name": "umami",
-  "description": "Documentation for Umami, a modern privacy-first analytics platform.",
+  "description": "Documentation for Umami, an open-source web and product analytics platform.",
   "logo": {
     "light": "/logo.svg",
     "dark": "/logo.svg",
@@ -188,7 +188,6 @@
               },
               {
                 "page": "about",
-                "hidden": true,
                 "title": "About"
               },
               {
@@ -431,6 +430,10 @@
               {
                 "page": "integrations",
                 "title": "Integrations"
+              },
+              {
+                "page": "mcp",
+                "title": "MCP"
               }
             ]
           },

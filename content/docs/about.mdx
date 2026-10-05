@@ -1,24 +1,64 @@
 ---
 title: About
+description: What Umami is, what you can use it for, how Umami Cloud and self-hosting differ, and where to find each feature in the documentation.
 ---
 
-## What is Umami Analytics?
+## What is Umami?
 
-Umami is an open source, privacy-first alternative to Google Analytics.
-Umami provides you with a powerful web analytics solution that does not violate the privacy of your users.
-Additionally, when you self-host Umami you are in complete control of your data.
+Umami is an open-source web and product analytics platform. It measures how people find your website or product, what they do there, whether they convert, and whether they come back.
+
+Umami collects data without cookies and does not collect personal data automatically. You can use the managed service, [Umami Cloud](/docs/cloud), or self-host the open-source platform on your own infrastructure and keep full control of your data.
 
 ![image](/images/docs/screenshot.png)
 
-## Key features
+## What you can use it for
 
-- **Privacy-first** - No cookies, no personal data collection, GDPR and CCPA compliant out of the box.
-- **Lightweight tracking** - A small tracking script that won't slow down your website.
-- **Custom events** - Track any user action beyond pageviews with custom event data.
-- **Boards** - Build custom dashboards to visualize the metrics that matter most.
-- **Insights** - Built-in reports including funnels, retention, UTM tracking, goals, and more.
-- **Session replay** - Record and replay user sessions to understand behavior in context.
-- **Performance monitoring** - Track Core Web Vitals and other performance metrics.
-- **Teams** - Share access and collaborate with your team members.
-- **API** - Full API access for building custom integrations and automations.
-- **Self-hosted or cloud** - Run on your own infrastructure or use [Umami Cloud](/docs/cloud).
+- **Understand acquisition.** See pageviews, visitors, referrers, channels, locations, and devices, and measure campaigns with [UTM parameters](/docs/utm), [links](/docs/links), [pixels](/docs/pixels), and [attribution](/docs/attribution).
+- **Analyze behavior.** Track actions with [custom events](/docs/track-events) and event properties, explore the paths people take with [journeys](/docs/journey), and inspect individual [sessions](/docs/sessions).
+- **Measure conversion.** Define [goals](/docs/goals), build [funnels](/docs/funnel) to find where people drop off, and connect outcomes to [revenue](/docs/revenue).
+- **Measure retention.** Use the [retention](/docs/retention) report to see how often visitors return, and compare groups with [segments](/docs/segments) and [cohorts](/docs/cohorts).
+- **Investigate interactions.** Watch [session replays](/docs/replays) and view click and scroll [heatmaps](/docs/heatmaps).
+- **Monitor performance.** Track Core Web Vitals with the [performance](/docs/performance) report.
+- **Share and extend.** Build dashboards with [boards](/docs/using-boards), collaborate through [teams](/docs/using-teams), add context with [annotations](/docs/annotations), use the [API](/docs/api), or connect an AI assistant through the official [MCP server](/docs/mcp).
+
+## Does Umami support product analytics?
+
+Yes. Custom events, funnels, goals, journeys, retention, segments, and cohorts are built in and use the same tracker as web analytics.
+
+By default, Umami identifies visitors with an anonymous session identifier and no cookies, so a person who changes device or browser appears as a new visitor. To connect the sessions of a logged-in user, set a [distinct ID](/docs/distinct-ids).
+
+Umami does not include feature flags, surveys, or a built-in experimentation engine. You can measure A/B tests by [tagging variants](/docs/guides/setup-ab-testing).
+
+## Umami Cloud and self-hosted
+
+The open-source platform and Umami Cloud share the same analytics features. They differ in who runs the infrastructure, and some Cloud features depend on your plan.
+
+| Capability | Umami Cloud | Self-hosted |
+| --- | --- | --- |
+| Web analytics, custom events, and event properties | All plans | Included |
+| Funnels, goals, journeys, retention, UTM, revenue, and attribution | All plans | Included |
+| Segments and cohorts | All plans | Included (v3.0 or later) |
+| Boards | All plans | Included (v3.1 or later) |
+| Teams | Pro, Business, and Enterprise | Included |
+| API access | Pro, Business, and Enterprise | Included |
+| [MCP](/docs/mcp) | Pro, Business, and Enterprise | Included (v3.4 or later, disabled by default) |
+| Session replays | Business and Enterprise | Included (v3.1 or later) |
+| Heatmaps | Business and Enterprise | Included (v3.2 or later) |
+| [Email reports](/docs/cloud/email-reports) | Pro, Business, and Enterprise | Cloud only |
+| Hosting, updates, backups, and scaling | Managed by Umami | Managed by you |
+
+Cloud plans also differ in event volume, data retention, and the number of websites and team members. See [pricing](https://umami.is/pricing) for current limits. Each feature page in these docs notes the version in which the feature became available.
+
+## Privacy
+
+- **No cookies.** The tracker does not use cookies.
+- **No automatic personal data collection.** Umami does not collect personally identifiable information by default. Data you choose to send, such as a distinct ID or event properties, is your responsibility.
+- **Your data stays yours.** When you self-host, your analytics data lives on your own infrastructure.
+
+See the [FAQ](/docs/faq) for common privacy questions.
+
+## Next steps
+
+- [Install Umami](/docs/install) or [sign up for Umami Cloud](https://cloud.umami.is/signup?ref=umami-docs-about).
+- [Add a website](/docs/add-a-website) and [collect data](/docs/collect-data).
+- [Track events](/docs/track-events) for the actions that matter to you.
