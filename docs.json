@@ -226,10 +226,6 @@
                 "title": "Environment variables"
               },
               {
-                "page": "mcp",
-                "title": "Enable MCP"
-              },
-              {
                 "page": "enable-cloudflare-headers",
                 "title": "Enable Cloudflare headers"
               },
