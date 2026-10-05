@@ -226,6 +226,10 @@
                 "title": "Environment variables"
               },
               {
+                "page": "mcp",
+                "title": "Enable MCP"
+              },
+              {
                 "page": "enable-cloudflare-headers",
                 "title": "Enable Cloudflare headers"
               },
@@ -798,6 +802,16 @@
                 ]
               },
               {
+                "group": "Attribution",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-attribution",
+                    "title": "Get website attribution",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
                 "group": "Boards",
                 "pages": [
                   {
@@ -843,6 +857,16 @@
                 ]
               },
               {
+                "group": "Breakdown",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-breakdown",
+                    "title": "Get website breakdown",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
                 "group": "Collection",
                 "pages": [
                   {
@@ -859,16 +883,6 @@
                     "page": "api-reference/send",
                     "title": "Send tracking data",
                     "method": "POST"
-                  }
-                ]
-              },
-              {
-                "group": "Configuration",
-                "pages": [
-                  {
-                    "page": "api-reference/get-config",
-                    "title": "Get application configuration",
-                    "method": "GET"
                   }
                 ]
               },
@@ -1058,6 +1072,26 @@
                 ]
               },
               {
+                "group": "Heatmaps",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-heatmaps",
+                    "title": "Get website heatmaps",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
+                "group": "Journeys",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-journeys",
+                    "title": "Get website journeys",
+                    "method": "GET"
+                  }
+                ]
+              },
+              {
                 "group": "Links",
                 "pages": [
                   {
@@ -1168,46 +1202,21 @@
                 ]
               },
               {
-                "group": "Realtime",
+                "group": "Retention",
                 "pages": [
                   {
-                    "page": "api-reference/get-realtime",
-                    "title": "Get real-time website activity",
+                    "page": "api-reference/get-website-retention",
+                    "title": "Get website retention",
                     "method": "GET"
                   }
                 ]
               },
               {
-                "group": "Reports",
+                "group": "Realtime",
                 "pages": [
                   {
-                    "page": "api-reference/get-website-attribution",
-                    "title": "Get website attribution",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-breakdown",
-                    "title": "Get website breakdown",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-heatmaps",
-                    "title": "Get website heatmaps",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-journeys",
-                    "title": "Get website journeys",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-retention",
-                    "title": "Get website retention",
-                    "method": "GET"
-                  },
-                  {
-                    "page": "api-reference/get-website-utm-metrics",
-                    "title": "Get website utm metrics",
+                    "page": "api-reference/get-realtime",
+                    "title": "Get real-time website activity",
                     "method": "GET"
                   }
                 ]
@@ -1624,6 +1633,16 @@
                     "page": "api-reference/update-user",
                     "title": "Update a user",
                     "method": "POST"
+                  }
+                ]
+              },
+              {
+                "group": "UTM",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-utm-metrics",
+                    "title": "Get website utm metrics",
+                    "method": "GET"
                   }
                 ]
               },

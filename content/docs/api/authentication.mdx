@@ -2,10 +2,45 @@
 title: Authentication
 ---
 
-The following authentication method is only for self-hosted Umami. For **Umami Cloud**, you simply
-need to generate an [API key](/docs/cloud/api-key).
+Self-hosted Umami supports two ways to authenticate API requests. **API keys** are the recommended method. Username and password authentication is still supported as an alternative.
 
-## POST /api/auth/login
+For **Umami Cloud**, API keys are the only authentication method. See [API key](/docs/cloud/api-key).
+
+## API keys (recommended)
+
+API keys are long-lived credentials that are ideal for programmatic access. They don't expire and can be revoked individually.
+
+### Create a key
+
+Generate a key from the app by clicking your profile icon, selecting **Settings**, and navigating to **API keys**. Click **Create key** and save the value — it is only shown once.
+
+You can also create, list, and delete keys programmatically:
+
+- [Create an API key](/docs/api-reference/create-my-api-key)
+- [List my API keys](/docs/api-reference/get-my-api-keys)
+- [Delete an API key](/docs/api-reference/delete-my-api-key)
+
+### Using your key
+
+Pass the key with an `Authorization` header using the Bearer authentication scheme.
+
+```http request
+Authorization: Bearer <api-key>
+```
+
+For example, with `curl` it would look like this:
+
+```shell
+curl https://{yourserver}/api/websites \
+   -H "Accept: application/json" \
+   -H "Authorization: Bearer <api-key>"
+```
+
+## Username and password (alternative)
+
+If you prefer, you can still authenticate by exchanging your username and password for a temporary token.
+
+### POST /api/auth/login
 
 First you need to get a _token_ in order to make API requests. You need to make a
 `POST` request to the `/api/auth/login` endpoint with the following data:
@@ -48,9 +83,7 @@ curl https://{yourserver}/api/websites \
 
 The authorization token is expected with every API call that requires permissions.
 
----
-
-## POST /api/auth/verify
+### POST /api/auth/verify
 
 You can verify if the token is still valid.
 

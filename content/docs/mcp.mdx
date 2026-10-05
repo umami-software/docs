@@ -43,13 +43,17 @@ MCP is disabled by default on self-hosted instances. Set the following [environm
 MCP_ENABLED=1
 ```
 
+For Docker Compose deployments, add `MCP_ENABLED=1` to the `umami` service environment and run `docker compose up -d` to recreate the container.
+
 ### Step 2: Create an API key
 
-Log in, open **Settings → API keys**, and create a key. Copy the complete key, including its `umami_` prefix. Browser login tokens are not accepted by the remote endpoint.
+Create an [API key](/docs/api/authentication#api-keys-recommended) from your profile menu: select **Settings**, open **API keys**, and click **Create key**. Save the complete key, including its `umami_` prefix, when it is shown; it is only displayed once. Browser login tokens are not accepted by the remote endpoint.
 
 ### Step 3: Configure your MCP client
 
-Add a remote server that points to your instance's `/mcp` endpoint and sends the key as a bearer token:
+Your MCP endpoint is the public URL of your Umami instance followed by `/mcp`. If your instance uses a [base path](/docs/environment-variables#base_path), include it in the endpoint, for example `https://your-umami.example.com/umami/mcp`.
+
+Add a remote server that points to this endpoint and sends the key as a bearer token:
 
 ```json
 {
@@ -63,6 +67,8 @@ Add a remote server that points to your instance's `/mcp` endpoint and sends the
   }
 }
 ```
+
+The exact configuration screen and format vary by client. Keep the API key private: the analytics returned by MCP are shared with the AI application to answer your questions.
 
 ### Step 4: Test the connection
 
@@ -86,6 +92,8 @@ If your client only supports local `stdio` servers, run the [`@umami/mcp`](https
   }
 }
 ```
+
+This configuration connects to Umami's API rather than the remote `/mcp` endpoint. Do not include `/api` in `UMAMI_URL`.
 
 | Variable | Description |
 | --- | --- |
@@ -122,7 +130,7 @@ If your client only supports local `stdio` servers, run the [`@umami/mcp`](https
 | `get_revenue` | Revenue totals, series, and breakdowns. |
 | `get_performance` | Core Web Vitals (LCP, INP, CLS, FCP, TTFB) percentiles, trend, and breakdown. |
 
-Dates are ISO 8601. Results are paginated with a hard cap on page size.
+Dates use ISO 8601. Results that return individual events or sessions are paginated and have a maximum page size.
 
 ## Example prompts
 
