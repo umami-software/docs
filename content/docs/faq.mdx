@@ -37,7 +37,11 @@ For self-hosted installations, data is retained indefinitely unless you manually
 
 ### 9. Does Umami support product analytics?
 
-Yes. Umami is an open-source web and product analytics platform. In addition to traffic and campaign reporting, it includes [custom events](/docs/track-events), [funnels](/docs/funnel), [goals](/docs/goals), [journeys](/docs/journey), [retention](/docs/retention), [segments](/docs/segments), [cohorts](/docs/cohorts), [session replays](/docs/replays), and [heatmaps](/docs/heatmaps). See [About](/docs/about) for where Umami Cloud and self-hosted availability differ.
+Yes. Umami is an open-source web and product analytics platform. In addition to traffic and campaign reporting, it includes [custom events](/docs/track-events), [funnels](/docs/funnel), [goals](/docs/goals), [journeys](/docs/journey), [retention](/docs/retention), [segments](/docs/segments), [cohorts](/docs/cohorts), [session replays](/docs/replays), and [heatmaps](/docs/heatmaps). These features use the same tracker as web analytics. See [Umami Cloud and self-hosted](/docs/cloud#umami-cloud-and-self-hosted) for availability differences.
+
+By default, Umami identifies visitorswith an anonymous session identifier and no cookies, so a person who changes device or browser appears as a new visitor. To connect the sessions of a logged-in user, set a [distinct ID](/docs/distinct-ids).
+
+Umami does not include feature flags, surveys, or a built-in experimentation engine. You can measure A/B tests by [tagging variants](/docs/guides/setup-ab-testing).
 
 ### 10. Can I query Umami from an AI assistant?
 
