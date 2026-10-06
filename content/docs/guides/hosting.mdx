@@ -1,9 +1,10 @@
 ---
 title: Hosting
+description: An overview of ways to host Umami, from a single server to app hosting providers, plus managed PostgreSQL database providers you can use.
 ---
 
 There are many ways you can get Umami up and running.
-All you need is a database [PostgreSQL](https://www.postgresql.org/) and server that can run [Node.js](https://nodejs.org/) (18.18 or newer).
+All you need is a [PostgreSQL](https://www.postgresql.org/) database and a server that can run [Node.js](https://nodejs.org/) (18.18 or newer).
 
 ## Single server
 
@@ -28,7 +29,7 @@ that the app could connect to. Here are a few app hosting providers that can hos
 - [Northflank](https://northflank.com/)
 - [Railway](https://railway.app/)
 
-For the deployment, the build command is `npm run build` and the publish directory is `.next`.
+For the deployment, the build command is `pnpm build` and the publish directory is `.next`.
 
 ## Managed databases
 
@@ -46,4 +47,3 @@ providers for managed databases.
 - [Railway](https://docs.railway.app/databases/postgresql/)
 - [Neon](https://neon.com)
 - [Supabase](https://supabase.com/database)
-- [PlanetScale](https://planetscale.com/)

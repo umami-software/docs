@@ -128,7 +128,7 @@ This configuration connects to Umami's API rather than the remote `/mcp` endpoin
 | `run_retention` | Cohort retention table. |
 | `run_attribution` | First-click or last-click attribution for a conversion. |
 | `get_revenue` | Revenue totals, series, and breakdowns. |
-| `get_performance` | Core Web Vitals (LCP, INP, CLS, FCP, TTFB) percentiles, trend, and breakdown. |
+| `get_performance` | Web Vitals (LCP, INP, CLS, FCP, TTFB) percentiles, trend, and breakdown. |
 
 Dates use ISO 8601. Results that return individual events or sessions are paginated and have a maximum page size.
 
@@ -155,7 +155,7 @@ Each prompt maps to one or more of the tools above.
 
 - Answers are only as complete as your tracking. Event, revenue, and performance questions depend on what your website records, and funnel, goal, and annotation questions depend on what you have saved.
 - Ask the assistant to state the website, date range, and filters it used. This makes it easier to check an answer against the matching report in Umami.
-- For large date ranges, results are paginated. Ask for a narrower range or a specific breakdown instead of every row.
+- Results that return individual events or sessions are paginated. For large date ranges, ask for a narrower range or a specific breakdown instead of every row.
 
 ## Limitations
 

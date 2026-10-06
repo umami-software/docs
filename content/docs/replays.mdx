@@ -1,5 +1,6 @@
 ---
 title: Replays
+description: Enable session replays in Umami, add the recorder script to your website, and watch and save recordings of real visitor sessions.
 related:
   - href: https://umami.is/guides/session-replay-analysis
     title: How to Use Session Replay to Find Out Why Visitors Get Stuck
@@ -20,7 +21,7 @@ Click on the **Edit** button for the website you want to edit.
 
 ![image](/images/docs/website-edit.png)
 
-Navigate to the **Replays & Heatmaps** section and click on the **Replays**toggle.
+Navigate to the **Replays & Heatmaps** section and click on the **Replays** toggle.
 
 ![image](/images/docs/replay-edit.png)
 
@@ -31,12 +32,13 @@ Navigate to the **Replays & Heatmaps** section and click on the **Replays**toggl
 | Max Duration | Maximum recording length in milliseconds. Recording stops automatically when reached. | `300000` (5 min) |
 | Block Selector | CSS selector for elements to fully exclude from recording (e.g., `.sensitive-widget`). | none |
 
-You will also need to update your tracker script to opt in to replay collection.
+You will also need to add the recorder script to your website. The recorder is a separate script that you add in addition to your existing Umami tracker script, using the same website ID.
 
 ```html
 <script
-  defer src="http://localhost:3000/recorder.js"
-  data-website-id="my-website-id"
+  defer
+  src="http://mywebsite.com/recorder.js"
+  data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
 ></script>
 ```
 
@@ -59,18 +61,18 @@ You will also need to update your tracker script to opt in to replay collection.
 
 Clicking the play button opens the replay player. The player shows a real-time recreation of the visitor's session, including:
 
-![image](/images/docs/replay-player.png)
-
 - Mouse movement and clicks
 - Scroll behavior
 - Page navigations
 - Form interactions (inputs are masked by default)
 
+![image](/images/docs/replay-player.png)
+
 ## Saving Replays
 
 You can mark individual replays as saved to flag them for quick access and easy rewatching of important sessions.
 
-Open a replay and click the **Save** button in the player toolbar and give it a name.
+Open a replay and click **Save** in the player toolbar, then give it a name.
 
 ![image](/images/docs/replay-save.png)
 

@@ -1,13 +1,14 @@
 ---
 title: Sending stats
+description: Send pageviews, custom events, and visitor data to Umami directly over HTTP with the /api/send and /api/batch endpoints.
 ---
 
 ## POST /api/send
 
+For **Umami Cloud** send a POST to `https://gateway.umami.is/api/send`.
+
 To register an `event`, you need to send a `POST` to `/api/send` with
 the following data:
-
-For **Umami Cloud** send a POST to `https://cloud.umami.is/api/send`.
 
 **Parameters**
 
@@ -20,7 +21,7 @@ For **Umami Cloud** send a POST to `https://cloud.umami.is/api/send`.
 | `payload.referrer` | string | Referrer URL. |
 | `payload.title` | string | Page title. |
 | `payload.tag` | string | Additional tag description. |
-| `payload.id` | string | Session identifier. |
+| `payload.id` | string | Distinct ID used to identify the visitor. See [Distinct IDs](/docs/distinct-ids). |
 | `payload.website` | string | Website ID. |
 | `payload.name` | string | Name of the event. |
 | `payload.data` | object | (optional) Additional data for the event. |

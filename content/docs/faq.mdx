@@ -1,5 +1,6 @@
 ---
 title: FAQ
+description: Answers to common questions about Umami, including GDPR compliance, cookies, collected data, self-hosting, supported databases, and data retention.
 ---
 
 ### 1. Is Umami GDPR compliant?
@@ -17,11 +18,11 @@ Yes, Umami automatically tracks page navigations in SPAs without any additional 
 
 ### 4. Can Umami record events such as button clicks?
 
-Yes, please see [Track Events](/docs/track-events) under **Getting Started**.
+Yes, please see [Track Events](/docs/track-events) under **Tracking**.
 
 ### 5. What data does Umami collect?
 
-Umami collects page views, referrer URLs, browsers, operating systems, device types, and country of origin. All data is anonymized and no personally identifiable information is stored. See [Metric definitions](/docs/metric-definitions) for a full list.
+Umami collects pageviews, referrer URLs, browsers, operating systems, device types, and country of origin. All data is anonymized and no personally identifiable information is stored. See [Metric definitions](/docs/metric-definitions) for a full list.
 
 ### 6. Can I self-host Umami?
 
@@ -39,7 +40,7 @@ For self-hosted installations, data is retained indefinitely unless you manually
 
 Yes. Umami is an open-source web and product analytics platform. In addition to traffic and campaign reporting, it includes [custom events](/docs/track-events), [funnels](/docs/funnel), [goals](/docs/goals), [journeys](/docs/journey), [retention](/docs/retention), [segments](/docs/segments), [cohorts](/docs/cohorts), [session replays](/docs/replays), and [heatmaps](/docs/heatmaps). These features use the same tracker as web analytics. See [Umami Cloud and self-hosted](/docs/cloud#umami-cloud-and-self-hosted) for availability differences.
 
-By default, Umami identifies visitorswith an anonymous session identifier and no cookies, so a person who changes device or browser appears as a new visitor. To connect the sessions of a logged-in user, set a [distinct ID](/docs/distinct-ids).
+By default, Umami identifies visitors with an anonymous session identifier and no cookies, so a person who changes device or browser appears as a new visitor. To connect the sessions of a logged-in user, set a [distinct ID](/docs/distinct-ids).
 
 Umami does not include feature flags, surveys, or a built-in experimentation engine. You can measure A/B tests by [tagging variants](/docs/guides/setup-ab-testing).
 

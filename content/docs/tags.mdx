@@ -1,5 +1,6 @@
 ---
 title: Tags
+description: Add the data-tag attribute to the Umami tracker script to group events under a tag for A/B testing, then filter your website data by tag.
 related:
   - href: https://umami.is/guides/ab-testing-analytics
     title: A/B Testing Analytics
@@ -16,12 +17,12 @@ Use Umami tags to group events under a single website, gather data, and enable v
 
 ## Usage
 
-Add the **data-tag** attribute to the tracking script. This will include the **tag** column in the payload.
+Add the **data-tag** attribute to the tracking script. This will include the **tag** property in the payload.
 
 ```html
 <script
   defer
-  src="http://mywebsite.com/umami.js"
+  src="http://mywebsite.com/script.js"
   data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
   data-tag="homepage-layout-a"
 ></script>
@@ -32,7 +33,7 @@ You can reuse the tracking script for different parts of your website, introduci
 ```html
 <script
   defer
-  src="http://mywebsite.com/umami.js"
+  src="http://mywebsite.com/script.js"
   data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
   data-tag="homepage-layout-b"
 ></script>

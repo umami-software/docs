@@ -1,5 +1,6 @@
 ---
 title: Exclude my own visits
+description: Stop your own visits from appearing in Umami stats by setting a localStorage flag in your browser for each website you track.
 ---
 
 You want to visit your own website, but you don't want your visits to appear in
@@ -9,7 +10,7 @@ Bring up the developer console in your browser: `Settings -> More tools -> Devel
 
 In the console, enter the following code and hit `Enter`:
 
-```javascript
+```js
 localStorage.setItem('umami.disabled', 1);
 ```
 
@@ -18,6 +19,6 @@ you want to be excluded from.
 
 To remove the setting, enter the following code and hit `Enter`:
 
-```javascript
+```js
 localStorage.removeItem('umami.disabled');
 ```

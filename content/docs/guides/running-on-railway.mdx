@@ -1,12 +1,13 @@
 ---
 title: Running on Railway
+description: Deploy Umami on Railway with a PostgreSQL database, either from the one-click Railway template or from your own fork of the repository.
 ---
 
 [Railway](https://railway.app/) is attempting to build software development infrastructure for humans. It's founded with the core ideology that building software should be "Take what you need, leave what you don't" and that the current iteration of tools for software development is far too complicated for current generations of developers, let alone the ones that come next. As a result, Railway handles your builds, deployments, scaling, and management of infrastructure; from development to production!
 
-Railway provides a free hosting services which allows you to deploy Umami and set up a PostgreSQL database so you can have your self-hosted version at the click of a button.
+Railway provides a free hosting service that allows you to deploy Umami and set up a PostgreSQL database so you can have your self-hosted version at the click of a button.
 
-## Setup Website and Database
+## Set up website and database
 
 ### Railway Button (Recommended)
 
@@ -29,8 +30,8 @@ The previously described method is the quickest and easiest way to get Umami up 
 1. If you wish, you can give Railway permission only to your Umami fork repository when linking your GitHub account.
 1. From the dashboard page click **New Project > Deploy from repo**.
 1. Choose your forked Umami repository and select the **master** branch.
-1. Add a first variable called `PORT`, set its value to a valid port number (eg: `3000`). Click **Add**.
-1. Add a second variable called `DATABASE_TYPE`, set its value to `postgres`. Click **Add**.
+1. Add a first variable called `PORT`, set its value to a valid port number (e.g. `3000`). Click **Add**.
+1. Add a second variable called `DATABASE_TYPE`, set its value to `postgresql`. Click **Add**.
 1. Add a third variable called `HOSTNAME`, set its value to `0.0.0.0`. Click **Add**.
 1. Click **Deploy**.
 
@@ -40,29 +41,29 @@ This initial deploy will fail until you follow the rest of these steps.
 
 1. Close the settings sidebar and click **New**, click **Database** and select **Add PostgreSQL**.
 1. On the dashboard, select your Umami service, go to the **Variables** tab and click **New Variable**.
-1. Click **Add Reference** and select the `DATABASE_URL` variable from your Postgres database. Click **Add**.
+1. Click **Add Reference** and select the `DATABASE_URL` variable from your PostgreSQL database. Click **Add**.
 
 Adding the database should trigger a re-deploy, and clicking the app link should get you to the login page of your Umami instance.
 
 <Callout title="Troubleshooting" variant="warning">
 
-If Railway states `Your project has no deploys` within your dashboard.
+If Railway states `Your project has no deploys` within your dashboard:
 
 1. Select `Set up your project locally` in the bottom left hand corner.
 
 2. Within the `umami` root directory follow the instructions within the pop up.
 
-- Login to your Railway account with `railway login`
+- Log in to your Railway account with `railway login`
 - Link your project with `railway link`
 - Open your project dashboard with `railway open`
 - Upload and deploy your project with `railway up`
 
-3. Follow the **Getting started** guide starting from the [Login](/docs/login) step and be sure to change the default password.
+3. Follow the **Quickstart** guide starting from the [Login](/docs/login) step and be sure to change the default password.
 
 </Callout>
 
 <Callout title="Notes">
 
-- Read more about [adding a website](https://umami.is/docs/add-a-website) and [collecting data](https://umami.is/docs/collect-data) here
+- Read more about [adding a website](/docs/add-a-website) and [collecting data](/docs/collect-data).
 
 </Callout>

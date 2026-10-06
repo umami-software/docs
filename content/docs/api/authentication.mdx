@@ -1,5 +1,6 @@
 ---
 title: Authentication
+description: Authenticate Umami API requests with an API key or by exchanging a username and password for a token, including two-factor sign-in.
 ---
 
 Self-hosted Umami supports two ways to authenticate API requests. **API keys** are the recommended method. Username and password authentication is still supported as an alternative.
@@ -61,11 +62,29 @@ If successful you should get a response like the following:
     "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
     "username": "admin",
     "role": "admin",
-    "createdAt": "2000-00-00T00:00:00.000Z",
-    "isAdmin": true
+    "createdAt": "2024-01-01T00:00:00.000Z",
+    "isAdmin": true,
+    "teams": [
+      {
+        "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+        "name": "My Team",
+        "logoUrl": null
+      }
+    ]
   }
 }
 ```
+
+If the account has two-factor authentication enabled, the login response does not include a token. Instead you get a short-lived partial token:
+
+```json
+{
+  "requiresTwoFactor": true,
+  "partialToken": "eyTMjU2IiwiY...4Q0JDLUhWxnIjoiUE_A"
+}
+```
+
+To finish signing in, send a `POST` request to [`/api/2fa/verify`](/docs/api-reference/verify-two-factor) with the partial token in the header `Authorization: Bearer <partialToken>` and either a 6-digit authenticator code (`{ "token": "123456" }`) or a backup code (`{ "backupCode": "..." }`). A successful response returns the same `token` and `user` object shown above.
 
 Save the token value and send an `Authorization` header with all your data requests with the value `Bearer <token>`. Your request header should look something like this:
 
@@ -94,7 +113,7 @@ You can verify if the token is still valid.
   "id": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
   "username": "admin",
   "role": "admin",
-  "createdAt": "2000-00-00T00:00:00.000Z",
+  "createdAt": "2024-01-01T00:00:00.000Z",
   "isAdmin": true,
   "teams": []
 }

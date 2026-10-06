@@ -1,5 +1,6 @@
 ---
 title: Changelog
+description: Notable changes to Umami Cloud and the Umami Cloud API, including new features, endpoint changes, and deprecations, listed by date.
 ---
 
 This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and **API (api.umami.is)**.
@@ -71,7 +72,7 @@ This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and
 
 **Heatmaps**
 
-- Added heatmaps reports, including snapshot-based rendering.
+- Added heatmap reports, including snapshot-based rendering.
 - Added share-page options for filtering and theme enforcement.
 
 **Cloud**
@@ -121,7 +122,7 @@ This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and
 **Funnels**
 
 - Added per-step filters to funnels.
-- Added wildcard support for goals reports.
+- Added wildcard support for goal reports.
 
 ## March 23, 2026
 
@@ -272,20 +273,20 @@ This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and
 
 **API: Event Data**
 
-- `GET /event-data/events` : **Moved** to `/websites/[id]/event-data/events`.
-- `GET /event-data/fields` : **Moved** to `/websites/[id]/event-data/fields`.
-- `GET /event-data/stats` : **Moved** to `/websites/[id]/event-data/stats`.
-- `GET /websites/[id]/event-data/values` : **Added**.
+- `GET /event-data/events`: **Moved** to `/websites/[id]/event-data/events`.
+- `GET /event-data/fields`: **Moved** to `/websites/[id]/event-data/fields`.
+- `GET /event-data/stats`: **Moved** to `/websites/[id]/event-data/stats`.
+- `GET /websites/[id]/event-data/values`: **Added**.
 
 **API: Sessions**
 
-- `GET /websites/:websiteId/sessions` : **Added**.
-- `GET /websites/:websiteId/sessions/stats` : **Added**.
-- `GET /websites/:websiteId/sessions/:sessionId` : **Added**.
-- `GET /websites/:websiteId/sessions/:sessionId/activity` : **Added**.
-- `GET /websites/:websiteId/sessions/:sessionId/properties` : **Added**.
-- `GET /websites/:websiteId/session-data/properties` : **Added**.
-- `GET /websites/:websiteId/session-data/values` : **Added**.
+- `GET /websites/:websiteId/sessions`: **Added**.
+- `GET /websites/:websiteId/sessions/stats`: **Added**.
+- `GET /websites/:websiteId/sessions/:sessionId`: **Added**.
+- `GET /websites/:websiteId/sessions/:sessionId/activity`: **Added**.
+- `GET /websites/:websiteId/sessions/:sessionId/properties`: **Added**.
+- `GET /websites/:websiteId/session-data/properties`: **Added**.
+- `GET /websites/:websiteId/session-data/values`: **Added**.
 
 ## May 23, 2024
 
@@ -308,8 +309,8 @@ This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and
 **API: Teams**
 
 - `/teams/[id]/websites/[websiteId]`: **Deprecated**.
-- `GET /teams/[id]/users/[userId]/index`: **Added**.
+- `GET /teams/[id]/users/[userId]`: **Added**.
 
 **API: Reports**
 
-- `GET /reports/index`: Added `websiteId` and `teamId` as query parameters.
+- `GET /reports`: Added `websiteId` and `teamId` as query parameters.

@@ -1,5 +1,6 @@
 ---
 title: Track outbound links
+description: Track clicks on links to external sites as Umami events, using data attributes on each link or a script that tags all outbound links.
 ---
 
 When a user clicks on a link to an external site, this event is normally not captured because
@@ -20,14 +21,15 @@ an event named `outbound-link-click` with the value of `url` set to the external
 ```
 
 If you don't want to manually update all your anchor tags, you can use this script to automatically add the
-event attributes to all your outbound tags. You can place the following script at the bottom of your HTML body.
+event attributes to all your outbound links. You can place the following script at the bottom of your HTML body.
 
 ```html
 <script type="text/javascript">
   (() => {
     const name = 'outbound-link-click';
     document.querySelectorAll('a').forEach(a => {
-      if (a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
+      const isWebLink = a.protocol === 'http:' || a.protocol === 'https:';
+      if (isWebLink && a.host !== window.location.host && !a.getAttribute('data-umami-event')) {
         a.setAttribute('data-umami-event', name);
         a.setAttribute('data-umami-event-url', a.href);
       }

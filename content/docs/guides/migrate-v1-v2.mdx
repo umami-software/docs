@@ -1,5 +1,6 @@
 ---
 title: Migrate v1 to v2
+description: Breaking changes between Umami v1 and v2, and how to convert a v1 database to the v2 schema with the @umami/migrate-v1-v2 script.
 ---
 
 Umami v2 introduces a redesigned schema and a number of breaking changes.
@@ -8,7 +9,7 @@ Umami v2 introduces a redesigned schema and a number of breaking changes.
 
 - The API endpoints have changed including new ones being added. See [API](/docs/api) for more information.
 - The tracker script has been renamed from `umami.js` to `script.js`.
-- The collect api endpoint has been renamed from `/api/collect` to `/api/send`.
+- The collect API endpoint has been renamed from `/api/collect` to `/api/send`.
 - The tracker no longer uses CSS class names to trigger events. It now uses HTML data attributes. See [Track events](/docs/track-events) for more information.
 - The methods on the global `umami` JavaScript object have changed. There is now a single `.track()` method and a new way to send event data.
   See [Tracker functions](/docs/tracker-functions) for more information.
@@ -21,11 +22,11 @@ To assist with the migration we created a script `@umami/migrate-v1-v2` that wil
 
 ### Requirements
 
-- Database schema must be in sync with the latest v1 version (v1.4.0). The script will query the prisma migrations table to ensure the latest migrations have been run.
+- Database schema must be in sync with the latest v1 version (v1.4.0). The script will query the Prisma migrations table to ensure the latest migrations have been run.
 
 <Callout title="Important" variant="warning">
 
-- Backup your target database prior to use. Potential data loss may occur if the migration is interrupted.
+- Back up your target database prior to use. Potential data loss may occur if the migration is interrupted.
 - For users with larger datasets (5M+), the migration may take a while. Please plan accordingly.
 - The script will NOT migrate any event data into v2.
 - The script will ask you if you want to drop your v1 tables after the migration is complete.
@@ -46,7 +47,7 @@ There are two ways to run the migration script.
 ### Running inside the Umami folder
 
 Use this method if you have terminal access to your application folder.
-Make sure your application is already built. If not run `yarn build` first.
+Make sure your application is already built. If not, run `yarn build` first.
 
 ```shell
 cd umami

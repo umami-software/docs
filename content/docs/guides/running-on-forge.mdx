@@ -1,15 +1,16 @@
 ---
 title: Running on Forge
+description: Deploy Umami on a Laravel Forge server with a PostgreSQL database, a pnpm deployment script, an Nginx proxy, and a daemon to keep it running.
 ---
 
 [Forge](https://forge.laravel.com/) is a paid server management service, tailored to hosting Laravel apps on Server Providers like DigitalOcean,
 Linode, Vultr, Amazon, Hetzner and more.
 
-If you have a Forge Account and a connected server bucket, you can easily set up an Umami installation.
+If you have a Forge account and a connected server, you can easily set up an Umami installation. Umami requires a PostgreSQL database, so make sure your server runs PostgreSQL and has [pnpm](https://pnpm.io/) installed (`npm install -g pnpm`).
 
 ## Prerequisites
 
-1. Configure the (sub) domain you would like to have Umami available on. Usually, you do this by configuring your DNS config with an A-Record that points to your bucket IP-Address.
+1. Configure the (sub) domain you would like to have Umami available on. Usually, you do this by configuring your DNS config with an A-Record that points to your server's IP address.
 
 ## Setup
 
@@ -26,11 +27,11 @@ If you have a Forge Account and a connected server bucket, you can easily set up
 4. Update the deployment script and add the following after the `git pull origin $FORGE_SITE_BRANCH` command.
 
    ```shell
-   yarn install
-   yarn build
+   pnpm install
+   pnpm build
    ```
 
-   Remove these lines, since we don't have artisan or use php:
+   Remove these lines, since we don't have artisan or use PHP:
 
    ```shell
    ( flock -w 10 9 || exit 1
@@ -42,28 +43,22 @@ If you have a Forge Account and a connected server bucket, you can easily set up
    ```
 
 5. In Forge, go to your Server page, click **Database** and add a user to the just created database.
-6. Create the database-connection string and add it to your `.env` file:
-
-   ```dotenv
-   DATABASE_URL=mysql://user:password@localhost:3306/dbname
-   ```
-
-   The connection url is in the following format:
+6. Create the database connection string and add it to your `.env` file:
 
    ```dotenv
    DATABASE_URL=postgresql://username:mypassword@localhost:5432/mydb
-   DATABASE_URL=mysql://username:mypassword@localhost:3306/mydb
    ```
 
 7. Perform the initial project setup, via SSH:
 
    ```shell
-   yarn install
-   yarn update-db
-   yarn build
+   pnpm install
+   pnpm build
    ```
 
-8. Go to your Umami-Site and click on **SSL** in the left menu and add an SSL-Certificate.
+   The first build creates the required database tables and a default login account with username **admin** and password **umami**. Change the password after your first login.
+
+8. Go to your Umami site, click on **SSL** in the left menu, and add an SSL certificate.
 9. Click **Edit files** > **Edit Nginx Configuration** and overwrite the following block:
 
    ```nginx
@@ -78,10 +73,10 @@ If you have a Forge Account and a connected server bucket, you can easily set up
    }
    ```
 
-   This configuration will route the traffic to the node-server that Umami runs on.
+   This configuration will route the traffic to the Node.js server that Umami runs on.
 
-10. In Forge, go to your Server page, click **Daemons** and add **New Daemon** to keep the Umami Node-Server up and running.
-    - Command: `yarn start`
+10. In Forge, go to your Server page, click **Daemons** and add **New Daemon** to keep the Umami Node.js server up and running.
+    - Command: `pnpm start`
     - Directory: `/home/forge/umami.yourdomain.tld`
     - Click **Create**
 

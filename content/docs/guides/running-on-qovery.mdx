@@ -1,8 +1,9 @@
 ---
 title: Running on Qovery
+description: Deploy Umami on Qovery from your GitHub or GitLab repository, with a PostgreSQL database configured through Qovery environment variables.
 ---
 
-[Qovery](https://www.qovery.com) is a fully-managed cloud platform that runs on your AWS, Digital Ocean and Scaleway account where you can host static sites, backend APIs, databases, cron jobs, and all your other apps in one place.
+[Qovery](https://www.qovery.com) is a fully-managed cloud platform that runs on your AWS, DigitalOcean and Scaleway accounts where you can host static sites, backend APIs, databases, cron jobs, and all your other apps in one place.
 
 Qovery provides **free hosting** for individual developers and includes the following:
 
@@ -28,7 +29,6 @@ Visit the [Qovery dashboard](https://start.qovery.com) to create an account if y
 
 - Click on **Create environment** and give a name (e.g. staging, production).
 
-
 ### 4. Add your Umami app
 
 - Click on **Create an application**, give a name and select your GitHub or GitLab repository where your Umami app is located.
@@ -39,17 +39,17 @@ After the application is created:
 
 - Navigate to your application **Settings**.
 - Select **Port**.
-- Add port used by your Umami application.
+- Add the port (3000) used by your Umami application.
 
 ### 5. Deploy a database
 
-Create and deploy a new database PostgreSQL database by [following this guide](https://hub.qovery.com/guides/getting-started/create-a-database).
+Create and deploy a new PostgreSQL database by [following this guide](https://hub.qovery.com/guides/getting-started/create-a-database).
 
 ### 6. Add storage
 
 To add storage, go to your application **Settings**.
 
-### 7. Setup your Umami configuration
+### 7. Set up your Umami configuration
 
 To use PostgreSQL provided by Qovery, you can use the built-in secrets and environment variables. You can read more about environment variables and secrets in our [configuration section](https://hub.qovery.com/docs/using-qovery/configuration/environment-variable/).
 
@@ -57,10 +57,9 @@ To use PostgreSQL provided by Qovery, you can use the built-in secrets and envir
 
 All you have to do now is to navigate to your application and click on **Deploy**.
 
-
 That's it. Watch the status and wait till the app is deployed.
 
-To open the application in your browser, click on **Action** and **Open** in your application overview
+To open the application in your browser, click on **Action** and **Open** in your application overview.
 
 ## Support
 

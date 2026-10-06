@@ -1,5 +1,6 @@
 ---
 title: Getting updates
+description: Update a self-hosted Umami installation from source or with Docker, and refresh PostgreSQL statistics after a major upgrade.
 ---
 
 ## Source code
@@ -44,11 +45,13 @@ Pull the latest image:
 docker pull docker.umami.is/umami-software/umami:latest
 ```
 
-Then restart your container to use the new image. If using Docker Compose:
+Then restart your container to use the new image.
+
+If you are using Docker Compose, pull the latest image and recreate the containers:
 
 ```shell
-docker compose down
-docker compose up -d
+docker compose pull
+docker compose up --force-recreate -d
 ```
 
 ## Refresh database statistics after upgrading

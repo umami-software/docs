@@ -1,5 +1,6 @@
 ---
 title: Performance
+description: Collect real-user Core Web Vitals with the Umami tracker and review LCP, INP, CLS, FCP, and TTFB by page, device, and browser.
 related:
   - href: https://umami.is/guides/core-web-vitals
     title: "Core Web Vitals: What to Measure and How to Improve Them"
@@ -23,7 +24,7 @@ Add the **data-performance** attribute to your tracking script to enable automat
 ```html
 <script
   defer
-  src="http://mywebsite.com/umami.js"
+  src="http://mywebsite.com/script.js"
   data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
   data-performance="true"
 ></script>
@@ -38,7 +39,7 @@ This manual pageview setup requires `v3.2.0` or later.
 ```html
 <script
   defer
-  src="http://mywebsite.com/umami.js"
+  src="http://mywebsite.com/script.js"
   data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
   data-auto-pageview="false"
   data-performance="true"
@@ -61,11 +62,11 @@ Each metric is rated against Google's defined thresholds:
 
 | Metric | Good | Needs Improvement | Poor |
 | --- | --- | --- | --- |
-| LCP | < 2,500 ms | 2,500 – 4,000 ms | > 4,000 ms |
-| INP | < 200 ms | 200 – 500 ms | > 500 ms |
-| CLS | < 0.1 | 0.1 – 0.25 | > 0.25 |
-| FCP | < 1,800 ms | 1,800 – 3,000 ms | > 3,000 ms |
-| TTFB | < 800 ms | 800 – 1,800 ms | > 1,800 ms |
+| LCP | ≤ 2,500 ms | > 2,500 and ≤ 4,000 ms | > 4,000 ms |
+| INP | ≤ 200 ms | > 200 and ≤ 500 ms | > 500 ms |
+| CLS | ≤ 0.1 | > 0.1 and ≤ 0.25 | > 0.25 |
+| FCP | ≤ 1,800 ms | > 1,800 and ≤ 3,000 ms | > 3,000 ms |
+| TTFB | ≤ 800 ms | > 800 and ≤ 1,800 ms | > 1,800 ms |
 
 ## Percentiles
 
@@ -74,8 +75,8 @@ Results are displayed at three percentile levels:
 | Percentile | Description |
 | --- | --- |
 | p50 | Median — half of users experience this or better. |
-| p75 | 75th percentile — the value most users experience. Google uses this for Core Web Vitals scoring. |
-| p95 | 95th percentile — represents the worst-case experience for most users. |
+| p75 | 75th percentile — 75% of visits are at or better than this value. Google uses this for Core Web Vitals scoring. |
+| p95 | 95th percentile — only the slowest 5% of visits are worse than this value. |
 
 ## Viewing Performance
 
@@ -87,6 +88,6 @@ Select a metric card to focus the chart on that metric. Use the **Percentile** d
 
 ![image](/images/docs/performance-metric.png)
 
-## Pages and Environment breakdowns
+## Pages and Environment Breakdowns
 
 The bottom of the page shows the selected metric broken down by **Pages** (path or title) and **Environment** (device or browser), helping you pinpoint which pages or clients are underperforming.

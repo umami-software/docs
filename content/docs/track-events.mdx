@@ -1,11 +1,12 @@
 ---
 title: Track events
+description: Track custom events in Umami with data attributes on HTML elements or with JavaScript, then view the events and their properties.
 ---
 
 *Available since v2.0.0*
 
 Besides pageviews, Umami is also able to track events that occur on your website. There are two ways to record
-events in Umami, using the **data attributes** property or using **JavaScript**.
+events in Umami: using **data attributes** or using **JavaScript**.
 
 ## Limits
 
@@ -14,7 +15,7 @@ events in Umami, using the **data attributes** property or using **JavaScript**.
 
 ## Using data attributes
 
-To enable events, simply add a special data property to the element you want to track.
+To enable events, simply add a data attribute to the element you want to track.
 
 For example, you might have a button with the following code:
 
@@ -22,7 +23,7 @@ For example, you might have a button with the following code:
 <button id="signup-button">Sign up</button>
 ```
 
-Add a data property with the following format:
+Add a data attribute with the following format:
 
 ```html
 data-umami-event="{event-name}"
@@ -36,7 +37,7 @@ So your button element would now look like this:
 
 When the user clicks on this button, Umami will record an event named `Signup button`.
 
-You can optionally pass along **event_data** with the **data-umami-event-\*** annotation.
+You can optionally pass along **event_data** with the **data-umami-event-\*** attribute.
 
 ```text
 data-umami-event="Signup button"
@@ -48,8 +49,9 @@ The additional properties will result in `{ email: 'bob@aol.com', id: '123' }` b
 
 <Callout title="Notes">
 
-- All event data will be saved as a string using this method. If you want to save event data as numeric, dates, booleans, etc. use the JavaScript method below.
+- All event data will be saved as a string using this method. If you want to save event data as numbers, dates, booleans, etc. use the JavaScript method below.
 - Other event listeners inside the element will not be triggered.
+
 </Callout>
 
 ## Using JavaScript

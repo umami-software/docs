@@ -1,5 +1,6 @@
 ---
 title: Running on bunny.net
+description: Deploy Umami and a PostgreSQL container together on bunny.net Magic Containers, with a persistent volume for data and a CDN endpoint.
 ---
 
 [bunny.net](https://bunny.net) is a global platform for content delivery and edge computing. [Magic Containers](https://bunny.net/magic-containers/) lets you deploy and run containerized applications across bunny.net's global network with built-in CDN integration.
@@ -36,13 +37,13 @@ Add a 1 GB persistent volume mounted at `/var/lib/postgresql/data`.
 
 1. Click **Add Container**.
 2. Enter the name `umami`.
-3. From the **Registry** dropdown, select **DockerHub Public**.
-4. Set the image to `docker.umami.is/umami-software/umami` and the tag to `postgresql-latest`.
+3. From the **Registry** dropdown, choose the option for pulling a public image from a custom (non-Docker Hub) registry.
+4. Set the image to the full path `docker.umami.is/umami-software/umami` and the tag to `latest`.
 
 Update the environment variables:
 
 - `DATABASE_URL` = `postgresql://umami:<your-password>@localhost:5432/umami`
-- `APP_SECRET` = _a random string used for encryption_
+- `APP_SECRET` = _a random string used to secure authentication tokens_
 - `DISABLE_TELEMETRY` = `1`
 
 Replace `<your-password>` with the `POSTGRES_PASSWORD` you set in the previous step.

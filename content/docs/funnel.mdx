@@ -1,5 +1,6 @@
 ---
 title: Funnel
+description: Create a funnel report in Umami to see how many visitors complete a sequence of page visits or events, and where they drop off between steps.
 related:
   - href: https://umami.is/guides/conversion-funnels
     title: How to Build and Analyze a Conversion Funnel
@@ -12,7 +13,7 @@ related:
 Umami Funnel helps you understand the conversion and drop-off rate of users.
 By analyzing the funnel, users can make informed decisions to optimize the website's user experience and achieve better conversion rates.
 
-The insight works by displaying the counts of users that reach each URL or event and the drop off rate from the previous step.
+The insight works by displaying the counts of users that reach each URL or event and the drop-off rate from the previous step.
 The funnel uses specific order criteria, which requires step completion in a required order.
 The user may navigate to other URLs or events in between the funnel steps, but must complete the funnel steps in order to be counted as a conversion.
 
@@ -23,11 +24,11 @@ The user may navigate to other URLs or events in between the funnel steps, but m
 
 ## Create an insight
 
-### Step 1: Click on the add Funnel button
+### Step 1: Click the **Add funnel** button
 
 ![image](/images/docs/funnel-add.png)
 
-### Step 2: Fill out the form details and click the **Save** button.
+### Step 2: Fill out the form details and click the **Save** button
 
 ![image](/images/docs/funnel-add-form.png)
 
@@ -43,12 +44,12 @@ Continue to add steps until your desired funnel conditions are completed. Umami 
 | --- | --- | --- |
 | Specific URL | The user must reach this specific URL. | `/` |
 | Event | The user must generate this specific event. | `live-demo-button` |
-| URL wildcards | The user must reach any URL that meets the wildcard criteria. Only `Ends with` search is available. | `/docs*` |
+| URL wildcards | The user must reach any URL that meets the wildcard criteria. The wildcard can only be used at the end of a value, which matches any URL that starts with it. | `/docs*` |
 
 ### Step 3: Run insight
 
 ![image](/images/docs/funnel-details.png)
 
-To Edit or Delete a funnel click on the ellipsis for that specific funnel.
+To edit or delete a funnel, click the ellipsis for that specific funnel.
 
 ![image](/images/docs/funnel-edit.png)
