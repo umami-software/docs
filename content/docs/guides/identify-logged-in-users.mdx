@@ -14,14 +14,37 @@ Use Umami's Distinct ID and session data features to associate analytics with sp
 
 ## Step 1: Assign a Distinct ID
 
-When a user logs in, call `umami.identify()` with a unique identifier:
+### If the page knows the user when it loads (recommended)
+
+When your pages are rendered for a logged-in user, add the user's ID to the tracker script with the
+[`data-distinct-id`](/docs/tracker-configuration#data-distinct-id) attribute:
+
+```html
+<script
+  defer
+  src="https://your-umami-instance/script.js"
+  data-website-id="your-website-id"
+  data-distinct-id="user-123"
+></script>
+```
+
+The user is identified from the first pageview. This matters most for apps used inside companies: coworkers on the
+same office network often share an IP address and browser, and because Umami does not use cookies, it cannot tell
+them apart until they are identified. With `data-distinct-id`, there is no anonymous gap to mix up.
+
+### If the user logs in without a page reload
+
+In a single-page app, call `umami.identify()` with a unique identifier once the user logs in:
 
 ```js
 // After user logs in
 umami.identify({ id: user.id });
 ```
 
-The ID can be any string up to 50 characters: a user ID, email, or hash. All subsequent page views and events in that session will be linked to this ID.
+Page views and events sent after this call are linked to the ID. The ones sent before it are anonymous. If your app
+reloads the page after login, prefer `data-distinct-id`.
+
+The ID can be any string up to 50 characters: a user ID, email, or hash.
 
 ## Step 2: Add session data (optional)
 
@@ -47,6 +70,36 @@ Navigate to **Sessions** in your Umami dashboard. Use the search bar to find a s
 3. Click on any session to see the full activity history: pages visited, events triggered, and timestamps. Since sessions linked to the same ID (e.g. from different devices) are combined automatically, this view shows the visitor's complete cross-device activity, not just the one session you clicked.
 
 ## Framework examples
+
+### Next.js (server-rendered)
+
+Render the tracker in your root layout and pass the logged-in user's ID:
+
+```tsx
+import Script from 'next/script';
+import { auth } from '@/auth';
+
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const session = await auth();
+
+  return (
+    <html lang="en">
+      <body>
+        {children}
+        <Script
+          src="https://your-umami-instance/script.js"
+          data-website-id="your-website-id"
+          data-distinct-id={session?.user?.id}
+          strategy="afterInteractive"
+        />
+      </body>
+    </html>
+  );
+}
+```
+
+The script loads once, so a client-side login that does not reload the page still needs `umami.identify()`, as
+in the examples below.
 
 ### React (after login)
 

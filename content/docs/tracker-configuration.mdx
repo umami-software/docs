@@ -85,6 +85,31 @@ Group events under a named tag for filtering and A/B testing. See [Tags](/docs/t
 ></script>
 ```
 
+## data-distinct-id
+
+<Badge>v3.4.0</Badge>
+
+Set a [Distinct ID](/docs/distinct-ids) for the visitor when the page loads. Every request the tracker sends,
+including the first pageview, carries the ID, so the visit is tied to the user from the start.
+
+This is the recommended way to identify users whenever your page already knows who is logged in, for example
+when it is rendered on the server. Visitors on a shared network (an office, school, or VPN) can have the same IP
+address and browser, and Umami does not use cookies to tell them apart. Identifying them from the first pageview
+keeps each user's activity in their own session.
+
+```html
+<script
+  defer
+  src="http://mywebsite.com/script.js"
+  data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
+  data-distinct-id="user-123"
+></script>
+```
+
+The value is read once, when the script loads. If a user logs in without a full page reload, call
+[`umami.identify()`](/docs/tracker-functions#sessions) instead. The value is visible in your page's HTML, so use
+an internal user ID or a hash rather than an email address. It has a 50-character limit.
+
 ## data-performance
 
 <Badge>v3.1.0</Badge>

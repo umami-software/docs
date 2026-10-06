@@ -140,7 +140,9 @@ Pass in your own ID to identify a user.
 umami.identify('unique_id');
 ```
 
-See [Distinct IDs](/docs/distinct-ids).
+If the user is already known when the page loads, set the ID with the
+[`data-distinct-id`](/docs/tracker-configuration#data-distinct-id) attribute instead, so the first pageview is
+identified too. See [Distinct IDs](/docs/distinct-ids).
 
 ## Session Data
 

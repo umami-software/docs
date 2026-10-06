@@ -18,7 +18,35 @@ For a more extensive way to identify a session, take a look at [Session Data](/d
 
 ## Usage
 
-You can set a Distinct ID using the `umami.identify()` tracker function by passing the ID as a string:
+### Set the ID when the page loads (recommended)
+
+If your page already knows who the user is, for example because it is rendered on the server after login, add the
+[`data-distinct-id`](/docs/tracker-configuration#data-distinct-id) attribute to the tracker script:
+
+```html
+<script
+  defer
+  src="https://your-umami-instance/script.js"
+  data-website-id="your-website-id"
+  data-distinct-id="user-123"
+></script>
+```
+
+The ID is sent with every request, starting with the first pageview, so the whole visit belongs to the user.
+
+<Callout title="Shared networks" variant="tip">
+
+Umami does not use cookies, so it cannot tell apart visitors who share an IP address and browser, which is common
+on office, school, and VPN networks. Page views sent before a user is identified are anonymous, and on a shared
+network they can end up in a different session from the user's identified activity. Setting `data-distinct-id`
+avoids this, because the user is identified from the first request.
+
+</Callout>
+
+### Set the ID after the page loads
+
+When the user logs in without a full page reload, as in a single-page app, set a Distinct ID with the
+`umami.identify()` tracker function by passing the ID as a string:
 
 ```js
 umami.identify('bob@aol.com');
@@ -35,6 +63,8 @@ Alternatively, pass a single object with an `id` property. The `id` property set
 ```js
 umami.identify({ id: 'bob@aol.com', name: 'Bob', plan: 'pro' });
 ```
+
+### Send the ID with the API
 
 You can also set a Distinct ID by adding the **id** property to the event payload when using the [Sending stats](/docs/api/sending-stats) API directly:
 
