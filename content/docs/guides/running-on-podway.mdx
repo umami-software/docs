@@ -1,0 +1,37 @@
+---
+title: Running on podway
+description: Run Umami on podway, a managed host that runs Umami with PostgreSQL in its own pod, snapshots before every upgrade, and rolls back automatically if an update fails.
+---
+
+[podway](https://podway.io) is a managed hosting service for open-source apps. It runs Umami in its own pod, 24/7, on EU-based infrastructure (Hetzner/OVH). Umami runs with PostgreSQL in its own pod, so there is no separate database to set up.
+
+You can start free with one app on a Mini pod, no card needed. After that, pricing is from $4 per month per app.
+
+Two things are specific to podway:
+
+- **Safe upgrades.** podway takes a snapshot before every upgrade and rolls back automatically if the new version fails its health check.
+- **An AI admin.** Setup, upgrades and investigating problems can be handled by an assistant you steer from Claude.
+
+## Deploy Umami
+
+[![Deploy on podway](https://podway.io/img/deploy-on-podway.svg)](https://podway.io/start?app=umami&ref=docs-umami)
+
+1. Click the button above.
+2. Sign in to podway or create an account, then follow the steps to launch Umami.
+3. When the pod is up, open its URL from your podway dashboard.
+
+Log in with the [default credentials](/docs/login) and change the password immediately.
+
+## Start collecting data
+
+1. Follow [Add a website](/docs/add-a-website) to register your website in Umami.
+2. Follow [Collect data](/docs/collect-data) to add the tracking script to your website.
+3. Visit your website and confirm that activity appears in the Umami dashboard.
+
+<Callout title="Notes">
+
+- Data is stored in the pod's PostgreSQL database on a persistent volume.
+- Custom domains are available for public pods after domain setup.
+- You do not run the [update procedure](/docs/updates) yourself: podway upgrades the pod, taking a snapshot first and rolling back automatically if the new version fails its health check.
+
+</Callout>
