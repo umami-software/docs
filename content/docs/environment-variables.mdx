@@ -30,7 +30,8 @@ APP_SECRET = "random string"
 <Badge>v1.24.0</Badge>
 
 HTTP header to check for the client's IP address. This is useful when you're
-behind a proxy that uses non-standard headers.
+behind a proxy that uses non-standard headers. If you're behind multiple proxies,
+see [TRUSTED_PROXIES](#trusted_proxies).
 
 ```
 CLIENT_IP_HEADER = "header name"
@@ -260,6 +261,22 @@ The `.js` extension is not required. The value can also be any path you choose, 
 ```
 TRACKER_SCRIPT_NAME = "custom-script-name.js"
 ```
+
+### TRUSTED_PROXIES
+
+<Badge>v3.5.0</Badge>
+
+A comma-delimited list of IP addresses and CIDR ranges of the proxies and load balancers in front of Umami. Set this when requests pass through more than one proxy and Umami records an internal address (like `10.0.0.8`) instead of the visitor's IP.
+
+When set, Umami reads `X-Forwarded-For` and `Forwarded` from right to left, skips trusted proxies, and uses the first address that isn't one. Headers such as `X-Real-IP` that contain a trusted proxy address are skipped in favor of the next header.
+
+You can also use the presets `loopback`, `linklocal` and `private` (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`).
+
+```
+TRUSTED_PROXIES = "10.0.0.0/8, 172.16.0.0/12"
+```
+
+Only list addresses that belong to your own proxies. If your visitors also use private addresses, such as on an internal network, list the specific proxy addresses rather than using `private`, otherwise those visitors will be skipped.
 
 ### TWO_FACTOR_ENCRYPTION_KEY
 
