@@ -14,10 +14,9 @@ mkdir umami && cd umami
 curl -O https://raw.githubusercontent.com/umami-software/umami/master/docker-compose.yml
 ```
 
-### 2. Edit the file
+### 2. Set the secrets
 
-- Replace the values of `APP_SECRET` and `TWO_FACTOR_ENCRYPTION_KEY`, each with the output of `openssl rand -hex 32`.
-- Remove the `ports` entry of the `umami` service. Pethost serves the application over HTTPS through its own proxy, so the port is not published.
+Replace the values of `APP_SECRET` and `TWO_FACTOR_ENCRYPTION_KEY` in the file, each with the output of `openssl rand -hex 32`. Nothing else in the file needs to change.
 
 ### 3. Deploy
 
@@ -25,11 +24,7 @@ curl -O https://raw.githubusercontent.com/umami-software/umami/master/docker-com
 pethost deploy
 ```
 
-The command starts Umami and PostgreSQL. Two services listen on a port, so it asks which one is the site and prints the command that chooses it:
-
-```bash
-pethost domain add umami.<your-account>.pethost.app umami:3000
-```
+The command starts Umami and PostgreSQL, serves Umami over HTTPS and prints its address, `https://umami.<your-account>.pethost.app`.
 
 ### 4. Final checks
 
