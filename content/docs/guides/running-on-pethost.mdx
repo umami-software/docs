@@ -1,0 +1,42 @@
+---
+title: Running on Pethost
+description: Deploy Umami and PostgreSQL on Pethost from Umami's own Docker Compose file, with HTTPS at an address of your own.
+---
+
+[Pethost](https://pethost.dev) runs Docker Compose projects and serves them over HTTPS. This guide deploys Umami with its PostgreSQL database from the `docker-compose.yml` in Umami's repository, using the [Pethost CLI](https://pethost.dev/docs/cli/).
+
+## Setup
+
+### 1. Get the Compose file
+
+```bash
+mkdir umami && cd umami
+curl -O https://raw.githubusercontent.com/umami-software/umami/master/docker-compose.yml
+```
+
+### 2. Edit the file
+
+- Replace the values of `APP_SECRET` and `TWO_FACTOR_ENCRYPTION_KEY`, each with the output of `openssl rand -hex 32`.
+- Remove the `ports` entry of the `umami` service. Pethost serves the application over HTTPS through its own proxy, so the port is not published.
+
+### 3. Deploy
+
+```bash
+pethost deploy
+```
+
+The command starts Umami and PostgreSQL. Two services listen on a port, so it asks which one is the site and prints the command that chooses it:
+
+```bash
+pethost domain add umami.<your-account>.pethost.app umami:3000
+```
+
+### 4. Final checks
+
+You can now log in at the address the command printed, as described in the [Login](/docs/login) section. Please immediately change your password on the profile page.
+
+### 5. Updating an existing Umami instance
+
+First make a backup of your database, for example with `pethost backup now`. Then change the image tag in `docker-compose.yml` to the desired version from the [Umami Docker Registry](https://github.com/umami-software/umami/pkgs/container/umami) and run `pethost deploy` again. The database stays in the `umami-db-data` volume.
+
+See the [Pethost guide](https://pethost.dev/blog/self-host-umami/) for custom domains and backups.
