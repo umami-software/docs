@@ -1,11 +1,21 @@
 ---
 title: Running on Pethost
-description: Deploy Umami and PostgreSQL on Pethost from Umami's own Docker Compose file, with HTTPS at an address of your own.
+description: Deploy Umami and PostgreSQL on Pethost with the one-click template or from Umami's own Docker Compose file, with HTTPS at an address of your own.
 ---
 
-[Pethost](https://pethost.dev) runs Docker Compose projects and serves them over HTTPS. This guide deploys Umami with its PostgreSQL database from the `docker-compose.yml` in Umami's repository, using the [Pethost CLI](https://pethost.dev/docs/cli/).
+[Pethost](https://pethost.dev) runs Docker Compose projects and serves them over HTTPS. This guide deploys Umami with its PostgreSQL database, using the one-click template or the `docker-compose.yml` in Umami's repository.
 
-## Setup
+## Method 1: One-click template (recommended)
+
+[Deploy Umami on Pethost](https://console.pethost.dev/?template=umami)
+
+The link opens a new project with Umami and PostgreSQL, with `APP_SECRET`, `TWO_FACTOR_ENCRYPTION_KEY` and the database password generated. Click **Create project**. Umami is then served over HTTPS at `https://umami.<your-account>.pethost.app`.
+
+You can now log in at that address, as described in the [Login](/docs/login) section. Please immediately change your password on the profile page.
+
+## Method 2: The Compose file
+
+This deploys the `docker-compose.yml` in Umami's repository with the [Pethost CLI](https://pethost.dev/docs/cli/).
 
 ### 1. Get the Compose file
 
@@ -30,8 +40,8 @@ The command starts Umami and PostgreSQL, serves Umami over HTTPS and prints its 
 
 You can now log in at the address the command printed, as described in the [Login](/docs/login) section. Please immediately change your password on the profile page.
 
-### 5. Updating an existing Umami instance
+## Updating an existing Umami instance
 
-First make a backup of your database, for example with `pethost backup now`. Then change the image tag in `docker-compose.yml` to the desired version from the [Umami Docker Registry](https://github.com/umami-software/umami/pkgs/container/umami) and run `pethost deploy` again. The database stays in the `umami-db-data` volume.
+First make a backup of your database: **Back up now** in the panel, or `pethost backup now`. Then change the image tag in the project's Compose file to the desired version from the [Umami Docker Registry](https://github.com/umami-software/umami/pkgs/container/umami) and deploy again: in the panel for a project created from the template, or with `pethost deploy`. The database stays in its volume.
 
 See the [Pethost guide](https://pethost.dev/blog/self-host-umami/) for custom domains and backups.
