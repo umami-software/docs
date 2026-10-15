@@ -587,6 +587,10 @@
                 "title": "Running on Northflank"
               },
               {
+                "page": "guides/running-on-pethost",
+                "title": "Running on Pethost"
+              },
+              {
                 "page": "guides/running-on-qovery",
                 "title": "Running on Qovery"
               },
