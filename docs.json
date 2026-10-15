@@ -465,6 +465,10 @@
               {
                 "page": "guides/index",
                 "title": "Overview"
+              },
+              {
+                "page": "guides/weinc",
+                "title": "WeInc"
               }
             ]
           },
