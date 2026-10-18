@@ -66,6 +66,16 @@ DATABASE_URL = "connection string"
 
 Connection string for your database. This is the only required variable.
 
+### DATABASE_REPLICA_URL
+
+<Badge>v2.18.0</Badge>
+
+Connection string for a read replica of your database. When set, read queries go to the replica and writes still go to `DATABASE_URL`.
+
+```
+DATABASE_REPLICA_URL = "connection string"
+```
+
 ### DEBUG
 
 <Badge>v2.0.0</Badge>
@@ -106,6 +116,16 @@ Umami collects completely anonymous telemetry data in order to help improve the 
 DISABLE_TELEMETRY = 1
 ```
 
+### DISABLE_UI
+
+<Badge>v2.6.0</Badge>
+
+Serves a blank page instead of the web interface. The API and data collection keep working, so this is useful for an instance that only collects data.
+
+```
+DISABLE_UI = 1
+```
+
 ### DISABLE_UPDATES
 
 <Badge>v1.33.0</Badge>
@@ -144,6 +164,16 @@ Some alternatives you can use:
 
 - https://www.google.com/s2/favicons?domain={{domain}}
 - https://logo.clearbit.com/{{domain}}
+
+### GEOLITE_DB_PATH
+
+<Badge>v2.19.0</Badge>
+
+Path to a MaxMind-compatible GeoIP database in MMDB format, used for IP-based location detection. By default Umami looks for `geo/GeoLite2-City.mmdb` in the application directory.
+
+```
+GEOLITE_DB_PATH = "/path/to/GeoLite2-City.mmdb"
+```
 
 ### GEO_DATABASE_URL
 
@@ -259,6 +289,16 @@ The `.js` extension is not required. The value can also be any path you choose, 
 
 ```
 TRACKER_SCRIPT_NAME = "custom-script-name.js"
+```
+
+### TRACKER_SCRIPT_URL
+
+<Badge>v2.14.0</Badge>
+
+Serves the tracker script from another URL. Requests for `/script.js` are proxied to this URL, for example a tracker build you host yourself.
+
+```
+TRACKER_SCRIPT_URL = "https://example.com/script.js"
 ```
 
 ### TWO_FACTOR_ENCRYPTION_KEY
