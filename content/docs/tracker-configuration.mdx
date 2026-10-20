@@ -161,7 +161,11 @@ Use this if you don't want to collect the hash value from the URL.
 
 <Badge>v2.17.0</Badge>
 
-Respects the user's [Do Not Track](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/doNotTrack) browser setting.
+Set this to `true` to disable Umami tracking when the browser exposes an enabled [Do Not Track](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/doNotTrack) preference.
+
+Do Not Track (DNT) is a deprecated browser feature with limited support, and its standardization has been discontinued. Umami retains this option for compatibility with browsers that expose the DNT preference.
+
+This option only controls Umami's tracker behavior when that signal is available. It is not a comprehensive privacy or consent-management solution and does not prevent all HTTP requests or infrastructure logging.
 
 ```html
 <script
