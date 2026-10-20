@@ -41,17 +41,6 @@
     ]
   },
   "footer": {
-    "links": [
-      {
-        "header": "Privacy and legal",
-        "items": [
-          { "label": "Privacy Policy", "href": "https://umami.is/privacy" },
-          { "label": "Terms of Service", "href": "https://umami.is/terms" },
-          { "label": "Data Processing Agreement", "href": "https://umami.is/dpa" },
-          { "label": "Subprocessors", "href": "https://umami.is/subprocessors" }
-        ]
-      }
-    ],
     "socials": [
       {
         "icon": "github",
