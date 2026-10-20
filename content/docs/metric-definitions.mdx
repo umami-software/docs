@@ -28,6 +28,14 @@ Event metrics help identify a unique event for a user. Each event is stored as a
 
 Session metrics help identify a unique session for a user. Each session is stored as a unique UUID called a Session ID.
 
+### Visitor identification
+
+By default, Umami generates an anonymous session identifier by hashing the website ID, visitor IP address, browser User-Agent, and a rotating salt. The IP address is processed during this calculation but is not stored as a field in the analytics session record.
+
+The salt rotates monthly by default. When it rotates, the same inputs produce a different session identifier. Anonymous identifiers are not automatically linked across rotation periods. Existing analytics records remain subject to the applicable retention settings; rotation does not delete them. Self-hosted installations can change the rotation period with [SALT_ROTATION](/docs/environment-variables#salt_rotation).
+
+This identifier groups activity without cookies; it is not a guarantee of absolute anonymity. Customers can also supply [Distinct IDs](/docs/distinct-ids) to link activity across sessions and rotation periods.
+
 | Metric | Description | Examples |
 | --- | --- | --- |
 | Browser | Browser name extracted from the [User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent). | Chrome, Firefox, Safari, Edge |
@@ -41,8 +49,9 @@ Session metrics help identify a unique session for a user. Each session is store
 
 ## Location metrics
 
-Location metrics come from different sources depending on the headers. The IP address sending the request is used to
-gather these metrics, but is never stored.
+Location metrics are approximate and come from IP geolocation or location headers supplied by infrastructure providers. Umami processes the visitor IP address to derive location when needed, but does not store it as a field in the standard analytics records.
+
+This differs from infrastructure processing: IP addresses are processed transiently to deliver requests and operate the service, and may also be recorded in operational or security logs managed by Umami or its providers. Not storing IP addresses in analytics does not mean they are never processed or logged elsewhere. For Umami Cloud, see the [Privacy Policy](https://umami.is/privacy), [DPA](https://umami.is/dpa) (including its operational logging and retention provisions), and [subprocessors](https://umami.is/subprocessors).
 
 - `Cloudflare`: [HTTP request headers](https://developers.cloudflare.com/fundamentals/reference/http-request-headers/)
 - `Vercel`: [Geolocation headers](https://vercel.com/guides/geo-ip-headers-geolocation-vercel-functions)
@@ -106,7 +115,7 @@ Calculated metrics are a combination of total and unique aggregates per website.
 | Metric | Definition |
 | --- | --- |
 | Views | The total number of events collected from your visitors. |
-| Visitors | Unique number of sessions. A session is calculated using a hash of data such as Website ID, hostname, User-Agent, etc., and a rotating salt that changes at the start of every month. |
+| Visitors | Unique number of sessions. By default, the session identifier is derived from the website ID, visitor IP address, User-Agent, and a salt that rotates monthly. See [Visitor identification](#visitor-identification). |
 | Visits | Unique number of visits. A visit is a more granular range within a user session. A visit is calculated using a hash of the session ID and a rotating salt that changes at the start of every hour. Visits are able to span across hourly intervals. |
 | Bounce rate | A bounce is defined when a visit has only 1 event. For example, a visitor enters the website, generates a single view, and then leaves. The bounce rate is calculated by dividing the total number of bounces by unique number of visits. |
 | Visit duration | Total time spent on the website divided by unique number of visits. Total time is only calculated for visitors that visit more than one page. The difference between the first and last event timestamps per visit is summed into a duration time. |
