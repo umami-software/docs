@@ -1,6 +1,6 @@
 ---
 title: FAQ
-description: Answers to common Umami Cloud questions about the free tier, free trials, billing, how usage is measured, server locations, and data export.
+description: Answers to common Umami Cloud questions about the free tier, free trials, billing, how usage is measured, data regions, retention, and data export.
 ---
 
 For general questions about the Umami application see [FAQ](/docs/faq).
@@ -28,7 +28,26 @@ property stored counts as one event. Session data you store also counts toward y
 
 ### Where are your servers located?
 
-Umami Cloud servers are located in the US and EU. Your account's selected region determines where your analytics data is stored.
+Umami Cloud offers US and EU data regions, selected during [account setup](/docs/cloud/sign-up). To check your selection, open **Settings → Account** and look for **Data region**.
+
+The data-region selection applies to analytics storage. It does not mean that all processing takes place within that region: CDN routing, security, support, and operational logging may involve services outside it. See the [Subprocessors](https://umami.is/subprocessors), [Privacy Policy](https://umami.is/privacy), and [Data Processing Agreement](https://umami.is/dpa) for the applicable processing terms.
+
+The region field in account settings is read-only after setup. If you need a different region, [contact support](mailto:support@umami.is) to confirm the options for your account, including whether a new account or data migration is required, before making changes.
+
+### How long is my analytics data retained?
+
+The current [Cloud plans](https://umami.is/pricing) specify the following analytics retention periods:
+
+| Plan | Analytics retention |
+| --- | --- |
+| Hobby | 6 months |
+| Pro | 2 years |
+| Business | 5 years |
+| Enterprise | Custom, as agreed for your account |
+
+These periods describe production analytics retention, not backup retention. Residual copies of deleted data may remain in backups under ordinary retention and backup cycles. See [DPA Section 8.3, Backups and legal retention](https://umami.is/dpa), for the applicable terms.
+
+For an account-specific retention arrangement, check your agreement. [Security and privacy resources](https://umami.is/security) describe the related safeguards and policies.
 
 ### Can I export my data?
 

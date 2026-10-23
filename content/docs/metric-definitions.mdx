@@ -53,6 +53,16 @@ Location metrics are approximate and come from IP geolocation or location header
 
 This differs from infrastructure processing: IP addresses are processed transiently to deliver requests and operate the service, and may also be recorded in operational or security logs managed by Umami or its providers. Not storing IP addresses in analytics does not mean they are never processed or logged elsewhere. For Umami Cloud, see the [Privacy Policy](https://umami.is/privacy), [DPA](https://umami.is/dpa) (including its operational logging and retention provisions), and [subprocessors](https://umami.is/subprocessors).
 
+### Reverse proxies and Umami Cloud
+
+Loading a page and sending an analytics request are separate HTTP requests. Putting your website behind a proxy does not by itself forward that website request's location headers to Umami.
+
+Country, region, and city can be derived from an IP geolocation database or location headers supplied by the infrastructure handling the analytics request. In Umami Cloud, the collection gateway forwards client IP information to the analytics service; when an IP is supplied in the collection payload, location is looked up from that IP rather than from location headers. Forwarding location headers alone therefore does not guarantee that Cloud will use them.
+
+If a reverse proxy omits or anonymizes the original visitor IP, location may be missing, less precise, or reflect the proxy instead. Because the default anonymous identifier also uses the IP address and User-Agent, visitors with the same effective IP and User-Agent may be grouped together, and changes to those inputs may split one visitor's activity. Visitor and session counts can be affected.
+
+For self-hosted installations, see [Enable Cloudflare headers](/docs/enable-cloudflare-headers). Only trust visitor headers supplied by infrastructure you control or trust; they should not be accepted unchanged from arbitrary clients. Self-hosted runtime settings are not Cloud account settings.
+
 - `Cloudflare`: [HTTP request headers](https://developers.cloudflare.com/fundamentals/reference/http-request-headers/)
 - `Vercel`: [Geolocation headers](https://vercel.com/guides/geo-ip-headers-geolocation-vercel-functions)
 - `MaxMind`: [GeoLite2 database](https://dev.maxmind.com/geoip/geolocate-an-ip)
