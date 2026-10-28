@@ -1,5 +1,6 @@
 ---
 title: Use Google Tag Manager
+description: Install the Umami tracker with a Google Tag Manager Custom HTML tag that creates the script element and keeps its data-website-id attribute.
 ---
 
 The Umami tracker can be installed using Google Tag Manager.
@@ -19,15 +20,15 @@ However, Google Tag Manager strips custom `data-*` attributes from script tags. 
 ```html
 <script>
   (function () {
-  var el = document.createElement('script');
-  el.setAttribute('src', 'http://mywebsite.com/script.js');
-  el.setAttribute('data-website-id', '94db1cb1-74f4-4a40-ad6c-962362670409');
-  document.body.appendChild(el);
-})();
+    var el = document.createElement('script');
+    el.setAttribute('src', 'http://mywebsite.com/script.js');
+    el.setAttribute('data-website-id', '94db1cb1-74f4-4a40-ad6c-962362670409');
+    document.body.appendChild(el);
+  })();
 </script>
 ```
 
-### GTM setup steps
+## GTM setup steps
 
 1. In Google Tag Manager, go to **Tags** and click **New**.
 2. Choose **Custom HTML** as the tag type.

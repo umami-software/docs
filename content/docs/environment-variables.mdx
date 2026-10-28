@@ -1,5 +1,6 @@
 ---
 title: Environment variables
+description: Reference for the runtime and build time environment variables you can set to configure a self-hosted Umami installation.
 ---
 
 You can configure Umami with the use of environment variables. They go into the same `.env` file as your `DATABASE_URL`.
@@ -29,7 +30,8 @@ APP_SECRET = "random string"
 <Badge>v1.24.0</Badge>
 
 HTTP header to check for the client's IP address. This is useful when you're
-behind a proxy that uses non-standard headers.
+behind a proxy that uses non-standard headers. If you're behind multiple proxies,
+see [TRUSTED_PROXIES](#trusted_proxies).
 
 ```
 CLIENT_IP_HEADER = "header name"
@@ -99,7 +101,7 @@ DISABLE_LOGIN = 1
 
 <Badge>v2.0.0</Badge>
 
-Umami collects completely anonymous telemetry data in order help improve the application. You can choose to disable this if you don't want to participate.
+Umami collects completely anonymous telemetry data in order to help improve the application. You can choose to disable this if you don't want to participate.
 
 ```
 DISABLE_TELEMETRY = 1
@@ -159,7 +161,7 @@ GEO_DATABASE_URL = "https://example.com/GeoLite2-City.mmdb"
 <Badge>v1.0.0</Badge>
 
 If you are running on an environment which requires you to bind to a specific hostname or port, such as Heroku, you can add
-these variables and start your app with `npm run start-env` instead of `npm start`.
+these variables and start your app with `pnpm run start-env` instead of `pnpm start`.
 
 ```
 HOSTNAME = "my.hostname.com"
@@ -188,7 +190,9 @@ LOG_QUERY = 1
 
 ### MCP_ENABLED
 
-Enables the [Model Context Protocol (MCP)](/docs/mcp) endpoint. MCP is disabled by default.
+<Badge>v3.4.0</Badge>
+
+Enables the remote [Model Context Protocol (MCP)](/docs/mcp) endpoint at `/mcp`. Disabled by default.
 
 ```
 MCP_ENABLED = 1
@@ -218,7 +222,7 @@ REDIS_URL = "redis://localhost:6379"
 
 <Badge>v1.26.0</Badge>
 
-Removes the trailing slash from all incoming urls.
+Removes the trailing slash from all incoming URLs.
 
 ```
 REMOVE_TRAILING_SLASH = 1
@@ -258,6 +262,22 @@ The `.js` extension is not required. The value can also be any path you choose, 
 TRACKER_SCRIPT_NAME = "custom-script-name.js"
 ```
 
+### TRUSTED_PROXIES
+
+<Badge>v3.5.0</Badge>
+
+A comma-delimited list of IP addresses and CIDR ranges of the proxies and load balancers in front of Umami. Set this when requests pass through more than one proxy and Umami records an internal address (like `10.0.0.8`) instead of the visitor's IP.
+
+When set, Umami reads `X-Forwarded-For` and `Forwarded` from right to left, skips trusted proxies, and uses the first address that isn't one. Headers such as `X-Real-IP` that contain a trusted proxy address are skipped in favor of the next header.
+
+You can also use the presets `loopback`, `linklocal` and `private` (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`).
+
+```
+TRUSTED_PROXIES = "10.0.0.0/8, 172.16.0.0/12"
+```
+
+Only list addresses that belong to your own proxies. If your visitors also use private addresses, such as on an internal network, list the specific proxy addresses rather than using `private`, otherwise those visitors will be skipped.
+
 ### TWO_FACTOR_ENCRYPTION_KEY
 
 <Badge>v3.3.0</Badge>
@@ -292,7 +312,7 @@ Build time variables are only recognized during the build process. This also inc
 
 <Badge>v2.3.0</Badge>
 
-A space-delimited list of urls allowed to host the application in an iframe.
+A space-delimited list of URLs allowed to host the application in an iframe.
 
 ```
 ALLOWED_FRAME_URLS = "URLs"
@@ -302,7 +322,7 @@ ALLOWED_FRAME_URLS = "URLs"
 
 <Badge>v1.9.0</Badge>
 
-If you want to host Umami under a subdirectory. You may need to update your reverse proxy settings to correctly handle the BASE_PATH prefix.
+Use this if you want to host Umami under a subdirectory. You may need to update your reverse proxy settings to correctly handle the BASE_PATH prefix.
 
 ```
 BASE_PATH = "/custom"
@@ -312,7 +332,7 @@ BASE_PATH = "/custom"
 
 <Badge>v3.0.0</Badge>
 
-Run the local GeoIP database setup step even in Vercel environment.
+Run the local GeoIP database setup step even in a Vercel environment.
 
 ```
 BUILD_GEO = 1
@@ -353,7 +373,7 @@ DIRECT_DATABASE_URL = "connection string"
 
 <Badge>v1.0.0</Badge>
 
-This will send a HTTP `Strict-Transport-Security` response header with all requests. See [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security).
+This will send an HTTP `Strict-Transport-Security` response header with all requests. See [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Strict-Transport-Security).
 
 ```
 FORCE_SSL = 1

@@ -1,5 +1,6 @@
 ---
 title: Migrate MySQL to PostgreSQL
+description: Move an Umami v2 MySQL database to PostgreSQL before upgrading to v3, using either a MySQL dump file or CSV exports imported with psql.
 ---
 
 As part of Umami v3, we are removing MySQL as a supported database option and standardizing on PostgreSQL.
@@ -9,7 +10,7 @@ This change ensures a more consistent and scalable data layer across all environ
 
 This document outlines the migration process from MySQL to PostgreSQL, including:
 
-- Preparing MySQL dump file or CSVs.
+- Preparing a MySQL dump file or CSVs.
 - Verifying data integrity and application compatibility.
 
 The goal is to make the transition seamless, while preserving all data and ensuring minimal downtime. There are open-source tools like
@@ -18,10 +19,10 @@ making this method as simple and agnostic as possible.
 
 ## Requirements
 
-- MySQL Database schema must be in sync with the latest v2 version (v2.19.0).
+- MySQL database schema must be in sync with the latest v2 version (v2.19.0).
 - Credentials to both databases:
 
-```shell
+```text
 MySQL: mysql://user:password@host:port/dbname
 
 PostgreSQL: postgresql://user:password@host:port/dbname
@@ -56,25 +57,25 @@ mysqldump --no-create-info --default-character-set=utf8mb4 --quick --skip-add-lo
 sed -i 's/`/"/g' mydbdump.sql
 ```
 
-3. Run the dump file using psql
+3. Run the dump file using psql.
 
 ```shell
 psql -U username -d mydb < mydbdump.sql
 ```
 
-Docker version
+Docker version:
 
 ```shell
 docker exec -i my-container psql -U username -d mydb < mydbdump.sql
 ```
 
-Now you can upgrade to Umami (v3.0)
+Now you can upgrade to Umami (v3.0).
 
 ### Generating CSVs
 
 For larger databases, the dump file may be too large and the insert statement may become inefficient.
 
-1. Generate MySQL CSV's for all the necessary tables with data.
+1. Generate MySQL CSVs for all the necessary tables with data.
 
 Inside the MySQL shell:
 
@@ -83,6 +84,7 @@ SELECT *
 INTO OUTFILE '/tmp/website_event.csv'
 FIELDS TERMINATED BY ','
 ENCLOSED BY '"'
+ESCAPED BY '\\'
 LINES TERMINATED BY '\n'
 FROM website_event;
 ```
@@ -94,16 +96,17 @@ FROM website_event;
 
 </Callout>
 
-2. Move the file from MySQL server to location accessible by psql using `scp` or `cp`.
+2. Move the file from the MySQL server to a location accessible by psql using `scp` or `cp`.
 
-3. Use psql `\COPY` command to import the CSVs into PostgreSQL database. Repeat command for each table.
+3. Use psql `\COPY` command to import the CSVs into the PostgreSQL database. Repeat the command for each table.
 
 ```shell
-psql -U postgres -d mydb -c "\COPY website_event FROM 'website_event.csv' CSV NULL '\N'"
+psql -U postgres -d mydb -c "\COPY website_event FROM 'website_event.csv' CSV NULL '\N' ESCAPE '\'"
 ```
 
 <Callout title="Notes">
 
-- Include schema if not using default schema.
+- Include the schema if you are not using the default schema.
+- `ESCAPE '\'` matches MySQL's backslash escaping (`ESCAPED BY '\\'`), so quotes and backslashes inside values are imported correctly. `NULL '\N'` matches how MySQL writes `NULL` values.
 
 </Callout>

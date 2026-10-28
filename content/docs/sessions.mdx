@@ -1,10 +1,11 @@
 ---
 title: Sessions
+description: View visitor sessions in Umami, open individual visitor profiles, and explore and filter the custom session properties you have saved.
 ---
 
 *Available since v2.13.0*
 
-The **Sessions** screen displays detailed information about your visitors. A session represents a single visit to your website, identified by a unique hash generated from the visitor's IP address, user agent, and website ID. This means visitors are tracked anonymously without cookies.
+The **Sessions** screen displays activity grouped by a session identifier. By default, Umami generates this identifier from the website ID, visitor IP address, browser User-Agent, and a rotating salt, without cookies. A session can include multiple visits. See [Visitor identification](/docs/metric-definitions#visitor-identification) for rotation behavior and [Distinct IDs](/docs/distinct-ids) for customer-supplied identifiers that link activity across sessions.
 
 ## Visitor activity
 

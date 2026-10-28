@@ -1,5 +1,6 @@
 ---
 title: Revenue
+description: Track revenue in Umami by sending revenue and currency event data with tracker functions or data attributes, then run the Revenue insight.
 ---
 
 *Available since v2.14.0*
@@ -13,8 +14,8 @@ The insight works by aggregating **Revenue** and **Currency** data across a spec
 
 ## Configuring Revenue
 
-To start collecting revenue data, you will track an event with dynamic data. This can be done through [tracker functions](https://umami.is/docs/tracker-functions#event-data)
-or [data attributes](https://umami.is/docs/track-events#using-data-attributes). The tracked event must be passed along with the two dynamic data
+To start collecting revenue data, you will track an event with dynamic data. This can be done through [tracker functions](/docs/tracker-functions#event-data)
+or [data attributes](/docs/track-events#using-data-attributes). The tracked event must be passed along with the two dynamic data
 properties `revenue` and `currency`. If a currency code (ISO 4217) is not recognized, the insight will default to `USD`.
 
 ### Tracker function

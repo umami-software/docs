@@ -11632,7 +11632,7 @@
                       },
                       "data": {
                         "additionalProperties": true,
-                        "description": "Data returned by the operation.",
+                        "description": "Custom event data.",
                         "type": "object"
                       },
                       "device": {
@@ -11649,7 +11649,7 @@
                         "type": "string"
                       },
                       "id": {
-                        "description": "Unique identifier of the resource.",
+                        "description": "Distinct ID of the visitor.",
                         "type": "string"
                       },
                       "inp": {
@@ -11674,7 +11674,8 @@
                         "type": "string"
                       },
                       "name": {
-                        "description": "Display name of the resource."
+                        "description": "Name of the custom event.",
+                        "type": "string"
                       },
                       "os": {
                         "description": "Operating system used by the visitor.",
@@ -11693,7 +11694,8 @@
                         "type": "string"
                       },
                       "tag": {
-                        "description": "Tag attached to the tracked activity."
+                        "description": "Tag attached to the tracked activity.",
+                        "type": "string"
                       },
                       "timestamp": {
                         "type": "integer"
@@ -11708,7 +11710,7 @@
                         "type": "number"
                       },
                       "url": {
-                        "description": "URL associated with the resource.",
+                        "description": "URL of the page.",
                         "type": "string"
                       },
                       "userAgent": {
@@ -18525,6 +18527,7 @@
     },
     "/api/websites/{websiteId}/attribution": {
       "get": {
+        "description": "Attributes conversions for a page path or custom event to referrers, paid ads, and UTM parameters using a first-click or last-click model.",
         "operationId": "getWebsiteAttribution",
         "parameters": [
           {
@@ -19079,6 +19082,7 @@
     },
     "/api/websites/{websiteId}/breakdown": {
       "get": {
+        "description": "Returns pageviews, visitors, visits, bounces, and total time for the website, grouped by the requested fields, over the date range.",
         "operationId": "getWebsiteBreakdown",
         "parameters": [
           {
@@ -26073,6 +26077,7 @@
     },
     "/api/websites/{websiteId}/funnels": {
       "get": {
+        "description": "Returns a paginated list of the saved funnels for the website, optionally filtered by search text.",
         "operationId": "getWebsiteFunnels",
         "parameters": [
           {
@@ -26381,6 +26386,7 @@
         "x-umami-source": "src/app/api/websites/[websiteId]/funnels/contract.ts"
       },
       "post": {
+        "description": "Saves a named funnel for the website with an optional description, its ordered steps, and the conversion window.",
         "operationId": "createWebsiteFunnel",
         "parameters": [
           {
@@ -26567,7 +26573,7 @@
             "bearerAuth": []
           }
         ],
-        "summary": "Create website funnel",
+        "summary": "Create a website funnel",
         "tags": [
           "Websites"
         ],
@@ -26578,6 +26584,7 @@
     },
     "/api/websites/{websiteId}/funnels/{funnelId}": {
       "delete": {
+        "description": "Deletes the specified saved funnel from the website after checking the caller's permissions.",
         "operationId": "deleteWebsiteFunnel",
         "parameters": [
           {
@@ -26670,7 +26677,7 @@
             "bearerAuth": []
           }
         ],
-        "summary": "Delete website funnel",
+        "summary": "Delete a website funnel",
         "tags": [
           "Websites"
         ],
@@ -26679,6 +26686,7 @@
         "x-umami-source": "src/app/api/websites/[websiteId]/funnels/[funnelId]/contract.ts"
       },
       "get": {
+        "description": "Returns a saved funnel for the website, including its name, description, steps, and conversion window.",
         "operationId": "getWebsiteFunnel",
         "parameters": [
           {
@@ -26784,7 +26792,7 @@
             "shareToken": []
           }
         ],
-        "summary": "Get website funnel",
+        "summary": "Get a website funnel",
         "tags": [
           "Websites"
         ],
@@ -26793,6 +26801,7 @@
         "x-umami-source": "src/app/api/websites/[websiteId]/funnels/[funnelId]/contract.ts"
       },
       "post": {
+        "description": "Updates the name, description, steps, or conversion window of a saved funnel for the website.",
         "operationId": "updateWebsiteFunnel",
         "parameters": [
           {
@@ -26989,7 +26998,7 @@
             "bearerAuth": []
           }
         ],
-        "summary": "Update website funnel",
+        "summary": "Update a website funnel",
         "tags": [
           "Websites"
         ],
@@ -27000,6 +27009,7 @@
     },
     "/api/websites/{websiteId}/funnels/{funnelId}/stats": {
       "get": {
+        "description": "Returns visitor counts and drop-off for each step of a saved funnel over the selected date range, with optional filters.",
         "operationId": "getWebsiteSavedFunnelStats",
         "parameters": [
           {
@@ -27414,6 +27424,7 @@
     },
     "/api/websites/{websiteId}/funnels/stats": {
       "get": {
+        "description": "Returns visitor counts and drop-off for each step of an ad-hoc funnel, given its steps and conversion window, over the date range.",
         "operationId": "getWebsiteFunnelStats",
         "parameters": [
           {
@@ -27835,6 +27846,7 @@
     },
     "/api/websites/{websiteId}/goals": {
       "get": {
+        "description": "Returns a paginated list of the saved goals for the website, optionally filtered by search text.",
         "operationId": "getWebsiteGoals",
         "parameters": [
           {
@@ -28143,6 +28155,7 @@
         "x-umami-source": "src/app/api/websites/[websiteId]/goals/contract.ts"
       },
       "post": {
+        "description": "Saves a named goal for the website with an optional description and the goal type and value to track.",
         "operationId": "createWebsiteGoal",
         "parameters": [
           {
@@ -28277,7 +28290,7 @@
             "bearerAuth": []
           }
         ],
-        "summary": "Create website goal",
+        "summary": "Create a website goal",
         "tags": [
           "Websites"
         ],
@@ -28288,6 +28301,7 @@
     },
     "/api/websites/{websiteId}/goals/{goalId}": {
       "delete": {
+        "description": "Deletes the specified saved goal from the website after checking the caller's permissions.",
         "operationId": "deleteWebsiteGoal",
         "parameters": [
           {
@@ -28380,7 +28394,7 @@
             "bearerAuth": []
           }
         ],
-        "summary": "Delete website goal",
+        "summary": "Delete a website goal",
         "tags": [
           "Websites"
         ],
@@ -28389,6 +28403,7 @@
         "x-umami-source": "src/app/api/websites/[websiteId]/goals/[goalId]/contract.ts"
       },
       "get": {
+        "description": "Returns a saved goal for the website, including its name, description, and the type and value it tracks.",
         "operationId": "getWebsiteGoal",
         "parameters": [
           {
@@ -28494,7 +28509,7 @@
             "shareToken": []
           }
         ],
-        "summary": "Get website goal",
+        "summary": "Get a website goal",
         "tags": [
           "Websites"
         ],
@@ -28503,6 +28518,7 @@
         "x-umami-source": "src/app/api/websites/[websiteId]/goals/[goalId]/contract.ts"
       },
       "post": {
+        "description": "Updates the name, description, or the type and value tracked by a saved goal for the website.",
         "operationId": "updateWebsiteGoal",
         "parameters": [
           {
@@ -28647,7 +28663,7 @@
             "bearerAuth": []
           }
         ],
-        "summary": "Update website goal",
+        "summary": "Update a website goal",
         "tags": [
           "Websites"
         ],
@@ -28658,6 +28674,7 @@
     },
     "/api/websites/{websiteId}/goals/{goalId}/stats": {
       "get": {
+        "description": "Returns the number of conversions and the total for a saved goal over the selected date range, with optional filters.",
         "operationId": "getWebsiteSavedGoalStats",
         "parameters": [
           {
@@ -29025,6 +29042,7 @@
     },
     "/api/websites/{websiteId}/goals/stats": {
       "get": {
+        "description": "Returns the number of conversions and the total for an ad-hoc goal, given its type and value, over the selected date range.",
         "operationId": "getWebsiteGoalStats",
         "parameters": [
           {
@@ -29399,6 +29417,7 @@
     },
     "/api/websites/{websiteId}/heatmaps": {
       "get": {
+        "description": "Returns click or scroll heatmap data for the website, optionally for a single page path, along with the pages that have recorded data.",
         "operationId": "getWebsiteHeatmaps",
         "parameters": [
           {
@@ -29967,6 +29986,7 @@
     },
     "/api/websites/{websiteId}/journeys": {
       "get": {
+        "description": "Returns the most common paths visitors take through the website, between 2 and 7 steps long, with optional start and end steps.",
         "operationId": "getWebsiteJourneys",
         "parameters": [
           {
@@ -31594,6 +31614,7 @@
     },
     "/api/websites/{websiteId}/performance/chart": {
       "get": {
+        "description": "Returns p50, p75, and p95 values over time for a Core Web Vitals metric such as LCP, INP, CLS, FCP, or TTFB.",
         "operationId": "getWebsitePerformanceChart",
         "parameters": [
           {
@@ -31985,6 +32006,7 @@
     },
     "/api/websites/{websiteId}/performance/metrics": {
       "get": {
+        "description": "Ranks pages, titles, devices, or browsers by a Core Web Vitals metric, with p50, p75, and p95 values and a measurement count.",
         "operationId": "getWebsitePerformanceMetrics",
         "parameters": [
           {
@@ -32399,6 +32421,7 @@
     },
     "/api/websites/{websiteId}/performance/stats": {
       "get": {
+        "description": "Returns p50, p75, and p95 values for LCP, INP, CLS, FCP, and TTFB and the number of measurements in the date range.",
         "operationId": "getWebsitePerformanceStats",
         "parameters": [
           {
@@ -34090,6 +34113,7 @@
     },
     "/api/websites/{websiteId}/retention": {
       "get": {
+        "description": "Returns daily retention for the website: for each first-visit date, how many visitors returned on later days and the percentage.",
         "operationId": "getWebsiteRetention",
         "parameters": [
           {
@@ -44439,6 +44463,7 @@
     },
     "/api/websites/{websiteId}/utm/metrics": {
       "get": {
+        "description": "Returns pageview counts grouped by a UTM parameter, such as source, medium, campaign, term, or content, for the selected date range.",
         "operationId": "getWebsiteUtmMetrics",
         "parameters": [
           {
@@ -44805,7 +44830,7 @@
             "shareToken": []
           }
         ],
-        "summary": "Get website utm metrics",
+        "summary": "Get website UTM metrics",
         "tags": [
           "Websites"
         ],

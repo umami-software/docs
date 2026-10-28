@@ -11,7 +11,7 @@
     "directory": "api-reference"
   },
   "name": "umami",
-  "description": "Documentation for Umami, a modern privacy-first analytics platform.",
+  "description": "Documentation for Umami, an open-source web and product analytics platform.",
   "logo": {
     "light": "/logo.svg",
     "dark": "/logo.svg",
@@ -60,12 +60,7 @@
     ]
   },
   "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude"
-    ]
+    "options": ["copy", "view", "chatgpt", "claude"]
   },
   "seo": {
     "indexing": "all",
@@ -83,6 +78,14 @@
     }
   },
   "redirects": [
+    {
+      "source": "/docs/guides/running-on-planetscale",
+      "destination": "/docs/guides/hosting"
+    },
+    {
+      "source": "/docs/about",
+      "destination": "/docs"
+    },
     {
       "source": "/docs/guides/measure-campaigns",
       "destination": "https://umami.is/guides/marketing-campaign-tracking"
@@ -187,13 +190,7 @@
                 "title": "Getting updates"
               },
               {
-                "page": "about",
-                "hidden": true,
-                "title": "About"
-              },
-              {
                 "page": "faq",
-                "hidden": true,
                 "title": "FAQ"
               }
             ]
@@ -225,10 +222,6 @@
               {
                 "page": "environment-variables",
                 "title": "Environment variables"
-              },
-              {
-                "page": "mcp",
-                "title": "Enable MCP"
               },
               {
                 "page": "enable-cloudflare-headers",
@@ -435,6 +428,10 @@
               {
                 "page": "integrations",
                 "title": "Integrations"
+              },
+              {
+                "page": "mcp",
+                "title": "MCP"
               }
             ]
           },
@@ -583,10 +580,6 @@
               {
                 "page": "guides/running-on-northflank",
                 "title": "Running on Northflank"
-              },
-              {
-                "page": "guides/running-on-planetscale",
-                "title": "Running on PlanetScale"
               },
               {
                 "page": "guides/running-on-qovery",

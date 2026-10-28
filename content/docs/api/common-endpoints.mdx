@@ -1,5 +1,6 @@
 ---
 title: Common endpoints
+description: A shortcut to the Umami API endpoints most integrations use, from listing websites to stats, time series, breakdowns, and realtime data.
 ---
 
 The API exposes an operation for everything you can do in the app, but most
@@ -8,7 +9,9 @@ website **Overview** screen. This page is a shortcut to those. Each row links to
 its full reference page for parameters and responses.
 
 All paths below are relative to your API base URL: `http://<your-umami-instance>/api`
-when self-hosting, or the Umami Cloud base URL from your [API key](/docs/cloud/api-key).
+when self-hosting, or `https://api.umami.is/v1` on Umami Cloud with an [API key](/docs/cloud/api-key).
+For example, `GET /websites` is `http://<your-umami-instance>/api/websites` or
+`https://api.umami.is/v1/websites`.
 
 ---
 
@@ -18,8 +21,8 @@ Most stats endpoints need a `websiteId`.
 
 | Task | Endpoint | Details |
 | --- | --- | --- |
-| List every website you can access | `GET /api/websites` | [List websites](/docs/api-reference/list-websites) |
-| Get a single website | `GET /api/websites/{websiteId}` | [Get a website](/docs/api-reference/get-website) |
+| List your websites (add `includeTeams=true` to include team websites) | `GET /websites` | [List websites](/docs/api-reference/list-websites) |
+| Get a single website | `GET /websites/{websiteId}` | [Get a website](/docs/api-reference/get-website) |
 
 ## Overview numbers
 
@@ -27,15 +30,15 @@ The stat cards and active-visitor count at the top of the dashboard.
 
 | Task | Endpoint | Details |
 | --- | --- | --- |
-| Pageviews, visitors, visits, bounces, total time (with comparison) | `GET /api/websites/{websiteId}/stats` | [Get website summary statistics](/docs/api-reference/get-website-stats) |
-| Visitors active in the last 5 minutes | `GET /api/websites/{websiteId}/active` | [Get active website visitors](/docs/api-reference/get-website-active) |
+| Pageviews, visitors, visits, bounces, total time (with comparison) | `GET /websites/{websiteId}/stats` | [Get website summary statistics](/docs/api-reference/get-website-stats) |
+| Visitors active in the last 5 minutes | `GET /websites/{websiteId}/active` | [Get active website visitors](/docs/api-reference/get-website-active) |
 
 ## Charts over time
 
 | Task | Endpoint | Details |
 | --- | --- | --- |
-| Pageviews and sessions time series | `GET /api/websites/{websiteId}/pageviews` | [Get pageviews and sessions over time](/docs/api-reference/get-website-pageviews) |
-| Events time series | `GET /api/websites/{websiteId}/events/series` | [Get custom event counts over time](/docs/api-reference/get-website-event-series) |
+| Pageviews and sessions time series | `GET /websites/{websiteId}/pageviews` | [Get pageviews and sessions over time](/docs/api-reference/get-website-pageviews) |
+| Events time series | `GET /websites/{websiteId}/events/series` | [Get custom event counts over time](/docs/api-reference/get-website-event-series) |
 
 ## Breakdowns
 
@@ -45,14 +48,14 @@ events, and so on. Pass the dimension with `type` (`path`, `referrer`,
 
 | Task | Endpoint | Details |
 | --- | --- | --- |
-| Ranked list of one dimension | `GET /api/websites/{websiteId}/metrics?type=path` | [Get ranked website metrics](/docs/api-reference/get-website-metrics) |
-| Same list with pageviews, visitors, visits, bounces, and time per row | `GET /api/websites/{websiteId}/metrics/expanded?type=path` | [Get detailed website metrics](/docs/api-reference/get-website-expanded-metrics) |
+| Ranked list of one dimension | `GET /websites/{websiteId}/metrics?type=path` | [Get ranked website metrics](/docs/api-reference/get-website-metrics) |
+| Same list with pageviews, visitors, visits, bounces, and time per row | `GET /websites/{websiteId}/metrics/expanded?type=path` | [Get detailed website metrics](/docs/api-reference/get-website-expanded-metrics) |
 
 ## Realtime
 
 | Task | Endpoint | Details |
 | --- | --- | --- |
-| Live countries, URLs, referrers, events, and totals (last 30 minutes) | `GET /api/realtime/{websiteId}` | [Get real-time website activity](/docs/api-reference/get-realtime) |
+| Live countries, URLs, referrers, events, and totals (last 30 minutes) | `GET /realtime/{websiteId}` | [Get real-time website activity](/docs/api-reference/get-realtime) |
 
 ---
 
@@ -88,7 +91,9 @@ curl http://localhost:3000/api/websites \
   "data": [
     { "id": "b8d3a1f0-1c2d-4e5f-8a9b-0c1d2e3f4a5b", "name": "Example", "domain": "example.com" }
   ],
-  "count": 1
+  "count": 1,
+  "page": 1,
+  "pageSize": 20
 }
 ```
 

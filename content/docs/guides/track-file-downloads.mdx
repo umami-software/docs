@@ -1,5 +1,6 @@
 ---
 title: Track file downloads
+description: Record file downloads as Umami custom events with data attributes on download links, or with a script that tags every file link automatically.
 ---
 
 Track when users download files like PDFs, ZIPs, images, or other assets from your website using Umami custom events.
@@ -32,8 +33,8 @@ Use this script to automatically track clicks on any link pointing to common fil
     const fileExtensions = /\.(pdf|zip|tar|gz|rar|doc|docx|xls|xlsx|ppt|pptx|csv|mp3|mp4|dmg|exe|iso)$/i;
 
     document.querySelectorAll('a[href]').forEach(function (a) {
-      if (fileExtensions.test(a.href) && !a.getAttribute('data-umami-event')) {
-        var filename = a.href.split('/').pop().split('?')[0];
+      if (fileExtensions.test(a.pathname) && !a.getAttribute('data-umami-event')) {
+        const filename = a.pathname.split('/').pop();
         a.setAttribute('data-umami-event', 'file-download');
         a.setAttribute('data-umami-event-file', filename);
       }

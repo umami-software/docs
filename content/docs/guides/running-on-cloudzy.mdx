@@ -1,5 +1,6 @@
 ---
 title: Running on Cloudzy
+description: Launch a preconfigured Umami VPS on Cloudzy with Docker Compose, PostgreSQL, and Nginx, then configure a domain and start collecting data.
 ---
 
 [Cloudzy](https://cloudzy.com) is an independent cloud hosting provider that offers a [one-click Umami deployment](https://cloudzy.com/marketplace/umami), letting you launch a ready-to-use Umami VPS without configuring the server from scratch. Deployment typically completes in about 60 seconds.
@@ -7,10 +8,6 @@ title: Running on Cloudzy
 Cloudzy lists 1 GB of RAM as the minimum requirement for Umami, so at current pricing, you can get started for $3.48/month. You can scale to a larger VPS later for higher traffic or heavier workloads.
 
 The image deploys Umami and PostgreSQL with Docker Compose on an Ubuntu Server 24.04 LTS VPS, with Nginx configured as the HTTPS reverse proxy.
-
-
-
-
 
 ## Deploy Umami
 
@@ -24,12 +21,6 @@ _Deploy a preconfigured Umami instance using the button above._
 4. Review the order and deploy the server.
 
 Once provisioning is complete, you can find the SSH credentials in the Cloudzy dashboard.
-
-
-
-
-
-
 
 ## Open your Umami instance
 
@@ -46,15 +37,10 @@ Cloudzy auto-generates an SSL certificate during provisioning and stores it in `
 
 Sign in with the default administrator account:
 
-\- Username: `admin`
+- Username: `admin`
+- Password: `umami`
 
-\- Password: `umami`
-
-After signing in, go to **Settings → Profile** and change the default password immediately. See [Login](https://docs.umami.is/docs/login) for more information.
-
-
-
-
+After signing in, go to **Settings → Profile** and change the default password immediately. See [Login](/docs/login) for more information.
 
 ## Configure a production domain
 
@@ -66,49 +52,28 @@ The IP address is useful for confirming that the deployment works. Before adding
 
 3. Install a browser-trusted TLS certificate for the domain and reload Nginx.
 
-
 The certificate files created during initial provisioning are stored in `/etc/nginx/ssl/`. Once the domain is configured, use its HTTPS address when adding the Umami tracking script to your website.
-
-
-
-
 
 ## Start collecting data
 
-1. Follow [Add a website](https://docs.umami.is/docs/add-a-website) to register your website in Umami.
+1. Follow [Add a website](/docs/add-a-website) to register your website in Umami.
 
-2. Follow [Collect data](https://docs.umami.is/docs/collect-data) to add the tracking script to your website.
+2. Follow [Collect data](/docs/collect-data) to add the tracking script to your website.
 
 3. Visit your website and confirm that activity appears in the Umami dashboard.
-
-
-
-
 
 ## Manage the instance
 
 Connect to the VPS over SSH when you need to inspect or restart the services. The Umami stack is located in `/root/umami`:
 
-
 ```shell
-
 cd /root/umami
-
 docker compose ps               # container status
-
 docker compose logs -f          # follow logs
-
 docker compose restart          # restart Umami and PostgreSQL
-
 systemctl restart nginx         # restart the reverse proxy
-
 ```
 
-Application settings are stored in `/root/umami/.env`, and the Docker Compose configuration is in `/root/umami/docker-compose.yaml`. PostgreSQL data persists in the `umami\_umami-db-data` Docker volume.
+Application settings are stored in `/root/umami/.env`, and the Docker Compose configuration is in `/root/umami/docker-compose.yaml`. PostgreSQL data persists in the `umami_umami-db-data` Docker volume.
 
-Back up the database before upgrading Umami. Follow [Getting updates](https://docs.umami.is/docs/updates) for the current Docker update procedure.
-
-
-
-
-
+Back up the database before upgrading Umami. Follow [Getting updates](/docs/updates) for the current Docker update procedure.

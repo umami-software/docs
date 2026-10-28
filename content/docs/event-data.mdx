@@ -1,5 +1,6 @@
 ---
 title: Event data
+description: Attach custom properties to tracked events in Umami with data attributes or umami.track(), then view them on the Events page.
 ---
 
 *Available since v2.0.0*
@@ -35,10 +36,10 @@ umami.track('add-to-cart', { product: 't-shirt', price: 29.99 });
 
 ## Accessing event data
 
-Navigate to **Websites** and click on the **View** button.
+Open a website and go to the **Events** page. Your custom event data can be accessed under the **Properties** tab.
 
-You can access event data by clicking on the **Event data** button from the top nav.
-
-![image](/images/docs/website-navbar.png)
+![image](/images/docs/events-properties.png)
 
 Event data is displayed as a breakdown of each property name and its values, along with the total count for each value. Use this to understand how your custom data is distributed across events.
+
+To narrow the results to specific property names and values, see [Filtering](/docs/track-events#filtering).

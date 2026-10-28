@@ -1,5 +1,6 @@
 ---
 title: Create a public dashboard
+description: Share Umami analytics publicly with a website share URL or a custom board, and embed either one on your own site in an iframe.
 ---
 
 Share your analytics publicly using Umami's share URLs and boards. This is useful for open-source projects, transparency reports, or sharing metrics with stakeholders who don't have Umami accounts.
@@ -28,7 +29,7 @@ Example: `https://your-umami.example.com/share/abc123/My-Website`
 
 ## Option 2: Share a custom board
 
-*Requires v3.1.0*
+*Available since v3.1.0*
 
 Boards let you build a custom dashboard with only the metrics and components that matter, then share it publicly.
 
@@ -71,6 +72,8 @@ Remember to set the `ALLOWED_FRAME_URLS` environment variable to allow your doma
 ```dotenv
 ALLOWED_FRAME_URLS="https://your-website.example.com"
 ```
+
+`ALLOWED_FRAME_URLS` is a build-time variable, so you need to rebuild Umami after setting it. See [Environment variables](/docs/environment-variables#allowed_frame_urls).
 
 <Callout title="Tips" variant="tip">
 

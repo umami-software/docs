@@ -1,5 +1,6 @@
 ---
 title: Bypass ad blockers
+description: Keep ad blockers from blocking Umami by proxying the tracker and collection endpoint, self-hosting the script, or renaming them.
 ---
 
 Even though Umami is a privacy-first product, it may still get blocked by
@@ -8,7 +9,7 @@ Some lists can be overly aggressive, for example blocking anything with even
 the word `analytics` in it or simply blocking all tracking products regardless
 of how they operate.
 
-Here are few methods you can use to avoid ad blockers.
+Here are a few methods you can use to avoid ad blockers.
 
 ## Proxying
 
@@ -31,19 +32,37 @@ Here are some tutorials you can use:
 - [Nginx](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/)
 - [Apache](https://httpd.apache.org/docs/2.4/howto/reverse_proxy.html)
 
-To implement this using server-side, what you can do is make a separate endpoint.
+To implement this server-side, create a separate endpoint.
 For instance, in [Express.js](https://expressjs.com):
 
 ```js
+app.use(express.json());
+
 app.get("/stats.js", async (req, res) => {
-    const scriptText = await fetch("https://cloud.umami.is/script.js");
-    res.send(await scriptText.text())
+    const response = await fetch("https://cloud.umami.is/script.js");
+    res.type("application/javascript").send(await response.text());
+});
+
+app.post("/api/send", async (req, res) => {
+    const response = await fetch("https://gateway.umami.is/api/send", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "User-Agent": req.get("User-Agent") ?? "",
+            "X-Forwarded-For": req.ip,
+        },
+        body: JSON.stringify(req.body),
+    });
+    res.status(response.status).send(await response.text());
 });
 ```
 
-Then in your html head tag:
+The second route forwards the tracking data. The Umami Cloud script sends its data to `gateway.umami.is` by default,
+so set `data-host-url` to your own domain to make it send to `/api/send` on your server instead.
+
+Then in your HTML `<head>` tag:
 ```html
-<script defer src="/stats.js" data-website-id="..."></script>
+<script defer src="/stats.js" data-host-url="https://yourdomain.com" data-website-id="..."></script>
 ```
 
 
@@ -57,7 +76,7 @@ tracker script on your own domain.
 1. Open the script URL in your browser, `https://cloud.umami.is/script.js`.
 2. Save the file.
 3. Upload the file to your domain.
-4. Set the `data-host-url` attribute to send data to the correct location. See [tracker configuration](https://umami.is/docs/tracker-configuration).
+4. Set the `data-host-url` attribute to send data to the correct location. See [tracker configuration](/docs/tracker-configuration).
 
 Note that this method is not as reliable as proxying and if the tracker script were to change, you would need
 to download and update the script again.

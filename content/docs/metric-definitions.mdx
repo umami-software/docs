@@ -1,8 +1,9 @@
 ---
 title: Metric definitions
+description: Definitions of the default metrics Umami collects, including event, session, location, UTM, ad click ID, Web Vitals, and calculated metrics.
 ---
 
-All default metrics Umami collects along with high level definitions.
+This page lists all default metrics Umami collects, with high-level definitions.
 
 ---
 
@@ -18,7 +19,7 @@ Event metrics help identify a unique event for a user. Each event is stored as a
 | Query parameters | [Search](https://developer.mozilla.org/en-US/docs/Web/API/URL/search) property that is extracted from the URL after the payload is sent. |
 | Referrer | Document [referrer](https://developer.mozilla.org/en-US/docs/Web/API/Document/referrer) property included in the payload. If the referrer includes the hostname, the value is replaced by the previous URL. |
 | Title | Document [title](https://developer.mozilla.org/en-US/docs/Web/API/Document/title) property included in the payload. |
-| Event Name | The name of a custom event triggered on the page (e.g. `signup-button`). |
+| Event Name | The name of a custom event triggered on the page (e.g., `signup-button`). |
 | Tag | An optional label attached to the event via the tracker `data-tag` attribute. |
 
 ---
@@ -27,30 +28,49 @@ Event metrics help identify a unique event for a user. Each event is stored as a
 
 Session metrics help identify a unique session for a user. Each session is stored as a unique UUID called a Session ID.
 
+### Visitor identification
+
+By default, Umami generates an anonymous session identifier by hashing the website ID, visitor IP address, browser User-Agent, and a rotating salt. The IP address is processed during this calculation but is not stored as a field in the analytics session record.
+
+The salt rotates monthly by default. When it rotates, the same inputs produce a different session identifier. Anonymous identifiers are not automatically linked across rotation periods. Existing analytics records remain subject to the applicable retention settings; rotation does not delete them. Self-hosted installations can change the rotation period with [SALT_ROTATION](/docs/environment-variables#salt_rotation).
+
+This identifier groups activity without cookies; it is not a guarantee of absolute anonymity. Customers can also supply [Distinct IDs](/docs/distinct-ids) to link activity across sessions and rotation periods.
+
 | Metric | Description | Examples |
 | --- | --- | --- |
 | Browser | Browser name extracted from the [User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent). | Chrome, Firefox, Safari, Edge |
 | OS | Operating system name extracted from the [User-Agent](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/User-Agent). | Windows 10, macOS, Linux, Android, iOS |
-| Device | Device name identified from the combination of **OS** and **screen**. | Laptop, desktop, mobile, tablet |
+| Device | Device name identified from the combination of **OS** and **screen**. | laptop, desktop, mobile, tablet |
 | Screen | [Screen](https://developer.mozilla.org/en-US/docs/Web/API/Screen) width and height property included in the payload. | 1920x1080, 1280x960 |
 | Language | Navigator [language](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/language) property included in the payload. | English, Chinese, German, French |
-| Distinct ID | A custom identifier assigned to a visitor via `umami.identify()`. See [Distinct IDs](/docs/distinct-ids). | `user-123`, `abc@example.com` |
+| Distinct ID | A custom identifier assigned to a visitor via `umami.identify()`. See [Distinct IDs](/docs/distinct-ids). | `user-123` |
 
 ---
 
 ## Location metrics
 
-Location metrics come from different sources depending on the headers. The IP address sending the request is used to
-gather these metrics, but is never stored.
+Location metrics are approximate and come from IP geolocation or location headers supplied by infrastructure providers. Umami processes the visitor IP address to derive location when needed, but does not store it as a field in the standard analytics records.
 
-- `Cloudflare`: [HTTP request headers](https://developers.cloudflare.com/fundamentals/reference/http-request-headers/#docs-content)
+This differs from infrastructure processing: IP addresses are processed transiently to deliver requests and operate the service, and may also be recorded in operational or security logs managed by Umami or its providers. Not storing IP addresses in analytics does not mean they are never processed or logged elsewhere. For Umami Cloud, see the [Privacy Policy](https://umami.is/privacy), [DPA](https://umami.is/dpa) (including its operational logging and retention provisions), and [subprocessors](https://umami.is/subprocessors).
+
+### Reverse proxies and Umami Cloud
+
+Loading a page and sending an analytics request are separate HTTP requests. Putting your website behind a proxy does not by itself forward that website request's location headers to Umami.
+
+Country, region, and city can be derived from an IP geolocation database or location headers supplied by the infrastructure handling the analytics request. In Umami Cloud, the collection gateway forwards client IP information to the analytics service; when an IP is supplied in the collection payload, location is looked up from that IP rather than from location headers. Forwarding location headers alone therefore does not guarantee that Cloud will use them.
+
+If a reverse proxy omits or anonymizes the original visitor IP, location may be missing, less precise, or reflect the proxy instead. Because the default anonymous identifier also uses the IP address and User-Agent, visitors with the same effective IP and User-Agent may be grouped together, and changes to those inputs may split one visitor's activity. Visitor and session counts can be affected.
+
+For self-hosted installations, see [Enable Cloudflare headers](/docs/enable-cloudflare-headers). Only trust visitor headers supplied by infrastructure you control or trust; they should not be accepted unchanged from arbitrary clients. Self-hosted runtime settings are not Cloud account settings.
+
+- `Cloudflare`: [HTTP request headers](https://developers.cloudflare.com/fundamentals/reference/http-request-headers/)
 - `Vercel`: [Geolocation headers](https://vercel.com/guides/geo-ip-headers-geolocation-vercel-functions)
-- `MaxMind`: [Geolite Database](https://dev.maxmind.com/geoip/geolocate-an-ip).
+- `MaxMind`: [GeoLite2 database](https://dev.maxmind.com/geoip/geolocate-an-ip)
 
 | Metric | Description | Examples |
 | --- | --- | --- |
-| Country | Name of country following ISO-3166 standards. | United States, China, Germany, France |
-| Region | Name of region (subdivisions) following ISO-3166-2 standards. | California, Ontario, Bayern, Île-de-France |
+| Country | Name of country following ISO 3166 standards. | United States, China, Germany, France |
+| Region | Name of region (subdivisions) following ISO 3166-2 standards. | California, Ontario, Bayern, Île-de-France |
 | City | Name of city. | San Francisco, Toronto, Munich, Paris |
 
 ---
@@ -61,8 +81,8 @@ UTM parameters are extracted from the URL query string and stored with each even
 
 | Metric | Description |
 | --- | --- |
-| UTM Source | Identifies the traffic source (e.g. `google`, `newsletter`). Maps to `utm_source`. |
-| UTM Medium | Identifies the marketing medium (e.g. `cpc`, `email`). Maps to `utm_medium`. |
+| UTM Source | Identifies the traffic source (e.g., `google`, `newsletter`). Maps to `utm_source`. |
+| UTM Medium | Identifies the marketing medium (e.g., `cpc`, `email`). Maps to `utm_medium`. |
 | UTM Campaign | Identifies the campaign name. Maps to `utm_campaign`. |
 | UTM Content | Identifies the specific ad or link content. Maps to `utm_content`. |
 | UTM Term | Identifies the paid search keyword. Maps to `utm_term`. |
@@ -84,9 +104,9 @@ Ad click IDs are automatically captured from URL query parameters when present. 
 
 ---
 
-## Core Web Vitals
+## Web Vitals
 
-Core Web Vitals are performance metrics collected from the browser and stored alongside each event.
+Web Vitals are performance metrics collected from the browser and stored alongside each event.
 
 | Metric | Description |
 | --- | --- |
@@ -105,7 +125,7 @@ Calculated metrics are a combination of total and unique aggregates per website.
 | Metric | Definition |
 | --- | --- |
 | Views | The total number of events collected from your visitors. |
-| Visitors | Unique number of sessions. A session is calculated using a hash of data such as Website ID, hostname, User-Agent, etc and a rotating salt that changes at the start of every month. |
+| Visitors | Unique number of sessions. By default, the session identifier is derived from the website ID, visitor IP address, User-Agent, and a salt that rotates monthly. See [Visitor identification](#visitor-identification). |
 | Visits | Unique number of visits. A visit is a more granular range within a user session. A visit is calculated using a hash of the session ID and a rotating salt that changes at the start of every hour. Visits are able to span across hourly intervals. |
-| Bounce rate | A bounce is defined when a visit has only 1 event. A user will enter the website, initially generating a view, then leaving. The bounce rate is calculated by dividing the total number of bounces by unique number of visits. |
+| Bounce rate | A bounce is defined when a visit has only 1 event. For example, a visitor enters the website, generates a single view, and then leaves. The bounce rate is calculated by dividing the total number of bounces by unique number of visits. |
 | Visit duration | Total time spent on the website divided by unique number of visits. Total time is only calculated for visitors that visit more than one page. The difference between the first and last event timestamps per visit is summed into a duration time. |

@@ -1,15 +1,15 @@
 ---
 title: FAQ
+description: Answers to common questions about Umami, including GDPR compliance, cookies, collected data, self-hosting, supported databases, and data retention.
 ---
 
 ### 1. Is Umami GDPR compliant?
 
-Yes, Umami does not collect any personally identifiable information and anonymizes all data collected. Users cannot be identified
-and are never tracked across websites.
+Umami is designed with privacy in mind. GDPR compliance depends on how you configure and use it.
 
 ### 2. Do I need to display a cookie notice to users?
 
-No, Umami does not use any cookies in the tracking code.
+Umami's web tracker does not use cookies. Whether your website needs a cookie notice depends on the other services you use and applicable requirements.
 
 ### 3. Does Umami work on a single page application (SPA)?
 
@@ -17,11 +17,11 @@ Yes, Umami automatically tracks page navigations in SPAs without any additional 
 
 ### 4. Can Umami record events such as button clicks?
 
-Yes, please see [Track Events](/docs/track-events) under **Getting Started**.
+Yes, please see [Track Events](/docs/track-events) under **Tracking**.
 
 ### 5. What data does Umami collect?
 
-Umami collects page views, referrer URLs, browsers, operating systems, device types, and country of origin. All data is anonymized and no personally identifiable information is stored. See [Metric definitions](/docs/metric-definitions) for a full list.
+Umami collects pageviews, referrer URLs, browsers, operating systems, device types, and approximate location. See [Metric definitions](/docs/metric-definitions) for a full list.
 
 ### 6. Can I self-host Umami?
 
@@ -35,7 +35,15 @@ Umami supports PostgreSQL (minimum v12.14).
 
 For self-hosted installations, data is retained indefinitely unless you manually delete it. For Umami Cloud, see the [Cloud FAQ](/docs/cloud/faq).
 
-### 9. Where can I go for help if I have problems or want to request a feature?
+### 9. Does Umami support product analytics?
+
+Yes. Umami supports product analytics with features such as [custom events](/docs/track-events), [funnels](/docs/funnel), [retention](/docs/retention), and [cohorts](/docs/cohorts).
+
+### 10. Can I query Umami from an AI assistant?
+
+Yes. Umami provides an official, read-only [MCP server](/docs/mcp) for clients such as Claude, ChatGPT, and Cursor.
+
+### 11. Where can I go for help if I have problems or want to request a feature?
 
 For general discussions and troubleshooting you can use [GitHub Discussions](https://github.com/umami-software/umami/discussions).
 

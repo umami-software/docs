@@ -1,12 +1,13 @@
 ---
 title: Enable Redis
+description: Enable Redis in self-hosted Umami with the REDIS_URL variable to cache lookups, reduce database load, and handle login sessions.
 ---
 
 Umami supports [Redis](https://redis.io/) as a caching layer for improved performance. When Redis is enabled,
 frequently accessed data such as website lookups and session information is cached, reducing database queries
 and improving response times.
 
-Additionally, login authentication will be handled by Redis sessions instead of JWT tokens, providing
+Additionally, login authentication will be handled by Redis sessions instead of JWTs, providing
 server-side session management.
 
 ## When to use Redis
@@ -38,14 +39,15 @@ REDIS_URL=rediss://username:password@your-redis-server:port
 To add Redis to an existing Docker Compose setup, add a Redis service and set the `REDIS_URL` environment variable:
 
 ```yaml
-redis:
-  image: redis:8.4.0
-  command: redis-server --requirepass ${REDIS_PASSWORD}
-  restart: always
+services:
+  redis:
+    image: redis:8.4.0
+    command: redis-server --requirepass ${REDIS_PASSWORD}
+    restart: always
 
-umami:
-  environment:
-    REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
+  umami:
+    environment:
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379
 ```
 
 ## Behavior

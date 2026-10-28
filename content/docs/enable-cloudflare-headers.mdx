@@ -1,19 +1,21 @@
 ---
 title: Enable Cloudflare headers
+description: Configure Cloudflare and your self-hosted reverse proxy to pass visitor location headers to Umami so it can record region and city data.
 ---
 
-If you are using Cloudflare for your website, Umami will use the headers Cloudflare sends
-to determine the visitor's location information. However, by default Cloudflare only sends
-data for the country. If you also want region and city information, then you will need to
-configure Cloudflare to send additional headers.
+This guide applies to **self-hosted Umami** when analytics collection requests pass through Cloudflare to your Umami server. Enabling Cloudflare on the tracked website alone does not send its location headers with separate analytics requests.
+
+For **Umami Cloud**, see [IP handling and reverse proxies](/docs/metric-definitions#reverse-proxies-and-umami-cloud). Cloud manages its collection infrastructure; the Nginx configuration and runtime variables below are not Cloud account settings.
+
+Umami can use Cloudflare-provided country, region, and city headers. Cloudflare's [Add visitor location headers transform](https://developers.cloudflare.com/rules/transform/managed-transforms/reference/) supplies additional location information.
 
 ## Steps
 
 1. Log in to the Cloudflare dashboard and select your account and website.
 
-2.  Go to Rules > Settings.
+2. Go to Rules > Settings.
 
-3.  Go to the Managed Transforms tab.
+3. Go to the Managed Transforms tab.
 
 4. Enable the **Add visitor location headers** setting.
 
@@ -23,6 +25,8 @@ Then, you'll have to proxy [the following headers](https://github.com/umami-soft
 - `CF-Region-Code`
 - `CF-IPCity`
 
+Only forward these headers from a trusted Cloudflare connection, and restrict access to the origin so clients cannot bypass that trusted proxy and supply their own headers.
+
 For example, if you're using Nginx as a reverse proxy, you can add the following configuration:
 
 ```nginx
@@ -31,9 +35,9 @@ location / {
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
     proxy_set_header X-Forwarded-Host $host;
-    proxy_set_header CF-Connecting-IP $remote_addr;
+    proxy_set_header CF-Connecting-IP $http_cf_connecting_ip;
     proxy_set_header CF-IPCountry $http_cf_ipcountry;
-    proxy_set_header CF-Region-Code $http_cf_regioncode;
+    proxy_set_header CF-Region-Code $http_cf_region_code;
     proxy_set_header CF-IPCity $http_cf_ipcity;
     proxy_pass http://127.0.0.1:3000;
 }
@@ -49,4 +53,4 @@ This disables header detection and forces the usage of the internal geo database
 SKIP_LOCATION_HEADERS=1
 ```
 
-The local geo database is slower than using CDN headers but provides full location data without additional proxy configuration.
+The local database uses the IP available to Umami. It cannot recover an original visitor IP removed or anonymized by a proxy, and region or city data may be unavailable. See [location metrics](/docs/metric-definitions#location-metrics) for accuracy limits and the distinction between analytics records and operational logs.

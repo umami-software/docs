@@ -1,19 +1,24 @@
 ---
 title: Running on Neon Postgres
+description: Use a Neon serverless PostgreSQL database for Umami, with a pooled connection string for the app and a direct connection for migrations.
 ---
 
-[Neon](https://neon.tech/) is a fully-managed serverless Postgres service.
+[Neon](https://neon.com/) is a fully-managed serverless PostgreSQL service.
 
 ## Setup
 
 1. Create a project on Neon with a given name in a region close to where you will be hosting your Umami project.
-   - You can also create a Neon project with the Neon CLI: `npx neonctl projects create`. The connection string will be printed to the console.
-2. Get the database connection string with pooled connection enabled. It should look something like this: `postgres://user:passwd@endpoint-pooler.region.aws.neon.tech/neondb`.
-   - You can also get the connection string with Neon CLI: `npx neonctl connection-string --project-id <project-id> --pooled`.
+   - You can also create a Neon project with the Neon CLI: `pnpm dlx neonctl projects create`. The connection string will be printed to the console.
+2. Get the database connection string with pooled connection enabled. It should look something like this: `postgresql://user:passwd@endpoint-pooler.region.aws.neon.tech/neondb`.
+   - You can also get the connection string with the Neon CLI: `pnpm dlx neonctl connection-string --project-id <project-id> --pooled`.
 3. **Important:** add `?pgbouncer=true&connect_timeout=10` to the connection string you just copied.
 4. Add `DATABASE_URL` to your `.env` file:
    ```text
-   DATABASE_URL=postgres://user:passwd@endpoint-pooler.region.aws.neon.tech/neondb?pgbouncer=true&connect_timeout=10
+   DATABASE_URL=postgresql://user:passwd@endpoint-pooler.region.aws.neon.tech/neondb?pgbouncer=true&connect_timeout=10
    ```
-5. You should now be able to check the database connection and update the schema (`yarn run build-db && yarn run update-db`).
-6. Follow the **Getting started** guide starting from the [Login](/docs/login) step and be sure to change the default password.
+5. Add `DIRECT_DATABASE_URL` to your `.env` file with the direct (non-pooled) connection string. Umami uses it to run database migrations, which should not go through the pooler. This is supported from v3.2.0. You can get it from the Neon dashboard or with `pnpm dlx neonctl connection-string --project-id <project-id>`.
+   ```text
+   DIRECT_DATABASE_URL=postgresql://user:passwd@endpoint.region.aws.neon.tech/neondb
+   ```
+6. Build Umami with `pnpm build`. The first build checks the database connection and creates the required tables.
+7. Follow the **Quickstart** guide starting from the [Login](/docs/login) step and be sure to change the default password.

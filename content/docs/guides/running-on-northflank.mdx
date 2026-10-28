@@ -1,12 +1,13 @@
 ---
 title: Running on Northflank
+description: Deploy Umami on Northflank with a managed PostgreSQL addon, using the one-click stack or a manually configured deployment service.
 ---
 
 [Northflank](https://northflank.com) is a fully managed platform for building, deploying, and scaling applications using containers. It combines the flexibility of cloud infrastructure with a simple developer experience so you can focus on your app instead of managing servers.
 
 Northflank provides free and paid hosting plans that let you deploy Umami together with a managed PostgreSQL database, all configured automatically.
 
-## Setup Website and Database
+## Set up website and database
 
 ### Northflank Button (Recommended)
 
@@ -14,9 +15,9 @@ Northflank provides free and paid hosting plans that let you deploy Umami togeth
 
 Click the button above to deploy your own Umami instance with a managed PostgreSQL addon and all environment variables preconfigured.
 
-Once the stack is deployed, go to your Umami service in the Northflank project dashboard and open the public URL.  
+Once the stack is deployed, go to your Umami service in the Northflank project dashboard and open the public URL.
 
-You should see the setup screen where you can create your admin account and start using Umami.
+Log in with username **admin** and password **umami**, then change the default password immediately.
 
 ## Running on Northflank manually
 
@@ -24,19 +25,17 @@ The one-click deployment is the easiest way to get started, but you can also dep
 
 1. Create a new project on [Northflank](https://northflank.com).
 2. Add a **PostgreSQL addon** to the project.
-3. Create a **Deployment service** using the Docker image `docker.umami.is/umami-software/umami:postgresql-latest`.
+3. Create a **Deployment service** using the Docker image `docker.umami.is/umami-software/umami:latest`.
 4. Expose port `3000` publicly.
-5. Add the following environment variables and link them to your database:
-   - `DATABASE_URL` — connection string from the PostgreSQL addon  
-   - `DATABASE_TYPE=postgres`
+5. Add the `DATABASE_URL` environment variable and link it to the connection string from the PostgreSQL addon.
 6. Deploy the service.
 
-Once deployed, open the public URL of your service to finish the Umami setup.
+Once deployed, open the public URL of your service and log in with username **admin** and password **umami**. Change the default password immediately.
 
 <Callout title="Notes">
 
 - Data is stored in the PostgreSQL addon and persists across deploys.
 - You can scale the service or update the image version from the dashboard.
-- Read more about [adding a website](https://umami.is/docs/add-a-website) and [collecting data](https://umami.is/docs/collect-data) here.
+- Read more about [adding a website](/docs/add-a-website) and [collecting data](/docs/collect-data).
 
 </Callout>

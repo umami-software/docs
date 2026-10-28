@@ -1,9 +1,10 @@
 ---
 title: Running on CapRover
+description: Deploy Umami on CapRover with a one-click app, either with a bundled PostgreSQL database or connected to a PostgreSQL database you run yourself.
 ---
 
-[CapRover](https://caprover.com) is an extremely easy to use app/database deployment & web server manager for your NodeJS, Python, PHP, ASP.NET, Ruby, MySQL, MongoDB, PostgreSQL, WordPress (and etc...) applications!
-It's blazingly fast and very robust as it uses Docker, nginx, LetsEncrypt and NetData under the hood behind its simple-to-use interface.
+[CapRover](https://caprover.com) is an easy-to-use app and database deployment and web server manager for Node.js, Python, PHP, ASP.NET, Ruby, MongoDB, PostgreSQL, WordPress, etc. applications.
+It uses Docker, Nginx, Let's Encrypt and NetData under the hood behind its simple-to-use interface.
 
 - CLI for automation and scripting
 - Web GUI for ease of access and convenience
@@ -14,70 +15,62 @@ It's blazingly fast and very robust as it uses Docker, nginx, LetsEncrypt and Ne
 
 ## Setup
 
-Setup of CapRover Umami is fairly easy. Follow the steps below to set up a Umami on CapRover:
+Setting up Umami on CapRover is fairly easy. Follow the steps below to set up Umami on CapRover:
 
 ### 1. Visit your CapRover Dashboard
 
-Login to your existing CapRover instance account at `captain.your-sub-domain.your-domain.xx`.
+Log in to your existing CapRover instance account at `captain.your-sub-domain.your-domain.xx`.
 
-If you don't have an existing CapRover instance check out their docs at [CapRover - Get Started](https://caprover.com/docs/get-started.html).
+If you don't have an existing CapRover instance, check out their docs at [CapRover - Get Started](https://caprover.com/docs/get-started.html).
 
 ### 2. Create app from template
 
 Click on the "Apps" section of your CapRover instance.
-Now select "One-Click Apps/Databases" and search for Umami. You will find 3 options:
+Now select "One-Click Apps/Databases" and search for Umami. You will find 2 options:
 
-- `umami_postgresql` will create Umami with a PostgreSQL database.
-- `umami_mysql` will create Umami with a MySQL database.
-- `umami_only` will create Umami alone and you need run your database infrastructure on your own and provide the database credentials in the setup.
+- `umami-postgresql` will create Umami with a PostgreSQL database.
+- `umami-only` will create Umami alone. You need to run your own PostgreSQL database and provide the database credentials in the setup.
 
-### 3. Setup Umami with database
+### 3. Set up Umami with a database
 
-After selecting `umami_postgresql` or `umami_mysql` from the CapRover One-Click Apps, you'll be prompted with a setup page where you can specify some env variables. Notice how most of them are already configured.
+After selecting `umami-postgresql` from the CapRover One-Click Apps, you'll be prompted with a setup page where you can specify some environment variables. Notice how most of them are already configured.
 
 - `App Name` is the display name for your Umami instance in CapRover.
-- `PostgreSQL or MySQL Version` can be any PostgreSQL OR MySQL version available on [PostgreSQL - Docker Hub](https://hub.docker.com/_/postgres) or [MYSQL - Docker Hub](https://hub.docker.com/_/mysql). The default value has successfully been tested to work with Umami.
-- `CapRover Umami Version` refers to the CapRover Umami latest release found on the [Umami release page](https://github.com/umami-software/umami/releases). CapRover Umami will use the official Docker image that has been released for specific database that you chose. Instead of using the version number like `v.1.33.x` you can use `latest` to build using the latest version of Umami.
-- `Database password` provides the used password for your database. There will always be a default value ready for you.
-- Optional: `Arguments for 'PostgreSQL initdb'` you can also provide arguments for PostgreSQL initdb like for example `--data-checksums` this option only available in `umami_postgresql`.
+- `Postgres Version` can be any PostgreSQL version available on [PostgreSQL - Docker Hub](https://hub.docker.com/_/postgres). The default value has been tested to work with Umami.
+- `CapRover Umami Version` is the Umami Docker image tag to deploy. You can use a version tag from the [Umami release page](https://github.com/umami-software/umami/releases), or `latest` to use the latest version of Umami.
+- `Database password` is the password for your database. There will always be a default value ready for you.
+- Optional: `Arguments for 'postgres initdb'` lets you provide arguments for PostgreSQL initdb, for example `--data-checksums`.
 
-Now just click on "Deploy" to start the setup of your CapRover Umami instance with Database service.
+Now just click on "Deploy" to start the setup of your CapRover Umami instance with a database service.
 Please do not leave the page until it's done.
 
-### 4. Setup Umami without database services
+### 4. Set up Umami without database services
 
-In some scenarios you may need to manage your database service on your own or use a remote database service for your umami application for doing that you can use `umami_only` CapRover app.
+In some scenarios you may need to manage your database service on your own or use a remote database service for your Umami application. To do that, use the `umami-only` CapRover app.
 
-Before setting up this application, you need to create a database service using MySQL or PostgreSQL.
+Before setting up this application, you need to create a PostgreSQL database.
 
-After you setup your database, click on `umami_only` in CapRover and fill the variables in the setup:
+After you set up your database, click on `umami-only` in CapRover and fill in the variables in the setup:
 
 - `App Name` is the display name for your Umami instance in CapRover.
-- `CapRover Umami Version` refers to the CapRover Umami latest release found on the [Umami release page](https://github.com/umami-software/umami/releases). CapRover Umami will use the official Docker image that has been released for specific database that you chose. instead of using the version number like `v.1.33.x` you can use `latest` to build using the latest version of Umami.
-- `Database Type` set to `postgresql` or `mysql` according to your database service.
-- `Database Remote URL` is the database service remote url that Umami can use to connect to the database. If your database is in your CapRover network use `srv-captain--appName`.
+- `CapRover Umami Version` is the Umami Docker image tag to deploy. You can use a version tag from the [Umami release page](https://github.com/umami-software/umami/releases), or `latest` to use the latest version of Umami.
+- `Database Remote URL` is the host that Umami uses to connect to the database. If your database is in your CapRover network, use `srv-captain--appName`.
 - `Database User` is your database user.
-- `Database Table` is the table that you created for your Umami application.
+- `Database Table Name` is the name of the database you created for your Umami application.
 - `Database Password` is your database password.
 
 Now just click on "Deploy" to start the setup of your CapRover Umami instance.
 
 Please do not leave the page until it's done.
 
-### 5. Final checkouts
+### 5. Final checks
 
-You're now able to login to your Umami deployment at `app-name.your-sub-domain.your-domain.xx` as described in the [Login](/docs/login) section. Please immediately change your password on the profile page.
+You can now log in to your Umami deployment at `app-name.your-sub-domain.your-domain.xx` as described in the [Login](/docs/login) section. Please immediately change your password on the profile page.
 
-### 6. Updating existing umami instance
+### 6. Updating an existing Umami instance
 
-First make a backup from your database before doing the update. After you make a backup, just go to the CapRover panel and select your Umami app.
-Go to the `Deployment` tab and scroll down to `Deploy via ImageName` and deploy the desired version from the [Umami Docker Registry](https://github.com/umami-software/umami/pkgs/container/umami).
-
-<Callout title="Select the matching database image">
-
-Do not forget to select the right Docker image according to your database. Usually the MySQL images are prefixed with `mysql_` and the PostgreSQL images are prefixed with `postgresql_`.
-
-</Callout>
+First make a backup of your database before doing the update. After you make a backup, go to the CapRover panel and select your Umami app.
+Go to the `Deployment` tab, scroll down to `Deploy via ImageName`, and deploy the desired version from the [Umami Docker Registry](https://github.com/umami-software/umami/pkgs/container/umami), for example `ghcr.io/umami-software/umami:latest`.
 
 ## Support
 

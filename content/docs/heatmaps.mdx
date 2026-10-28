@@ -1,5 +1,6 @@
 ---
 title: Heatmaps
+description: Enable heatmaps in Umami to see where visitors click and how far they scroll on each page, grouped by screen width over a live page preview.
 ---
 
 *Available since v3.2.0*
@@ -7,9 +8,9 @@ title: Heatmaps
 **Heatmaps** visualize where visitors click and scroll on your pages — giving you an at-a-glance view of engagement patterns without watching individual replays.
 Use heatmaps to identify which elements attract the most attention, discover dead clicks, and understand how far down the page visitors actually scroll.
 
-## Enabling Heatmaps
+## Enabling heatmaps
 
-Log into Umami and click on **Websites** in the sidebar.
+Log in to Umami and click on **Websites** in the sidebar.
 
 ![image](/images/docs/navbar.png)
 
@@ -29,8 +30,8 @@ Add the recorder script to your site. This enables heatmap event collection.
 
 ```html
 <script
-  defer src="http://localhost:3000/recorder.js"
-  data-website-id="my-website-id"
+  defer src="http://mywebsite.com/recorder.js"
+  data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
 ></script>
 ```
 
@@ -41,7 +42,7 @@ Add the recorder script to your site. This enables heatmap event collection.
 
 </Callout>
 
-## Page Overlay
+## Page overlay
 
 The heatmap overlays click dots or scroll bands on top of a live preview of your page.
 Umami loads the actual page in an embedded frame using its captured URL — no screenshots, replays, or extra services are required.
@@ -52,7 +53,7 @@ If the preview can't load, the heatmap still shows click and scroll data on a bl
 
 The preview only loads if your page allows the Umami dashboard to embed it in an iframe. Most sites block framing by default, so you need to opt in by adding the dashboard's origin to a `Content-Security-Policy` `frame-ancestors` directive on the pages you want to inspect:
 
-```
+```text
 Content-Security-Policy: frame-ancestors 'self' https://your-umami-instance.com;
 ```
 
@@ -63,7 +64,7 @@ Content-Security-Policy: frame-ancestors 'self' https://your-umami-instance.com;
 
 </Callout>
 
-## Accessing Heatmaps
+## Accessing heatmaps
 
 Navigate to a website and click the **Heatmap** tab.
 
@@ -75,7 +76,7 @@ Use the **Pages** dropdown to select the page you want to inspect.
 
 The heatmap overlay is rendered on top of a live preview of the page when one is available.
 
-## Heatmap Types
+## Heatmap types
 
 Use the type selector to switch between views.
 
@@ -86,7 +87,7 @@ Use the type selector to switch between views.
 | Click | Shows where visitors click. Highlights high-engagement elements and dead clicks. |
 | Scroll | Shows how far down the page visitors scroll. Useful for identifying content below the fold that goes unseen. |
 
-## Screen Width
+## Screen width
 
 Because responsive pages render differently across devices, heatmap data is grouped by the visitor's screen width. Use the **Screen width** selector to switch between the available widths and view the overlay for each layout.
 

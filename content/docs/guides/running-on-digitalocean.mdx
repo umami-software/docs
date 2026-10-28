@@ -1,12 +1,13 @@
 ---
 title: Running on DigitalOcean
+description: Self-host Umami on a DigitalOcean droplet with Ubuntu, PostgreSQL, Node.js, PM2, and an Nginx reverse proxy, with optional SSL from Let's Encrypt.
 ---
 
 [DigitalOcean](https://m.do.co/c/c9ebc1c0928d) is an affordable cloud hosting provider that will let you host
 your own Umami setup. In this setup guide we are going to install
-[Ubuntu](https://ubuntu.com/), a [PostgreSQL](https://www.postgresql.org/) or [MySQL](https://www.mysql.com/) database,
-an [Nginx](https://www.nginx.com/) webserver, [Node.js](https://nodejs.org/) and Umami.
-DigitalOcean also has a [NodeJS droplet build](https://marketplace.digitalocean.com/apps/nodejs) that comes with Node.js, Ubuntu and Nginx which can get you started quicker.
+[Ubuntu](https://ubuntu.com/), a [PostgreSQL](https://www.postgresql.org/) database,
+an [Nginx](https://www.nginx.com/) web server, [Node.js](https://nodejs.org/) and Umami.
+DigitalOcean also has a [Node.js droplet build](https://marketplace.digitalocean.com/apps/nodejs) that comes with Node.js, Ubuntu and Nginx which can get you started quicker.
 
 For personal use, you can start with a single $5 a month cloud server
 and scale up as needed. You can use this **[link](https://m.do.co/c/c9ebc1c0928d)**
@@ -18,10 +19,9 @@ Note, these steps can be repeated on any cloud hosting provider that offers Ubun
 
 - [Initial server setup with Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/initial-server-setup-with-ubuntu-20-04)
 
-## Install database (PostgreSQL or MySQL)
+## Install PostgreSQL
 
 - [How to install PostgreSQL on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart)
-- [How to install MySQL on Ubuntu 20.04](https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-20-04)
 
 ## Install Nginx
 
@@ -33,18 +33,19 @@ Note, these steps can be repeated on any cloud hosting provider that offers Ubun
 
 ## Install Umami
 
-- See [Install](/docs/install) under **Getting started**
+- See [Install](/docs/install) under **Quickstart**
 
 ## Running Umami
 
-You can simply run `npm start` to start Umami, but it's highly recommended you use a process manager like [PM2](https://pm2.keymetrics.io/) which will handle restarts for you.
+You can simply run `pnpm start` to start Umami, but it's highly recommended you use a process manager like [PM2](https://pm2.keymetrics.io/) which will handle restarts for you.
 
 To run with PM2:
 
 ```shell
-npm install pm2 -g
+pnpm add -g pm2
 cd umami
-pm2 start npm --name umami -- start
+pm2 start "pnpm start" --name umami
+pm2 startup
 pm2 save
 ```
 
@@ -67,8 +68,8 @@ server {
 }
 ```
 
-The following config will allow you to host Umami at a subpath for your domain (eg: website.com/stats).
-This requires setting the environment variable `BASE_PATH=/stats` in your `.env` file.
+The following config will allow you to host Umami at a subpath for your domain (e.g. website.com/stats).
+This requires setting the environment variable `BASE_PATH=/stats` in your `.env` file. `BASE_PATH` is a build-time variable, so you need to rebuild Umami with `pnpm build` after setting it.
 
 ```nginx
 server {
