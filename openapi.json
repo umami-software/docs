@@ -1261,7 +1261,7 @@
       "name": "MIT"
     },
     "title": "Umami API",
-    "version": "3.4.0"
+    "version": "3.4.1"
   },
   "openapi": "3.1.0",
   "paths": {
@@ -11618,123 +11618,255 @@
           "content": {
             "application/json": {
               "schema": {
-                "properties": {
-                  "payload": {
+                "oneOf": [
+                  {
                     "properties": {
-                      "browser": {
-                        "description": "Browser used by the visitor.",
-                        "type": "string"
-                      },
-                      "cls": {
-                        "maximum": 100,
-                        "minimum": 0,
-                        "type": "number"
-                      },
-                      "data": {
-                        "additionalProperties": true,
-                        "description": "Custom event data.",
+                      "payload": {
+                        "properties": {
+                          "environment": {
+                            "default": "production",
+                            "maxLength": 50,
+                            "type": "string"
+                          },
+                          "eventId": {
+                            "description": "ID of the event.",
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                            "type": "string"
+                          },
+                          "fingerprint": {
+                            "items": {
+                              "maxLength": 200,
+                              "minLength": 1,
+                              "type": "string"
+                            },
+                            "maxItems": 5,
+                            "minItems": 1,
+                            "type": "array"
+                          },
+                          "handled": {
+                            "default": false,
+                            "type": "boolean"
+                          },
+                          "id": {
+                            "description": "Unique identifier of the resource.",
+                            "maxLength": 50,
+                            "type": "string"
+                          },
+                          "language": {
+                            "description": "Preferred language reported by the visitor browser.",
+                            "maxLength": 35,
+                            "type": "string"
+                          },
+                          "message": {
+                            "description": "Human-readable explanation of the result.",
+                            "maxLength": 2000,
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "Display name of the resource.",
+                            "maxLength": 200,
+                            "minLength": 1,
+                            "type": "string"
+                          },
+                          "release": {
+                            "default": "",
+                            "maxLength": 100,
+                            "type": "string"
+                          },
+                          "screen": {
+                            "description": "Screen resolution of the visitor device.",
+                            "maxLength": 11,
+                            "type": "string"
+                          },
+                          "stack": {
+                            "default": "",
+                            "maxLength": 16000,
+                            "type": "string"
+                          },
+                          "tags": {
+                            "additionalProperties": {
+                              "maxLength": 200,
+                              "type": "string"
+                            },
+                            "default": {},
+                            "propertyNames": {
+                              "maxLength": 50,
+                              "type": "string"
+                            },
+                            "type": "object"
+                          },
+                          "timestamp": {
+                            "exclusiveMinimum": 0,
+                            "maximum": 9007199254740991,
+                            "type": "integer"
+                          },
+                          "url": {
+                            "description": "URL associated with the resource.",
+                            "maxLength": 2000,
+                            "type": "string"
+                          },
+                          "version": {
+                            "const": 1,
+                            "type": "number"
+                          },
+                          "website": {
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "version",
+                          "website",
+                          "eventId",
+                          "timestamp",
+                          "name",
+                          "message",
+                          "url"
+                        ],
                         "type": "object"
                       },
-                      "device": {
-                        "description": "Device category used by the visitor.",
-                        "type": "string"
-                      },
-                      "fcp": {
-                        "maximum": 60000,
-                        "minimum": 0,
-                        "type": "number"
-                      },
-                      "hostname": {
-                        "description": "Hostname on which the activity occurred.",
-                        "type": "string"
-                      },
-                      "id": {
-                        "description": "Distinct ID of the visitor.",
-                        "type": "string"
-                      },
-                      "inp": {
-                        "maximum": 60000,
-                        "minimum": 0,
-                        "type": "number"
-                      },
-                      "ip": {
-                        "type": "string"
-                      },
-                      "language": {
-                        "description": "Preferred language reported by the visitor browser.",
-                        "type": "string"
-                      },
-                      "lcp": {
-                        "maximum": 60000,
-                        "minimum": 0,
-                        "type": "number"
-                      },
-                      "link": {
-                        "format": "uuid",
-                        "type": "string"
-                      },
-                      "name": {
-                        "description": "Name of the custom event.",
-                        "type": "string"
-                      },
-                      "os": {
-                        "description": "Operating system used by the visitor.",
-                        "type": "string"
-                      },
-                      "pixel": {
-                        "format": "uuid",
-                        "type": "string"
-                      },
-                      "referrer": {
-                        "description": "URL of the referring page.",
-                        "type": "string"
-                      },
-                      "screen": {
-                        "description": "Screen resolution of the visitor device.",
-                        "type": "string"
-                      },
-                      "tag": {
-                        "description": "Tag attached to the tracked activity.",
-                        "type": "string"
-                      },
-                      "timestamp": {
-                        "type": "integer"
-                      },
-                      "title": {
-                        "description": "Title of the page.",
-                        "type": "string"
-                      },
-                      "ttfb": {
-                        "maximum": 60000,
-                        "minimum": 0,
-                        "type": "number"
-                      },
-                      "url": {
-                        "description": "URL of the page.",
-                        "type": "string"
-                      },
-                      "userAgent": {
-                        "type": "string"
-                      },
-                      "website": {
-                        "format": "uuid",
+                      "type": {
+                        "const": "error",
                         "type": "string"
                       }
                     },
+                    "required": [
+                      "type",
+                      "payload"
+                    ],
                     "type": "object"
                   },
-                  "type": {
-                    "enum": [
-                      "event",
-                      "identify",
-                      "performance"
+                  {
+                    "properties": {
+                      "payload": {
+                        "properties": {
+                          "browser": {
+                            "description": "Browser used by the visitor.",
+                            "type": "string"
+                          },
+                          "cls": {
+                            "maximum": 100,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "data": {
+                            "additionalProperties": {},
+                            "description": "Data returned by the operation.",
+                            "propertyNames": {
+                              "type": "string"
+                            },
+                            "type": "object"
+                          },
+                          "device": {
+                            "description": "Device category used by the visitor.",
+                            "type": "string"
+                          },
+                          "fcp": {
+                            "maximum": 60000,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "hostname": {
+                            "description": "Hostname on which the activity occurred.",
+                            "type": "string"
+                          },
+                          "id": {
+                            "description": "Unique identifier of the resource.",
+                            "type": "string"
+                          },
+                          "inp": {
+                            "maximum": 60000,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "ip": {
+                            "type": "string"
+                          },
+                          "language": {
+                            "description": "Preferred language reported by the visitor browser.",
+                            "type": "string"
+                          },
+                          "lcp": {
+                            "maximum": 60000,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "link": {
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "Display name of the resource.",
+                            "type": "string"
+                          },
+                          "os": {
+                            "description": "Operating system used by the visitor.",
+                            "type": "string"
+                          },
+                          "pixel": {
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                            "type": "string"
+                          },
+                          "referrer": {
+                            "description": "URL of the referring page.",
+                            "type": "string"
+                          },
+                          "screen": {
+                            "description": "Screen resolution of the visitor device.",
+                            "type": "string"
+                          },
+                          "tag": {
+                            "description": "Tag attached to the tracked activity.",
+                            "type": "string"
+                          },
+                          "timestamp": {
+                            "maximum": 9007199254740991,
+                            "minimum": -9007199254740991,
+                            "type": "integer"
+                          },
+                          "title": {
+                            "description": "Title of the page.",
+                            "type": "string"
+                          },
+                          "ttfb": {
+                            "maximum": 60000,
+                            "minimum": 0,
+                            "type": "number"
+                          },
+                          "url": {
+                            "description": "URL associated with the resource.",
+                            "type": "string"
+                          },
+                          "userAgent": {
+                            "type": "string"
+                          },
+                          "website": {
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                            "type": "string"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": {
+                        "enum": [
+                          "event",
+                          "identify",
+                          "performance"
+                        ],
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "type",
+                      "payload"
                     ],
-                    "type": "string"
+                    "type": "object"
                   }
-                },
-                "required": [
-                  "type",
-                  "payload"
                 ],
                 "type": "object"
               }
@@ -11749,6 +11881,7 @@
                 "schema": {
                   "anyOf": [
                     {
+                      "additionalProperties": false,
                       "properties": {
                         "beep": {
                           "type": "string"
@@ -11760,13 +11893,18 @@
                       "type": "object"
                     },
                     {
+                      "additionalProperties": false,
                       "properties": {
-                        "cache": {},
+                        "cache": {
+                          "type": "string"
+                        },
                         "sessionId": {
-                          "description": "ID of the visitor session."
+                          "description": "ID of the visitor session.",
+                          "type": "string"
                         },
                         "visitId": {
-                          "description": "ID of the visit."
+                          "description": "ID of the visit.",
+                          "type": "string"
                         }
                       },
                       "required": [
@@ -11775,63 +11913,125 @@
                         "visitId"
                       ],
                       "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "cache": {
+                          "type": "string"
+                        },
+                        "eventId": {
+                          "description": "ID of the event.",
+                          "format": "uuid",
+                          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                          "type": "string"
+                        },
+                        "issueId": {
+                          "description": "ID of the error issue.",
+                          "format": "uuid",
+                          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                          "type": "string"
+                        },
+                        "ok": {
+                          "const": true,
+                          "description": "Whether the operation succeeded.",
+                          "type": "boolean"
+                        }
+                      },
+                      "required": [
+                        "ok",
+                        "eventId",
+                        "issueId",
+                        "cache"
+                      ],
+                      "type": "object"
+                    },
+                    {
+                      "additionalProperties": false,
+                      "properties": {
+                        "ok": {
+                          "const": false,
+                          "description": "Whether the operation succeeded.",
+                          "type": "boolean"
+                        },
+                        "reason": {
+                          "enum": [
+                            "bot"
+                          ],
+                          "type": "string"
+                        }
+                      },
+                      "required": [
+                        "ok",
+                        "reason"
+                      ],
+                      "type": "object"
                     }
                   ]
                 }
               }
             },
-            "description": "The operation completed successfully."
+            "description": "Successful response."
           },
           "400": {
             "content": {
               "application/json": {
-                "example": {
-                  "error": {
-                    "code": "bad-request",
-                    "message": "Bad request.",
-                    "status": 400
-                  }
-                },
                 "schema": {
                   "$ref": "#/components/schemas/ApiError"
                 }
               }
             },
-            "description": "Bad request."
+            "description": "Invalid collection payload or session token."
           },
           "403": {
             "content": {
               "application/json": {
-                "example": {
-                  "error": {
-                    "code": "forbidden",
-                    "message": "Forbidden.",
-                    "status": 403
-                  }
-                },
                 "schema": {
                   "$ref": "#/components/schemas/ApiError"
                 }
               }
             },
-            "description": "Forbidden."
+            "description": "Collection blocked."
+          },
+          "413": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Error payload exceeds 48,000 bytes."
+          },
+          "429": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Website error collection quota exceeded.",
+            "headers": {
+              "Retry-After": {
+                "schema": {
+                  "def": {
+                    "type": "string"
+                  },
+                  "type": "string"
+                }
+              }
+            }
           },
           "500": {
             "content": {
               "application/json": {
-                "example": {
-                  "error": {
-                    "code": "server-error",
-                    "message": "Server error.",
-                    "status": 500
-                  }
-                },
                 "schema": {
                   "$ref": "#/components/schemas/ApiError"
                 }
               }
             },
-            "description": "Server error."
+            "description": "Collection failed. Retry errors with the same occurrence ID."
           }
         },
         "security": [],
@@ -11841,7 +12041,7 @@
         ],
         "x-umami-audience": "collect",
         "x-umami-contract": "explicit",
-        "x-umami-source": "src/app/api/send/contract.generated.ts"
+        "x-umami-source": "src/app/api/send/contract.ts"
       }
     },
     "/api/share": {
@@ -19552,6 +19752,1846 @@
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
         "x-umami-source": "src/app/api/websites/[websiteId]/daterange/contract.generated.ts"
+      }
+    },
+    "/api/websites/{websiteId}/errors": {
+      "get": {
+        "description": "Returns a paginated list of error issues for the website, with occurrence and affected visit counts for the selected date range.",
+        "operationId": "getWebsiteErrors",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+              "enum": [
+                "unresolved",
+                "resolved",
+                "ignored"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search text used to filter results.",
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by release, as set with `data-release` or `captureException`.",
+            "in": "query",
+            "name": "release",
+            "schema": {
+              "description": "Filter by release, as set with `data-release` or `captureException`.",
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+            "in": "query",
+            "name": "environment",
+            "schema": {
+              "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by the page path on which the error occurred.",
+            "in": "query",
+            "name": "urlPath",
+            "schema": {
+              "description": "Filter by the page path on which the error occurred.",
+              "maxLength": 500,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page number, starting at 1.",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "default": 1,
+              "maximum": 10000,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Number of results per page.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "default": 25,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "count": {
+                      "description": "Number of matching records.",
+                      "type": "number"
+                    },
+                    "data": {
+                      "description": "Data returned by the operation.",
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "createdAt": {
+                            "description": "Date and time the record was created.",
+                            "type": "string"
+                          },
+                          "fingerprint": {
+                            "type": "string"
+                          },
+                          "firstSeen": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "groupingVersion": {
+                            "type": "number"
+                          },
+                          "id": {
+                            "description": "Unique identifier of the resource.",
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                            "type": "string"
+                          },
+                          "lastSeen": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "occurrences": {
+                            "type": "number"
+                          },
+                          "resolvedAt": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "status": {
+                            "enum": [
+                              "unresolved",
+                              "resolved",
+                              "ignored"
+                            ],
+                            "type": "string"
+                          },
+                          "title": {
+                            "description": "Title of the page.",
+                            "type": "string"
+                          },
+                          "visits": {
+                            "description": "Visit counts for the selected period.",
+                            "type": "number"
+                          },
+                          "websiteId": {
+                            "description": "ID of the website.",
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "websiteId",
+                          "fingerprint",
+                          "groupingVersion",
+                          "title",
+                          "status",
+                          "resolvedAt",
+                          "createdAt",
+                          "occurrences",
+                          "visits",
+                          "firstSeen",
+                          "lastSeen"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "page": {
+                      "description": "Page number, starting at 1.",
+                      "type": "number"
+                    },
+                    "pageSize": {
+                      "description": "Number of results per page.",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "count",
+                    "page",
+                    "pageSize"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Invalid request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Authenticated website access required."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Website, issue, or occurrence not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "List error issues",
+        "tags": [
+          "Errors"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/errors/contract.ts"
+      }
+    },
+    "/api/websites/{websiteId}/errors/{issueId}": {
+      "get": {
+        "description": "Returns an error issue with its status, occurrence counts, and first and last seen times for the selected date range.",
+        "operationId": "getWebsiteErrorIssue",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of the error issue.",
+            "in": "path",
+            "name": "issueId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+              "enum": [
+                "unresolved",
+                "resolved",
+                "ignored"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search text used to filter results.",
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by release, as set with `data-release` or `captureException`.",
+            "in": "query",
+            "name": "release",
+            "schema": {
+              "description": "Filter by release, as set with `data-release` or `captureException`.",
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+            "in": "query",
+            "name": "environment",
+            "schema": {
+              "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by the page path on which the error occurred.",
+            "in": "query",
+            "name": "urlPath",
+            "schema": {
+              "description": "Filter by the page path on which the error occurred.",
+              "maxLength": 500,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page number, starting at 1.",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "default": 1,
+              "maximum": 10000,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Number of results per page.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "default": 25,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "canUpdate": {
+                      "type": "boolean"
+                    },
+                    "createdAt": {
+                      "description": "Date and time the record was created.",
+                      "type": "string"
+                    },
+                    "fingerprint": {
+                      "type": "string"
+                    },
+                    "firstSeen": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "groupingVersion": {
+                      "type": "number"
+                    },
+                    "id": {
+                      "description": "Unique identifier of the resource.",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                      "type": "string"
+                    },
+                    "issues": {
+                      "type": "number"
+                    },
+                    "lastSeen": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "occurrences": {
+                      "type": "number"
+                    },
+                    "resolvedAt": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "series": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "date": {
+                            "type": "string"
+                          },
+                          "occurrences": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "date",
+                          "occurrences"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "status": {
+                      "enum": [
+                        "unresolved",
+                        "resolved",
+                        "ignored"
+                      ],
+                      "type": "string"
+                    },
+                    "title": {
+                      "description": "Title of the page.",
+                      "type": "string"
+                    },
+                    "visits": {
+                      "description": "Visit counts for the selected period.",
+                      "type": "number"
+                    },
+                    "websiteId": {
+                      "description": "ID of the website.",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "websiteId",
+                    "fingerprint",
+                    "groupingVersion",
+                    "title",
+                    "status",
+                    "resolvedAt",
+                    "createdAt",
+                    "occurrences",
+                    "visits",
+                    "firstSeen",
+                    "lastSeen",
+                    "issues",
+                    "series",
+                    "canUpdate"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Invalid request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Authenticated website access required."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Website, issue, or occurrence not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Get an error issue",
+        "tags": [
+          "Errors"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/errors/[issueId]/contract.ts"
+      },
+      "patch": {
+        "description": "Changes the status of an error issue to unresolved, resolved, or ignored. Changing the status does not discard new occurrences.",
+        "operationId": "updateWebsiteErrorIssue",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of the error issue.",
+            "in": "path",
+            "name": "issueId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "properties": {
+                  "status": {
+                    "description": "New status of the issue.",
+                    "enum": [
+                      "unresolved",
+                      "resolved",
+                      "ignored"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "status"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Ok"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Invalid request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Authenticated website access required."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Website, issue, or occurrence not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Update an error issue status",
+        "tags": [
+          "Errors"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/errors/[issueId]/contract.ts"
+      }
+    },
+    "/api/websites/{websiteId}/errors/{issueId}/events": {
+      "get": {
+        "description": "Returns a paginated list of occurrences for an error issue, newest first.",
+        "operationId": "getWebsiteErrorEvents",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of the error issue.",
+            "in": "path",
+            "name": "issueId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+              "enum": [
+                "unresolved",
+                "resolved",
+                "ignored"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search text used to filter results.",
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by release, as set with `data-release` or `captureException`.",
+            "in": "query",
+            "name": "release",
+            "schema": {
+              "description": "Filter by release, as set with `data-release` or `captureException`.",
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+            "in": "query",
+            "name": "environment",
+            "schema": {
+              "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by the page path on which the error occurred.",
+            "in": "query",
+            "name": "urlPath",
+            "schema": {
+              "description": "Filter by the page path on which the error occurred.",
+              "maxLength": 500,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page number, starting at 1.",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "default": 1,
+              "maximum": 10000,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Number of results per page.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "default": 25,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "count": {
+                      "description": "Number of matching records.",
+                      "type": "number"
+                    },
+                    "data": {
+                      "description": "Data returned by the operation.",
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "browser": {
+                            "description": "Browser used by the visitor.",
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "description": "Date and time the record was created.",
+                            "type": "string"
+                          },
+                          "device": {
+                            "description": "Device category used by the visitor.",
+                            "type": "string"
+                          },
+                          "environment": {
+                            "type": "string"
+                          },
+                          "handled": {
+                            "type": "boolean"
+                          },
+                          "id": {
+                            "description": "Unique identifier of the resource.",
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                            "type": "string"
+                          },
+                          "message": {
+                            "description": "Human-readable explanation of the result.",
+                            "type": "string"
+                          },
+                          "name": {
+                            "description": "Display name of the resource.",
+                            "type": "string"
+                          },
+                          "os": {
+                            "description": "Operating system used by the visitor.",
+                            "type": "string"
+                          },
+                          "release": {
+                            "type": "string"
+                          },
+                          "sessionId": {
+                            "description": "ID of the visitor session.",
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                            "type": "string"
+                          },
+                          "urlPath": {
+                            "description": "Path portion of the page URL.",
+                            "type": "string"
+                          },
+                          "visitId": {
+                            "description": "ID of the visit.",
+                            "format": "uuid",
+                            "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                            "type": "string"
+                          }
+                        },
+                        "required": [
+                          "id",
+                          "createdAt",
+                          "name",
+                          "message",
+                          "handled",
+                          "release",
+                          "environment",
+                          "browser",
+                          "os",
+                          "device",
+                          "urlPath",
+                          "sessionId",
+                          "visitId"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "page": {
+                      "description": "Page number, starting at 1.",
+                      "type": "number"
+                    },
+                    "pageSize": {
+                      "description": "Number of results per page.",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "data",
+                    "count",
+                    "page",
+                    "pageSize"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Invalid request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Authenticated website access required."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Website, issue, or occurrence not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "List error occurrences",
+        "tags": [
+          "Errors"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/errors/[issueId]/events/contract.ts"
+      }
+    },
+    "/api/websites/{websiteId}/errors/{issueId}/events/{eventId}": {
+      "get": {
+        "description": "Returns a single occurrence of an error issue, including its stack trace, tags, and session details.",
+        "operationId": "getWebsiteErrorEvent",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of the error issue.",
+            "in": "path",
+            "name": "issueId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of the event.",
+            "in": "path",
+            "name": "eventId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "browser": {
+                      "description": "Browser used by the visitor.",
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "description": "Date and time the record was created.",
+                      "type": "string"
+                    },
+                    "device": {
+                      "description": "Device category used by the visitor.",
+                      "type": "string"
+                    },
+                    "environment": {
+                      "type": "string"
+                    },
+                    "frames": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "column": {
+                            "type": "number"
+                          },
+                          "filename": {
+                            "type": "string"
+                          },
+                          "function": {
+                            "type": "string"
+                          },
+                          "line": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "filename",
+                          "function",
+                          "line",
+                          "column"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "handled": {
+                      "type": "boolean"
+                    },
+                    "id": {
+                      "description": "Unique identifier of the resource.",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                      "type": "string"
+                    },
+                    "message": {
+                      "description": "Human-readable explanation of the result.",
+                      "type": "string"
+                    },
+                    "name": {
+                      "description": "Display name of the resource.",
+                      "type": "string"
+                    },
+                    "os": {
+                      "description": "Operating system used by the visitor.",
+                      "type": "string"
+                    },
+                    "release": {
+                      "type": "string"
+                    },
+                    "replayId": {
+                      "anyOf": [
+                        {
+                          "format": "uuid",
+                          "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                          "type": "string"
+                        },
+                        {
+                          "type": "null"
+                        }
+                      ],
+                      "description": "ID of the session replay."
+                    },
+                    "sessionId": {
+                      "description": "ID of the visitor session.",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                      "type": "string"
+                    },
+                    "stack": {
+                      "type": "string"
+                    },
+                    "tags": {
+                      "additionalProperties": {
+                        "type": "string"
+                      },
+                      "propertyNames": {
+                        "type": "string"
+                      },
+                      "type": "object"
+                    },
+                    "urlPath": {
+                      "description": "Path portion of the page URL.",
+                      "type": "string"
+                    },
+                    "visitId": {
+                      "description": "ID of the visit.",
+                      "format": "uuid",
+                      "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "id",
+                    "createdAt",
+                    "name",
+                    "message",
+                    "handled",
+                    "release",
+                    "environment",
+                    "browser",
+                    "os",
+                    "device",
+                    "urlPath",
+                    "sessionId",
+                    "visitId",
+                    "stack",
+                    "frames",
+                    "tags",
+                    "replayId"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Invalid request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Authenticated website access required."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Website, issue, or occurrence not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Get an error occurrence",
+        "tags": [
+          "Errors"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/errors/[issueId]/events/[eventId]/contract.ts"
+      }
+    },
+    "/api/websites/{websiteId}/errors/{issueId}/values": {
+      "get": {
+        "description": "Returns the distinct values and occurrence counts of an error field, such as release or browser, for one issue.",
+        "operationId": "getWebsiteErrorIssueValues",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of the error issue.",
+            "in": "path",
+            "name": "issueId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+              "enum": [
+                "unresolved",
+                "resolved",
+                "ignored"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search text used to filter results.",
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by release, as set with `data-release` or `captureException`.",
+            "in": "query",
+            "name": "release",
+            "schema": {
+              "description": "Filter by release, as set with `data-release` or `captureException`.",
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+            "in": "query",
+            "name": "environment",
+            "schema": {
+              "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by the page path on which the error occurred.",
+            "in": "query",
+            "name": "urlPath",
+            "schema": {
+              "description": "Filter by the page path on which the error occurred.",
+              "maxLength": 500,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Error field to return values for: `release`, `environment`, `browser`, or `urlPath`.",
+            "in": "query",
+            "name": "type",
+            "required": true,
+            "schema": {
+              "description": "Error field to return values for: `release`, `environment`, `browser`, or `urlPath`.",
+              "enum": [
+                "release",
+                "environment",
+                "browser",
+                "urlPath"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search text used to filter the returned values.",
+            "in": "query",
+            "name": "value",
+            "schema": {
+              "description": "Search text used to filter the returned values.",
+              "maxLength": 500,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "count": {
+                        "description": "Number of matching records.",
+                        "type": "number"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "count"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Invalid request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Authenticated website access required."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Website, issue, or occurrence not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Get error issue filter values",
+        "tags": [
+          "Errors"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/errors/[issueId]/values/contract.ts"
+      }
+    },
+    "/api/websites/{websiteId}/errors/stats": {
+      "get": {
+        "description": "Returns the total number of error occurrences, issues, and affected visits for the selected date range, with a daily trend in UTC.",
+        "operationId": "getWebsiteErrorStats",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+              "enum": [
+                "unresolved",
+                "resolved",
+                "ignored"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search text used to filter results.",
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by release, as set with `data-release` or `captureException`.",
+            "in": "query",
+            "name": "release",
+            "schema": {
+              "description": "Filter by release, as set with `data-release` or `captureException`.",
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+            "in": "query",
+            "name": "environment",
+            "schema": {
+              "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by the page path on which the error occurred.",
+            "in": "query",
+            "name": "urlPath",
+            "schema": {
+              "description": "Filter by the page path on which the error occurred.",
+              "maxLength": 500,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Page number, starting at 1.",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "default": 1,
+              "maximum": 10000,
+              "minimum": 1,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Number of results per page.",
+            "in": "query",
+            "name": "pageSize",
+            "schema": {
+              "default": 25,
+              "maximum": 100,
+              "minimum": 1,
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "firstSeen": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "issues": {
+                      "type": "number"
+                    },
+                    "lastSeen": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "occurrences": {
+                      "type": "number"
+                    },
+                    "series": {
+                      "items": {
+                        "additionalProperties": false,
+                        "properties": {
+                          "date": {
+                            "type": "string"
+                          },
+                          "occurrences": {
+                            "type": "number"
+                          }
+                        },
+                        "required": [
+                          "date",
+                          "occurrences"
+                        ],
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "visits": {
+                      "description": "Visit counts for the selected period.",
+                      "type": "number"
+                    }
+                  },
+                  "required": [
+                    "occurrences",
+                    "visits",
+                    "issues",
+                    "firstSeen",
+                    "lastSeen",
+                    "series"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Invalid request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Authenticated website access required."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Website, issue, or occurrence not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Get error stats",
+        "tags": [
+          "Errors"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/errors/stats/contract.ts"
+      }
+    },
+    "/api/websites/{websiteId}/errors/values": {
+      "get": {
+        "description": "Returns the distinct values and occurrence counts of an error field, such as release or browser, across all issues.",
+        "operationId": "getWebsiteErrorValues",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 4102444800000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+            "in": "query",
+            "name": "status",
+            "schema": {
+              "description": "Filter by issue status: `unresolved`, `resolved`, or `ignored`.",
+              "enum": [
+                "unresolved",
+                "resolved",
+                "ignored"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search text used to filter results.",
+            "in": "query",
+            "name": "search",
+            "schema": {
+              "maxLength": 200,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by release, as set with `data-release` or `captureException`.",
+            "in": "query",
+            "name": "release",
+            "schema": {
+              "description": "Filter by release, as set with `data-release` or `captureException`.",
+              "maxLength": 100,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+            "in": "query",
+            "name": "environment",
+            "schema": {
+              "description": "Filter by environment, as set with `data-environment` or `captureException`.",
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "maxLength": 50,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by the page path on which the error occurred.",
+            "in": "query",
+            "name": "urlPath",
+            "schema": {
+              "description": "Filter by the page path on which the error occurred.",
+              "maxLength": 500,
+              "type": "string"
+            }
+          },
+          {
+            "description": "Error field to return values for: `release`, `environment`, `browser`, or `urlPath`.",
+            "in": "query",
+            "name": "type",
+            "required": true,
+            "schema": {
+              "description": "Error field to return values for: `release`, `environment`, `browser`, or `urlPath`.",
+              "enum": [
+                "release",
+                "environment",
+                "browser",
+                "urlPath"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Search text used to filter the returned values.",
+            "in": "query",
+            "name": "value",
+            "schema": {
+              "description": "Search text used to filter the returned values.",
+              "maxLength": 500,
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "count": {
+                        "description": "Number of matching records.",
+                        "type": "number"
+                      },
+                      "value": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "value",
+                      "count"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "Successful response."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Invalid request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Authenticated website access required."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Website, issue, or occurrence not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
+        "summary": "Get error filter values",
+        "tags": [
+          "Errors"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/errors/values/contract.ts"
       }
     },
     "/api/websites/{websiteId}/event-data": {
@@ -28190,6 +30230,10 @@
                     "description": "Configuration parameters for the resource.",
                     "properties": {
                       "type": {
+                        "enum": [
+                          "path",
+                          "event"
+                        ],
                         "type": "string"
                       },
                       "value": {
@@ -28563,6 +30607,10 @@
                     "description": "Configuration parameters for the resource.",
                     "properties": {
                       "type": {
+                        "enum": [
+                          "path",
+                          "event"
+                        ],
                         "type": "string"
                       },
                       "value": {
@@ -29310,6 +31358,10 @@
             "name": "type",
             "required": true,
             "schema": {
+              "enum": [
+                "path",
+                "event"
+              ],
               "type": "string"
             }
           },
@@ -33386,6 +35438,12 @@
                             "description": "Device category used by the visitor.",
                             "type": "string"
                           },
+                          "distinctIds": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
                           "duration": {
                             "description": "Replay duration in milliseconds.",
                             "type": "number"
@@ -33436,6 +35494,7 @@
                           }
                         },
                         "required": [
+                          "distinctIds",
                           "id",
                           "sessionId",
                           "websiteId",
@@ -33725,6 +35784,12 @@
                             "format": "date-time",
                             "type": "string"
                           },
+                          "distinctIds": {
+                            "items": {
+                              "type": "string"
+                            },
+                            "type": "array"
+                          },
                           "id": {
                             "description": "Unique identifier of the resource.",
                             "type": "string"
@@ -33748,6 +35813,7 @@
                           }
                         },
                         "required": [
+                          "distinctIds",
                           "id",
                           "createdAt",
                           "updatedAt",
@@ -36595,6 +38661,7 @@
                   "name": {
                     "description": "Display name of the resource.",
                     "maxLength": 200,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "parameters": {
@@ -37117,6 +39184,7 @@
                   "name": {
                     "description": "Display name of the resource.",
                     "maxLength": 200,
+                    "minLength": 1,
                     "type": "string"
                   },
                   "parameters": {
@@ -45184,6 +47252,9 @@
     },
     {
       "name": "Dashboard"
+    },
+    {
+      "name": "Errors"
     },
     {
       "name": "Links"

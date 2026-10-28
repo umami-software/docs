@@ -1,0 +1,69 @@
+---
+title: Google Search Console
+description: Connect Google Search Console to Umami Cloud to see the Google searches, clicks, impressions, and positions that bring visitors to your website.
+---
+
+Connect Google Search Console to a website to see which Google searches bring visitors to it. Umami shows your search
+queries, clicks, impressions, click-through rate, and average position next to the rest of your analytics.
+
+Google Search Console is an [integration](/docs/cloud/integrations) and requires a Pro or Business plan. Umami reads
+search data from Google whenever you open the report. Nothing is copied or stored in Umami.
+
+## Before you begin
+
+Your website must be a verified property in [Google Search Console](https://search.google.com/search-console). You will
+connect with the Google account that has access to that property.
+
+## Connect Google Search Console
+
+Log into Umami and click on the side nav profile button then click **Settings**.
+
+![image](/images/cloud/navbar-settings.png)
+
+Navigate to **Integrations**, click on the **Add integration** button, and choose **Google Search Console**.
+
+![image](/images/cloud/integration-add.png)
+
+Select the **Website** to show search data for. This can't be changed later. Click **Continue with Google**, choose
+your Google account, and grant Umami access to Search Console.
+
+![image](/images/cloud/integration-search-console-form.png)
+
+You will be returned to the **Integrations** page. If Umami can't choose a property for your website, click on the
+**Edit** button next to the integration and select the **Search Console property** that matches your website.
+
+## Viewing search data
+
+Navigate to a website and click the **Searches** tab.
+
+![image](/images/cloud/search-console-report.png)
+
+| Metric | Description |
+| --- | --- |
+| Clicks | Number of clicks from Google search results to your website. |
+| Impressions | Number of times your website appeared in Google search results. |
+| CTR | Click-through rate, the percentage of impressions that resulted in a click. |
+| Average position | Average position of your website in Google search results. |
+
+Search data can be broken down by **Queries**, **Pages**, **Countries**, and **Devices**.
+
+<Callout title="Note">
+
+Search data comes from Google, so it is reported in whole days and recent days may not be available yet. Filters
+don't apply to search data.
+
+</Callout>
+
+## Troubleshooting
+
+| Problem | Solution |
+| --- | --- |
+| No properties are listed | The Google account you connected has no verified Search Console properties. Disconnect the integration and connect again with the Google account that has access to your website in Search Console. |
+| Google did not grant lasting access | Remove Umami from your Google account's [third-party access](https://myaccount.google.com/connections) and connect again. |
+| The report asks you to reconnect | Google rejected the connection. Disconnect the integration and connect it again. |
+
+## Disconnect Google Search Console
+
+Navigate to **Integrations** and click on the **Disconnect** button next to the integration. Search data will no
+longer be shown for the website. To revoke access, remove Umami from your Google account's
+[third-party access](https://myaccount.google.com/connections).

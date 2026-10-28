@@ -1,6 +1,6 @@
 ---
 title: Tracker functions
-description: Use the umami.track() and umami.identify() tracker functions to send pageviews, events, event data, and session data from your own code.
+description: Use the umami.track(), umami.identify(), and umami.captureException() tracker functions to send pageviews, events, event data, session data, and errors from your own code.
 ---
 
 The Umami tracker exposes functions that you can call on your website if you want
@@ -37,6 +37,9 @@ umami.identify(unique_id: string, data: object);
 
 // Save session data (an `id` property, if present, is used as the Distinct ID)
 umami.identify(data: object);
+
+// Report a caught error
+umami.captureException(error: unknown, options?: object);
 ```
 
 ## Pageviews
@@ -164,4 +167,25 @@ If the object includes an `id` property, its value is also used as the Distinct 
 
 ```js
 umami.identify({ id: 'unique_id', name: 'Bob' });
+```
+
+## Errors
+
+<Badge>v3.5.0</Badge>
+
+Report an error that your code has caught. Requires [`data-errors`](/docs/tracker-configuration#data-errors).
+
+```js
+try {
+  checkout();
+} catch (error) {
+  umami.captureException(error);
+}
+```
+
+Pass an optional second argument to add a `release`, `environment`, `tags`, or a `fingerprint`. See
+[Error tracking](/docs/error-tracking#reporting-caught-errors) for details.
+
+```js
+umami.captureException(error, { tags: { feature: 'checkout' } });
 ```

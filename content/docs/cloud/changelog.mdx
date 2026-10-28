@@ -5,6 +5,54 @@ description: Notable changes to Umami Cloud and the Umami Cloud API, including n
 
 This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and **API (api.umami.is)**.
 
+## October 23, 2026
+
+**Integrations**
+
+- Added [Integrations](/docs/cloud/integrations) under **Settings** for Pro and Business plans. Connect a [payment provider](/docs/cloud/payment-providers) (Stripe, Paddle, Lemon Squeezy, Dodo Payments, Polar, or WooCommerce) to import payments and refunds as revenue, or [Google Search Console](/docs/cloud/google-search-console) to see search queries, clicks, and impressions for a website.
+- Payment providers have moved from **Settings** → **Payment providers** to **Settings** → **Integrations**.
+
+**API: Websites, links, and pixels**
+
+- `POST /api/websites`, `POST /api/links`, and `POST /api/pixels`: Requests that supply an `id` already used by another website, link, pixel, board, team, or user now return `400 Bad Request` with the message `ID already in use.`
+
+## October 16, 2026
+
+**Error tracking**
+
+- Added browser [error tracking](/docs/error-tracking). Add `data-errors="true"` to your tracking script to capture uncaught exceptions and unhandled promise rejections, or report caught exceptions with `umami.captureException()`. Errors are grouped into issues under the new **Errors** tab for each website.
+
+**API: Errors**
+
+- `GET /api/websites/:websiteId/errors`: **Added** — lists error issues.
+- `GET /api/websites/:websiteId/errors/stats`: **Added** — returns error totals and a daily trend.
+- `GET /api/websites/:websiteId/errors/values`: **Added** — lists the distinct values of an error field across issues.
+- `GET /api/websites/:websiteId/errors/:issueId`: **Added** — returns an error issue.
+- `PATCH /api/websites/:websiteId/errors/:issueId`: **Added** — changes the status of an error issue to `unresolved`, `resolved`, or `ignored`.
+- `GET /api/websites/:websiteId/errors/:issueId/events`: **Added** — lists the occurrences of an error issue.
+- `GET /api/websites/:websiteId/errors/:issueId/events/:eventId`: **Added** — returns an error occurrence.
+- `GET /api/websites/:websiteId/errors/:issueId/values`: **Added** — lists the distinct values of an error field for one issue.
+
+**API: Collection**
+
+- `POST /api/send`: Accepts a new `error` payload type for error tracking. Error payloads are limited to 48,000 bytes and return `413` when larger, and `429` with a `Retry-After` header when the website's error quota is exceeded.
+
+## October 8, 2026
+
+**API: Session replays**
+
+- `GET /api/websites/:websiteId/replays` and `GET /api/websites/:websiteId/replays/saved`: Each replay now includes `distinctIds`, the list of distinct IDs linked to the replay's session.
+
+**API: Goals**
+
+- `POST /api/websites/:websiteId/goals`, `POST /api/websites/:websiteId/goals/:goalId`, and `GET /api/websites/:websiteId/goals/stats`: The goal `type` must be `path` or `event`. Other values return a validation error.
+
+## October 1, 2026
+
+**API: Segments**
+
+- `POST /api/websites/:websiteId/segments` and `POST /api/websites/:websiteId/segments/:segmentId`: `name` can no longer be empty. Cohorts also require an action type, action value, and date range.
+
 ## September 24, 2026
 
 **API: Date ranges**

@@ -127,6 +127,18 @@ Enables the internal test page, `{host}/console`. Admin access is required. User
 ENABLE_TEST_CONSOLE = 1
 ```
 
+### ERRORS_PER_MINUTE
+
+<Badge>v3.5.0</Badge>
+
+The maximum number of [error tracking](/docs/error-tracking) requests accepted per website per minute. Requests
+over the limit return `429` and the tracker pauses capture. Retries count toward the limit. Accepts `1` to
+`100000`. Defaults to `120`.
+
+```
+ERRORS_PER_MINUTE = 120
+```
+
 ### FAVICON_URL
 
 <Badge>v2.18.0</Badge>

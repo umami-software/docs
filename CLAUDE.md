@@ -51,6 +51,22 @@ Every published page must be listed in `docs.json`. Use a page object with
 `"hidden": true` for a page that should remain routable without appearing in
 the sidebar.
 
+## Screenshots
+
+When a page needs a screenshot that doesn't exist yet, reference the image at
+its final path and commit a placeholder PNG at that path. `pnpm check` fails on
+missing images, so never link to a file that doesn't exist.
+
+- Store images in `public/images/docs` or `public/images/cloud`, matching the
+  section, and reference them as `![image](/images/cloud/integration-add.png)`.
+- Name the file after what it will show, in kebab case, such as
+  `integration-payment-form.png` or `errors-list.png`.
+- Make the placeholder a real PNG: a light gray background with a dashed border
+  and the text "Screenshot placeholder" plus a short description of the
+  screenshot to take.
+- List every placeholder when you hand off the work. To replace one, overwrite
+  the file at the same path; the page doesn't need to change.
+
 ## Analytics
 
 Set `VITE_TRACKER_ID` at build time to load the Umami tracker. Environment

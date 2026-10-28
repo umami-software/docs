@@ -1,43 +1,84 @@
 ---
 title: Payment Providers
+description: Connect Stripe, Paddle, Lemon Squeezy, Dodo Payments, Polar, or WooCommerce to Umami Cloud to import payments and refunds as revenue for a website.
 ---
 
-Connect your Stripe account to a website to see your recurring revenue in Umami. Umami imports your
-Stripe invoices and shows your ARR (annual recurring revenue) over time, broken down into new,
-retained, resurrected, expansion, contraction, and churned revenue, along with year-over-year growth
-and an ARR roll-forward table.
+Connect a payment provider to a website to see your real revenue in Umami. Umami imports your payments and refunds and
+reports them in the [Revenue](/docs/revenue) report for that website, alongside revenue you track with events.
 
-Setting up a payment provider takes three steps:
+Payment providers are an [integration](/docs/cloud/integrations) and require a Pro or Business plan. Umami only reads
+data from your provider. It never creates charges, issues refunds, or changes any data.
 
-1. [Create a read-only API key](#create-a-read-only-api-key) in Stripe.
-2. [Add the payment provider](#add-a-payment-provider) in Umami.
-3. Optionally, [set up a webhook](#set-up-live-updates-optional) for live updates.
+## Supported providers
 
-## Create a read-only API key
+| Provider | Credentials | Sandbox |
+| --- | --- | --- |
+| Stripe | API key | Yes |
+| Paddle | API key | Yes |
+| Lemon Squeezy | API key and store ID | Yes |
+| Dodo Payments | API key | Yes |
+| Polar | Access token and organization ID | Yes |
+| WooCommerce | Store URL, consumer key, and consumer secret | No |
 
-Umami only needs to **read** your invoices, so always use a Stripe **restricted key** with read-only
-permissions. Never use your secret key (`sk_live_...`), which has full access to your Stripe
-account.
+## Create read-only credentials
+
+Umami only needs to **read** your payments and refunds, so always create a dedicated key with read-only access. Never
+use a key with full access to your account.
 
 <Callout title="Use a read-only key" variant="warning">
 
-A restricted key limits what Umami can do in your Stripe account. With read-only permissions, the
-key can't create charges, issue refunds, or change any data, even if it were exposed.
+A read-only key limits what Umami can do in your account. The key can't create charges, issue refunds, or change any
+data, even if it were exposed.
 
 </Callout>
 
-In the Stripe Dashboard, go to **Developers** → **API keys** and click **Create restricted key**.
+### Stripe
 
-Give the key a name, such as `Umami`, then set the following permissions to **Read**:
+In the Stripe Dashboard, go to **Developers** → **API keys** and click **Create restricted key**. Give the key a name,
+such as `Umami`, then set the following permissions to **Read**:
 
 | Resource | Permission |
 | --- | --- |
-| Invoices | Read |
-| Events | Read |
-| Prices | Read |
+| Charges | Read |
+| Customers | Read |
+| Refunds | Read |
+| Connect → Accounts | Read |
 
-Leave every other permission set to **None**, then click **Create key**. Copy the key, which starts
-with `rk_live_`.
+Leave every other permission set to **None**, then click **Create key**. The key starts with `rk_live_`, or `rk_test_`
+for a sandbox.
+
+### Paddle
+
+In Paddle Billing, go to **Developer tools** → **Authentication** and create an API key with the following permissions:
+
+- `transaction.read`
+- `adjustment.read`
+- `customer.read`
+
+### Lemon Squeezy
+
+In Lemon Squeezy, go to **Settings** → **API** and create an API key. Use a test mode key for a sandbox. You will also need
+the numeric ID of the store you want to import.
+
+### Dodo Payments
+
+In Dodo Payments, go to **Developer** → **API Keys** and create an API key with **Read** access to **Payments** and
+**Refunds**. Use a test mode key for a sandbox.
+
+### Polar
+
+In Polar, go to **Settings** → **Developers** and create an organization access token with the following scopes:
+
+- `orders:read`
+- `refunds:read`
+- `organizations:read`
+
+Use a sandbox token for a sandbox. You will also need your organization ID.
+
+### WooCommerce
+
+In WordPress, go to **WooCommerce** → **Settings** → **Advanced** → **REST API** and add a key with **Read** permissions for
+a user with the Shop Manager or Administrator role. WooCommerce 9.0 or later is required, and your store must use HTTPS.
 
 ## Add a payment provider
 
@@ -45,68 +86,68 @@ Log into Umami and click on the side nav profile button then click **Settings**.
 
 ![image](/images/cloud/navbar-settings.png)
 
-Navigate to **Payment providers** and click on the **Add payment provider** button.
+Navigate to **Integrations**, click on the **Add integration** button, and choose your payment provider.
+
+![image](/images/cloud/integration-add.png)
 
 Fill out the form:
 
-- **Name**: a name to identify this provider, for example `Stripe`.
-- **Website**: the website this revenue belongs to.
-- **Provider**: `Stripe`.
-- **API key**: the restricted key you created above.
+- **Environment**: `Live`, or `Sandbox` for a test account.
+- **Website**: the website this revenue belongs to. This can't be changed later.
+- **Credentials**: the read-only credentials you created above.
 
-Click **Save**. Umami immediately starts importing your full invoice history. Depending on how many
-invoices you have, this can take a few minutes. Click on the provider's name to view your revenue.
+![image](/images/cloud/integration-payment-form.png)
+
+Click **Save**. Umami checks your credentials and starts importing payments. Credentials are encrypted, and only the
+last four characters of the key are shown.
 
 ## Keeping data up to date
 
-Umami refreshes your invoice data from Stripe **every 4 hours**. Each refresh picks up new invoices
-and changes to existing ones, such as an unpaid invoice that has since been paid or an invoice that
-was voided.
+Umami imports new payments and refunds **every hour**. Each import also checks the previous 7 days, so late refunds and
+delayed captures are picked up. Payments from the last few minutes are left for the next import, so a new payment can take
+up to an hour to appear.
 
-To refresh right away, open the payment provider and click **Sync now**. The time of the last sync is
-shown next to the button.
+Umami imports payments made after you add the payment provider.
 
-## Set up live updates (optional)
+## Link payments to visitors
 
-If you want changes in Stripe to appear in Umami within seconds instead of on the next refresh, add a
-webhook in Stripe. This is optional. Without it, your data still refreshes every 4 hours.
+By default, imported payments count toward your website's revenue, but they aren't linked to a visitor. To attribute
+revenue to the visitor who made the payment, and to their referrer, campaign, and other traffic sources, identify the
+visitor with a [Distinct ID](/docs/distinct-ids) and pass the same ID to your payment provider in the
+`umami_distinct_id` metadata field.
 
-### 1. Copy your webhook URL
+```js
+umami.identify('user-123');
+```
 
-In Umami, navigate to **Payment providers** and click the **Edit** button next to your provider.
-Copy the **Webhook URL**. Each payment provider has its own URL.
+| Provider | Where to set `umami_distinct_id` |
+| --- | --- |
+| Stripe | Metadata on the customer or the charge. |
+| Paddle | Custom data on the transaction or the customer. |
+| Dodo Payments | Metadata on the payment or the customer. |
+| Polar | Metadata on the order or the customer. If neither is set, Polar uses the customer's external ID, set with `external_customer_id` at checkout. |
+| WooCommerce | Order meta with the key `umami_distinct_id` or `_umami_distinct_id`. |
+| Lemon Squeezy | Not supported. Lemon Squeezy doesn't share checkout custom data through its API. |
 
-### 2. Create the webhook in Stripe
+For example, with Stripe:
 
-In the Stripe Dashboard, go to **Developers** → **Webhooks** and add an endpoint:
+```js
+const customer = await stripe.customers.create({
+  email: user.email,
+  metadata: { umami_distinct_id: 'user-123' },
+});
+```
 
-- **Endpoint URL**: the webhook URL you copied from Umami.
-- **Events to send**: select these events:
-  - `invoice.created`
-  - `invoice.finalized`
-  - `invoice.paid`
-  - `invoice.payment_failed`
-  - `invoice.updated`
-  - `invoice.voided`
-  - `invoice.marked_uncollectible`
-
-Save the endpoint, then reveal and copy its **Signing secret**, which starts with `whsec_`.
-
-### 3. Add the signing secret to Umami
-
-Back in Umami, paste the signing secret into the **Webhook secret** field of your payment provider
-and click **Save**. Umami uses the secret to verify that webhook requests come from Stripe.
+Umami links a payment to the visitor's most recent visit in the 90 days before the payment.
 
 ## Edit or delete a payment provider
 
-Navigate to **Payment providers** and click on the **Edit** button or **Delete** button next to your
-payment provider. When editing, leave the **API key** or **Webhook secret** field blank to keep the
-current value.
+Navigate to **Integrations** and click on the **Edit** button or **Disconnect** button next to your payment provider.
+When editing, leave the credential fields blank to keep the saved credentials. To replace them, fill in every field.
 
 <Callout title="Note">
 
-Deleting a payment provider in Umami doesn't change anything in your Stripe account. If you set up a
-webhook, delete it in Stripe under **Developers** → **Webhooks**, and roll or delete the restricted
-key under **Developers** → **API keys**.
+Disconnecting a payment provider in Umami doesn't change anything in your provider account. To revoke access, delete
+the API key in your provider's dashboard.
 
 </Callout>

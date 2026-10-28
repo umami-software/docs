@@ -333,6 +333,10 @@
                 "title": "Performance"
               },
               {
+                "page": "error-tracking",
+                "title": "Error tracking"
+              },
+              {
                 "page": "compare",
                 "title": "Compare"
               },
@@ -888,6 +892,51 @@
                     "page": "api-reference/post-dashboard",
                     "title": "Save my dashboard",
                     "method": "POST"
+                  }
+                ]
+              },
+              {
+                "group": "Errors",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-errors",
+                    "title": "List error issues",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-stats",
+                    "title": "Get error stats",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-values",
+                    "title": "Get error filter values",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-issue",
+                    "title": "Get an error issue",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-website-error-issue",
+                    "title": "Update an error issue status",
+                    "method": "PATCH"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-events",
+                    "title": "List error occurrences",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-event",
+                    "title": "Get an error occurrence",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-issue-values",
+                    "title": "Get error issue filter values",
+                    "method": "GET"
                   }
                 ]
               },
@@ -1755,10 +1804,6 @@
                 "title": "IP Filters"
               },
               {
-                "page": "cloud/payment-providers",
-                "title": "Payment Providers"
-              },
-              {
                 "page": "cloud/white-label",
                 "title": "White-label"
               },
@@ -1774,6 +1819,23 @@
                 "page": "cloud/faq",
                 "hidden": true,
                 "title": "FAQ"
+              }
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              {
+                "page": "cloud/integrations",
+                "title": "Integrations"
+              },
+              {
+                "page": "cloud/payment-providers",
+                "title": "Payment Providers"
+              },
+              {
+                "page": "cloud/google-search-console",
+                "title": "Google Search Console"
               }
             ]
           },
