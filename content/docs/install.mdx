@@ -20,7 +20,7 @@ Umami creates a default login account with username **admin** and password **uma
 
 ### Requirements
 
-- A server with [Node.js](https://nodejs.org/) version 18.18 or newer.
+- A server with [Node.js](https://nodejs.org/) version 20.19 or newer (22 LTS recommended).
 - A database. Umami supports [PostgreSQL](https://www.postgresql.org/) (minimum v12.14) databases.
 
 <Callout title="Use UTC">
@@ -76,6 +76,8 @@ pnpm start
 By default this will launch the application on `http://localhost:3000`. You will need to either
 [proxy](https://docs.nginx.com/nginx/admin-guide/web-server/reverse-proxy/) requests from your web server
 or change the [port](https://nextjs.org/docs/app/api-reference/cli/next#next-start-options) to serve the application directly.
+
+To bind to the `HOSTNAME` and `PORT` set in your `.env` file, start with `pnpm run start:env` instead.
 
 ### Running Umami
 
