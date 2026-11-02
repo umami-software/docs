@@ -602,6 +602,10 @@
                 "title": "Running on Supabase"
               },
               {
+                "page": "guides/running-on-varity",
+                "title": "Running on Varity"
+              },
+              {
                 "page": "guides/running-on-vercel",
                 "title": "Running on Vercel"
               }
