@@ -1836,6 +1836,10 @@
               {
                 "page": "cloud/google-search-console",
                 "title": "Google Search Console"
+              },
+              {
+                "page": "cloud/google-ads",
+                "title": "Google Ads"
               }
             ]
           },

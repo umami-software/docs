@@ -1,0 +1,83 @@
+---
+title: Google Ads
+description: Connect Google Ads to Umami Cloud to see the cost, clicks, impressions, and conversions of your ad campaigns alongside your website analytics.
+---
+
+Connect Google Ads to a website to see how your ad campaigns perform and what they cost. Umami shows your spend,
+clicks, impressions, click-through rate, and conversions for campaigns, ad groups, and keywords next to the rest of
+your analytics.
+
+Google Ads is an [integration](/docs/cloud/integrations) and requires a Pro or Business plan. Umami reads ad data from
+Google whenever you open the report and caches it for a few minutes. Nothing is stored in Umami.
+
+## Before you begin
+
+You need a Google account with access to the Google Ads account that advertises your website. If you manage ads
+through a manager account, connect with a Google account that has access to the manager account. You will choose the
+client account that runs the ads.
+
+## Connect Google Ads
+
+Log into Umami and click on the side nav profile button then click **Settings**.
+
+![image](/images/cloud/navbar-settings.png)
+
+Navigate to **Integrations**, click on the **Add integration** button, and choose **Google Ads**.
+
+![image](/images/cloud/integration-add.png)
+
+Select the **Website** to show ad data for. This can't be changed later. Click **Continue with Google**, choose your
+Google account, and grant Umami access to Google Ads.
+
+![image](/images/cloud/integration-google-ads-form.png)
+
+You will be returned to the **Integrations** page. If your Google account can reach only one Google Ads client account, it
+is selected automatically. Otherwise, click on the **Edit** button next to the integration and select the
+**Google Ads account** that advertises your website.
+
+![image](/images/cloud/integration-google-ads-account.png)
+
+Only client accounts are listed. Manager accounts have no ad metrics of their own, so choose the client account below
+the manager instead.
+
+## Viewing ad data
+
+Navigate to a website and click the **Ads** tab.
+
+![image](/images/cloud/google-ads-report.png)
+
+| Metric | Description |
+| --- | --- |
+| Cost | Amount spent on ads, in the currency of your Google Ads account. |
+| Clicks | Number of clicks on your ads. |
+| Impressions | Number of times your ads were shown. |
+| CTR | Click-through rate, the percentage of impressions that resulted in a click. |
+| Conversions | Number of conversions recorded by Google Ads. |
+| Conversion value | Total value of those conversions, as recorded by Google Ads. |
+
+Ad data can be broken down by **Campaigns**, **Ad groups**, and **Keywords**, sorted by cost.
+
+<Callout title="Note">
+
+Ad data comes from Google, so it is reported in whole days in your Google Ads account's time zone, and recent days may
+not be available yet. Conversions are the ones tracked in Google Ads, not Umami events or goals. Filters don't apply to
+ad data, and a date range can cover at most two years.
+
+</Callout>
+
+## Troubleshooting
+
+| Problem | Solution |
+| --- | --- |
+| No accounts are listed | The Google account you connected can't read any Google Ads client accounts. Disconnect the integration and connect again with a Google account that has access to the ad account. |
+| The report asks you to choose a Google Ads account | No account is selected for the integration, or a manager account is selected. Edit the integration and select a client account. |
+| The report says the Google Ads account is unavailable | The connected Google account has lost access to the selected Google Ads account. Restore access in Google Ads, or edit the integration and select another account. |
+| The report asks you to reconnect | Google rejected the connection. Disconnect the integration and connect it again. |
+| Google access was denied | Connect again and grant Umami access to Google Ads on Google's consent screen. |
+| Google did not grant lasting access | Remove Umami from your Google account's [third-party access](https://myaccount.google.com/connections) and connect again. |
+
+## Disconnect Google Ads
+
+Navigate to **Integrations** and click on the **Disconnect** button next to the integration. Ad data will no longer be
+shown for the website. To revoke access, remove Umami from your Google account's
+[third-party access](https://myaccount.google.com/connections).
