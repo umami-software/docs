@@ -147,12 +147,29 @@ This setting is ignored when `data-salt` is set, and like `data-salt` it require
 ></script>
 ```
 
+## data-performance
+
+<Badge>v3.1.0</Badge>
+
+Enable automatic collection of [Core Web Vitals](https://web.dev/articles/vitals) from your visitors' browsers. If
+you are sending pageviews manually, use `data-auto-pageview="false"` instead of `data-auto-track="false"` so
+performance tracking still initializes. See [Performance](/docs/performance) for more details.
+
+```html
+<script
+  defer
+  src="http://mywebsite.com/script.js"
+  data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
+  data-performance="true"
+></script>
+```
+
 ## data-errors
 
 <Badge>v3.5.0</Badge>
 
-Captures uncaught JavaScript exceptions and unhandled promise rejections. When it is enabled, you can also report
-handled errors with [`umami.captureException()`](/docs/tracker-functions#errors). See
+Enable automatic capture of uncaught JavaScript exceptions and unhandled promise rejections from your visitors'
+browsers. This is also required for errors reported with [`umami.captureException()`](/docs/tracker-functions#errors). See
 [Error tracking](/docs/error-tracking) for more details.
 
 ```html
@@ -168,8 +185,8 @@ handled errors with [`umami.captureException()`](/docs/tracker-functions#errors)
 
 <Badge>v3.5.0</Badge>
 
-The release or version of your website, attached to every captured error so you can filter errors by release. Up
-to 100 characters.
+Attach a release or version to every captured error, so you can filter issues by release. It has a 100-character
+limit. Only used when `data-errors` is enabled.
 
 ```html
 <script
@@ -177,7 +194,7 @@ to 100 characters.
   src="http://mywebsite.com/script.js"
   data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
   data-errors="true"
-  data-release="1.4.2"
+  data-release="web@1.4.2"
 ></script>
 ```
 
@@ -185,8 +202,8 @@ to 100 characters.
 
 <Badge>v3.5.0</Badge>
 
-The environment attached to every captured error, for example `staging`. The default is `production`. Up to 50
-characters.
+Attach an environment to every captured error, so you can filter issues by environment. Defaults to `production`
+and has a 50-character limit. Only used when `data-errors` is enabled.
 
 ```html
 <script
@@ -195,23 +212,6 @@ characters.
   data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
   data-errors="true"
   data-environment="staging"
-></script>
-```
-
-## data-performance
-
-<Badge>v3.1.0</Badge>
-
-Enable automatic collection of [Core Web Vitals](https://web.dev/articles/vitals) from your visitors' browsers. If
-you are sending pageviews manually, use `data-auto-pageview="false"` instead of `data-auto-track="false"` so
-performance tracking still initializes. See [Performance](/docs/performance) for more details.
-
-```html
-<script
-  defer
-  src="http://mywebsite.com/script.js"
-  data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
-  data-performance="true"
 ></script>
 ```
 
@@ -249,7 +249,11 @@ Use this if you don't want to collect the hash value from the URL.
 
 <Badge>v2.17.0</Badge>
 
-Respects the user's [Do Not Track](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/doNotTrack) browser setting.
+Set this to `true` to disable Umami tracking when the browser exposes an enabled [Do Not Track](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/doNotTrack) preference.
+
+Do Not Track (DNT) is a deprecated browser feature with limited support, and its standardization has been discontinued. Umami retains this option for compatibility with browsers that expose the DNT preference.
+
+This option only controls Umami's tracker behavior when that signal is available. It is not a comprehensive privacy or consent-management solution and does not prevent all HTTP requests or infrastructure logging.
 
 ```html
 <script

@@ -42,7 +42,8 @@ your `DATABASE_URL`. Umami then derives the same secret it used before.
 <Badge>v1.24.0</Badge>
 
 HTTP header to check for the client's IP address. This is useful when you're
-behind a proxy that uses non-standard headers. To pick the correct address from a header that lists several proxies, such as `X-Forwarded-For`, also set [`TRUSTED_PROXIES`](#trusted_proxies).
+behind a proxy that uses non-standard headers. If you're behind multiple proxies,
+see [TRUSTED_PROXIES](#trusted_proxies).
 
 ```
 CLIENT_IP_HEADER = "header name"
@@ -155,8 +156,9 @@ ENABLE_TEST_CONSOLE = 1
 
 <Badge>v3.5.0</Badge>
 
-The maximum number of [browser errors](/docs/error-tracking) accepted per website per minute. Errors above the limit
-are rejected with a `429` response, and the tracker pauses sending. The default is `120`, and the maximum is `100000`.
+The maximum number of [error tracking](/docs/error-tracking) requests accepted per website per minute. Requests
+over the limit return `429` and the tracker pauses capture. Retries count toward the limit. Accepts `1` to
+`100000`. Defaults to `120`.
 
 ```
 ERRORS_PER_MINUTE = 120
@@ -312,20 +314,17 @@ TRACKER_SCRIPT_NAME = "custom-script-name.js"
 
 <Badge>v3.5.0</Badge>
 
-A comma-separated list of IP addresses, CIDR ranges, or presets that belong to the proxies and load balancers in front
-of Umami. Umami uses it to find the real client IP address when a request passes through several proxies.
+A comma-delimited list of IP addresses and CIDR ranges of the proxies and load balancers in front of Umami. Set this when requests pass through more than one proxy and Umami records an internal address (like `10.0.0.8`) instead of the visitor's IP.
 
-The presets are `loopback` (`127.0.0.0/8`, `::1/128`), `linklocal` (`169.254.0.0/16`, `fe80::/10`), and `private`
-(`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`). Invalid entries are ignored.
+Without it, Umami uses the leftmost address in `X-Forwarded-For` or `Forwarded`, which a client can set to anything. When set, Umami reads `X-Forwarded-For` and `Forwarded` from right to left, skips trusted proxies, and uses the first address that isn't one. Headers such as `X-Real-IP` that contain a trusted proxy address are skipped in favor of the next header.
+
+You can also use the presets `loopback` (`127.0.0.0/8`, `::1/128`), `linklocal` (`169.254.0.0/16`, `fe80::/10`), and `private` (`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`). Invalid entries are ignored.
 
 ```
-TRUSTED_PROXIES = "private, 203.0.113.10"
+TRUSTED_PROXIES = "10.0.0.0/8, 172.16.0.0/12"
 ```
 
-Without `TRUSTED_PROXIES`, Umami uses the leftmost address in `X-Forwarded-For` or `Forwarded`. With it, Umami reads
-the chain from right to left, skips trusted proxies, and uses the first address that is not trusted. A client can
-write anything into the left side of the chain, so this is the more reliable choice behind multiple proxies. A
-header that holds a trusted proxy's own address is skipped in favor of the next one.
+Only list addresses that belong to your own proxies. If your visitors also use private addresses, such as on an internal network, list the specific proxy addresses rather than using `private`, otherwise those visitors will be skipped.
 
 ### TWO_FACTOR_ENCRYPTION_KEY
 

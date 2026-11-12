@@ -5,6 +5,74 @@ description: Notable changes to Umami Cloud and the Umami Cloud API, including n
 
 This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and **API (api.umami.is)**.
 
+## October 23, 2026
+
+**Integrations**
+
+- Added [Integrations](/docs/cloud/integrations) under **Settings** for Pro and Business plans. Connect a [payment provider](/docs/cloud/payment-providers) (Stripe, Paddle, Lemon Squeezy, Dodo Payments, Polar, or WooCommerce) to import payments and refunds as revenue, or [Google Search Console](/docs/cloud/google-search-console) to see search queries, clicks, and impressions for a website.
+- Payment providers have moved from **Settings** → **Payment providers** to **Settings** → **Integrations**.
+
+**API: Websites, links, and pixels**
+
+- `POST /api/websites`, `POST /api/links`, and `POST /api/pixels`: Requests that supply an `id` already used by another website, link, pixel, board, team, or user now return `400 Bad Request` with the message `ID already in use.`
+
+## October 16, 2026
+
+**Error tracking**
+
+- Added browser [error tracking](/docs/error-tracking). Add `data-errors="true"` to your tracking script to capture uncaught exceptions and unhandled promise rejections, or report caught exceptions with `umami.captureException()`. Errors are grouped into issues under the new **Errors** tab for each website.
+
+**API: Errors**
+
+- `GET /api/websites/:websiteId/errors`: **Added** — lists error issues.
+- `GET /api/websites/:websiteId/errors/stats`: **Added** — returns error totals and a daily trend.
+- `GET /api/websites/:websiteId/errors/values`: **Added** — lists the distinct values of an error field across issues.
+- `GET /api/websites/:websiteId/errors/:issueId`: **Added** — returns an error issue.
+- `PATCH /api/websites/:websiteId/errors/:issueId`: **Added** — changes the status of an error issue to `unresolved`, `resolved`, or `ignored`.
+- `GET /api/websites/:websiteId/errors/:issueId/events`: **Added** — lists the occurrences of an error issue.
+- `GET /api/websites/:websiteId/errors/:issueId/events/:eventId`: **Added** — returns an error occurrence.
+- `GET /api/websites/:websiteId/errors/:issueId/values`: **Added** — lists the distinct values of an error field for one issue.
+
+**API: Collection**
+
+- `POST /api/send`: Accepts a new `error` payload type for error tracking. Error payloads are limited to 48,000 bytes and return `413` when larger, and `429` with a `Retry-After` header when the website's error quota is exceeded.
+
+## October 8, 2026
+
+**API: Session replays**
+
+- `GET /api/websites/:websiteId/replays` and `GET /api/websites/:websiteId/replays/saved`: Each replay now includes `distinctIds`, the list of distinct IDs linked to the replay's session.
+
+**API: Goals**
+
+- `POST /api/websites/:websiteId/goals`, `POST /api/websites/:websiteId/goals/:goalId`, and `GET /api/websites/:websiteId/goals/stats`: The goal `type` must be `path` or `event`. Other values return a validation error.
+
+## October 1, 2026
+
+**API: Segments**
+
+- `POST /api/websites/:websiteId/segments` and `POST /api/websites/:websiteId/segments/:segmentId`: `name` can no longer be empty. Cohorts also require an action type, action value, and date range.
+
+## September 24, 2026
+
+**API: Date ranges**
+
+- Added an optional `period` query parameter to use in place of `startAt` and `endAt`. Accepted values: `today`, `24h`, `7d`, `30d`, `0day`, `24hour`, `0week`, `7day`, `0month`, `30day`, `90day`, `0year`, `6month`, `12month`.
+- `period` is calculated relative to the current time in the request's `timezone` (default `UTC`). Sending `period` together with `startAt` or `endAt` returns a validation error.
+- Supported endpoints:
+  - `GET /api/websites/:websiteId/stats`, `/pageviews`, `/metrics`, `/events`, `/events/series`, and `/annotations`
+  - `GET /api/websites/:websiteId/sessions`, `/sessions/stats`, `/sessions/weekly`, and `/sessions/:sessionId/activity`
+  - `GET /api/websites/:websiteId/event-data`, `/event-data/*` (except `/event-data/:eventId`), `/event-data-pivot`, and `/event-data-pivot/*`
+  - `GET /api/websites/:websiteId/session-data/*` and `/session-data-pivot`
+  - `GET /api/websites/charts`
+
+## September 15, 2026
+
+**API: Sessions**
+
+- `GET /api/websites/:websiteId/sessions/:sessionId`: Response now includes `distinctIds`, the list of distinct IDs linked to the session.
+- If a session is linked to more than one distinct ID, `distinctId` is omitted and the session is no longer merged with other sessions for those IDs. This also applies to `GET /api/websites/:websiteId/sessions/:sessionId/activity`.
+
 ## September 10, 2026
 
 **MCP**
@@ -12,6 +80,59 @@ This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and
 - Added a remote [Model Context Protocol](https://modelcontextprotocol.io) server at `https://cloud.umami.is/mcp`. Connect Claude, ChatGPT, Cursor, and other MCP clients to ask questions about your website traffic in natural language. See [MCP](/docs/cloud/mcp) for setup instructions.
 - Authenticate with your existing Cloud API key using an `Authorization: Bearer api_<key>` header (or `x-umami-api-key`). The same subscription requirements and website/team permissions as the Cloud API apply.
 - All tools are read-only and cover stats, traffic, metrics, realtime, events, sessions, annotations, segments, funnels, goals, journeys, retention, attribution, revenue, and performance.
+
+## September 9, 2026
+
+**API: Reports**
+
+- `POST /api/reports/*` report endpoints and `GET/POST/DELETE /api/reports` are **Deprecated** in favor of the website-scoped GET endpoints below. Existing clients can keep calling the old URLs with the same requests and responses. No removal date has been set.
+- `GET /api/websites/:websiteId/reports`: **Deprecated**. Use the `funnels` and `goals` endpoints to list saved definitions.
+- New endpoints take `startAt` and `endAt` (epoch milliseconds), optional `timezone` and `unit`, and the standard filter parameters as query parameters. The report envelope is no longer used.
+
+| Deprecated endpoint | Replacement |
+| --- | --- |
+| `POST /api/reports/attribution` | `GET /api/websites/:websiteId/attribution` |
+| `POST /api/reports/breakdown` | `GET /api/websites/:websiteId/breakdown` |
+| `POST /api/reports/funnel` | `GET /api/websites/:websiteId/funnels/stats` |
+| `POST /api/reports/goal` | `GET /api/websites/:websiteId/goals/stats` |
+| `POST /api/reports/heatmap` | `GET /api/websites/:websiteId/heatmaps` |
+| `POST /api/reports/journey` | `GET /api/websites/:websiteId/journeys` |
+| `POST /api/reports/performance` | `GET /api/websites/:websiteId/performance/stats`, `/performance/chart`, `/performance/metrics` |
+| `POST /api/reports/retention` | `GET /api/websites/:websiteId/retention` |
+| `POST /api/reports/revenue` | `GET /api/websites/:websiteId/revenue/stats`, `/revenue/chart`, `/revenue/metrics` |
+| `POST /api/reports/utm` | `GET /api/websites/:websiteId/utm/metrics` |
+
+**API: Funnels**
+
+- `GET /api/websites/:websiteId/funnels`: **Added** — lists saved funnels.
+- `POST /api/websites/:websiteId/funnels`: **Added** — creates a saved funnel.
+- `GET /api/websites/:websiteId/funnels/:funnelId`: **Added** — returns a saved funnel.
+- `POST /api/websites/:websiteId/funnels/:funnelId`: **Added** — updates a saved funnel.
+- `DELETE /api/websites/:websiteId/funnels/:funnelId`: **Added** — deletes a saved funnel.
+- `GET /api/websites/:websiteId/funnels/:funnelId/stats`: **Added** — calculates a saved funnel.
+- `GET /api/websites/:websiteId/funnels/stats`: **Added** — calculates a funnel from `steps` and `window` without saving it.
+
+**API: Goals**
+
+- `GET /api/websites/:websiteId/goals`: **Added** — lists saved goals.
+- `POST /api/websites/:websiteId/goals`: **Added** — creates a saved goal.
+- `GET /api/websites/:websiteId/goals/:goalId`: **Added** — returns a saved goal.
+- `POST /api/websites/:websiteId/goals/:goalId`: **Added** — updates a saved goal.
+- `DELETE /api/websites/:websiteId/goals/:goalId`: **Added** — deletes a saved goal.
+- `GET /api/websites/:websiteId/goals/:goalId/stats`: **Added** — calculates a saved goal.
+- `GET /api/websites/:websiteId/goals/stats`: **Added** — calculates a goal from `type` and `value` without saving it.
+
+**API: Websites**
+
+- `GET /api/websites/:websiteId/attribution`: **Added** — returns attribution data by `model`, `type`, and `step`.
+- `GET /api/websites/:websiteId/breakdown`: **Added** — returns a breakdown by the given `fields`.
+- `GET /api/websites/:websiteId/heatmaps`: **Added** — returns heatmap data by `urlPath` and `mode`.
+- `GET /api/websites/:websiteId/journeys`: **Added** — returns user journeys by `steps`, `startStep`, `endStep`, and `eventType`.
+- `GET /api/websites/:websiteId/retention`: **Added** — returns retention data.
+- `GET /api/websites/:websiteId/performance/stats`: **Added** — returns a summary of all Web Vitals metrics.
+- `GET /api/websites/:websiteId/performance/chart`: **Added** — returns chart data for one `metric` (`lcp` \| `inp` \| `cls` \| `fcp` \| `ttfb`).
+- `GET /api/websites/:websiteId/performance/metrics`: **Added** — returns a performance breakdown by `type` (`path` \| `title` \| `device` \| `browser`).
+- `GET /api/websites/:websiteId/utm/metrics`: **Added** — returns UTM metrics for one `type` (`utm_source` \| `utm_medium` \| `utm_campaign` \| `utm_term` \| `utm_content`).
 
 ## September 3, 2026
 
@@ -27,6 +148,15 @@ This page documents notable changes made to **Umami Cloud (cloud.umami.is)** and
 - `GET /api/websites/:websiteId/annotations/:annotationId`: **Added** — returns a single annotation.
 - `POST /api/websites/:websiteId/annotations/:annotationId`: **Added** — updates an annotation.
 - `DELETE /api/websites/:websiteId/annotations/:annotationId`: **Added** — deletes an annotation.
+
+## September 1, 2026
+
+**API: API Keys**
+
+- `GET /api/me/api-keys`: **Added** — lists your API keys.
+- `POST /api/me/api-keys`: **Added** — creates an API key.
+- `DELETE /api/me/api-keys/:keyId`: **Added** — deletes an API key.
+- `GET /api/me`: Response now includes `authType` and, when you authenticate with an API key, `apiKey`.
 
 ## June 6, 2026
 

@@ -1,23 +1,24 @@
 ---
 title: Error tracking
-description: Capture JavaScript errors from your visitors' browsers with the Umami tracker, group them into issues with stack traces, and resolve or ignore them.
+description: Capture JavaScript errors from your visitors' browsers with the Umami tracker, group them into issues, and investigate occurrences alongside sessions and replays.
 ---
 
 *Available since v3.5.0*
 
-**Error tracking** captures JavaScript errors from your visitors' browsers alongside your analytics. Errors are
-grouped into issues, so you can see how often each problem happens, how many visits it affects, and which session
-it happened in.
+**Error tracking** captures JavaScript exceptions from your visitors' browsers and groups them into issues.
+Use it to find out which errors your visitors run into, how often they happen, and which pages, browsers, and releases
+are affected.
 
 ## Use Cases
 
-- Find JavaScript errors your visitors hit that never show up in your own testing.
-- See whether a new release introduced errors, and confirm a fix by watching occurrences drop.
-- Jump from an error to the visitor's session, or to its [replay](/docs/replays), to see what led up to it.
+- Catch errors in production that never showed up during testing.
+- See which releases introduced new errors, and confirm that a fix worked.
+- Prioritize fixes by the number of occurrences and affected visits.
+- Watch the session or replay behind an error to see what the visitor did before it happened.
 
 ## Usage
 
-Add the **data-errors** attribute to your tracking script.
+Add the **data-errors** attribute to your tracking script to enable error tracking.
 
 ```html
 <script
@@ -28,24 +29,12 @@ Add the **data-errors** attribute to your tracking script.
 ></script>
 ```
 
-Once enabled, the tracker automatically captures uncaught exceptions and unhandled promise rejections. Failures to
-load resources such as images or stylesheets are not JavaScript exceptions and are not captured.
+Once enabled, Umami automatically captures uncaught exceptions and unhandled promise rejections and reports them under
+the **Errors** tab for that website. Error tracking doesn't create pageviews or events, and it works when automatic
+pageview tracking is disabled.
 
-To report an error that your own code catches, call
-[`umami.captureException()`](/docs/tracker-functions#errors):
-
-```js
-try {
-  await saveSettings();
-} catch (error) {
-  umami.captureException(error);
-}
-```
-
-### Releases and environments
-
-Tag errors with the version of your site and the environment it runs in, so you can filter by them later. The
-environment defaults to `production`.
+You can also add the **data-release** and **data-environment** attributes to label every error with the version of your
+website and where it is running. Both can be used as filters. The environment defaults to `production`.
 
 ```html
 <script
@@ -53,71 +42,135 @@ environment defaults to `production`.
   src="http://mywebsite.com/script.js"
   data-website-id="94db1cb1-74f4-4a40-ad6c-962362670409"
   data-errors="true"
-  data-release="1.4.2"
-  data-environment="staging"
+  data-release="web@1.4.2"
+  data-environment="production"
 ></script>
 ```
 
 You can also set these options with [`window.umamiConfig`](/docs/tracker-configuration#windowumamiconfig).
 
-## Viewing errors
+Errors are sent to the same collection endpoint as your pageviews and events, so they work with
+[`data-host-url`](/docs/tracker-configuration#data-host-url), [`COLLECT_API_ENDPOINT`](/docs/environment-variables#collect_api_endpoint),
+and [proxies](/docs/bypass-ad-blockers) without any extra setup.
 
-Errors appear under **Errors** in the **Monitoring** section of a website. The page shows the total occurrences,
-issues, and affected visits for the selected date range, with a chart of daily occurrences in UTC.
+<Callout title="Notes">
 
-Below it is the list of issues. Each issue shows its status, the number of occurrences and affected visits, and when
-it was first and last seen. You can search issues and filter them by status, release, environment, browser, and page
-path.
+- Errors that happen before the tracker loads, resource load failures (such as broken images), errors in web workers, and server-side errors are not captured.
+- Errors from scripts on another domain may only report a generic `Script error.` message unless the script is served with CORS headers and loaded with the `crossorigin` attribute.
 
-Click an issue to see its occurrences, newest first. Select an occurrence to see its details:
+</Callout>
 
-- The page path, release, environment, and browser
-- Whether it was captured automatically (unhandled) or with `captureException()` (handled)
-- The stack trace
-- Any tags passed to `captureException()`
-- Links to the visitor's session and, if one was recorded, the replay
+## Reporting caught errors
 
-## Issue status
+Errors that your code catches, such as those handled by a framework error boundary, are not captured automatically.
+Report them with `umami.captureException()`.
 
-Every issue is **Unresolved**, **Resolved**, or **Ignored**. Use the buttons at the top of an issue to **Resolve**,
-**Ignore**, or **Reopen** it. Changing the status requires permission to edit the website.
+```js
+try {
+  checkout();
+} catch (error) {
+  umami.captureException(error);
+}
+```
 
-A status does not stop collection. New occurrences of a resolved or ignored issue are still recorded and counted,
-and the issue keeps its status until you change it.
+You can pass an optional second argument to add context to the error.
 
-## How errors are grouped
+```js
+umami.captureException(error, {
+  release: 'web@1.4.2',
+  environment: 'production',
+  tags: { feature: 'checkout' },
+  fingerprint: ['checkout-payment'],
+});
+```
 
-Errors with the same fingerprint belong to the same issue. By default the fingerprint is built from the error name
-and the top 10 frames of the stack trace, ignoring content hashes in file names, so a new build of the same code
-still groups with earlier errors. An error without a stack trace is grouped by its name and message, with numbers
-and IDs in the message ignored.
+| Option | Description |
+| --- | --- |
+| release | Overrides `data-release` for this error. |
+| environment | Overrides `data-environment` for this error. |
+| tags | Key-value pairs of strings shown on the occurrence. Up to 20 tags. Keys that look like credentials, such as `password`, `token`, `cookie`, or `email`, are dropped. |
+| fingerprint | Up to 5 strings used to group the error into an issue, replacing automatic grouping. |
 
-To control grouping yourself, pass a `fingerprint` to `captureException()`. See
-[Tracker functions](/docs/tracker-functions#errors).
+`captureException()` requires `data-errors="true"` and never throws, so it is safe to call from any error handler.
+
+## Viewing Errors
+
+Navigate to a website and click the **Errors** tab.
+
+![image](/images/docs/errors-list.png)
+
+The list shows each issue with its status, number of occurrences, number of affected visits, and when it was first and
+last seen within the selected date range. The chart above the list shows daily error occurrences in UTC.
+
+Use the filters to narrow the list by **Status**, **Release**, **Environment**, **Browser**, or **Page path**, or search
+for text in the error message.
+
+## Issues
+
+Umami groups errors into issues by the error type and the top 10 frames of its stack trace. Content hashes in file
+names are ignored, so the same error still groups together after you deploy a new build. If no stack trace is
+available, errors are grouped by their message, with numbers and IDs in the message ignored. Use the `fingerprint`
+option of `umami.captureException()` to control grouping yourself.
+
+Click on an issue to see its occurrences. Select an occurrence to see its stack trace, page, browser, operating system,
+device, release, environment, and tags, and whether it was captured automatically (unhandled) or reported with
+`captureException()` (handled).
+
+![image](/images/docs/errors-issue.png)
+
+From an occurrence you can click **View session** to open the visitor's session. If a [replay](/docs/replays) was
+recorded at the time of the error, a **View replay** link is also shown.
+
+Each issue has one of three statuses:
+
+| Status | Description |
+| --- | --- |
+| Unresolved | The default status for new issues. |
+| Resolved | The issue has been fixed. |
+| Ignored | The issue doesn't need any action. |
+
+Use the **Resolve**, **Ignore**, and **Reopen** buttons at the top of an issue to change its status. Changing a status
+requires permission to edit the website.
+
+Changing the status of an issue doesn't stop new occurrences from being collected. A resolved or ignored issue keeps
+its status when it happens again, until you change it.
 
 ## Privacy
 
-Before an error leaves the browser, the tracker:
+- Page URLs are recorded without query strings or hash values.
+- Email addresses, JWTs, and values that look like passwords, secrets, tokens, or API keys are redacted from error messages and stack traces, both in the browser and on the server. This is best-effort, so don't rely on it to remove all sensitive data.
+- Console logs, request bodies, cookies, and local variables are never collected.
+- The [`data-before-send`](/docs/tracker-configuration#data-before-send) handler is called with the type `error`, so you can remove sensitive data from an error or cancel it before it is sent.
 
-- Removes query strings and fragments from URLs, including the page path and URLs in the stack trace
-- Replaces email addresses with `[email]` and JSON Web Tokens with `[token]`
-- Redacts values that follow `password`, `secret`, `token`, `authorization`, or `api_key`
-- Drops tags whose keys look like credentials, such as `password`, `token`, `cookie`, or `email`
+```js
+function beforeSendHandler(type, payload) {
+  if (type === 'error' && payload.url.startsWith('/admin')) {
+    return false;
+  }
+  return payload;
+}
+```
 
-The same rules are applied again on the server. They cover common patterns only, so if your errors can contain other
-sensitive data, remove it in a [`data-before-send`](/docs/tracker-configuration#data-before-send) handler. The
-handler is called with `type` set to `error` for every captured error, and returning a falsy value drops it.
+Error tracking also respects [`data-domains`](/docs/tracker-configuration#data-domains),
+[`data-do-not-track`](/docs/tracker-configuration#data-do-not-track), and
+[excluding your own visits](/docs/exclude-my-own-visits).
 
 ## Limits
 
-To protect your site and your Umami server, the tracker sends at most 20 errors per minute from each page, skips the
-same error object if it is thrown again within a second, and drops reports larger than 48 KB. Messages are limited
-to 2,000 characters and stack traces to 16,000.
+| Limit | Value |
+| --- | --- |
+| Errors captured per page | 20 per minute |
+| Repeats of the same error object | Ignored within 1 second |
+| Error message | 2,000 characters |
+| Stack trace | 16,000 characters |
+| Tags | 20 per error |
+| Error payload size | 48,000 bytes |
+| Errors accepted per website | 120 requests per minute |
 
-The server accepts up to 120 errors per website per minute. Self-hosted installations can change this with
-[`ERRORS_PER_MINUTE`](/docs/environment-variables#errors_per_minute). When the limit is reached the server responds
-with `429`, and the tracker pauses sending for the time the server asks.
+When the per-website limit is reached, the server responds with `429` and the tracker pauses capture for a short time.
+On self-hosted installs you can change the limit with [`ERRORS_PER_MINUTE`](/docs/environment-variables#errors_per_minute).
 
 ## API
 
-Error issues and occurrences are available through the API. See the [Errors endpoints](/docs/api-reference/get-website-errors).
+Error issues and occurrences are also available through the API. See the
+[Errors endpoints](/docs/api-reference/get-website-errors).

@@ -1,0 +1,153 @@
+---
+title: Payment Providers
+description: Connect Stripe, Paddle, Lemon Squeezy, Dodo Payments, Polar, or WooCommerce to Umami Cloud to import payments and refunds as revenue for a website.
+---
+
+Connect a payment provider to a website to see your real revenue in Umami. Umami imports your payments and refunds and
+reports them in the [Revenue](/docs/revenue) report for that website, alongside revenue you track with events.
+
+Payment providers are an [integration](/docs/cloud/integrations) and require a Pro or Business plan. Umami only reads
+data from your provider. It never creates charges, issues refunds, or changes any data.
+
+## Supported providers
+
+| Provider | Credentials | Sandbox |
+| --- | --- | --- |
+| Stripe | API key | Yes |
+| Paddle | API key | Yes |
+| Lemon Squeezy | API key and store ID | Yes |
+| Dodo Payments | API key | Yes |
+| Polar | Access token and organization ID | Yes |
+| WooCommerce | Store URL, consumer key, and consumer secret | No |
+
+## Create read-only credentials
+
+Umami only needs to **read** your payments and refunds, so always create a dedicated key with read-only access. Never
+use a key with full access to your account.
+
+<Callout title="Use a read-only key" variant="warning">
+
+A read-only key limits what Umami can do in your account. The key can't create charges, issue refunds, or change any
+data, even if it were exposed.
+
+</Callout>
+
+### Stripe
+
+In the Stripe Dashboard, go to **Developers** → **API keys** and click **Create restricted key**. Give the key a name,
+such as `Umami`, then set the following permissions to **Read**:
+
+| Resource | Permission |
+| --- | --- |
+| Charges | Read |
+| Customers | Read |
+| Refunds | Read |
+| Connect → Accounts | Read |
+
+Leave every other permission set to **None**, then click **Create key**. The key starts with `rk_live_`, or `rk_test_`
+for a sandbox.
+
+### Paddle
+
+In Paddle Billing, go to **Developer tools** → **Authentication** and create an API key with the following permissions:
+
+- `transaction.read`
+- `adjustment.read`
+- `customer.read`
+
+### Lemon Squeezy
+
+In Lemon Squeezy, go to **Settings** → **API** and create an API key. Use a test mode key for a sandbox. You will also need
+the numeric ID of the store you want to import.
+
+### Dodo Payments
+
+In Dodo Payments, go to **Developer** → **API Keys** and create an API key with **Read** access to **Payments** and
+**Refunds**. Use a test mode key for a sandbox.
+
+### Polar
+
+In Polar, go to **Settings** → **Developers** and create an organization access token with the following scopes:
+
+- `orders:read`
+- `refunds:read`
+- `organizations:read`
+
+Use a sandbox token for a sandbox. You will also need your organization ID.
+
+### WooCommerce
+
+In WordPress, go to **WooCommerce** → **Settings** → **Advanced** → **REST API** and add a key with **Read** permissions for
+a user with the Shop Manager or Administrator role. WooCommerce 9.0 or later is required, and your store must use HTTPS.
+
+## Add a payment provider
+
+Log into Umami and click on the side nav profile button then click **Settings**.
+
+![image](/images/cloud/navbar-settings.png)
+
+Navigate to **Integrations**, click on the **Add integration** button, and choose your payment provider.
+
+![image](/images/cloud/integration-add.png)
+
+Fill out the form:
+
+- **Environment**: `Live`, or `Sandbox` for a test account.
+- **Website**: the website this revenue belongs to. This can't be changed later.
+- **Credentials**: the read-only credentials you created above.
+
+![image](/images/cloud/integration-payment-form.png)
+
+Click **Save**. Umami checks your credentials and starts importing payments. Credentials are encrypted, and only the
+last four characters of the key are shown.
+
+## Keeping data up to date
+
+Umami imports new payments and refunds **every hour**. Each import also checks the previous 7 days, so late refunds and
+delayed captures are picked up. Payments from the last few minutes are left for the next import, so a new payment can take
+up to an hour to appear.
+
+Umami imports payments made after you add the payment provider.
+
+## Link payments to visitors
+
+By default, imported payments count toward your website's revenue, but they aren't linked to a visitor. To attribute
+revenue to the visitor who made the payment, and to their referrer, campaign, and other traffic sources, identify the
+visitor with a [Distinct ID](/docs/distinct-ids) and pass the same ID to your payment provider in the
+`umami_distinct_id` metadata field.
+
+```js
+umami.identify('user-123');
+```
+
+| Provider | Where to set `umami_distinct_id` |
+| --- | --- |
+| Stripe | Metadata on the customer or the charge. |
+| Paddle | Custom data on the transaction or the customer. |
+| Dodo Payments | Metadata on the payment or the customer. |
+| Polar | Metadata on the order or the customer. If neither is set, Polar uses the customer's external ID, set with `external_customer_id` at checkout. |
+| WooCommerce | Order meta with the key `umami_distinct_id` or `_umami_distinct_id`. |
+| Lemon Squeezy | Not supported. Lemon Squeezy doesn't share checkout custom data through its API. |
+
+For example, with Stripe:
+
+```js
+const customer = await stripe.customers.create({
+  email: user.email,
+  metadata: { umami_distinct_id: 'user-123' },
+});
+```
+
+Umami links a payment to the visitor's most recent visit in the 90 days before the payment.
+
+## Edit or delete a payment provider
+
+Navigate to **Integrations** and click on the **Edit** button or **Disconnect** button next to your payment provider.
+When editing, leave the credential fields blank to keep the saved credentials. To replace them, fill in every field.
+
+<Callout title="Note">
+
+Disconnecting a payment provider in Umami doesn't change anything in your provider account. To revoke access, delete
+the API key in your provider's dashboard.
+
+</Callout>

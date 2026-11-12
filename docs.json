@@ -60,12 +60,7 @@
     ]
   },
   "contextual": {
-    "options": [
-      "copy",
-      "view",
-      "chatgpt",
-      "claude"
-    ]
+    "options": ["copy", "view", "chatgpt", "claude"]
   },
   "seo": {
     "indexing": "all",
@@ -1828,6 +1823,27 @@
                 "page": "cloud/faq",
                 "hidden": true,
                 "title": "FAQ"
+              }
+            ]
+          },
+          {
+            "group": "Integrations",
+            "pages": [
+              {
+                "page": "cloud/integrations",
+                "title": "Integrations"
+              },
+              {
+                "page": "cloud/payment-providers",
+                "title": "Payment Providers"
+              },
+              {
+                "page": "cloud/google-search-console",
+                "title": "Google Search Console"
+              },
+              {
+                "page": "cloud/google-ads",
+                "title": "Google Ads"
               }
             ]
           },
