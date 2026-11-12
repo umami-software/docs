@@ -26,6 +26,11 @@ trending in the right direction.
 
 ![image](/images/docs/compare-date.png)
 
+If the selected range is still in progress, such as **Today** or **This month**, the stats are compared against the
+same elapsed part of the earlier period, rounded down to whole hours. For example, at 2:30 PM, today's stats are
+compared against yesterday from midnight to 2:00 PM rather than the whole day. Available since v3.5.0. Earlier
+versions compared against the full earlier period.
+
 ### Step 2: Run insight
 
 Compare mode will show website stats along with performance changes between the two periods.

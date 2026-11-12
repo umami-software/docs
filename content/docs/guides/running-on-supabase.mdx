@@ -16,5 +16,6 @@ description: Use a Supabase PostgreSQL database for Umami, with a pooled connect
    DIRECT_DATABASE_URL=postgresql://[db-user].[project-ref]:[db-password]@aws-0-[aws-region].pooler.supabase.com:5432/[db-name]
    ```
 
-4. You should now be able to build and start Umami (`pnpm build` followed by `pnpm start`). The first build creates the required database tables.
-5. Follow the **Quickstart** guide starting from the [Login](/docs/login) step and be sure to change the default password.
+4. Add the required `APP_SECRET` to your `.env` file. Generate the value with `openssl rand -hex 32`. See [APP_SECRET](/docs/environment-variables#app_secret).
+5. You should now be able to build and start Umami (`pnpm build` followed by `pnpm start`). The first build creates the required database tables.
+6. Follow the **Quickstart** guide starting from the [Login](/docs/login) step and be sure to change the default password.

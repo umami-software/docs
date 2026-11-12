@@ -1,6 +1,6 @@
 ---
 title: Tracker functions
-description: Use the umami.track() and umami.identify() tracker functions to send pageviews, events, event data, and session data from your own code.
+description: Use the umami.track(), umami.identify(), and umami.captureException() tracker functions to send pageviews, events, event data, session data, and handled errors from your own code.
 ---
 
 The Umami tracker exposes functions that you can call on your website if you want
@@ -37,6 +37,9 @@ umami.identify(unique_id: string, data: object);
 
 // Save session data (an `id` property, if present, is used as the Distinct ID)
 umami.identify(data: object);
+
+// Report a handled error (requires data-errors="true")
+umami.captureException(error: unknown, options?: object);
 ```
 
 ## Pageviews
@@ -165,3 +168,38 @@ If the object includes an `id` property, its value is also used as the Distinct 
 ```js
 umami.identify({ id: 'unique_id', name: 'Bob' });
 ```
+
+## Errors
+
+<Badge>v3.5.0</Badge>
+
+Report an error that your code caught and handled. Uncaught exceptions and unhandled promise rejections are
+captured automatically, so you only need this for errors that never reach the browser. It requires
+[`data-errors="true"`](/docs/tracker-configuration#data-errors) and does nothing without it.
+
+```js
+try {
+  await saveSettings();
+} catch (error) {
+  umami.captureException(error);
+}
+```
+
+You can pass options as a second argument:
+
+| Option | Description |
+| --- | --- |
+| `release` | Overrides [`data-release`](/docs/tracker-configuration#data-release) for this error. |
+| `environment` | Overrides [`data-environment`](/docs/tracker-configuration#data-environment) for this error. |
+| `tags` | An object of string key/value pairs, up to 20. Keys that look like secrets, such as `password`, `token`, or `email`, are dropped. |
+| `fingerprint` | An array of up to 5 strings. Errors with the same fingerprint are grouped into the same issue instead of being grouped by stack trace. |
+
+```js
+umami.captureException(error, {
+  tags: { feature: 'checkout' },
+  fingerprint: ['checkout-payment-failed'],
+});
+```
+
+`captureException()` never throws and returns a promise. See [Error tracking](/docs/error-tracking) for how errors
+are grouped and what is collected.

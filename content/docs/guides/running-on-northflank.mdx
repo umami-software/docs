@@ -28,7 +28,8 @@ The one-click deployment is the easiest way to get started, but you can also dep
 3. Create a **Deployment service** using the Docker image `docker.umami.is/umami-software/umami:latest`.
 4. Expose port `3000` publicly.
 5. Add the `DATABASE_URL` environment variable and link it to the connection string from the PostgreSQL addon.
-6. Deploy the service.
+6. Add the required `APP_SECRET` environment variable. Generate the value with `openssl rand -hex 32`. See [APP_SECRET](/docs/environment-variables#app_secret).
+7. Deploy the service.
 
 Once deployed, open the public URL of your service and log in with username **admin** and password **umami**. Change the default password immediately.
 

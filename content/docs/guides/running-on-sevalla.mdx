@@ -35,4 +35,5 @@ If you prefer more control, you can manually deploy from your own GitHub repo or
 3. Once created, scroll to **Connected Applications**, click **Add Connection**, select your Umami app, and enable **"Add environment variables"**.
 4. Set the variable name as `DATABASE_URL` (it may be prefilled as `DB_URL`; change it to `DATABASE_URL`).
 5. Click **Add connection**. This links your app and DB with the correct environment variable.
-6. Go back to your application and click **Deploy**. Once the build is complete, visit your app's URL and log in using the [default credentials](/docs/login).
+6. In your application, add the required `APP_SECRET` environment variable. Generate the value with `openssl rand -hex 32`. See [APP_SECRET](/docs/environment-variables#app_secret).
+7. Go back to your application and click **Deploy**. Once the build is complete, visit your app's URL and log in using the [default credentials](/docs/login).

@@ -245,6 +245,10 @@
                 "title": "Two-factor authentication"
               },
               {
+                "page": "preferences",
+                "title": "Preferences"
+              },
+              {
                 "page": "bypass-ad-blockers",
                 "title": "Bypass ad blockers"
               },
@@ -336,6 +340,10 @@
               {
                 "page": "performance",
                 "title": "Performance"
+              },
+              {
+                "page": "error-tracking",
+                "title": "Error tracking"
               },
               {
                 "page": "compare",
@@ -893,6 +901,51 @@
                     "page": "api-reference/post-dashboard",
                     "title": "Save my dashboard",
                     "method": "POST"
+                  }
+                ]
+              },
+              {
+                "group": "Errors",
+                "pages": [
+                  {
+                    "page": "api-reference/get-website-errors",
+                    "title": "List error issues",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-stats",
+                    "title": "Get error stats",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-values",
+                    "title": "Get error filter values",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-issue",
+                    "title": "Get an error issue",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/update-website-error-issue",
+                    "title": "Update an error issue status",
+                    "method": "PATCH"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-events",
+                    "title": "List error occurrences",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-event",
+                    "title": "Get an error occurrence",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-error-issue-values",
+                    "title": "Get error issue filter values",
+                    "method": "GET"
                   }
                 ]
               },

@@ -15,7 +15,7 @@ Runtime variables are recognized when Umami is running. You can set your environ
 
 <Badge>v1.0.0</Badge>
 
-A random string used to secure authentication tokens. Each installation should have a unique value. You can generate one with:
+**Required.** A random string used to secure authentication tokens. Each installation should have a unique value. You can generate one with:
 
 ```shell
 openssl rand -hex 32
@@ -25,12 +25,24 @@ openssl rand -hex 32
 APP_SECRET = "random string"
 ```
 
+<Callout title="Required since v3.5.0" variant="warning">
+
+Earlier versions fell back to `DATABASE_URL` when `APP_SECRET` was not set. That fallback has been removed. An
+empty value or the placeholder `replace-me-with-a-random-string` is now rejected.
+
+The secret signs login tokens and is part of how anonymous session IDs are generated. If you set a new value,
+everyone is signed out. Visitors already seen in the current salt period are also counted as new sessions. To
+upgrade an installation that never set `APP_SECRET` without either effect, set `APP_SECRET` to the exact value of
+your `DATABASE_URL`. Umami then derives the same secret it used before.
+
+</Callout>
+
 ### CLIENT_IP_HEADER
 
 <Badge>v1.24.0</Badge>
 
 HTTP header to check for the client's IP address. This is useful when you're
-behind a proxy that uses non-standard headers.
+behind a proxy that uses non-standard headers. To pick the correct address from a header that lists several proxies, such as `X-Forwarded-For`, also set [`TRUSTED_PROXIES`](#trusted_proxies).
 
 ```
 CLIENT_IP_HEADER = "header name"
@@ -116,6 +128,19 @@ Disables the check for new versions of Umami.
 DISABLE_UPDATES = 1
 ```
 
+### ENABLE_CLIENT_SALT
+
+<Badge>v3.5.0</Badge>
+
+Accepts a session salt sent by the tracker with [`data-salt`](/docs/tracker-configuration#data-salt) or
+[`data-salt-rotation`](/docs/tracker-configuration#data-salt-rotation). The client salt is mixed into the server salt
+set by [`SALT_ROTATION`](#salt_rotation) rather than replacing it, so it can only split sessions further. Without this
+variable, client salts are ignored.
+
+```
+ENABLE_CLIENT_SALT = 1
+```
+
 ### ENABLE_TEST_CONSOLE
 
 <Badge>v2.0.0</Badge>
@@ -124,6 +149,17 @@ Enables the internal test page, `{host}/console`. Admin access is required. User
 
 ```
 ENABLE_TEST_CONSOLE = 1
+```
+
+### ERRORS_PER_MINUTE
+
+<Badge>v3.5.0</Badge>
+
+The maximum number of [browser errors](/docs/error-tracking) accepted per website per minute. Errors above the limit
+are rejected with a `429` response, and the tracker pauses sending. The default is `120`, and the maximum is `100000`.
+
+```
+ERRORS_PER_MINUTE = 120
 ```
 
 ### FAVICON_URL
@@ -160,7 +196,7 @@ GEO_DATABASE_URL = "https://example.com/GeoLite2-City.mmdb"
 <Badge>v1.0.0</Badge>
 
 If you are running on an environment which requires you to bind to a specific hostname or port, such as Heroku, you can add
-these variables and start your app with `pnpm run start-env` instead of `pnpm start`.
+these variables and start your app with `pnpm run start:env` instead of `pnpm start`.
 
 ```
 HOSTNAME = "my.hostname.com"
@@ -231,11 +267,22 @@ REMOVE_TRAILING_SLASH = 1
 
 <Badge>v3.1.0</Badge>
 
-Controls how often the anonymous session salt rotates for generated session identifiers. The default is `month`.
+Controls how often the anonymous session salt rotates for generated session identifiers. When the salt rotates, a
+returning visitor gets a new session ID. The default is `month`.
+
+| Value | Behavior |
+| --- | --- |
+| `day` or `daily` | Rotates at the start of each day (UTC). |
+| `week` or `weekly` | Rotates at the start of each week (UTC). |
+| `month` or `monthly` | Rotates at the start of each month (UTC). This is the default. |
+| Any other value | Uses a fixed salt derived from that value, so the salt never rotates. Available since v3.5.0. |
 
 ```
 SALT_ROTATION = "month"
 ```
+
+The `daily`, `weekly`, and `monthly` aliases and fixed salts were added in v3.5.0. To let the tracker add its own
+salt on top of this one, see [`ENABLE_CLIENT_SALT`](#enable_client_salt).
 
 ### SKIP_LOCATION_HEADERS
 
@@ -260,6 +307,25 @@ The `.js` extension is not required. The value can also be any path you choose, 
 ```
 TRACKER_SCRIPT_NAME = "custom-script-name.js"
 ```
+
+### TRUSTED_PROXIES
+
+<Badge>v3.5.0</Badge>
+
+A comma-separated list of IP addresses, CIDR ranges, or presets that belong to the proxies and load balancers in front
+of Umami. Umami uses it to find the real client IP address when a request passes through several proxies.
+
+The presets are `loopback` (`127.0.0.0/8`, `::1/128`), `linklocal` (`169.254.0.0/16`, `fe80::/10`), and `private`
+(`10.0.0.0/8`, `172.16.0.0/12`, `192.168.0.0/16`, `fc00::/7`). Invalid entries are ignored.
+
+```
+TRUSTED_PROXIES = "private, 203.0.113.10"
+```
+
+Without `TRUSTED_PROXIES`, Umami uses the leftmost address in `X-Forwarded-For` or `Forwarded`. With it, Umami reads
+the chain from right to left, skips trusted proxies, and uses the first address that is not trusted. A client can
+write anything into the left side of the chain, so this is the more reliable choice behind multiple proxies. A
+header that holds a trusted proxy's own address is skipped in favor of the next one.
 
 ### TWO_FACTOR_ENCRYPTION_KEY
 

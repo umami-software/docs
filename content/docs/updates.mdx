@@ -54,6 +54,23 @@ docker compose pull
 docker compose up --force-recreate -d
 ```
 
+## Upgrading to v3.5.0
+
+Check the following before you upgrade to v3.5.0:
+
+- **Set `APP_SECRET`.** Umami no longer falls back to `DATABASE_URL` when `APP_SECRET` is missing, and will not
+  start without it. The bundled Docker Compose file also refuses to start without it. If you never set it, see
+  [APP_SECRET](/docs/environment-variables#app_secret) for how to keep existing logins and sessions working.
+- **Use Node.js 20.19 or newer.** Node.js 22 LTS is recommended. This only applies when installing from source.
+  The Docker image includes its own Node.js.
+- **Password changes have moved** from **Settings > Profile** to **Settings > Security**.
+- **The default password must be replaced.** If the `admin` account still uses the default password, you are asked
+  to change it the next time you log in.
+- **The public `/api/config` endpoint has been removed.**
+
+This release adds the `27_add_error_tracking` PostgreSQL migration for [error tracking](/docs/error-tracking).
+It runs automatically during `pnpm build` and when the Docker container starts.
+
 ## Refresh database statistics after upgrading
 
 Major upgrades (such as moving to v3) run schema migrations that can leave PostgreSQL's query planner with stale statistics, making dashboard queries slower than expected on large instances. Run `ANALYZE` to refresh them:

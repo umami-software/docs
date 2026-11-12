@@ -47,7 +47,10 @@ If you have a Forge account and a connected server, you can easily set up an Uma
 
    ```dotenv
    DATABASE_URL=postgresql://username:mypassword@localhost:5432/mydb
+   APP_SECRET=random-string
    ```
+
+   Generate the value with `openssl rand -hex 32`. See [APP_SECRET](/docs/environment-variables#app_secret).
 
 7. Perform the initial project setup, via SSH:
 

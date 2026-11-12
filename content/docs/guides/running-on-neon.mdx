@@ -20,5 +20,6 @@ description: Use a Neon serverless PostgreSQL database for Umami, with a pooled 
    ```text
    DIRECT_DATABASE_URL=postgresql://user:passwd@endpoint.region.aws.neon.tech/neondb
    ```
-6. Build Umami with `pnpm build`. The first build checks the database connection and creates the required tables.
-7. Follow the **Quickstart** guide starting from the [Login](/docs/login) step and be sure to change the default password.
+6. Add the required `APP_SECRET` to your `.env` file. Generate the value with `openssl rand -hex 32`. See [APP_SECRET](/docs/environment-variables#app_secret).
+7. Build Umami with `pnpm build`. The first build checks the database connection and creates the required tables.
+8. Follow the **Quickstart** guide starting from the [Login](/docs/login) step and be sure to change the default password.

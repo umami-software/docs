@@ -13,14 +13,14 @@ You can also check out the **Managed databases** section under [Hosting](/docs/g
 
 ## Setup
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fumami-software%2Fumami&env=DATABASE_URL)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fumami-software%2Fumami&env=DATABASE_URL,APP_SECRET)
 
 _Automate steps 1-5 using the button above_
 
 1. Fork the [https://github.com/umami-software/umami](https://github.com/umami-software/umami) project to your GitHub account.
 2. Create an account on [Vercel](https://vercel.com/).
 3. From the dashboard page click **Import Project** then specify the URL to your fork of the project on GitHub.
-4. Add the required environment variable `DATABASE_URL` to your Vercel project. This value is defined in the
+4. Add the required environment variables `DATABASE_URL` and `APP_SECRET` to your Vercel project. These values are defined in the
    **Configure Umami** step from [Install](/docs/install). You can also add a PostgreSQL database through a Vercel Marketplace integration at this point.
 
    - If your database provider gives you a pooled connection string, use it as `DATABASE_URL` for Umami.

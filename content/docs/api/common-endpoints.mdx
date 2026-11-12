@@ -57,6 +57,22 @@ events, and so on. Pass the dimension with `type` (`path`, `referrer`,
 | --- | --- | --- |
 | Live countries, URLs, referrers, events, and totals (last 30 minutes) | `GET /realtime/{websiteId}` | [Get real-time website activity](/docs/api-reference/get-realtime) |
 
+## Date ranges
+
+Stats endpoints take an explicit range with `startAt` and `endAt` (millisecond timestamps). Since v3.5.0, most of
+them also accept a relative `period` instead:
+
+| `period` | Range |
+| --- | --- |
+| `today` | From the start to the end of today, in the requested `timezone` |
+| `24h` | The last 24 hours |
+| `7d` | The last 7 days |
+| `30d` | The last 30 days |
+
+The same values the dashboard uses, such as `90day`, `6month`, and `12month`, are also accepted. Each endpoint's
+reference page lists the values it supports. `period` cannot be combined with `startAt` and `endAt` in the same
+request.
+
 ---
 
 ## Working example
@@ -104,6 +120,8 @@ timestamps bounding the range — the example values below span a 24-hour window
 curl "http://localhost:3000/api/websites/b8d3a1f0-1c2d-4e5f-8a9b-0c1d2e3f4a5b/stats?startAt=1757376000000&endAt=1757462400000" \
   -H "Authorization: Bearer <token>"
 ```
+
+On v3.5.0 or later, you can pass `period=24h` instead of `startAt` and `endAt` to get the last 24 hours.
 
 ```json
 {
