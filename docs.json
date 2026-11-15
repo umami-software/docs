@@ -602,6 +602,10 @@
                 "title": "Running on Sevalla"
               },
               {
+                "page": "guides/running-on-simafri",
+                "title": "Running on Simafri"
+              },
+              {
                 "page": "guides/running-on-supabase",
                 "title": "Running on Supabase"
               },
