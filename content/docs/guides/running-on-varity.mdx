@@ -1,0 +1,30 @@
+---
+title: Running on Varity
+description: Deploy Umami on Varity with an attached PostgreSQL database using the one-click template.
+---
+
+[Varity](https://varity.so) is a cloud for running applications, AI agents, and open-source apps without managing servers. Each app runs on its own HTTPS address, and the monthly maximum is shown before you deploy, with no request, ingress, or egress fees.
+
+The Varity Umami template deploys Umami together with an attached PostgreSQL database, so page views are stored in a database that belongs to your deployment.
+
+## Set up website and database
+
+### Varity template (Recommended)
+
+[Deploy Umami on Varity](https://developer.store.varity.so/dashboard/deploy/?workload=application&template=umami&utm_source=umami-docs&utm_medium=directory&utm_campaign=templates)
+
+1. Open the link above and sign in to the Varity developer portal, or create an account.
+2. Review the parts the template creates (the Umami app and a PostgreSQL database) and the monthly maximum, then deploy.
+3. When the deployment is running, open its HTTPS address from the deployment page.
+
+Log in with username **admin** and password **umami**, then change the default password immediately.
+
+You can also start from the template page at [varity.so/templates/umami](https://varity.so/templates/umami/), or pick **Umami** under **Templates** when you create a new deployment in the portal.
+
+<Callout title="Notes">
+
+- Data is stored in the attached PostgreSQL database and persists across restarts and redeploys.
+- Billing is by the running minute and never goes above the monthly maximum shown before you deploy.
+- Read more about [adding a website](/docs/add-a-website) and [collecting data](/docs/collect-data).
+
+</Callout>
