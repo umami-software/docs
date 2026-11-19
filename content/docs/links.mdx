@@ -47,6 +47,20 @@ After saving, Umami generates a tracking link (e.g., `https://your-umami-instanc
 
 The link overview displays metrics including total clicks, unique visitors, referrer sources, and geographic data.
 
+## Custom domains
+
+Links are served from `/q` on your Umami address by default. To share them from another domain, forward that domain to the Umami `/q` route with your reverse proxy, then set [`LINKS_URL`](/docs/environment-variables#links_url) to the new base URL.
+
+To share links from more than one domain, list every base URL in `LINKS_URL`, separated by commas:
+
+```
+LINKS_URL = "https://go.example.com, https://example.org/go"
+```
+
+When more than one base URL is set, the link form shows a **Domain** field before the slug. The link table, the link page and the copied link all use the domain chosen for that link. Links that have never had a domain chosen use the first base URL, so list your current one first when you add more. If you remove a base URL from the list, links that used it fall back to the first one.
+
+Every slug works on all of your domains. Slugs are unique across the whole installation, not per domain.
+
 ## Edit or delete a link
 
 From the **Links** screen, click on the **Edit** button to update a link or click on the **Delete** button to delete a link.

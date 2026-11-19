@@ -230,6 +230,22 @@ You can provide a comma-delimited list of IP addresses and CIDR ranges to exclud
 IGNORE_IP = "192.168.0.1, 10.0.0.0/24, 2001:db8::/32"
 ```
 
+### LINKS_URL
+
+<Badge>v3.0.0</Badge>
+
+The base URL used to build short link URLs in the dashboard. Defaults to `/q` on the address Umami is served from, for example `https://umami.example.com/q`. Set it when your links are served from another domain that your reverse proxy forwards to the Umami `/q` route.
+
+```
+LINKS_URL = "https://go.example.com"
+```
+
+You can provide a comma-separated list of base URLs to share links from several domains. The first one is the default, and a **Domain** field lets you choose another one for each link. See [Links](/docs/links#custom-domains).
+
+```
+LINKS_URL = "https://go.example.com, https://example.org/go"
+```
+
 ### LOG_QUERY
 
 <Badge>v2.0.0</Badge>
