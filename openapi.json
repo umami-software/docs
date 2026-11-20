@@ -6901,6 +6901,23 @@
               }
             },
             "description": "Unauthorized."
+          },
+          "403": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "forbidden",
+                    "message": "Forbidden.",
+                    "status": 403
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Forbidden."
           }
         },
         "security": [
@@ -29281,6 +29298,773 @@
         "x-umami-source": "src/app/api/websites/[websiteId]/funnels/[funnelId]/contract.ts"
       }
     },
+    "/api/websites/{websiteId}/funnels/{funnelId}/breakdown": {
+      "get": {
+        "description": "Returns visitor counts for each step of a saved funnel split by a session attribute (browser, os, device, or country), for the most common values.",
+        "operationId": "getWebsiteSavedFunnelBreakdown",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "funnelId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL path.",
+            "in": "query",
+            "name": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by referring URL.",
+            "in": "query",
+            "name": "referrer",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page title.",
+            "in": "query",
+            "name": "title",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL query string.",
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Operating system used by the visitor.",
+            "in": "query",
+            "name": "os",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Device category used by the visitor.",
+            "in": "query",
+            "name": "device",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Country code of the visitor.",
+            "in": "query",
+            "name": "country",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Region or subdivision of the visitor.",
+            "in": "query",
+            "name": "region",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "City of the visitor.",
+            "in": "query",
+            "name": "city",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Tag attached to the tracked activity.",
+            "in": "query",
+            "name": "tag",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Hostname on which the activity occurred.",
+            "in": "query",
+            "name": "hostname",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Custom identifier assigned to the visitor.",
+            "in": "query",
+            "name": "distinctId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Preferred language reported by the visitor browser.",
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by custom event name.",
+            "in": "query",
+            "name": "event",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign source.",
+            "in": "query",
+            "name": "utmSource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign medium.",
+            "in": "query",
+            "name": "utmMedium",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign name.",
+            "in": "query",
+            "name": "utmCampaign",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign content.",
+            "in": "query",
+            "name": "utmContent",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign search term.",
+            "in": "query",
+            "name": "utmTerm",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved segment used to filter results.",
+            "in": "query",
+            "name": "segment",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved cohort used to filter visitors.",
+            "in": "query",
+            "name": "cohort",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Event type: 1 for a pageview or 2 for a custom event.",
+            "in": "query",
+            "name": "eventType",
+            "schema": {
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Set a non-empty value to exclude visits with only one pageview.",
+            "in": "query",
+            "name": "excludeBounce",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether records must match all filters or any filter.",
+            "in": "query",
+            "name": "match",
+            "schema": {
+              "enum": [
+                "all",
+                "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "IANA time zone used to interpret dates and group results, for example America/New_York.",
+            "in": "query",
+            "name": "timezone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Time interval used to group results: minute, hour, day, month, or year.",
+            "in": "query",
+            "name": "unit",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "field",
+            "required": true,
+            "schema": {
+              "enum": [
+                "device",
+                "browser",
+                "os",
+                "country"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "name": {
+                        "description": "Display name of the resource.",
+                        "type": "string"
+                      },
+                      "visitors": {
+                        "description": "Unique visitor counts for the selected period.",
+                        "items": {
+                          "type": "number"
+                        },
+                        "type": "array"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "visitors"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "The operation completed successfully."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "bad-request",
+                    "message": "Bad request.",
+                    "status": 400
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Bad request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "unauthorized",
+                    "message": "Unauthorized.",
+                    "status": 401
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unauthorized."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "not-found",
+                    "message": "Not found.",
+                    "status": 404
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "shareContext": [],
+            "shareToken": []
+          }
+        ],
+        "summary": "Get website saved funnel breakdown",
+        "tags": [
+          "Websites"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/funnels/[funnelId]/breakdown/contract.ts"
+      }
+    },
+    "/api/websites/{websiteId}/funnels/{funnelId}/chart": {
+      "get": {
+        "description": "Returns, for each time bucket, how many sessions entered a saved funnel and how many of them reached its last step, grouped by when they entered.",
+        "operationId": "getWebsiteSavedFunnelChart",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "funnelId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL path.",
+            "in": "query",
+            "name": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by referring URL.",
+            "in": "query",
+            "name": "referrer",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page title.",
+            "in": "query",
+            "name": "title",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL query string.",
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Operating system used by the visitor.",
+            "in": "query",
+            "name": "os",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Device category used by the visitor.",
+            "in": "query",
+            "name": "device",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Country code of the visitor.",
+            "in": "query",
+            "name": "country",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Region or subdivision of the visitor.",
+            "in": "query",
+            "name": "region",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "City of the visitor.",
+            "in": "query",
+            "name": "city",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Tag attached to the tracked activity.",
+            "in": "query",
+            "name": "tag",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Hostname on which the activity occurred.",
+            "in": "query",
+            "name": "hostname",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Custom identifier assigned to the visitor.",
+            "in": "query",
+            "name": "distinctId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Preferred language reported by the visitor browser.",
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by custom event name.",
+            "in": "query",
+            "name": "event",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign source.",
+            "in": "query",
+            "name": "utmSource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign medium.",
+            "in": "query",
+            "name": "utmMedium",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign name.",
+            "in": "query",
+            "name": "utmCampaign",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign content.",
+            "in": "query",
+            "name": "utmContent",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign search term.",
+            "in": "query",
+            "name": "utmTerm",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved segment used to filter results.",
+            "in": "query",
+            "name": "segment",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved cohort used to filter visitors.",
+            "in": "query",
+            "name": "cohort",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Event type: 1 for a pageview or 2 for a custom event.",
+            "in": "query",
+            "name": "eventType",
+            "schema": {
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Set a non-empty value to exclude visits with only one pageview.",
+            "in": "query",
+            "name": "excludeBounce",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether records must match all filters or any filter.",
+            "in": "query",
+            "name": "match",
+            "schema": {
+              "enum": [
+                "all",
+                "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "IANA time zone used to interpret dates and group results, for example America/New_York.",
+            "in": "query",
+            "name": "timezone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Time interval used to group results: minute, hour, day, month, or year.",
+            "in": "query",
+            "name": "unit",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "converted": {
+                        "type": "number"
+                      },
+                      "entered": {
+                        "type": "number"
+                      },
+                      "t": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "t",
+                      "entered",
+                      "converted"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "The operation completed successfully."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "bad-request",
+                    "message": "Bad request.",
+                    "status": 400
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Bad request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "unauthorized",
+                    "message": "Unauthorized.",
+                    "status": 401
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unauthorized."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "not-found",
+                    "message": "Not found.",
+                    "status": 404
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "shareContext": [],
+            "shareToken": []
+          }
+        ],
+        "summary": "Get website saved funnel chart",
+        "tags": [
+          "Websites"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/funnels/[funnelId]/chart/contract.ts"
+      }
+    },
     "/api/websites/{websiteId}/funnels/{funnelId}/stats": {
       "get": {
         "description": "Returns visitor counts and drop-off for each step of a saved funnel over the selected date range, with optional filters.",
@@ -29694,6 +30478,384 @@
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
         "x-umami-source": "src/app/api/websites/[websiteId]/funnels/[funnelId]/stats/contract.ts"
+      }
+    },
+    "/api/websites/{websiteId}/funnels/{funnelId}/times": {
+      "get": {
+        "description": "Returns the median time in seconds between consecutive steps of a saved funnel, and from the first step to the last, for sessions that reached each step.",
+        "operationId": "getWebsiteSavedFunnelTimes",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "funnelId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL path.",
+            "in": "query",
+            "name": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by referring URL.",
+            "in": "query",
+            "name": "referrer",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page title.",
+            "in": "query",
+            "name": "title",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL query string.",
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Operating system used by the visitor.",
+            "in": "query",
+            "name": "os",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Device category used by the visitor.",
+            "in": "query",
+            "name": "device",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Country code of the visitor.",
+            "in": "query",
+            "name": "country",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Region or subdivision of the visitor.",
+            "in": "query",
+            "name": "region",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "City of the visitor.",
+            "in": "query",
+            "name": "city",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Tag attached to the tracked activity.",
+            "in": "query",
+            "name": "tag",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Hostname on which the activity occurred.",
+            "in": "query",
+            "name": "hostname",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Custom identifier assigned to the visitor.",
+            "in": "query",
+            "name": "distinctId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Preferred language reported by the visitor browser.",
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by custom event name.",
+            "in": "query",
+            "name": "event",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign source.",
+            "in": "query",
+            "name": "utmSource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign medium.",
+            "in": "query",
+            "name": "utmMedium",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign name.",
+            "in": "query",
+            "name": "utmCampaign",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign content.",
+            "in": "query",
+            "name": "utmContent",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign search term.",
+            "in": "query",
+            "name": "utmTerm",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved segment used to filter results.",
+            "in": "query",
+            "name": "segment",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved cohort used to filter visitors.",
+            "in": "query",
+            "name": "cohort",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Event type: 1 for a pageview or 2 for a custom event.",
+            "in": "query",
+            "name": "eventType",
+            "schema": {
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Set a non-empty value to exclude visits with only one pageview.",
+            "in": "query",
+            "name": "excludeBounce",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether records must match all filters or any filter.",
+            "in": "query",
+            "name": "match",
+            "schema": {
+              "enum": [
+                "all",
+                "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "IANA time zone used to interpret dates and group results, for example America/New_York.",
+            "in": "query",
+            "name": "timezone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Time interval used to group results: minute, hour, day, month, or year.",
+            "in": "query",
+            "name": "unit",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "steps": {
+                      "items": {
+                        "type": [
+                          "number",
+                          "null"
+                        ]
+                      },
+                      "type": "array"
+                    },
+                    "total": {
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "total",
+                    "steps"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The operation completed successfully."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "bad-request",
+                    "message": "Bad request.",
+                    "status": 400
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Bad request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "unauthorized",
+                    "message": "Unauthorized.",
+                    "status": 401
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unauthorized."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "not-found",
+                    "message": "Not found.",
+                    "status": 404
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "shareContext": [],
+            "shareToken": []
+          }
+        ],
+        "summary": "Get website saved funnel times",
+        "tags": [
+          "Websites"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/funnels/[funnelId]/times/contract.ts"
       }
     },
     "/api/websites/{websiteId}/funnels/stats": {
@@ -30954,6 +32116,774 @@
         "x-umami-source": "src/app/api/websites/[websiteId]/goals/[goalId]/contract.ts"
       }
     },
+    "/api/websites/{websiteId}/goals/{goalId}/breakdown": {
+      "get": {
+        "description": "Returns visitors and converted visitors for a saved goal split by a session attribute (browser, os, device, or country), for the most common values.",
+        "operationId": "getWebsiteSavedGoalBreakdown",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "goalId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL path.",
+            "in": "query",
+            "name": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by referring URL.",
+            "in": "query",
+            "name": "referrer",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page title.",
+            "in": "query",
+            "name": "title",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL query string.",
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Operating system used by the visitor.",
+            "in": "query",
+            "name": "os",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Device category used by the visitor.",
+            "in": "query",
+            "name": "device",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Country code of the visitor.",
+            "in": "query",
+            "name": "country",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Region or subdivision of the visitor.",
+            "in": "query",
+            "name": "region",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "City of the visitor.",
+            "in": "query",
+            "name": "city",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Tag attached to the tracked activity.",
+            "in": "query",
+            "name": "tag",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Hostname on which the activity occurred.",
+            "in": "query",
+            "name": "hostname",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Custom identifier assigned to the visitor.",
+            "in": "query",
+            "name": "distinctId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Preferred language reported by the visitor browser.",
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by custom event name.",
+            "in": "query",
+            "name": "event",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign source.",
+            "in": "query",
+            "name": "utmSource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign medium.",
+            "in": "query",
+            "name": "utmMedium",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign name.",
+            "in": "query",
+            "name": "utmCampaign",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign content.",
+            "in": "query",
+            "name": "utmContent",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign search term.",
+            "in": "query",
+            "name": "utmTerm",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved segment used to filter results.",
+            "in": "query",
+            "name": "segment",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved cohort used to filter visitors.",
+            "in": "query",
+            "name": "cohort",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Event type: 1 for a pageview or 2 for a custom event.",
+            "in": "query",
+            "name": "eventType",
+            "schema": {
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Set a non-empty value to exclude visits with only one pageview.",
+            "in": "query",
+            "name": "excludeBounce",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether records must match all filters or any filter.",
+            "in": "query",
+            "name": "match",
+            "schema": {
+              "enum": [
+                "all",
+                "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "IANA time zone used to interpret dates and group results, for example America/New_York.",
+            "in": "query",
+            "name": "timezone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Time interval used to group results: minute, hour, day, month, or year.",
+            "in": "query",
+            "name": "unit",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "in": "query",
+            "name": "field",
+            "required": true,
+            "schema": {
+              "enum": [
+                "device",
+                "browser",
+                "os",
+                "country"
+              ],
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "converted": {
+                        "type": "number"
+                      },
+                      "name": {
+                        "description": "Display name of the resource.",
+                        "type": "string"
+                      },
+                      "visitors": {
+                        "description": "Unique visitor counts for the selected period.",
+                        "type": "number"
+                      }
+                    },
+                    "required": [
+                      "name",
+                      "visitors",
+                      "converted"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "The operation completed successfully."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "bad-request",
+                    "message": "Bad request.",
+                    "status": 400
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Bad request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "unauthorized",
+                    "message": "Unauthorized.",
+                    "status": 401
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unauthorized."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "not-found",
+                    "message": "Not found.",
+                    "status": 404
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "shareContext": [],
+            "shareToken": []
+          }
+        ],
+        "summary": "Get website saved goal breakdown",
+        "tags": [
+          "Websites"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/goals/[goalId]/breakdown/contract.ts"
+      }
+    },
+    "/api/websites/{websiteId}/goals/{goalId}/chart": {
+      "get": {
+        "description": "Returns, for each time bucket, how many sessions started and how many of them reached a saved goal, grouped by their first event.",
+        "operationId": "getWebsiteSavedGoalChart",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "goalId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL path.",
+            "in": "query",
+            "name": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by referring URL.",
+            "in": "query",
+            "name": "referrer",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page title.",
+            "in": "query",
+            "name": "title",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL query string.",
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Operating system used by the visitor.",
+            "in": "query",
+            "name": "os",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Device category used by the visitor.",
+            "in": "query",
+            "name": "device",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Country code of the visitor.",
+            "in": "query",
+            "name": "country",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Region or subdivision of the visitor.",
+            "in": "query",
+            "name": "region",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "City of the visitor.",
+            "in": "query",
+            "name": "city",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Tag attached to the tracked activity.",
+            "in": "query",
+            "name": "tag",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Hostname on which the activity occurred.",
+            "in": "query",
+            "name": "hostname",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Custom identifier assigned to the visitor.",
+            "in": "query",
+            "name": "distinctId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Preferred language reported by the visitor browser.",
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by custom event name.",
+            "in": "query",
+            "name": "event",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign source.",
+            "in": "query",
+            "name": "utmSource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign medium.",
+            "in": "query",
+            "name": "utmMedium",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign name.",
+            "in": "query",
+            "name": "utmCampaign",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign content.",
+            "in": "query",
+            "name": "utmContent",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign search term.",
+            "in": "query",
+            "name": "utmTerm",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved segment used to filter results.",
+            "in": "query",
+            "name": "segment",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved cohort used to filter visitors.",
+            "in": "query",
+            "name": "cohort",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Event type: 1 for a pageview or 2 for a custom event.",
+            "in": "query",
+            "name": "eventType",
+            "schema": {
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Set a non-empty value to exclude visits with only one pageview.",
+            "in": "query",
+            "name": "excludeBounce",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether records must match all filters or any filter.",
+            "in": "query",
+            "name": "match",
+            "schema": {
+              "enum": [
+                "all",
+                "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "IANA time zone used to interpret dates and group results, for example America/New_York.",
+            "in": "query",
+            "name": "timezone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Time interval used to group results: minute, hour, day, month, or year.",
+            "in": "query",
+            "name": "unit",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "items": {
+                    "additionalProperties": false,
+                    "properties": {
+                      "converted": {
+                        "type": "number"
+                      },
+                      "entered": {
+                        "type": "number"
+                      },
+                      "t": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "t",
+                      "entered",
+                      "converted"
+                    ],
+                    "type": "object"
+                  },
+                  "type": "array"
+                }
+              }
+            },
+            "description": "The operation completed successfully."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "bad-request",
+                    "message": "Bad request.",
+                    "status": 400
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Bad request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "unauthorized",
+                    "message": "Unauthorized.",
+                    "status": 401
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unauthorized."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "not-found",
+                    "message": "Not found.",
+                    "status": 404
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "shareContext": [],
+            "shareToken": []
+          }
+        ],
+        "summary": "Get website saved goal chart",
+        "tags": [
+          "Websites"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/goals/[goalId]/chart/contract.ts"
+      }
+    },
     "/api/websites/{websiteId}/goals/{goalId}/stats": {
       "get": {
         "description": "Returns the number of conversions and the total for a saved goal over the selected date range, with optional filters.",
@@ -31320,6 +33250,379 @@
         "x-umami-audience": "public",
         "x-umami-contract": "explicit",
         "x-umami-source": "src/app/api/websites/[websiteId]/goals/[goalId]/stats/contract.ts"
+      }
+    },
+    "/api/websites/{websiteId}/goals/{goalId}/summary": {
+      "get": {
+        "description": "Returns the number of events that matched a saved goal, and the median time in seconds from a session start to its first match.",
+        "operationId": "getWebsiteSavedGoalSummary",
+        "parameters": [
+          {
+            "description": "ID of the website.",
+            "in": "path",
+            "name": "websiteId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "in": "path",
+            "name": "goalId",
+            "required": true,
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL path.",
+            "in": "query",
+            "name": "path",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by referring URL.",
+            "in": "query",
+            "name": "referrer",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page title.",
+            "in": "query",
+            "name": "title",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by page URL query string.",
+            "in": "query",
+            "name": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Operating system used by the visitor.",
+            "in": "query",
+            "name": "os",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Browser used by the visitor.",
+            "in": "query",
+            "name": "browser",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Device category used by the visitor.",
+            "in": "query",
+            "name": "device",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Country code of the visitor.",
+            "in": "query",
+            "name": "country",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Region or subdivision of the visitor.",
+            "in": "query",
+            "name": "region",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "City of the visitor.",
+            "in": "query",
+            "name": "city",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Tag attached to the tracked activity.",
+            "in": "query",
+            "name": "tag",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Hostname on which the activity occurred.",
+            "in": "query",
+            "name": "hostname",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Custom identifier assigned to the visitor.",
+            "in": "query",
+            "name": "distinctId",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Preferred language reported by the visitor browser.",
+            "in": "query",
+            "name": "language",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Filter by custom event name.",
+            "in": "query",
+            "name": "event",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign source.",
+            "in": "query",
+            "name": "utmSource",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign medium.",
+            "in": "query",
+            "name": "utmMedium",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign name.",
+            "in": "query",
+            "name": "utmCampaign",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign content.",
+            "in": "query",
+            "name": "utmContent",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "UTM campaign search term.",
+            "in": "query",
+            "name": "utmTerm",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved segment used to filter results.",
+            "in": "query",
+            "name": "segment",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "ID of a saved cohort used to filter visitors.",
+            "in": "query",
+            "name": "cohort",
+            "schema": {
+              "format": "uuid",
+              "pattern": "^([0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-8][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}|00000000-0000-0000-0000-000000000000|ffffffff-ffff-ffff-ffff-ffffffffffff)$",
+              "type": "string"
+            }
+          },
+          {
+            "description": "Event type: 1 for a pageview or 2 for a custom event.",
+            "in": "query",
+            "name": "eventType",
+            "schema": {
+              "exclusiveMinimum": 0,
+              "maximum": 9007199254740991,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "Set a non-empty value to exclude visits with only one pageview.",
+            "in": "query",
+            "name": "excludeBounce",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Whether records must match all filters or any filter.",
+            "in": "query",
+            "name": "match",
+            "schema": {
+              "enum": [
+                "all",
+                "any"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Start of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "startAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "End of the date range as a Unix timestamp in milliseconds.",
+            "in": "query",
+            "name": "endAt",
+            "required": true,
+            "schema": {
+              "maximum": 8640000000000000,
+              "minimum": 0,
+              "type": "integer"
+            }
+          },
+          {
+            "description": "IANA time zone used to interpret dates and group results, for example America/New_York.",
+            "in": "query",
+            "name": "timezone",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "Time interval used to group results: minute, hour, day, month, or year.",
+            "in": "query",
+            "name": "unit",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "additionalProperties": false,
+                  "properties": {
+                    "completions": {
+                      "type": "number"
+                    },
+                    "median": {
+                      "description": "Median of the numeric property values.",
+                      "type": [
+                        "number",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "completions",
+                    "median"
+                  ],
+                  "type": "object"
+                }
+              }
+            },
+            "description": "The operation completed successfully."
+          },
+          "400": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "bad-request",
+                    "message": "Bad request.",
+                    "status": 400
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Bad request."
+          },
+          "401": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "unauthorized",
+                    "message": "Unauthorized.",
+                    "status": 401
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Unauthorized."
+          },
+          "404": {
+            "content": {
+              "application/json": {
+                "example": {
+                  "error": {
+                    "code": "not-found",
+                    "message": "Not found.",
+                    "status": 404
+                  }
+                },
+                "schema": {
+                  "$ref": "#/components/schemas/ApiError"
+                }
+              }
+            },
+            "description": "Not found."
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          },
+          {
+            "shareContext": [],
+            "shareToken": []
+          }
+        ],
+        "summary": "Get website saved goal summary",
+        "tags": [
+          "Websites"
+        ],
+        "x-umami-audience": "public",
+        "x-umami-contract": "explicit",
+        "x-umami-source": "src/app/api/websites/[websiteId]/goals/[goalId]/summary/contract.ts"
       }
     },
     "/api/websites/{websiteId}/goals/stats": {

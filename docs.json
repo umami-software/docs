@@ -1071,6 +1071,21 @@
                     "page": "api-reference/get-website-saved-funnel-stats",
                     "title": "Get website saved funnel stats",
                     "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-funnel-breakdown",
+                    "title": "Get website saved funnel breakdown",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-funnel-chart",
+                    "title": "Get website saved funnel chart",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-funnel-times",
+                    "title": "Get website saved funnel times",
+                    "method": "GET"
                   }
                 ]
               },
@@ -1110,6 +1125,21 @@
                   {
                     "page": "api-reference/get-website-saved-goal-stats",
                     "title": "Get website saved goal stats",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-goal-breakdown",
+                    "title": "Get website saved goal breakdown",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-goal-chart",
+                    "title": "Get website saved goal chart",
+                    "method": "GET"
+                  },
+                  {
+                    "page": "api-reference/get-website-saved-goal-summary",
+                    "title": "Get website saved goal summary",
                     "method": "GET"
                   }
                 ]
