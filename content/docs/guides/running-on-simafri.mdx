@@ -1,0 +1,134 @@
+---
+title: Running on Simafri
+description: Install Umami with Docker Compose and PostgreSQL on a Simafri managed VPS, serve it over HTTPS with Caddy, then start collecting data.
+---
+
+[Simafri](https://www.simafri.com) is an independent hosting company that offers a [managed VPS](https://www.simafri.com/en/managed-vps/): you keep root access to your Linux server, while the Simafri team applies system and security updates, monitors the server 24/7 and keeps encrypted nightly backups off the machine.
+
+This guide installs Umami from the official Docker image, following the `docker-compose.yml` of the Umami repository, with PostgreSQL, and serves it over HTTPS with Caddy. A longer version, with Nginx and Certbot, tracking script settings and restores, is available in the [Simafri guide](https://www.simafri.com/en/guides/self-host-umami/).
+
+## Prerequisites
+
+- A Simafri managed VPS with Docker and the Docker Compose plugin installed.
+- A subdomain for Umami, such as `analytics.example.com`, with an `A` record (and an `AAAA` record for IPv6) pointing to the VPS.
+- Caddy installed on the VPS, with ports 80 and 443 open.
+
+## Create the secrets
+
+Create a folder for Umami, then generate its secrets at random:
+
+```shell
+mkdir -p ~/umami && cd ~/umami
+cat > .env <<EOF
+POSTGRES_PASSWORD=$(openssl rand -hex 24)
+APP_SECRET=$(openssl rand -hex 32)
+TWO_FACTOR_ENCRYPTION_KEY=$(openssl rand -hex 32)
+EOF
+chmod 600 .env
+```
+
+`APP_SECRET` secures authentication tokens: keep it stable once Umami is running. `TWO_FACTOR_ENCRYPTION_KEY` is required to enable two-factor authentication. See [Environment variables](/docs/environment-variables) for the other settings.
+
+## Start Umami
+
+Place this `compose.yaml` next to the `.env` file. It follows the `docker-compose.yml` of the Umami repository, with two changes: the secrets come from `.env`, and the port is published on `127.0.0.1` only, so that Umami is reachable through the reverse proxy alone.
+
+```yaml
+services:
+  umami:
+    image: ghcr.io/umami-software/umami:latest
+    ports:
+      - "127.0.0.1:3000:3000"
+    environment:
+      DATABASE_URL: postgresql://umami:${POSTGRES_PASSWORD}@db:5432/umami
+      APP_SECRET: ${APP_SECRET}
+      TWO_FACTOR_ENCRYPTION_KEY: ${TWO_FACTOR_ENCRYPTION_KEY}
+    depends_on:
+      db:
+        condition: service_healthy
+    init: true
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "curl http://localhost:3000/api/heartbeat"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+  db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: umami
+      POSTGRES_USER: umami
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - umami-db-data:/var/lib/postgresql/data
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+volumes:
+  umami-db-data:
+```
+
+Start the stack and check that Umami answers:
+
+```shell
+docker compose up -d
+curl -s http://127.0.0.1:3000/api/heartbeat
+```
+
+On the first run, Umami creates its tables and the default administrator account. The heartbeat returns `{"ok":true}` once it is ready.
+
+## Serve Umami over HTTPS
+
+Add a block for your subdomain to `/etc/caddy/Caddyfile`:
+
+```text
+analytics.example.com {
+  reverse_proxy 127.0.0.1:3000
+}
+```
+
+Then reload Caddy:
+
+```shell
+systemctl reload caddy
+```
+
+Caddy obtains a Let's Encrypt certificate for the subdomain and passes the visitor address in the `X-Forwarded-For` header, which Umami reads to tell visitors apart and locate their country.
+
+## Sign in
+
+Open `https://analytics.example.com` and sign in with the default administrator account:
+
+- Username: `admin`
+- Password: `umami`
+
+After signing in, go to **Settings → Profile** and change the default password immediately. See [Login](/docs/login) for more information.
+
+## Start collecting data
+
+1. Follow [Add a website](/docs/add-a-website) to register your website in Umami.
+
+2. Follow [Collect data](/docs/collect-data) to add the tracking script to your website.
+
+3. Visit your website and confirm that activity appears in the Umami dashboard.
+
+## Back up and update
+
+All of Umami's data lives in its PostgreSQL database. Dump it every day and before each update, and keep a copy of the `.env` file somewhere safe:
+
+```shell
+cd ~/umami
+docker compose exec -T db pg_dump -U umami -d umami -Fc > umami-$(date +%F).dump
+```
+
+To update Umami, pull the new image and recreate the container. Umami applies its database migrations on startup:
+
+```shell
+docker compose pull
+docker compose up --force-recreate -d
+```
+
+See [Getting updates](/docs/updates) for more information.
