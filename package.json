@@ -17,7 +17,7 @@
     ]
   },
   "dependencies": {
-    "@umami/shiso": "^1.19.0",
+    "@umami/shiso": "^1.20.0",
     "react": "^19.3.1",
     "react-dom": "^19.3.1"
   },
