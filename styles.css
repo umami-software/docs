@@ -18,3 +18,56 @@ html[data-theme='dark'] {
   max-width: 100%;
   box-shadow: 2px 2px 16px rgb(0 0 0 / 10%);
 }
+
+/* Below Shiso's lg breakpoint the header's right-side controls overflow into
+   the brand, so show only the logo mark and drop the keyboard hint. */
+@media (max-width: 63.999rem) {
+  header > div > div:first-child > a > span,
+  header kbd {
+    display: none;
+  }
+
+  /* Drop the empty tab column so the search control can fill the space. */
+  header > div {
+    grid-template-columns: auto minmax(0, 1fr);
+    column-gap: 1.25rem;
+  }
+
+  header > div > div:nth-child(2) {
+    display: none;
+  }
+
+  header > div > div:last-child {
+    justify-self: stretch;
+  }
+
+  header > div > div:last-child > button:first-child {
+    flex: 1;
+  }
+
+  main [data-slot='sheet-trigger'] {
+    margin-top: 1rem;
+  }
+}
+
+/* Between Shiso's lg breakpoint and wide desktops, the centered tabs collide
+   with the search control. Give the tabs the leftover space instead so they
+   scroll rather than overlap. */
+@media (min-width: 64rem) and (max-width: 79.999rem) {
+  header > div {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+    column-gap: 1.5rem;
+  }
+
+  header > div > div:nth-child(2) {
+    justify-self: stretch;
+  }
+
+  header > div > div:nth-child(2) > nav {
+    justify-content: safe center;
+  }
+
+  header kbd {
+    display: none;
+  }
+}

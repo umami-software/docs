@@ -205,6 +205,21 @@ HOSTNAME = "my.hostname.com"
 PORT = 3000
 ```
 
+### IGNORE_ASN
+
+<Badge>v3.6.0</Badge>
+
+You can provide a comma-delimited list of autonomous system numbers (ASNs) to exclude from data collection. Use this to
+block traffic from networks such as cloud hosting providers, where automated browsers often appear as ordinary visitors.
+Values can be written with or without the `AS` prefix.
+
+```
+IGNORE_ASN = "132203, AS45102"
+```
+
+The lookup uses the GeoLite2-ASN database, which is downloaded at build time alongside the location database. Blocking
+a hosting provider's ASN may also exclude real visitors who use a VPN or proxy on that network.
+
 ### IGNORE_IP
 
 <Badge>v1.0.0</Badge>
